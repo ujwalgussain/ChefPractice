@@ -1,0 +1,7 @@
+A graph has 2 sets: G(V,E)
+    Vertex , Edges
+
+finite graph: finite no of edges and vertices
+null graph: vertices only and no edges
+trivial graph: only one vertex and no edges
+complete graph:
