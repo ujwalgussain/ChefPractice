@@ -4,4 +4,15 @@ A graph has 2 sets: G(V,E)
 finite graph: finite no of edges and vertices
 null graph: vertices only and no edges
 trivial graph: only one vertex and no edges
-complete graph:
+complete graph:Where there is edge b/w every pair of vertex. (Kn).
+ for undirected graph = n(n-1)/2 (as edges are counted twice).
+
+Degree:d(Vi) is no of edges connected to vertex
+
+Handshake Theorem:
+    sum of d(Vi) for all vertices = 2|E|----(1)
+    sum of degree of all vertices in graph is twice no of edges.
+    from 1, we can say that sum of d(Vi) for all vertices is always even. -------(2)
+    But  sum of d(Vi) for all vertices = sum of d(Vi) for all vertex with even degree + sum of d(Vi) for all vertex with odd degree
+         --------------Even----------- = ----------------------Even------------------ + ----------------???------------------------
+    But from 2 ??? must be even. Hence the number of odd vertices must be even.
