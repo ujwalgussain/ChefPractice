@@ -1,0 +1,18 @@
+Given an array A having N integers .Two elements of the array  and  are called similar iff Ai = Aj+1  or Aj = Ai+1 .
+Also, the similarity follows transitivity. If Ai   and Aj are similar and  Aj and Ak are similar, then Ai and Ak are also similar.
+Note: i,j ,k and  are all distinct.
+
+You need to find number of pairs of indices  such that (i<j)  and  Ai is similar to Aj.
+
+Input
+
+The first line contains a single integer  denoting number of elements in the array.
+The second line contains  space separated integers where  elements indicate.
+
+Output
+
+Output the number of pairs of indices  such that  and  is similar to  in a single line.
+
+
+
+https://www.hackerearth.com/practice/data-structures/arrays/1-d/practice-problems/algorithm/pairs-having-similar-element-eed098aa/description/
