@@ -1,3 +1,4 @@
+/*
 package MergeSortTree;
 
 import java.util.*;
@@ -39,14 +40,16 @@ public class MergeSortTreeImpl {
                  int queryStart, int queryEnd, int node,
                  int K, List<Integer> tree[])
     {
-    /*
+    */
+/*
         segmentStart => start of a Segment,
         segmentEnd   => ending of a Segment,
         queryStart   => start of a query range,
         queryEnd     => ending of a query range,
         treeIndex    => index in the Segment
                         Tree/Merge Sort Tree,
-        K  => kth smallest number to find  */
+        K  => kth smallest number to find  *//*
+
 
         if (segmentStart == segmentEnd)
             return tree[node].get(0);
@@ -116,3 +119,4 @@ public class MergeSortTreeImpl {
 
     }
 }
+*/
