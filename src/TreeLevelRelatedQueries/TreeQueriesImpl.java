@@ -135,7 +135,7 @@ public class TreeQueriesImpl {
             }
             level[level_ctr++] = a2;
         }
-        for(int[] level_arr:level)
+            for(int[] level_arr:level)
         {
             if(level_arr!=null)
             System.out.println(Arrays.toString(level_arr));
