@@ -1,0 +1,8 @@
+Any local variable, formal parameter, or exception parameter used but not declared in a lambda expression
+must either be declared final or be effectively final (§4.12.4), or a compile-time error occurs where the use is attempted.
+
+To overcome this, we can come up with 3 potential solutions:
+
+1. Making the variable static.
+2. Use Array
+3. Atomic Integer

@@ -27,9 +27,6 @@ class Codechef
                 arr2.get(listindex).add(arr[index]);
             }
             else{
-
-
-
                 listindex+=1;
                 arr2.add(new ArrayList<>());
                 if(listindex==k-1)
