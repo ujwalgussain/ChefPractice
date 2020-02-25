@@ -40,7 +40,7 @@ public class BSTCormenImpl {
         void transplant(Node u , Node v)
         {
             if(root == u)
-                v = root;
+                 root=v;
             else{
                 if(u == u.parent.left)
                     u.parent.left = v;
