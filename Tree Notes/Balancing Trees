@@ -1,0 +1,26 @@
+There are 4 cases for Balancing Trees:
+x
+ \		L.R			 y
+  y     ---- >      /\
+   \			   x  z
+    z
+
+	 z
+	/     R.R.
+   y      --- >     y
+  /                /\
+ x                x  z
+
+
+y                  z
+\      LR(z)      /      RR(y)
+ z    ----->     y       ---->         y
+ /              /                     /\
+x              x                     x  z
+
+
+ z                  x
+/      RR()          \      LR()
+x     ----->          y    ----->    y
+\                     /             /\
+ y                   z             x  z

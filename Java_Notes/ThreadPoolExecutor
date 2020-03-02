@@ -1,0 +1,25 @@
+1> FixedTP:
+    blocking queue
+2> CachedTP: - for short lived tasks
+   donot have fixed no of threads.
+   uses synchronous queue() which can store only one task. check if any thread is idle. if not create new thread.
+   if thread is idle more than 60 sec kills the thread.
+
+3> ScheduledTP - schedule tasks after certain delay.
+    uses delay queue(arranges tasks according to delay).
+    For eg: We need to perform login checks after every 10 sec. use scheduleAtFixedRate()
+
+        ScheduledExecutorService svc = Executors.newScheduledTP(10);
+        //run after 10 sec delay
+        svc.schedule(new Task(), delay:10, SECONDS);
+        //run repeatedly after 10 sec delay
+        svc.scheduleAtFixedRate(new Task(),initialDelay:15, period:10, SECONDS);
+        //run repeatedly after 10 sec delay after previous task completes.
+        sc.scheduleWithFixedDelay(new Task(), initialDelay:15,delay:10, TimeUnit.SECONDS);
+
+        class Task implements Runnable{ ... }
+
+4>SingleThreadedExecutor:
+    size of Queue is 1.
+    If task throws an Exception and Thread is killed it recreate it.
+

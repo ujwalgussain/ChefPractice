@@ -40,6 +40,7 @@ public class FloydWarshalls_Impl {
                     {
                         //System.out.printf("%d to %d (%d)is less when %d (%d)is between\n",i,j,k,cost[i][j],cost[i][k]+cost[k][j]);
                         cost[i][j]=cost[i][k]+cost[k][j];
+                        //For path just add path(i,j)=k
                     }
                 }
             }
