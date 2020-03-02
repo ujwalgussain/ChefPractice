@@ -1,0 +1,26 @@
+IO is stream oriented,
+    Java IO being stream oriented means that you read one or more bytes at a time, from a stream.
+    They are not cached anywhere.
+    Hence, you cannot move forth and back in the data in a stream.
+    If you need to move forth and back in the data read from a stream, you will need to cache it in a buffer first.
+NIO is buffer oriented,
+     Data is read into a buffer from which it is later processed.
+     You can move forth and back in the buffer as you need to.
+     This gives you a bit more flexibility during processing.
+     However, you also need to check if the buffer contains all the data you need in order to fully process it.
+     And, you need to make sure that when reading more data into the buffer, you do not overwrite data in the buffer you have not yet processed.
+
+Java IO's various streams are blocking.
+That means, that when a thread invokes a read() or write(), that thread is blocked until there is some data to read,
+or the data is fully written. The thread can do nothing else in the meantime.
+
+Java NIO's non-blocking mode enables a thread to request reading data from a channel,
+and only get what is currently available, or nothing at all, if no data is currently available.
+Rather than remain blocked until data becomes available for reading, the thread can go on with something else.
+
+The same is true for non-blocking writing.
+A thread can request that some data be written to a channel, but not wait for it to be fully written.
+The thread can then go on and do something else in the mean time.
+
+What threads spend their idle time on when not blocked in IO calls, is usually performing IO on other channels in the meantime.
+That is, a single thread can now manage multiple channels of input and output.
