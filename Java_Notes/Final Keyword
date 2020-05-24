@@ -1,0 +1,45 @@
+Q) Can you declare the main method as final?
+Yes, We can declare the main method as public static final void main(String[] args){}.
+
+Q) What is the final Keyword?
+    Final Variable
+        In Java, the final variable is used to restrict the user from updating it.
+        If we initialize the final variable, we can't change its value.
+    Final Blank Variable:
+        Instance - A non-static final blank variable which is not initialized can only be assigned through the class constructor.
+        Eg:
+            class B
+            {
+                final int Z;
+                B(int x)
+                {
+                    Z=x;
+                }
+            }
+        Static- A static final blank variable which is not initialized can only be assigned through a static block.
+        Eg:
+            class B
+            {
+                final static int Z;
+                static
+                {
+                    Z=x;
+                }
+             }
+        Local- It can be assigned value directly.
+        Eg:
+            public static void m1(){
+               final int i;
+               i = 20;
+               System.out.println(i);
+            }
+        Or else gives an Compilation Error: "Variable might not have been Initialized"
+
+Q) Can we declare a constructor as final?
+Ans: No.
+    The constructor can never be declared as final because it is never inherited. Constructors are not ordinary methods;
+    therefore, there is no sense to declare constructors as final. However, if you try to do so, The compiler will throw an error.
+
+Q)  Can we declare an interface as final?
+   No, we cannot declare an interface as final because the interface must be implemented by some class to provide its definition.
+   Therefore, there is no sense to make an interface final. However, if you try to do so, the compiler will show an error.

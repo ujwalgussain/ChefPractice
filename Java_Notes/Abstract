@@ -1,0 +1,2 @@
+Q) Can there be an abstract method without an abstract class?
+No, if there is an abstract method in a class, that class must be abstract.
