@@ -1,5 +1,12 @@
-Q) Can you declare the main method as final?
-Yes, We can declare the main method as public static final void main(String[] args){}.
+Final Keyword:
+    Final Class     -> cannot be inherited. Need? String class is immutable and not be overridden.
+    Final Method    -> cannot be overridden. Need?Eg: isAlive() of thread class must not be overridden
+    Final Variable  -> cannot be reinitialized.
+    Final Arguments ->  public Record getRecord(int fileNumber, final int recordNumber) {}
+--------------------------------------------------------------------------
+***Note:    1. Final is only modifier applicable to local variable.
+            2. Most of the libraries/utilities class in Java are Final
+-----------------------------------------------------------------------------
 
 Q) What is the final Keyword?
     Final Variable
@@ -43,3 +50,6 @@ Ans: No.
 Q)  Can we declare an interface as final?
    No, we cannot declare an interface as final because the interface must be implemented by some class to provide its definition.
    Therefore, there is no sense to make an interface final. However, if you try to do so, the compiler will show an error.
+
+Q) Can you declare the main method as final?
+Yes, We can declare the main method as public static final void main(String[] args){}.

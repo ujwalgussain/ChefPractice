@@ -1,0 +1,4 @@
+Hamiltonian Path is a path in a directed or undirected graph that visits each vertex exactly once.
+The problem to check whether a graph (directed or undirected) contains a Hamiltonian Path is NP-complete,
+so is the problem of finding all the Hamiltonian Paths in a graph. Following images explains the idea behind Hamiltonian Path more clearly.
+

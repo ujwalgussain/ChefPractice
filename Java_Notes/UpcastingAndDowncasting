@@ -1,0 +1,20 @@
+
+Downcasting a superclass:
+
+class Animal {}
+class Dog extends Animal {}
+class DogTest {
+    public static void main(String[] args) {
+
+        Animal animal = new Animal();
+        Dog d = (Dog) animal; // compiles but fails during runtime -> java.lang.ClassCastException
+
+
+        Dog d = new Dog();
+        Animal a1 = d; // upcast ok with no explicit cast
+        Animal a2 = (Animal) d; // upcast ok with an explicit cast
+
+
+    }
+}
+

@@ -1,2 +1,18 @@
+#Abstract Class:
+    A class which has abstract method must be declared abstract.
+    But a abstract class may or may not contain abstract methods.
+---------------------------------------------------------------------
+#Abstract Method:
+   The first concrete subclass of an abstract class must implement all abstract methods of the superclass.
+
+
 Q) Can there be an abstract method without an abstract class?
 No, if there is an abstract method in a class, that class must be abstract.
+
+Q) Consider the following scenario:
+interface i1{
+    public void m1();
+}
+abstract class Sample implements i1{
+    //Does it need to implement m1() -> No. The first concrete subclass has to implementv ******
+}

@@ -1,0 +1,32 @@
+Access Modifiers:
+    public protected default private
+Non Access Modifiers:
+    final,static,abstract,transient,volatile, synchronized, native, strictfp
+
+Applicable to Class:
+    Access Modifiers        NonAccess Modifiers
+    public
+
+
+Q)What are the modifiers applicable to class?
+Ans:    Access modifiers:       public, protected, private.
+        Non-access modifiers    strictfp, final, and abstract.
+
+
+Q)What are the modifiers applicable to variables?
+Ans: Instance & static-> yes
+      local -> only final.
+
+Q) Can access modifiers be applied to local variables?
+    Ans: NO!
+
+Q) INSTANCE variables:
+    Can be marked as:
+        public,private, default, protected
+        final, transient,static, volatile
+    Cannot be marked as:
+        strictfp, synchronized, native,
+
+**Note: 1. Local variables are always on the stack, not the heap.
+        2. A local variable must be initialized before you try to use it. because—unlike instance variables—local variables don't get
+           default values.

@@ -1,0 +1,13 @@
+Things you can mark as static:
+    ■ Methods
+    ■ Variables
+    ■ A class nested within another class, but not within a method
+    ■ Initialization blocks
+
+Things you can't mark as static:
+    ■ Constructors (makes no sense; a constructor is used only to create instances)
+    ■ Classes (unless they are nested)
+    ■ Interfaces
+    ■ Method local inner classes (we'll explore this in Chapter 8)
+    ■ Inner class methods and instance variables
+    ■ Local variables

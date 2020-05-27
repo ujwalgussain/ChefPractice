@@ -1,0 +1,185 @@
+Enums:
+----------------------------------------------------------------------------------------------
+Creating and declaring Enums:
+enum CoffeeSize { BIG, HUGE, OVERWHELMING };
+
+CoffeeSize cs = CoffeeSize.BIG;
+-----------------------------------------------------------------------------------------------
+A sample program:
+enum Animals {
+    DOG("woof"), CAT("meow"), FISH("burble");
+    String sound;
+    Animals(String s) { sound = s; }
+}
+
+public class Test123 {
+    static Animals a; //is allowed
+    final Animals d = Animals.DOG; //is allowed
+    public static void main(String[] args) {
+        Animals a=Animals.DOG;
+        switch (a)
+        {
+            //in switch case just specify the enum constant name ******
+            case DOG:
+                System.out.println("dogs bark");
+            case FISH:
+                System.out.println("fish swims");
+            case CAT:
+                System.out.println("cat meows");
+        }
+        //otherwise use fully qualified name *******
+        if(a==Animals.DOG)
+        {
+            System.out.println("Dogs Bark");
+        }
+    }
+}
+
+------------------------------------------------------------------------------------------------
+Declaring an enum outside a class:
+
+enum CoffeeSize { BIG, HUGE, OVERWHELMING } // this cannot be private or protected
+class Coffee {
+    CoffeeSize size;
+}
+public class CoffeeTest1 {
+    public static void main(String[] args) {
+        Coffee drink = new Coffee();
+        drink.size = CoffeeSize.BIG; // enum outside class
+    }
+}
+--------------------------------------------------------------------------------------------------
+Here's an example of declaring an enum inside a class:
+class Coffee2 {
+    enum CoffeeSize {BIG, HUGE, OVERWHELMING }
+    CoffeeSize size;
+}
+public class CoffeeTest2 {
+    public static void main(String[] args) {
+        Coffee2 drink = new Coffee2();
+        drink.size = Coffee2.CoffeeSize.BIG; // enclosing class name required
+    }
+}
+-------------------------------------------------------------------------------------------------------
+Enum with constructor:
+enum CoffeeSize {
+    // 8, 10 & 16 are passed to the constructor
+    BIG(8), HUGE(10), OVERWHELMING(16);
+
+    CoffeeSize(int ounces) { // constructor
+        this.ounces = ounces;
+    }
+    private int ounces; // an instance variable
+    public int getOunces() {
+        return ounces;
+    }
+}
+class Coffee {
+    CoffeeSize size; // each instance of Coffee has an enum
+
+    public static void main(String[] args) {
+        Coffee drink1 = new Coffee();
+        drink1.size = CoffeeSize.BIG;
+        Coffee drink2 = new Coffee();
+        drink2.size = CoffeeSize.OVERWHELMING;
+        System.out.println(drink1.size.getOunces()); // prints 8
+        for(CoffeeSize cs: CoffeeSize.values())
+            System.out.println(cs + " " + cs.getOunces());
+            /*outputs
+                BIG 8
+                HUGE 10
+                OVERWHELMING 16
+             */
+    }
+}
+--------------------------------------------------------------------------------------------
+Enum with multiple methods/values
+
+Imagine this scenario: you want enums to have two methods—
+    one for ounces
+    and one for lid code (a String).
+Now imagine that most coffee sizes use the same lid code, "B", but the OVERWHELMING size uses type "A".
+You can define a  getLidCode() method in the CoffeeSize enum that returns "B", but then you need  a way to override it for OVERWHELMING.
+You don't want to do some hard-to-maintain if/then code in the getLidCode() method, so the best approach might be to somehow have the OVERWHELMING constant override the getLidCode()
+method.
+
+enum CoffeeSize {
+    BIG(8),HUGE(10),
+    OVERWHELMING(16) { // start a code block that defines the "body" for this constant
+            public String getLidCode() { // override the method defined in CoffeeSize
+                return "A";
+            }
+     }; // the semicolon is REQUIRED when more code follows
+    CoffeeSize(int ounces) {
+        this.ounces = ounces;
+    }
+    private int ounces;
+    public int getOunces() {
+        return ounces;
+    }
+    public String getLidCode() { // this method is overridden by the OVERWHELMING constant
+        return "B"; // the default value we want to return for CoffeeSize constants
+    }
+}
+
+
+Eg 2: Enum with 2 values.
+public enum Planet {
+    MERCURY (3.303e+23, 2.4397e6),
+    VENUS   (4.869e+24, 6.0518e6),
+    EARTH   (5.976e+24, 6.37814e6),
+    MARS    (6.421e+23, 3.3972e6),
+    JUPITER (1.9e+27,   7.1492e7),
+    SATURN  (5.688e+26, 6.0268e7),
+    URANUS  (8.686e+25, 2.5559e7),
+    NEPTUNE (1.024e+26, 2.4746e7);
+
+    private final double mass;   // in kilograms
+    private final double radius; // in meters
+    Planet(double mass, double radius) {
+        this.mass = mass;
+        this.radius = radius;
+    }
+    private double mass() { return mass; }
+    private double radius() { return radius; }
+
+    // universal gravitational constant  (m3 kg-1 s-2)
+    public static final double G = 6.67300E-11;
+
+    double surfaceGravity() {
+        return G * mass / (radius * radius);
+    }
+    double surfaceWeight(double otherMass) {
+        return otherMass * surfaceGravity();
+    }
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.err.println("Usage: java Planet <earth_weight>");
+            System.exit(-1);
+        }
+        double earthWeight = Double.parseDouble(args[0]);
+        double mass = earthWeight/EARTH.surfaceGravity();
+        for (Planet p : Planet.values())
+           System.out.printf("Your weight on %s is %f%n",
+                             p, p.surfaceWeight(mass));
+    }
+}
+-------------------------------------------------------------------------------------------------
+Therefore we can say that:
+1. Enums can be declared outside or within the class.(the way to access them changes)
+2. Enums cannot be declared inside methods.
+3. Semicolon after enums is optional.
+4. Enum values are constants.,ie static and final ******
+5. You can NEVER invoke an enum constructor directly. The enum constructor is invoked automatically, with the arguments you define after the constant
+   value.
+6. An enum declared outside a class must NOT be marked static, final, abstract, protected, or private.
+7. Enums can contain constructors, methods, variables, and constant class bodies.
+8. enum constructors can have arguments, and can be overloaded.
+9. enum constructors can NEVER be invoked directly in code. They are always called automatically when an enum is initialized.
+10. The semicolon at the end of an enum declaration is optional. These are legal:
+   enum Foo { ONE, TWO, THREE}
+   enum Foo { ONE, TWO, THREE};
+   enum Foo { ONE, TWO, THREE;};*****if enum has constructor then semicolon after Enum constants is mandatory
+11. MyEnum.values() returns an array of MyEnum's values.
+12. All enums implicitly extend java.lang.Enum
+13. List of Enum Constants must always end with a semicolon

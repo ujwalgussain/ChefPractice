@@ -1,0 +1,38 @@
+Interface:
+    1.All interface methods are implicitly public and abstract.(After Java8 static & default)
+    2. All variables defined in an interface must be public, static, and final.(constants)
+    3. Interface methods must not be static.
+    4. Because interface methods are abstract, they cannot be marked final,strictfp, or native. (More on these modifiers later.)
+    5. An interface can extend one or more other interfaces.
+    6. An interface cannot extend anything but another interface.
+    7. An interface cannot implement another interface or class.
+    8. An interface must be declared with the keyword interface.
+    9. Interface types can be used polymorphically
+
+The following is a legal interface declaration:
+        public abstract interface Rollable { }
+
+------------------------------------------------------------------------------------------
+Diamond problem with default keyword:
+interface A{
+    default public void m1()
+    {
+        System.out.println("A.m1()");
+    }
+}
+interface B{
+    default public void m1()
+    {
+        System.out.println("B.m1()");
+    }
+}
+class C implements A,B
+{
+    //This will throw a compilation Error as m1 is present in both A,B. Hence we will need to provide a implementation for m1() in C as well
+}
+ ***Note: Diamond problem doesnt arise in the following scenarios:
+    Case 1: if A's m1() is default and B's m1() is static
+    Case 2: If both A's and B's m1() is static or abstract.
+
+Hence we can say that Diamond problem arises only with default keyword.
+------------------------------------------------------------------------------

@@ -1,0 +1,26 @@
+Protected:
+    It is accessible within package and only to Child outside the package.
+    Note: Outside the package,It is accessible only through Child Reference
+    Eg:
+    ------------------------------------------------------------------------------
+    package p1;
+    class A{
+        protected void m1()
+        {     }
+    }
+    ------------------------------------------------------------------------------
+    package p2;
+    class B extends A{
+        public static void main(String args[])
+        {
+            A a=new A();
+            a.m1() //CError: m1 has protected access in p1.A
+
+            B b = new B();
+            b.m1();
+
+            A a1 = new B();
+            b.m1();//CError: m1 has protected access in p1.A
+        }
+    }
+    ------------------------------------------------------------------------------

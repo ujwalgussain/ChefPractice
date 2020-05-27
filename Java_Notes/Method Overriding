@@ -27,7 +27,7 @@ Q) Overriding with Polymorphic Reference
         A.m1() -> throws Exception
         B.m1() -> throws SQLDataException
 
-    2.  In case of polymorphic reference, it will have access to all methods in superclass and overridden methods in subclass
+    2.  In case of polymorphic reference, it will have access to all methods in superclass and (overridden methods in subclass during runtime)
         B a = new B();
         a.m1(); // this throws SQLDataException
         A poly=new B();
