@@ -6,3 +6,32 @@ To overcome this, we can come up with 3 potential solutions:
 1. Making the variable static.
 2. Use Array
 3. Atomic Integer
+
+------------------------------------------------------------------------------------------------------------
+>Scope of a Lambda Expression
+    Point 1.    The body of a lambda expression has the same scope as a nested block.
+                The same rules for name conflicts and shadowing apply.
+                It is illegal to declare a parameter or a local variable in the lambda that has the same name as a local variable
+                int first = 0;
+                Comparator<String> comp = (first, second) -> first.length() - second.length();
+                    // Error: Variable first already defined
+    Point 2.    As another consequence of the “same scope” rule, the this keyword in a lambda expression denotes the this parameter
+                of the method that creates the lambda.
+                For example, consider
+
+                public class Test123 {
+                    @Override
+                    public String toString() {
+                        return "test1243";
+                    }
+                    public void doStuff()
+                    {
+                        X obj = x ->{
+                            System.out.println(this.toString());
+                        };
+                        obj.m1(10);
+                    }
+                    public static void main(String[] args) {
+                        new Test123().doStuff(); // prints test1243
+                    }
+                }

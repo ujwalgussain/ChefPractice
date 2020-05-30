@@ -1,0 +1,108 @@
+Q) Ways to Create Thread:
+1. Extends Thread Class.
+2. Implement Runnable Interface. This approach is recommended. This allows inheritance.
+
+
+Q) Why do we need start method?
+    Register thread with Thread scheduler
+    Perform all other mandatory activities
+    Invoke run method
+
+Examples:
+    Runnable r1=()->{
+                for (int i=0;i<5;i++)
+                    System.out.println("T1 running");
+            };
+    Runnable r2=()->{
+        for (int i=0;i<5;i++)
+                    System.out.println("T2 running");
+         };
+    new Thread(r1).start();
+    new Thread(r2).start();
+    new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for(int i=0;i<6;i++)
+                        System.out.println("T3 running");
+                }
+    }).start();
+
+Q) Is it possible to overload run()?
+Yes
+
+Q) While creating a Thread using Thread Class what if we dont override run()?
+    Valid. Compiler will call Thread class run() which has empty implementation.
+
+Q) What if we override the start() method?
+If we override start() method, our start() method will be executed like normal method call and new method won't be created.
+hence it is advised not to override start() method.
+
+Q) Consider foll Eg:
+    class MyThread extends Thread{
+        public void run(){
+            sop("Child Thread");
+        }
+        public static void main(String args[])
+        {
+            MyThread t = new MyThread();
+            Thread t2 = new Thread(t); // this is valid since Thread already implements Runnable
+            t2.start();
+        }
+    }
+    Here 1 child thread would be created by t2.
+
+Q) What is the range of Priority?
+    1(min) - 10(max)
+Q)What is the default priority for threads?
+    Default priority for Main Thread is 5
+    For others, it is inherited from parent Thread.
+    Here Parent Thread is the Thread which invokes the start() method of the child.
+
+    Ex:
+    public static void main(String a[])
+        {
+            //Main Thread priority is 5
+            Runnable r1=()->{
+                for (int i=0;i<5;i++)
+                    System.out.println("T1 running " + Thread.currentThread().getPriority()); // Priority is 5
+            };
+            Runnable r2=()->{
+                for (int i=0;i<5;i++)
+                    System.out.println("T2 running " + Thread.currentThread().getPriority()); // Priority is 5
+            };
+            new Thread(r1).start();
+            new Thread(r2).start();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for(int i=0;i<6;i++)
+                        System.out.println("T3 running " + Thread.currentThread().getPriority()); // Priority is 5
+                }
+            }).start();
+        }
+
+Ex 2:
+        public static void main(String a[])
+                {
+                    Thread.currentThread().setPriority(9);//Main Thread priority is 9
+                    Runnable r1=()->{
+                        for (int i=0;i<5;i++)
+                            System.out.println("T1 running " + Thread.currentThread().getPriority()); // Priority is 9
+                    };
+                    Runnable r2=()->{
+                        for (int i=0;i<5;i++)
+                            System.out.println("T2 running " + Thread.currentThread().getPriority()); // Priority is 9
+                    };
+                    new Thread(r1).start();
+                    new Thread(r2).start();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for(int i=0;i<6;i++)
+                                System.out.println("T3 running " + Thread.currentThread().getPriority()); // Priority is 9
+                        }
+                    }).start();
+                }
+
+Q) Is it guaranteed after setting Thread Priorities we will get expected output?
+Ans: It is dependent on OS.Some platforms dont provise support for Thread priorities.

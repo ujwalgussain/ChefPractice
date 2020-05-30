@@ -1,0 +1,121 @@
+Synchronization:
+Synchronized keyword is used to solve the data inconsistency problem caused by multiple thread access.
+It allows only access to only one thread.
+Disadv: hence it increases waiting time of thread.
+    java.util.concurrent pkg -> is better than synchronized keyword.
+Ex:
+    class X{
+        synchronized void m1(){}
+        synchronized void m2(){}
+        void m3(){}
+    }
+    X obj;
+    Suppose There are 4 threads:
+        t1 requires m1()
+        t2 requires m1()
+        t3 requires m2()
+        t3 requires m3()
+    if t1 gets chance, it will acquire lock in obj and proceed.
+    At the same time if t2,t3 comes, it has to wait until t1 releases lock.
+    if t4 comes it will get chance as m3 is a normal method.
+
+While a thread executing synchtonized method in obj, the remaining threads are not allowed to execute any synchronized method on the same obj
+but allowed to execute non-synchronized method.
+
+Lock concept is implemented based on object but not based on method.
+Object has 2 areas:
+sync area: can be accessed by one thread at a time.
+non sync area: can be accessed by multiple threads.
+----------------------------
+|          |                |
+|  non     |    sync        |
+|  sync    |                |
+|          |                |
+----------------------------
+ ^  ^   ^         ^
+ t1 t2  t3        t4
+
+ If multiple threads can access non sync area would it cause data inconsistency?
+ Hence always follow the below rule:
+ class X{
+    sync{
+        //wherever we change state of object  ie, update
+    }
+    non-sync{
+            //wherever we dont change state of object ., read
+        }
+}
+Q) There are 2 types of lock a Thread can acquire
+        1. Object Level Lock
+        2. Class Level Lock.
+Consider the following Ex:
+   public class SyncLocksSample {
+       synchronized void m1()
+       {
+           System.out.println(Thread.currentThread().getName()+" Accessed m1()");
+           try {
+               Thread.currentThread().sleep(10000);
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+           System.out.println(Thread.currentThread().getName()+" Released m1()");
+       }
+
+       synchronized void m3()
+       {
+           System.out.println(Thread.currentThread().getName()+" Accessed m3()");
+           try {
+               Thread.currentThread().sleep(10000);
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+           System.out.println(Thread.currentThread().getName()+" Released m1()");
+       }
+
+       static synchronized void m2()
+       {
+           System.out.println(Thread.currentThread().getName()+" Accessed m2()");
+           try {
+               Thread.currentThread().sleep(10000);
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+           System.out.println(Thread.currentThread().getName()+" Released m2()");
+       }
+       public static void main(String args[])
+       {
+           SyncLocksSample s = new SyncLocksSample();
+           Runnable r = ()->{
+               s.m1();
+           };
+           Runnable r1 = ()->{
+               s.m2();
+           };
+           Runnable r2 = ()->{
+               s.m3();
+           };
+           Thread t1 = new Thread(r,"t1"); //acquires object Level Lock on s and executes m1()
+           Thread t2 = new Thread(r2,"t2");//waits as it requires Object Level Lock on s to execute m3() currently acquired by t1
+           Thread t3 = new Thread(r1,"t3");//acquires Class Level Lock on s and executes m2()
+           Thread t4 = new Thread(r1,"t4");//waits as it requires class Level Lock on s to execute m2() currently acquired by t3
+           t1.start();
+           t2.start();
+           t3.start();
+           t4.start();
+       }
+   }
+   Output:
+        t1 Accessed m1()
+        t3 Accessed m2()
+        t1 Released m1()
+        t3 Released m2()
+        t2 Accessed m3()
+        t4 Accessed m2()
+        t2 Released m1()
+        t4 Released m2()
+
+
+
+
+
+

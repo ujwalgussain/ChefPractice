@@ -3,7 +3,7 @@ Interface:
     2. All variables defined in an interface must be public, static, and final.(constants)
     3. Interface methods must not be static.
     4. Because interface methods are abstract, they cannot be marked final,strictfp, or native. (More on these modifiers later.)
-    5. An interface can extend one or more other interfaces.
+    5. An interface can extend one or more other interfaces. ***********
     6. An interface cannot extend anything but another interface.
     7. An interface cannot implement another interface or class.
     8. An interface must be declared with the keyword interface.
