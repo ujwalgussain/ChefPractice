@@ -1,0 +1,2 @@
+Bean - are objects managed by IOC Containers
+Job of IOC Container is to instantiate, configure and inject dependencies in the bean

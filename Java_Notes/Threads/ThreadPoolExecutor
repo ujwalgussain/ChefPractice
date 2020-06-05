@@ -23,3 +23,12 @@
     size of Queue is 1.
     If task throws an Exception and Thread is killed it recreate it.
 
+Terminologies:
+1. corePoolSize: The pool consists of a fixed number of core threads that are kept inside all the time,
+    and some excessive threads that may be spawned and then terminated when they are not needed anymore.
+2. maximumPoolSize :  When a new task comes in, if all core threads are busy and the internal queue is full, then the pool is allowed to grow up to maximumPoolSize.
+3. keepAliveTime: This parameter is the interval of time for which the excessive threads (instantiated in excess of the corePoolSize) are allowed to exist in the idle state.
+                By default, the ThreadPoolExecutor only considers non-core threads for removal.
+                In order to apply the same removal policy to core threads, we can use the allowCoreThreadTimeOut(true) method.
+  Ex: newFixedThreadPool method creates a ThreadPoolExecutor with equal corePoolSize and maximumPoolSize parameter values and a zero keepAliveTime.
+        This means that the number of threads in this thread pool is always the same

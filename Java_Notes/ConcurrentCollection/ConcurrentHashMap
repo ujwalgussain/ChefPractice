@@ -1,0 +1,34 @@
+ConcurrentHashMap
+ConcurrentMap provides 2 methods:
+    putIfAbsent()-
+        Object putIfAbsent(Object key,Object value)
+        If key already available dont add else add
+    remove()-
+        boolean remove(Object key,Object value):
+        HashMap already has remove(key) method which remove based on key. But this method removes based on key and value
+    replace()-
+        boolean replace(Object key,Object oldvalue,Object newValue)
+
+In normal hashmap synchronized keyword provides object level lock ie., only one thread can access at a time.
+In concurrenthashmap uses bucket level lock for update operations
+        ie,one thread can access the bucket at a time & other thread can access another bucket at a time,
+            but multiple threads can access the other buckets for read operation.
+
+1) Based on Hash Table DS.
+2) allows concurrent read access but allows thread safe concurrent write access.
+3) Doesn't require total hashmap level lock, requires segment/bucket level lock.
+4) Concurrent update is acheieved by dividing hashmap into parts which is concurrency level(default is 16)
+5) Doesn't allow null key and value.
+6) When one thread iterating, other thread can update.
+
+
+ConcurrentHashMap() initialCapacity=16 loadFactor=0.75 concurrencyLevel=16
+    Creates a new, empty map with the default initial table size (16).
+ConcurrentHashMap(int initialCapacity)
+    Creates a new, empty map with an initial table size accommodating the specified number of elements without the need to dynamically resize.
+ConcurrentHashMap(int initialCapacity, float loadFactor)
+    Creates a new, empty map with an initial table size based on the given number of elements (initialCapacity) and initial table density (loadFactor).
+ConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel)
+    Creates a new, empty map with an initial table size based on the given number of elements (initialCapacity), table density (loadFactor), and number of concurrently updating threads (concurrencyLevel).
+ConcurrentHashMap(Map<? extends K,? extends V> m)
+    Creates a new map with the same mappings as the given map.

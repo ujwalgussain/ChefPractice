@@ -106,3 +106,45 @@ Ex 2:
 
 Q) Is it guaranteed after setting Thread Priorities we will get expected output?
 Ans: It is dependent on OS.Some platforms dont provise support for Thread priorities.
+
+Q) Is it possible to start a thread twice? ***************************************
+Ans: No, we cannot restart the thread, as once a thread started and executed, it goes to the Dead state.
+Therefore, if we try to start a thread twice, it will give a runtimeException "java.lang.IllegalThreadStateException".
+
+Q) What about the daemon threads?
+Ans:  The daemon threads are the low priority threads that provide the background support and services to the user threads.
+ Daemon thread gets automatically terminated by the JVM if the program remains with the daemon thread only, and all other user threads are ended/died. There are two methods for daemon thread available in the Thread class:
+
+   public void setDaemon(boolean status): It used to mark the thread daemon thread or a user thread.
+   public boolean isDaemon(): It checks the thread is daemon or not.
+
+Q) Can we make the user thread as daemon thread if the thread is started?
+   No, if you do so, it will throw IllegalThreadStateException. Therefore, we can only create a daemon thread before starting the thread.
+
+   class Testdaemon1 extends Thread{
+   public void run(){
+             System.out.println("Running thread is daemon...");
+   }
+   public static void main (String[] args) {
+         Testdaemon1 td= new Testdaemon1();
+         td.start();
+         setDaemon(true);// It will throw the exception: td.
+      }
+   }
+
+Q) What is shutdown hook?
+   The shutdown hook is a thread that is invoked implicitly before JVM shuts down.
+   So we can use it to perform clean up the resource or save the state when JVM shuts down normally or abruptly.
+   We can add shutdown hook by using the following method:
+
+   public void addShutdownHook(Thread hook){}
+
+   Ex:
+       Runtime r=Runtime.getRuntime();
+       r.addShutdownHook(new MyThread());
+
+   Some important points about shutdown hooks are :
+
+   Shutdown hooks initialized but can only be started when JVM shutdown occurred.
+   Shutdown hooks are more reliable than the finalizer() because there are very fewer chances that shutdown hooks not run.
+   The shutdown hook can be stopped by calling the halt(int) method of Runtime class.

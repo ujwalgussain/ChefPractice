@@ -1,0 +1,2 @@
+Collections.unmodifiableCollection() will return a Object of UnmodifiableCollection whose add()/remove() methods will throw
+ UnsupportedOperationException for any manipulation operations.

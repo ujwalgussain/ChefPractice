@@ -1,0 +1,6 @@
+ReentrantLock:
+-Called a reentrant lock because we can call the same lock any no of times.
+-Has 2 constructors:
+    new ReentrantLock(); //how is false
+    new ReentrantLock(boolean how);
+    if how is true then

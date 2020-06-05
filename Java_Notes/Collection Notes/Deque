@@ -1,0 +1,3 @@
+offer() vs add()
+    offer() returns true if element is added else return false.
+    add() return true if element is added else throws Exception.

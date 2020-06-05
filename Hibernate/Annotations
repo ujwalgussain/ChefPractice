@@ -1,0 +1,59 @@
+Class Level Annotations:
+@Entity - Creates a table
+    It can have 2 type of Data
+    1. Value Type
+    2: Embeddable Type
+@Embeddable -
+@Check - to apply check constraint.
+@
+
+Column Level/instance Variable Level
+
+@Id - Primary Key
+    @Id
+    private Long id;
+
+@ColumnDefault- Default values for column.
+     @ColumnDefault("'N/A'")
+        private String name;
+      @ColumnDefault("-1")
+         private Long clientId;
+
+@UniqueConstraint:
+    @Entity
+    @Table(
+        name = "book",
+        uniqueConstraints =  @UniqueConstraint(
+            name = "uk_book_title_author",
+            columnNames = {
+                "title",
+                "author_id"
+            }
+        )
+    )
+@Index:
+    @Entity
+    @Table(
+        name = "author",
+        indexes =  @Index(
+            name = "idx_author_first_last_name",
+            columnList = "first_name, last_name",
+            unique = false
+        )
+    )
+    public static class Author {
+
+        @Id
+        @GeneratedValue
+        private Long id;
+
+        @Column(name = "first_name")
+        private String firstName;
+
+        @Column(name = "last_name")
+        private String lastName;
+
+        //Getter and setters omitted for brevity
+    }
+
+
