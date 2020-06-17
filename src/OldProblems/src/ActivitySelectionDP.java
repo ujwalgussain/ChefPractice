@@ -3,7 +3,7 @@ package OldProblems.src;
 public class ActivitySelectionDP {
     public static int selectActivity(Activities a, int prevActIdx, String res)
     {
-        System.out.println("Call prevIdx = "+prevActIdx+" res = " + res);
+        //System.out.println("Call prevIdx = "+prevActIdx+" res = " + res);
         if(prevActIdx==a.start.length)
         {
             System.out.println("Res =" +res);
@@ -17,7 +17,7 @@ public class ActivitySelectionDP {
         int q=-1;
         while(i<start.length) {
             if (!res.contains(i+"")) {
-                System.out.println("For i = "+i);
+               // System.out.println("For i = "+i);
                 if(prevActIdx==-1||end[prevActIdx]<=start[i]) {
 
 

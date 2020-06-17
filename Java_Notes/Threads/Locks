@@ -1,6 +1,110 @@
-ReentrantLock:
--Called a reentrant lock because we can call the same lock any no of times.
--Has 2 constructors:
-    new ReentrantLock(); //how is false
-    new ReentrantLock(boolean how);
-    if how is true then
+Reentrant Locks:
+Synchronized Locks are implicit. Whereas Locks are Explicit. We can acquire locks in one method and release in other/ acquire and release locks in any order.
+ReentrantLock can be acquire any number of times by the same thread,(behind the scenes only the hold count gets incremented) and should be released the same no of times.
+It is always advised to call unlock() in finally block.
+Constructor:
+	new ReentrantLock(boolean fair)
+	When fair=true, the threads will be given chance in FCFS Order(Waiting Queue). It gives Equal chance to each thread, hence it is slower.
+	When fair=false(Barge in), any incoming thread would be given chance. As it doesnt honor any order it is fast, but their is a possibility of Thread Starvation.\
+
+Methods:
+	tryLock()- Attempts to acquire Lock.
+	/* Note: Even if lock is fair, lock.tryLock() will not honor fairness. For Fairness use tryLock(long timeout, TimeUnit unit)*/
+
+	Eg:
+	 public void accessResource()
+    {
+        boolean acquireLock=lock.tryLock();  try{
+            if(acquireLock)
+            {
+                //access resource
+            }
+            else
+            {
+                //do Something Else
+            }
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+
+Condition:
+We can acquire Condition using
+    Condition producer=lock.newCondition();
+it has 3 methods: await(), signal(), signalAll()
+
+Eg:
+package MultithreadingSample;
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
+class Q1{
+    int data;
+    boolean valueSet;
+    ReentrantLock lock=new ReentrantLock();
+    Condition producer=lock.newCondition();
+    Condition consumer=lock.newCondition();
+    void put(int i)
+    {
+        lock.lock();
+        try {
+            while (valueSet) {
+                try {
+                    producer.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            data=i;
+            System.out.println("Produced data"+i);
+            valueSet=true;
+            consumer.signal();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+    void get()
+    {
+        lock.lock();
+        try {
+            while(!valueSet)
+            {
+                try {
+                    consumer.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("Consumed "+ data);
+            valueSet=false;
+            producer.signal();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+}
+public class ProducerConsumerUsingLocks {
+    public static void main(String[] args) {
+        Q1 q = new Q1();
+        new Thread(()->{
+            for(int i=0;i<10;i++)
+                q.put(i);
+        }).start();
+
+        new Thread(()->{
+            for(;;)
+                q.get();
+        }).start();
+    }
+}

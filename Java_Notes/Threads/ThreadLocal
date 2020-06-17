@@ -1,0 +1,138 @@
+ThreadLocal:
+ThreadLocal provides Thread Local Variables.
+ThreadLocal obj maintains values on per Thread basis
+Each ThreadLocal obj maintains a seperate value like userID, TransID etc for each Thread.
+Thread can access,manipulate and remove the its Local values.
+In any part of the code which is executed by the thread we can access its Thread local Variable.
+    Ex: Consider a servlet which invokes some business methods, we have a requirement to generate a unique transID for each and every request and we have to pass this transId to the business methods.
+        For this requirement we can use Thread Local to maintain a seperate transID for Every request ie., for Every Thread.
+Note: 1. ThreadLocal class intoduced in 1.2 version and Enhanced in 1.5 version.
+      2.  ThreadLocal can be associated with Thread Scope
+      3. Total Code which is executed by the thread has access to Corresponding ThreadLocal variables.
+      4. A Thread can access its own local variables and can't access other threads local Variables.
+      5. Once a thread entered into dead state, all its local variables are by default eligible for garbage collection.
+
+How to Create ThreadLocal variable
+ThreadLocal t1 = new ThreadLocal(); creates a ThreadLocal variable
+
+Methods:
+    Object get() - returns the value of ThreadLocal variable associated with current Thread.
+    Object initialValue() - return initial Value of ThreadLocal variable associated with current Thread.
+                            The default implementation of this method returns null. To customize we need to override this method.
+    void set(Object new Value)- set value of ThreadLocal variable associated with current Thread.
+    void remove() - remove value of ThreadLocal variable associated with current Thread.
+                    It is a newly added method in 1.5 version. After removal if we try to remove once again, it will invoke initialValue method
+         Ex:
+                    ThreadLocal tl = new ThreadLocal();
+                    System.out.println(tl.get()); //Due to default impl of initialValue() hence prints null
+                    tl.set("test");
+                    System.out.println(tl.get());// prints test
+                    tl.remove();
+                    System.out.println(tl.get());// invokes initialValue()
+                    tl = new ThreadLocal(){
+                        @Override
+                        protected Object initialValue() {
+                            return "initValue";
+                        }
+                    };
+                    System.out.println(tl.get()); //prints initValue
+                    tl.set("test");
+                    System.out.println(tl.get());// prints test
+                    tl.remove();
+                    System.out.println(tl.get());// invokes initialValue() prints initValue
+
+Look at the program given below
+package MultithreadingSample;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+class CustomerThread extends Thread{
+    static volatile Integer custId=0;
+    static ThreadLocal tl = new ThreadLocal(){
+        @Override
+        protected Integer initialValue() {
+            return ++custId;
+        }
+    };
+    CustomerThread(String name)
+    {
+        super(name);
+    }
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName()+" ID = "+tl.get());
+    }
+}
+public class ThreadLocalSample2 {
+    public static void main(String[] args) {
+        new CustomerThread("t1").start();
+        new CustomerThread("t2").start();
+        new CustomerThread("t3").start();
+        new CustomerThread("t4").start();
+    }
+
+}
+   Output:
+    t1 ID = 1
+    t3 ID = 2
+    t2 ID = 3
+    t4 ID = 4
+
+Now lets discuss Parent Child Relation in Thread local. The TL of ParentThread is not available to ChildThread
+For Eg:
+    package MultithreadingSample;
+    class ParentThread extends Thread
+    {
+        static ThreadLocal tl = new ThreadLocal();
+        @Override
+        public void run() {
+            tl.set("parentValue");
+            System.out.println("Parent Thread tl val="+tl.get());//->parentValue
+            new ChildThread().start();
+        }
+    }
+    class ChildThread extends Thread
+    {
+        @Override
+        public void run() {
+            System.out.println("Child Thread tl val="+ParentThread.tl.get());//->null
+        }
+    }
+    public class ThreadLocalParentChildSample {
+        public static void main(String[] args) {
+            new ParentThread().start();
+        }
+    }
+    Output:
+        Parent Thread tl val=parentValue
+        Child Thread tl val=null
+
+
+To Overcome this use InheritableThreadLocal
+    package MultithreadingSample;
+    class ParentThread extends Thread
+    {
+        static InheritableThreadLocal tl = new InheritableThreadLocal();
+        @Override
+        public void run() {
+            tl.set("parentValue");
+            System.out.println("Parent Thread tl val="+tl.get());
+            new ChildThread().start();
+        }
+    }
+    class ChildThread extends Thread
+    {
+        @Override
+        public void run() {
+            System.out.println("Child Thread tl val="+ParentThread.tl.get());
+        }
+    }
+    public class ThreadLocalParentChildSample {
+        public static void main(String[] args) {
+            new ParentThread().start();
+        }
+    }
+If we want seperate value for Child then we will have to override child
+

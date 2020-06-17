@@ -1,13 +1,49 @@
 Problems for Practice:
 Find all subsets/pairs/triplets in array whose sum=K
 Find GCD/LCM of number
+    GCD - normal, Euclidean
 Sieve of Eratosthenes
+Find Pythagorean Triplet
+    1)Naive Approach 2)Efficient Approach C:\Users\capiot\IdeaProjects\ChefPractice\src\PythagoreanTripletImpl.java
 
 Max subarray sum(Divide&Conquer, Kadane's)
 MO's Algo for range sum/max/min
 Find longest Increasing Sequence
 Print all possible permutations of string
-Find whether a string can be rearranged to become palindrome.
+Find whether a string can be rearranged to become palindrome. ** Count min swaps to make string palindrome
+    (if strlen is even then occurence of all chars should be even else one char occurence can be odd)
+Find k largest elements in array
+    Approach 1: Bubble sort
+    Approach 2: use temp[k] add first k elems in temp[] and find min.for each element x after k to length if x > min of temp replace min and find new min
+    Approach 3: use max heap
+    Approach 4: sort array.\\
+Multiply a number using + and bitwise operator
+    https://www.geeksforgeeks.org/russian-peasant-multiply-two-numbers-using-bitwise-operators/
+Arrival and Departure time of train is given. Find min number of platforms.
+    https://www.geeksforgeeks.org/minimum-number-platforms-required-railwaybus-station/
+
+Stacks:
+Find next greatest/smallest element in array.
+Find no of smaller elements to the left of an array
+Implement Queue using stack
 
 LinkedList:
-Print middle of list
+Print middle of list 1) use fast slow ptrs
+Reverse a linked list 1) Stack 2) in O(1)
+Delete a node from the linked list where the pointer to that node is given and head pointer is not given.
+	Step 1 insert a copy of node after the node.
+	Step 2 Add org.next.random=org.random.next;
+	Step 3: Remove all duplicate Nodes
+Clone a Linked list having next and random pointer(can point to any other node in a linked list).
+	Ans: 1. Replace the data of node to be deleted with next node data.
+	     2. Now delete next node as normal delete
+Nth node from the end of a Linked List
+Print the middle of a given linked list
+Find length of loop in linked list
+Function to check if a singly linked list is palindrome
+
+Graphs:
+    Detect a cycle in undirected graph.(https://www.geeksforgeeks.org/detect-cycle-undirected-graph/)
+    Detect a cycle in directed graph.(https://www.geeksforgeeks.org/detect-cycle-in-a-graph/)
+
+

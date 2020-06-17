@@ -4,7 +4,7 @@ Garbage Collection (OCA Objective 2.4)
 3. Only the JVM decides when to run the GC; you can only suggest it.
 4. You can’t know the GC algorithm for sure.
 5. Objects must be considered eligible before they can be garbage collected.
-6. An object is eligible when no live thread can reach it.
+6. An object is eligible when no live thread can reach it. -********
 7. To reach an object, you must have a live, reachable reference to that object.
 8. Java applications can run out of memory.
 9. Islands of objects can be garbage collected, even though they refer to each other.

@@ -1,2 +1,128 @@
 Bean - are objects managed by IOC Containers
 Job of IOC Container is to instantiate, configure and inject dependencies in the bean
+Component scanning- Spring can automatically discover components from an application’s classpath and create them as beans in the
+                    Spring application context.
+AutoWiring- With autowiring, Spring automatically injects the components with the other beans that they depend on.
+
+Spring Boot - Spring Boot is an extension of the Spring Framework that offers several productivity enhancements.
+              The most well-known of these enhancements is autoconfiguration, where Spring Boot can make reasonable guesses
+              of what components need to be configured and wired together, based on entries in the classpath,
+              environment variables, and other factors.
+
+Creating Controllers:
+@RestController,@RequestMapping
+
+Ways to Get Data From Request:
+1. Using Path Variable
+        @GetMapping("/{id}")
+        public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
+            Optional<Taco> optTaco = tacoRepo.findById(id);
+            if (optTaco.isPresent()) {
+            return new ResponseEntity<>(optTaco.get(), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+2. Using Path Parameter
+    @GetMapping("/getApiSample")
+        public ResponseEntity<String> getApiSample(@PathParam("id")String id,@PathParam("name")String name)
+        {
+            System.out.println("Received Id =" + id+" name="+name);
+            HttpHeaders hdrs = new HttpHeaders();
+            hdrs.set("MyheaderName","myHeaderValue");
+            ResponseEntity<String> responseEntity = new ResponseEntity<String>("Success",hdrs,HttpStatus.OK);
+            return responseEntity;
+        }
+3. Using POST:
+    3.1 Get Request Body as String:
+         @PostMapping("/postApiSample")
+            public ResponseEntity<String> postApiSample(@RequestHeader Map<String, String> headers, @RequestBody String requestBody)
+            {
+                System.out.println(String.format("Received Headers=%s Body=%s",headers,requestBody));
+                HttpHeaders hdrs = new HttpHeaders();
+                hdrs.set("MyheaderName","myHeaderValue");
+                ResponseEntity<String> responseEntity = new ResponseEntity<String>("Success",hdrs,HttpStatus.OK);
+                return responseEntity;
+
+            }
+    3.2 Get Request Body as DTO:
+        /*With DTO*/
+            @PostMapping(path="/postApiSampleDTO")
+            public ResponseEntity<String> postApiSampleDTO(@RequestHeader Map<String, String> headers, @RequestBody MyDTO requestBody)
+            {
+                System.out.println(String.format("Received Headers=%s Body=%s",headers,requestBody.toString()));
+                HttpHeaders hdrs = new HttpHeaders();
+                hdrs.set("MyheaderName","myHeaderValue");
+                ResponseEntity<String> responseEntity = new ResponseEntity<String>("Success",hdrs,HttpStatus.OK);
+                return responseEntity;
+            }
+    3.3 Get Request Body as JSON:
+         @PostMapping(path="/postApiSampleJSON", consumes= MediaType.APPLICATION_JSON_VALUE)
+            public ResponseEntity<String> postApiSampleJSON(@RequestHeader Map<String, String> headers, @RequestBody String requestBody)
+            {
+                JSONObject reqJSON= new JSONObject(requestBody);
+                System.out.println(String.format("Received Body=%s Headers=%s",reqJSON,headers));
+                HttpHeaders hdrs = new HttpHeaders();
+                hdrs.set("MyheaderName","myHeaderValue");
+                ResponseEntity<String> responseEntity = new ResponseEntity<String>("Success",hdrs,HttpStatus.OK);
+                return responseEntity;
+            }
+-------------------------------------------------------------------------------------------------------------------------
+Questions:
+What are the constructors of Response Entity?
+
+ResponseEntity(HttpStatus status)
+    Create a new ResponseEntity with the given status code, and no body nor headers.
+ResponseEntity(MultiValueMap<String,String> headers, HttpStatus status)
+    Create a new HttpEntity with the given headers and status code, and no body.
+ResponseEntity(T body, HttpStatus status)
+    Create a new ResponseEntity with the given body and status code, and no headers.
+ResponseEntity(T body, MultiValueMap<String,String> headers, HttpStatus status)
+    Create a new HttpEntity with the given body, headers, and status code.
+--------------------------------------------------------------------------------------------------------------------
+What are various HTTPStatusCodes?
+
+--------------------------------------------------------------------------------------------------------------------
+What happens when u don't specify appropriate HTTP Method?
+Ans: {
+     	"timestamp": "2020-06-14T13:31:26.353+00:00",
+     	"status": 405,
+     	"error": "Method Not Allowed",
+     	"message": "",
+     	"path": "/getApiSample"
+     }
+--------------------------------------------------------------------------------------------------------------------
+What are the various Loggers available?
+Ans:
+--------------------------------------------------------------------------------------------------------------------
+Which Logger is used in our project?
+Ans:
+--------------------------------------------------------------------------------------------------------------------
+When do we get HTTP 500 Error from Spring?
+    ie.,{"timestamp":"2020-06-14T13:42:09.676+00:00","status":500,"error":"Internal Server Error","message":"","path":"/postApiSample"}
+Ans: When code crashes(Exception) w/o returning response.
+--------------------------------------------------------------------------------------------------------------------
+Consider the following scenario:
+    /*DTO POJO*/
+    public class MyDTO {
+        private int uuid;
+        private String name;
+        private int age;
+    }
+    /*Controller*/
+    @PostMapping(path="/postApiSampleDTO")
+        public ResponseEntity<String> postApiSampleDTO(@RequestHeader Map<String, String> headers, @RequestBody MyDTO requestBody)
+        {
+            System.out.println(String.format("Received Headers=%s Body=%s",headers,requestBody.toString()));
+            HttpHeaders hdrs = new HttpHeaders();
+            hdrs.set("MyheaderName","myHeaderValue");
+            ResponseEntity<String> responseEntity = new ResponseEntity<String>("Success",hdrs,HttpStatus.OK);
+            return responseEntity;
+        }
+    If RequestBody:
+    Case 1: {"uuid":123,"name":"Adarsh", "age":23} -> Success.
+    Case 2: {"uuid":"123","name":"Adarsh", "age":"23"} -> Success.(String will automatically be parsed into String)
+    Case 3: {"uuid":"123","name":"Adarsh", "age":"23a"} -> Failure. Will throw HTTPStatus 400 "23a" is not an Integer.
+
+
+
+

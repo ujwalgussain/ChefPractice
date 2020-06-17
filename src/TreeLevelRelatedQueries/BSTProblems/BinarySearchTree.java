@@ -10,6 +10,11 @@ class Node{
     {
         this.data=data;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(data);
+    }
 }
 public class BinarySearchTree {
     Node root;
@@ -42,28 +47,34 @@ public class BinarySearchTree {
                 y.left=n;
         }
     }
-    Node delete_Rec(Node root,int key)
+    void delete(int key)
+    {
+        delete_Rec(root,key);
+    }
+    private Node delete_Rec(Node root,int key)
     {
         if(root==null)
             return null;
-        if(root.data>key)
+        if(root.data<key)
         {
             root.right=delete_Rec(root.right,key);
-        }else if(root.data<key)
-        {
-            root.left=delete_Rec(root.left,key);
         }
-        else
-        {
-            if(root.right==null) {
-                return root.left;
+        else {
+            if (root.data > key) {
+                root.left = delete_Rec(root.left, key);
             }
-            if(root.left==null){
-                return root.right;
+            else
+            {
+                if(root.right==null) {
+                    return root.left;
+                }
+                if(root.left==null){
+                    return root.right;
+                }
+                int min=getMinValue(root.right);
+                root.data=min;
+                root.right=delete_Rec(root.right,min);
             }
-            int min=getMinValue(root.right);
-            root.data=min;
-            root.right=delete_Rec(root.right,min);
         }
         return root;
     }

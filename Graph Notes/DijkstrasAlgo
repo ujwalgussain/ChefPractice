@@ -1,0 +1,11 @@
+Djkstras Algo:
+Also known as Single Source Shortest Path.
+Doesnt work with -ve wrights(Use BellmanFord Algo instead).
+
+Algo:
+ Step 1: Create a mstSet{} and CostMtx initialized to Inf {INF,INF,....}
+ Step 2: Start with 0th node. Add O to mstSet{0} and costmtx[0]=0
+ Step 3:Relax all neighbours ie., dist[u]+cost[u,v]
+ Step 4: Select minCost node which is not present in mstSet
+ Step 5: Perform S3 to S5 until all nodes are visited
+ 

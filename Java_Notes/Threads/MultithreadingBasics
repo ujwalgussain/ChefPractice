@@ -128,7 +128,7 @@ Q) Can we make the user thread as daemon thread if the thread is started?
    public static void main (String[] args) {
          Testdaemon1 td= new Testdaemon1();
          td.start();
-         setDaemon(true);// It will throw the exception: td.
+         td.setDaemon(true);// It will throw the exception:
       }
    }
 
