@@ -35,3 +35,51 @@ To overcome this, we can come up with 3 potential solutions:
                         new Test123().doStuff(); // prints test1243
                     }
                 }
+--------------------------------------------------------------------------------------------------------------------------
+Q) What is lambda expression?
+Lambda expression in itself is an anonymous method
+ i.e. a method with no name which is used to provide implementation of the method defined by a functional interface.
+--------------------------------------------------------------------------------------------------------------------------
+Q) Rules for Lambda expression resolution
+    To infer that object type from the context -
+        The parameter type of the abstract method and the parameter type of the lambda expression must be compatible. For Example, if the abstract method in the functional interface specifies one int parameter, then the lambda should also have one int parameter explicitly defined or implicitly inferred as int by the context.
+        Its return type must be compatible with the method's type.
+        Lambda expression can throw only those exceptions which are acceptable to the method.
+----------------------------------------------------------------------------------------------------------------------------
+Q) Explain target typing with an example.
+    Let's say there is a functional interface IMyFunc
+
+   interface IMyFunc {
+       int getValue(int num);
+   }
+   And a class LambdaDemo with a lambda expression which implements this functional interface.
+
+   public class LambdaDemo {
+
+       public static void main(String[] args) {
+       // lambda expression
+           IMyFunc myFactorialFunc = (num) -> {
+               int fact = 1;
+               for(int i = 1; i <= num; i++){
+                   fact = i * fact;
+               }
+               return fact;
+           };
+           System.out.println("Factorial of 7 is " + myFactorialFunc.getValue(7));
+       }
+   }
+   Here you can see that the lambda expression is assigned to the variable of type IMyFunc(functional interface). Now when the method myFactorialFunc.getValue(7) is called it will know that the lambda expression is providing the implementation of the method getValue() because -
+
+   The parameter type of the abstract method and the parameter type of the lambda expression are compatible.
+   getValue() method's return type is compatible with the return type of the lambda expression.
+   So you can see in this example how target type of the lambda expression is inferred from the context.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+(int x, int y) -> x+y; or (x, y) -> x + y; which one of these is a valid lambda expression?
+
+Both of them are valid lambda expressions if used in a correct context.
+
+With the first one (int x, int y) -> x+y; we know that the parameters must be of type int.
+
+In case of (x, y) -> x + y; if used in a correct context type can be inferred from the context in which the lambda expression is executed.
+
+See more lambda expressions examples
