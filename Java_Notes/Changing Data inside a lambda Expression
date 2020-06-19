@@ -6,6 +6,36 @@ To overcome this, we can come up with 3 potential solutions:
 1. Making the variable static.
 2. Use Array
 3. Atomic Integer
+Case 1:
+     static int a=0;
+        public static void main(String[] args) {
+
+            new Thread(()->
+            {
+                for(int i=0;i<10;i++)
+                {
+                    a+=2;
+                }
+            }).start();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(a);
+        }
+Case2:
+    public static void main(String[] args) {
+        int a[] = new int[1];
+        new Thread(()->
+        {
+            for(int i=0;i<10;i++)
+            {
+                a[0]+=2;
+            }
+        });
+        System.out.println(a[0]);
+    }
 
 ------------------------------------------------------------------------------------------------------------
 >Scope of a Lambda Expression
@@ -74,7 +104,7 @@ Q) Explain target typing with an example.
    getValue() method's return type is compatible with the return type of the lambda expression.
    So you can see in this example how target type of the lambda expression is inferred from the context.
 -----------------------------------------------------------------------------------------------------------------------------------------------
-(int x, int y) -> x+y; or (x, y) -> x + y; which one of these is a valid lambda expression?
+Q) (int x, int y) -> x+y; or (x, y) -> x + y; which one of these is a valid lambda expression?
 
 Both of them are valid lambda expressions if used in a correct context.
 
@@ -82,4 +112,77 @@ With the first one (int x, int y) -> x+y; we know that the parameters must be of
 
 In case of (x, y) -> x + y; if used in a correct context type can be inferred from the context in which the lambda expression is executed.
 
-See more lambda expressions examples
+Q) What is block lambda expression?
+
+   A block lambda is the lambda expression where the right side of the lambda expression is a block of code.
+
+   As example -
+
+   IMyFunc myFactorialFunc = (num) -> {
+               int fact = 1;
+               for(int i = 1; i <= num; i++){
+                   fact = i * fact;
+               }
+               return fact;
+           };Where as (String s1, String s2) -> s1+s2; is a single expression lambda.
+
+Q) Why lambda expression is called a poly expression?
+
+   The type of a lambda expression is inferred from the target type thus the same lambda expression could have different types in different contexts.
+
+   As example-
+
+   If there is a functional interface IMyInterface
+
+   interface IMyInterface {
+       int getValue();
+   }
+   Then both of the following lambda expressions can be of type IMyInterface.
+
+   // Lambda expression
+   objRef = () -> 7;
+
+   // Another lambda expression using the same interface reference
+   objRef = () -> 7 * 5;
+   Another example-
+
+   Let’s say there are these 2 functional interfaces.
+
+   @FunctionalInterface
+   interface TestInterface {
+     int addValues(int val1, int val2);
+   }
+   @FunctionalInterface
+   interface StrInterface {
+     String concat(String str1, String str2);
+   }
+   Then you can write a lambda expression as follows-
+
+   TestInterface obj1;
+   obj1 = (x, y) -> x + y;
+   System.out.println("" + obj1.addValues(2, 3));
+
+   StrInterface obj2;
+   obj2 = (x, y) -> x + y;
+   System.out.println("" + obj2.concat("Hello", "Lambda"));
+   If you notice here same lambda expression (x, y) -> x + y; is used both of the times but the type of the parameters and the return type determines which functional interface should be referred
+ ---------------------------------------------------------------------------------------------------------------------------------------
+ Q) Can we have a generic functional interface?
+
+ Since lambda expression doesn't have type parameters of its own so it can't be generic. But the functional interface that specifies the target type for the lambda expression can be generic.
+ As example-
+ A generic functional interface -
+
+ @FunctionalInterface
+ interface GenInterface<T, U, R> {
+   R addValues(T t, U u);
+ }
+ Lambda expression implementing the given functional interface with Integer types.
+
+ GenInterface<Integer, Integer, Integer> obj1;
+ obj1 = (x, y) -> x + y;
+ System.out.println("" + obj1.addValues(2, 3));Lambda expression implementing the given functional interface with String types.
+ GenInterface<String, String, String> obj2;
+ obj2 = (x, y) -> x + y;
+ System.out.println("" + obj2.addValues("Hello", "Lambda"));
+-----------------------------------------------------------------------------------------------------------------------------------------------

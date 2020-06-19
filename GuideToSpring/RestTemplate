@@ -1,0 +1,26 @@
+RestTemplate:
+-Currently after Spring 5 WebClient is recommended(as it supports both blocking/nonblocking HTTP Calls)
+-response.getStatusCode() and response.getBody()
+Methods:
+getForEntity:
+    ResponseEntity<String> response = restTemplate.getForEntity(fooResourceUrl, String.class);
+    response.getStatusCode() and response.getBody()
+
+    We can also map the response directly to a Resource DTO – for example:
+        public class Foo implements Serializable {
+            private long id;
+
+            private String name;
+            // standard getters and setters
+        }
+    Now – we can simply use the getForObject API in the template:
+
+        Foo foo = restTemplate.getForObject(fooResourceUrl + "/1", Foo.class);
+
+postForObject()
+    HttpEntity<Foo> request = new HttpEntity<>(new Foo("bar"));
+    Foo foo = restTemplate.postForObject(fooResourceUrl, request, Foo.class);
+
+postForLocation()
+    HttpEntity<Foo> request = new HttpEntity<>(new Foo("bar"));
+    URI location = restTemplate.postForLocation(fooResourceUrl, request);

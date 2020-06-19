@@ -1,0 +1,93 @@
+The process of creating exactly duplicate Object is called cloning.
+The main purpose of cloning is to maintain backup copy and to preserve state of an Object.
+If something goes wrong we can access the org Object.
+We can perform cloning by using clone() method of Object class
+    protected native Object clone() throws CloneNotSupportedException
+
+Ex:
+    public class Test implements Cloneable{
+        int i=10,j=20;
+
+        public static void main(String[] args) throws CloneNotSupportedException {
+            CloningSample s = new CloningSample();
+            CloningSample s1 =(CloningSample)s.clone();
+            System.out.println(s1.i+" "+s1.j);
+        }
+    }
+
+If Test doesn't implement Cloneable we will get Runtime Error CloneNotSupportedException
+
+We can perform only for cloneable Objects.
+An Object is said to be Cloneable, if and only if the corresponding class implements Cloneable interface.
+Cloneable interface is present in java.lang package. It is a marker Interface.
+If we are trying to perform cloning for non cloneable Objects then we will get runtimeexception - CloneNotSupportedException
+
+
+Shallow Cloning and Deep Cloning:
+Ex :
+class Dog implement Cloneable{
+    int i=10;
+    Cat c= new Cat();//contained Object
+}
+The process of creating Bitwise Copy of an Object is called Shallow Cloning.
+
+In shallow Cloning for main Object:
+    For primitive variables - a seperate copy is created.
+    For Object references - a duplicate reference will be created pointing to the same Object as the original and no new Object is created.
+Object class clone() is meant for shallow cloning
+Ex:
+    class Cat{
+        int c;
+        Cat(int x)
+        {
+            c=x;
+        }
+    }
+    class Dog implements Cloneable
+    {
+        int d;
+        Cat cat;
+        Dog(int d, Cat c)
+        {
+            this.cat=c;
+            this.d = d;
+        }
+        public Object clone() throws CloneNotSupportedException
+        {
+            return super.clone();
+        }
+    }
+
+Deep Cloning:
+The process of Creating exactly independent duplicate Object is called Deep Cloning.
+In Deep Cloning if the main Object contains any primitive variables then in the clone Object duplicate variables will be created.
+If main Object contains any contained Object then in the clone Object duplicate Objects will be created.
+By default Object class clone method meant for shallow cloning but we can implement deep cloning explicity by overriding clone method in our class.
+Ex:
+class Cat{
+    int c;
+    Cat(int x)
+    {
+        c=x;
+    }
+}
+class Dog implements Cloneable
+{
+    int d;
+    Cat cat;
+    Dog(int d, Cat c)
+    {
+        this.cat=c;
+        this.d = d;
+    }
+    public Object clone() throws CloneNotSupportedException
+    {
+        Cat c1 = new Cat(cat.c);
+        Dog d1 = new Dog(d,c1);
+        return d1;
+    }
+}
+
+Which one is best?
+If Object contains only primitive variables then shallow Cloning is best choice.
+If Object contains reference variables then Deep Cloning is best choice.

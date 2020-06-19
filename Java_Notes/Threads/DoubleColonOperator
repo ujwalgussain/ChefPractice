@@ -1,0 +1,9 @@
+What are the types of method reference?
+
+There are four kinds of method references:
+
+Kind	                                                                        Example	                                Syntax
+Reference to a static method	                                                ContainingClass::staticMethodName	    ClassName::methodName
+Reference to an instance method of a particular object	                        containingObject::instanceMethodName	objRef::methodName
+Reference to an instance method of an arbitrary object of a particular type	    ContainingType::methodName	            ClassName::instanceMethodName
+Reference to a constructor	                                                    ClassName::new	                        classname::new

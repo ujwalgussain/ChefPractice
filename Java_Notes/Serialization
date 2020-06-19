@@ -1,0 +1,130 @@
+Serialization:
+Process of saving state of an obj in a File is called Serialization.
+Strictly speaking converting object from Java supported form to File/Network Supported form.
+
+class Foo implements Serializable{
+    .....
+}
+
+S2: FileOutputStream
+FOS fos=new FOS(filename)
+S1: ObjectOutputStream
+OOS oos=new OOS(fos)
+S3: use writeObject
+oos.writeObject(new Foo())
+
+Deserialization:
+
+S1 : FileInputStream:
+FIS fis= new FIS(filename)
+S2: ObjectInputStream
+OIS ois = new OIS(fis)
+S3: use readObject()
+ois.readObject()
+
+Object must implement Serializable.
+
+What if the object doesnt implement Serializable?
+Ans: We will get a runtimeException: NotSerializableException
+
+transient:
+    At the time of Ser, if we dont want to save the variable use transient.
+    JVM will ignore org value ignored and default value will be saved(Sensitive data like password).
+    It doesnt work with static and final.
+    For eg:
+     int i=10;
+     transient int j=20
+
+    After deserialization we will get i=10 j=0
+
+    Case1: static variable:
+    Static variables are class level variables and Serialization is Done over an object hence transient has no effect over static variables.
+    Ex :
+    class Foo implements Serializable
+    {
+        int i=10;
+        static int j=20
+    }
+    After deserialization we will get i=10 j=20
+
+    class Foo implements Serializable
+    {
+            int i=10;
+            transient static int j=20
+    }
+    After deserialization we will get i=10 j=20
+
+    class Foo implements Serializable
+    {
+        transient int i=10;
+        transient static int j=20
+    }
+    After Serialization/deserialization  we will get i=0 j=20
+
+Final variables:
+    At compile time every Final variables will be replaced by value.
+    Hence
+     class Foo implements Serializable
+     {
+            int i=10;
+            final int j=20 //j will be replaced by 20 compile time only
+     }
+     After Serialization/deserialization we will get i=10 j=20
+
+Hence we can say that Final variable has no effect on Final Variables
+     class Foo implements Serializable
+     {
+                 int i=10;
+                 final transient int j=20 //j will be replaced by 20 compile time only and transient is applicable to variables and not values.
+     }
+     After Serialization/deserialization we will get i=10 j=20
+
+
+Serialization of Multiple Objects in one File: But we should deserialize them in same order they were Serialized.
+Otherwise we will get ClassCastException
+Ex:
+    Dog d = new Dog();
+    Cat c = new Cat();
+    Rat r= new Rat();
+    FileOutputStream file = new FileOutputStream(filename);
+    ObjectOutputStream out = new ObjectOutputStream(file);
+    // Method for serialization of object
+    out.writeObject(d);
+    out.writeObject(c);
+    out.writeObject(r);
+
+    out.close();
+    file.close();
+
+    FileInputStream file = new FileInputStream(filename);
+     ObjectInputStream in = new ObjectInputStream(file);
+    // Method for deserialization of object
+    Dog d1 = (Dog)in.readObject();
+    Cat c1 = (Cat)in.readObject();
+    Rat r1 = (Rat)in.readObject();
+    in.close();
+    file.close();
+
+    How can we handle the scenario if we dont know order of serialization:
+    Object o = ois.readObject()
+    if(o instanceOf Dog)
+        Dog d1=(Dog)o;
+    else
+        if(o instanceOf Cat)
+           Cat c1=(Cat)o;
+        else
+            Rat r1= (Rat)o;
+
+Object Graph:
+If dog object is serialized then all objects reachable from dog object will also be serialized. this is called Object graph.
+In Object Graph all objects should be serializable.
+Ex: dog->cat->rat
+     class Dog implements Serializable {
+        Cat c = new Cat();
+     }
+     class Cat implements Serializable {
+        Rat r = new Rat();
+     }
+     class Rat implements Serializable {
+        int j=10;
+     }
