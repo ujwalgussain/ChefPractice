@@ -1,0 +1,88 @@
+it is a common misconception that synchronized is only about atomicity or demarcating “critical sections”.
+Synchronization is also about memory visibility:
+    We want not only to prevent one thread from modifying the state of an object when another is using it, but also to ensure
+    that when a thread modifies the state of an object, other threads can actually see the changes that were made
+
+VISIBILITY PROBLEM MAY ARISE DUE TO REORDERING OF INSTRUCTIONS DONE BY JVM.
+
+Stale Data: With the following code there are chances of getting stale data:
+    @NotThreadSafe
+    public class MutableInteger {
+        private int value;
+        public int get() {
+            return value;
+        }
+        public void set(int value) {
+            this.value = value;
+        }
+    }
+IT IS QUITE POSSIBLE THAT CONCURRENT ACCESS BY THREADS TO MutableInteger MAY LEAD TO GETTING OLD DATA INSTEAD OF THE MOST RECENT ONE.
+To avoid stale data we must synchronize both getter and setter so that we work on latest copy every time.
+    @ThreadSafe
+    public class SynchronizedInteger {
+        @GuardedBy("this") private int value;
+        public synchronized int get() {
+            return value;
+        }
+        public synchronized void set(int value) {
+            this.value = value;
+        }
+    }
+
+Nonatomic 64-bit operations (Except other primitive values, nonvolatile long/double may fetch random values.)
+    When a thread reads a variable without synchronization, it may see a stale value, but at least it sees a value that
+    was actually placed there by some thread rather than some random value. This safety guarantee is called OUT-OF-THIN-AIR safety.
+
+    Out-of-thin-air safety applies to all variables, with one exception: 64-bit numeric variables (double and long) that are not declared volatile.
+
+    The Java Memory Model requires fetch and store operations to be atomic, but for nonvolatile long and double variables,
+    the JVM is permitted to treat a 64-bit read or write as two separate 32-bit operations.  ****Imp
+
+    If the reads and writes occur in different threads, it is therefore possible to read a nonvolatile long and get back the high 32 bits of
+    one value and the low 32 bits of another.
+
+    Conclusion: Even if you don’t care about stale values, it is not safe to use shared mutable long and double variables in multithreaded programs
+    unless they are declared volatile or guarded by a lock.
+
+Locking and visibility.(With sync access on same Object, Thread B will see all the changes made by Thread A)
+    Intrinsic locking can be used to guarantee that one thread sees the effects of another in a predictable manner.
+    When thread A executes a synchronized block, and subsequently thread B enters a synchronized block guarded by the same lock,
+    the values of variables that were visible to A prior to releasing the lock are guaranteed to be visible to B
+    upon acquiring the lock.
+
+    Conclusion: In other words, everything A did in or prior to a synchronized block is visible to B when it executes
+    a synchronized block guarded by the same lock.  Without synchronization, there is no such guarantee.
+
+Volatile variables
+    The Java language also provides an alternative, weaker form of synchronization, volatile variables, to ensure that
+    updates to a variable are propagated predictably to other threads.
+    When a field is declared volatile, the compiler and runtime are put on notice that this variable is shared and
+    that operations on it should not be reordered with other memory operations.
+
+    IT IS GUARANTEED THAT A READ TO volatile variable ALWAYS RETURNS MOST RECENT WRITE by any thread.
+
+    Why weaker form of synchronization? Ans: Because, it ensures most recent write is available w/o acquiring any lock.
+
+    HAPPENS BEFORE RELATION:
+    When thread A writes to a volatile variable and subsequently thread B reads that same variable, the values of all variables that were
+    visible to A prior to writing to the volatile variable become visible to B after reading the volatile variable.
+
+    So from a memory visibility perspective, WRITING a volatile variable is like EXITING a synchronized block and READING a volatile
+    variable is like ENTERING a synchronized block.
+    However, we do not recommend relying too heavily on volatile variables for visibility;
+
+    Good uses of volatile variables include ensuring the visibility of their own state, that of the object they refer to,
+    or indicating that an important lifecycle event (such as initialization or shutdown) has occurred.
+
+    Volatile reads are only slightly more expensive than nonvolatile reads on most current processor architectures.
+
+    For example,   the semantics of volatile are not strong enough to make the increment operation (count++) atomic, unless you can guarantee that
+    the variable is written only from    a single thread. (Atomic variables do provide atomic read-modify-write support and can often be used
+    as “better volatile variables”; see Chapter 15.)
+
+    NOTE: LOCKING CAN GUARANTEE BOTH VISIBILITY AND ATOMICITY; VOLATILE VARIABLES CAN ONLY GUARANTEE VISIBILITY.
+
+    You can use volatile variables only when all the following criteria are met:
+        • Writes to the variable do not depend on its current value, or you can ensure that only a single thread ever updates the value;
+        • The variable does not participate in invariants with other state variables; and
+        • Locking is not required for any other reason while the variable is being accessed.
