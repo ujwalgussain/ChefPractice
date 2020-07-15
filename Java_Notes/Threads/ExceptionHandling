@@ -1,0 +1,3 @@
+Q) Exception vs Error
+Q) Can we catch a Throwable? If yes Why it is not recommended
+Q) if we return from try block will finally be executed

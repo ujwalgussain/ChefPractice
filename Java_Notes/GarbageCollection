@@ -9,7 +9,7 @@ Hence Heap is split in 2 types:
     Young Gen   -   Minor Collection. Most GC is run here. All Objects first come here and are GCed if they are unused(die young)
     Old Gen     -   Major Collection. Class level variables have longer life. If such variables are not eligible for GC for a long period of time they promoted to Old Gen
                     ie., Objects in young Gen that survived multiple minor collections / If they are too big for younger Gen.
-Whenever there are lot of objects in Old Gen, Then GC is triggered in Old Gen( A diff GC algo is used ).
+                    Whenever there are lot of objects in Old Gen, Then GC is triggered in Old Gen( A diff GC algo is used ).
 
 
 Young Gen:
@@ -62,6 +62,7 @@ Multiple Threads for Minor and Major GC and hence suitable for batch application
 It is possible that it may occupy all threads and not run parellely with the application.
 Greatest throughput in multiprocessor system.
 
+
 CMS(Concurrent Mark and Sweep):
 It runs concurrently with application to mark and sweep But may have pause times.
 pauses times are smaller as compared to parellel collector
@@ -74,3 +75,20 @@ More footprint than CMS
 can set pausetime threshold
 Lower latency
 
+
+
+Garbage Collection (OCA Objective 2.4)
+1. In Java, garbage collection (GC) provides automated memory management.
+2. The purpose of GC is to delete objects that can’t be reached.
+3. Only the JVM decides when to run the GC; you can only suggest it.
+4. You can’t know the GC algorithm for sure.
+5. Objects must be considered eligible before they can be garbage collected.
+6. An object is eligible when no live thread can reach it. -********
+7. To reach an object, you must have a live, reachable reference to that object.
+8. Java applications can run out of memory.
+9. Islands of objects can be garbage collected, even though they refer to each other.
+10. Request garbage collection with System.gc();.
+11. The Object class has a finalize() method.
+12. The finalize() method is guaranteed to run once and only once before the garbage collector deletes an object.
+13. The garbage collector makes no guarantees; finalize() may never run.
+14. You can ineligible-ize an object for GC from within finalize(). ****

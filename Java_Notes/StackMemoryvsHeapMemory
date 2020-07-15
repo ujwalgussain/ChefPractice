@@ -3,7 +3,7 @@ Whenever an object is created, it’s always stored in the Heap space and stack 
 Stack memory only contains local primitive variables and reference variables to objects in heap space.
 Objects stored in the heap are globally accessible whereas stack memory can’t be accessed by other threads.
 Memory management in stack is done in LIFO manner whereas it’s more complex in Heap memory because it’s used globally.
- Heap memory is divided into Young-Generation, Old-Generation etc, more details at Java Garbage Collection.
+Heap memory is divided into Young-Generation, Old-Generation etc, more details at Java Garbage Collection.
 Stack memory is short-lived whereas heap memory lives from the start till the end of application execution.
 We can use -Xms and -Xmx JVM option to define the startup size and maximum size of heap memory.
 We can use -Xss to define the stack memory size.

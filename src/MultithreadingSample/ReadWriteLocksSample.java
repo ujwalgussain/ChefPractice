@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ReadWriteLocksSample {
@@ -17,6 +18,7 @@ public class ReadWriteLocksSample {
         readLock.lock();
         ArrayList x = l;
         readLock.unlock();
+
         return x;
     }
     public void write(int x)

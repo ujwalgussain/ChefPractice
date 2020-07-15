@@ -1,0 +1,72 @@
+Bean Scopes:
+    Singleton-
+            Single bean instantiation per IOC container.
+            It must be used for stateless beans.
+    Prototype-
+            Multiple bean instances per getBean() call.
+            It must be used for stateful beans.
+    Request-
+           Single bean instance per HTTP Request.
+    Session-
+            Single bean instance per HTTP Session.
+            It will return the same bean of each request by same user provided the HTTP Session is established.
+    Global Session
+
+Annotation Based Configuration:
+    Depending on the application context configuration, such component classes will be
+    autodetected and turned into Spring bean definitions, not requiring explicit configuration for each such bean.
+
+---------------------------------------------------------------------------------------------------------------------
+Dependency Injection:
+Setter Injection:
+    xml config:
+        <bean id="exampleBean" class="examples.ExampleBean">
+            <!-- setter injection using the nested <ref/> element -->
+            <property name="beanOne"><ref bean="anotherExampleBean"/></property>
+            <!-- setter injection using the neater 'ref' attribute -->
+            <property name="beanTwo" ref="yetAnotherBean"/>
+            <property name="integerProperty" value="1"/>
+        </bean>
+        <bean id="anotherExampleBean" class="examples.AnotherBean"/>
+        <bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
+    Class:
+         public class ExampleBean {
+             private AnotherBean beanOne;
+             private YetAnotherBean beanTwo;
+             private int i;
+             public void setBeanOne(AnotherBean beanOne) {
+                 this.beanOne = beanOne;
+             }
+             public void setBeanTwo(YetAnotherBean beanTwo) {
+                 this.beanTwo = beanTwo;
+             }
+             public void setIntegerProperty(int i) {
+                 this.i = i;
+             }
+         }
+Constructor Injection:
+    xml config:
+    <bean id="exampleBean" class="examples.ExampleBean">
+        <!-- constructor injection using the nested <ref/> element -->
+        <constructor-arg>
+        <ref bean="anotherExampleBean"/>
+        </constructor-arg>
+        <!-- constructor injection using the neater 'ref' attribute -->
+        <constructor-arg ref="yetAnotherBean"/>
+        <constructor-arg type="int" value="1"/>
+    </bean>
+    <bean id="anotherExampleBean" class="examples.AnotherBean"/>
+    <bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
+
+    Class Def:
+    public class ExampleBean {
+        private AnotherBean beanOne;
+        private YetAnotherBean beanTwo;
+        private int i;
+        public ExampleBean(
+            AnotherBean anotherBean, YetAnotherBean yetAnotherBean, int i) {
+            this.beanOne = anotherBean;
+            this.beanTwo = yetAnotherBean;
+            this.i = i;
+        }
+    }

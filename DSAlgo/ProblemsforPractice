@@ -10,13 +10,17 @@ Max subarray sum(Divide&Conquer, Kadane's)
 MO's Algo for range sum/max/min
 Find longest Increasing Sequence
 Print all possible permutations of string
-Find whether a string can be rearranged to become palindrome. ** Count min swaps to make string palindrome
-    (if strlen is even then occurence of all chars should be even else one char occurence can be odd)
+Find whether a string can be rearranged to become palindrome.(if strlen is even then occurence of all chars should be even else one char occurence can be odd)
+
+Count min swaps to make string palindrome
+    C:\Users\capiot\IdeaProjects\ChefPractice\src\CountMinSwapsToMakePalindromeImpl.java
+
 Find k largest elements in array
     Approach 1: Bubble sort
     Approach 2: use temp[k] add first k elems in temp[] and find min.for each element x after k to length if x > min of temp replace min and find new min
     Approach 3: use max heap
     Approach 4: sort array.\\
+
 Multiply a number using + and bitwise operator
     https://www.geeksforgeeks.org/russian-peasant-multiply-two-numbers-using-bitwise-operators/
 Arrival and Departure time of train is given. Find min number of platforms.

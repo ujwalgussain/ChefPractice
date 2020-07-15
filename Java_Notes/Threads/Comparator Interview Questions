@@ -1,0 +1,50 @@
+Q) Consider the following class:
+    class Person{
+        String firstName,lastName;
+    }
+    Write a comparator to sort Collection of Persons in ascending order by lastName and then firstName.
+    Consider non null values of firstName/lastName
+Ans:
+        new Comparator<Comparator_With_Nulls_First>() {
+                    @Override
+                    public int compare(Comparator_With_Nulls_First o1, Comparator_With_Nulls_First o2) {
+
+                        if(o1.lastName.equals(o2.lastName)){
+                            return o1.firstName.compareTo(o2.lastName);
+                        }
+                        return o1.lastName.compareTo(o2.lastName);
+                    }
+        })
+
+Q) What if we have null Person objects in the list?
+Ans: Then we can have 2 cases:
+        Comparator.nullsFirst()
+        Comparator.nullsLast()
+
+Q) What if there are objects with null firstName/lastName and we want nullsfirst?
+Ans:
+   new Comparator<Comparator_With_Nulls_First>() {
+               @Override
+               public int compare(Comparator_With_Nulls_First o1, Comparator_With_Nulls_First o2) {
+                   /*Handle null FirstName/lastName*/
+                   if(o1.lastName==null&& o2.lastName!=null)
+                       return -1;
+                   if(o2.lastName==null && o1.lastName!=null)
+                       return 1;
+                   if((o1.lastName==null &&o2.lastName==null )||o1.lastName.equals(o2.lastName)){
+                       if(o1.firstName==null && o2.firstName==null)
+                           return 0;
+                       if(o1.firstName==null)
+                       {
+                           return -1;
+                       }
+                       if(o2.firstName==null)
+                       {
+                           return 1;
+                       }
+                       return o1.firstName.compareTo(o2.lastName);
+                   }
+
+                   return o1.lastName.compareTo(o2.lastName);
+               }
+           })

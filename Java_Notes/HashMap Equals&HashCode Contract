@@ -1,0 +1,34 @@
+What is initial Capacity and load factor of HashMap?
+
+Internal Working of HashMap:
+
+
+
+
+
+What if we override hashCode/equals method?
+In both the cases we will end up having DUPLICATE KEYS in hashMap.
+with map.get() we will have following cases:
+    In Both Cases we if the object which is INSERTED is used as key, we will get the corresponding entry otherwise we will get null.
+    Case1: Only Hashcode Override
+        Map With HashCode override {[ID-1, Name=Adarsh]=e1, [ID-2, Name=Ujwal]=e2, [ID-2, Name=Ujwal]=e2_duplicate, [ID-2, Name=Ujwal]=e2_clone, [ID-3, Name=Rama]=e3, [ID-4, Name=Dinesh]=e4}
+                                                             ********************  *******************************  ****************************
+                                                               duplicate keys
+            Same Object as inserted is used then
+                e2 is used e2
+                e2_duplicate is used e2_duplicate
+                e2_clone is used e2_clone
+            Different Object is used then
+                If a new object with same Data as e2 used then -null
+                If a clone of e2 is used null
+
+        Case 2: If Only Equals is Overridden then
+            Map With HashCode override {[ID-2, Name=Ujwal]=e2, [ID-3, Name=Rama]=e3, [ID-2, Name=Ujwal]=e2_clone, [ID-4, Name=Dinesh]=e4, [ID-1, Name=Adarsh]=e1, [ID-2, Name=Ujwal]=e2_duplicate}
+                                         ********************                        ***************************                                                   ******************************
+            Same Object as inserted is used then
+                e2 is used e2
+                e2_duplicate is used e2_duplicate
+                e2_clone is used e2_clone
+            Different Object is used then
+                If a new object with same Data as e2 used then -null
+                If a clone of e2 is used null

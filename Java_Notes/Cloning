@@ -25,7 +25,7 @@ If we are trying to perform cloning for non cloneable Objects then we will get r
 
 Shallow Cloning and Deep Cloning:
 Ex :
-class Dog implement Cloneable{
+class Dog implements Cloneable{
     int i=10;
     Cat c= new Cat();//contained Object
 }

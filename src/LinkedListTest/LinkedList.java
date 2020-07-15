@@ -19,9 +19,8 @@ public class LinkedList {
             insert(i);
         }
     }
-    void insert(int i)
+    void insertNode(Node n)
     {
-        Node n = new Node(i);
         if(head==null)
             head=n;
         else
@@ -32,6 +31,11 @@ public class LinkedList {
             t.next=n;
         }
         length++;
+    }
+    void insert(int i)
+    {
+        Node n = new Node(i);
+        insertNode(n);
     }
     void insert(int i, int pos)
     {

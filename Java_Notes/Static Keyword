@@ -10,4 +10,4 @@ Things you can't mark as static:
     ■ Interfaces
     ■ Method local inner classes (we'll explore this in Chapter 8)
     ■ Inner class methods and instance variables
-    ■ Local variables
+    ■ Local variables.

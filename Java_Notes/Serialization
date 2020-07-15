@@ -6,9 +6,9 @@ class Foo implements Serializable{
     .....
 }
 
-S2: FileOutputStream
+S1: FileOutputStream
 FOS fos=new FOS(filename)
-S1: ObjectOutputStream
+S2: ObjectOutputStream
 OOS oos=new OOS(fos)
 S3: use writeObject
 oos.writeObject(new Foo())
@@ -30,7 +30,7 @@ Ans: We will get a runtimeException: NotSerializableException
 transient:
     At the time of Ser, if we dont want to save the variable use transient.
     JVM will ignore org value ignored and default value will be saved(Sensitive data like password).
-    It doesnt work with static and final.
+    It doesn't work with static and final.
     For eg:
      int i=10;
      transient int j=20

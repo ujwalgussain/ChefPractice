@@ -1,13 +1,26 @@
 1> FixedTP:
-    blocking queue
-2> CachedTP: - for short lived tasks
-   donot have fixed no of threads.
-   uses synchronous queue() which can store only one task. check if any thread is idle. if not create new thread.
-   if thread is idle more than 60 sec kills the thread.
+    public static ExecutorService newFixedThreadPool(int nThreads) {
+            return new ThreadPoolExecutor(nThreads, nThreads,
+                                          0L, TimeUnit.MILLISECONDS,
+                                          new LinkedBlockingQueue<Runnable>());
+        }
+    Uses blocking queue
+2> CachedTP: -  (corePoolSize-0, maxPoolSize=Integer.MAX_VALUE)
+        public static ExecutorService newCachedThreadPool() {
+                return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                              60L, TimeUnit.SECONDS,
+                                              new SynchronousQueue<Runnable>());
 
-3> ScheduledTP - schedule tasks after certain delay.
-    uses delay queue(arranges tasks according to delay).
-    For eg: We need to perform login checks after every 10 sec. use scheduleAtFixedRate()
+    (On demand Creation Of threads)
+    for short lived tasks
+    donot have fixed no of threads.
+    uses synchronous queue() which can store only one task. check if any thread is idle. if not create new thread.
+    if thread is idle more than 60 sec kills the thread.
+
+3> ScheduledTP - (corePoolSize-in arg, maxPoolSize=Integer.MAX_VALUE)
+        schedule tasks after certain delay.
+        uses delay queue(arranges tasks according to delay).
+        For eg: We need to perform login checks after every 10 sec. use scheduleAtFixedRate()
 
         ScheduledExecutorService svc = Executors.newScheduledTP(10);
         //run after 10 sec delay
@@ -20,8 +33,13 @@
         class Task implements Runnable{ ... }
 
 4>SingleThreadedExecutor:
-    size of Queue is 1.
-    If task throws an Exception and Thread is killed it recreate it.
+    public static ExecutorService newSingleThreadExecutor() {
+            return new FinalizableDelegatedExecutorService
+                (new ThreadPoolExecutor(1, 1,
+                                        0L, TimeUnit.MILLISECONDS,
+                                        new LinkedBlockingQueue<Runnable>()));
+    - size of Queue is 1.
+    - If task throws an Exception and Thread is killed it recreate it.
 
 Terminologies:
 1. corePoolSize: The pool consists of a fixed number of core threads that are kept inside all the time,
