@@ -1,12 +1,12 @@
-Any sequence A of size n is called B-sequence if:
+Any sequence JavaInterviewQuestionsImpl.A of size n is called JavaInterviewQuestionsImpl.B-sequence if:
 
- A[0]<A[1]<A[2]...<A[k]>A[k+1]>A[k+2]...A[n] where 1<=k<=n . That is, a sequence which is initially strictly increasing and then strictly decreasing (the decreasing part may or may not be there).
+ JavaInterviewQuestionsImpl.A[0]<JavaInterviewQuestionsImpl.A[1]<JavaInterviewQuestionsImpl.A[2]...<JavaInterviewQuestionsImpl.A[k]>JavaInterviewQuestionsImpl.A[k+1]>JavaInterviewQuestionsImpl.A[k+2]...JavaInterviewQuestionsImpl.A[n] where 1<=k<=n . That is, a sequence which is initially strictly increasing and then strictly decreasing (the decreasing part may or may not be there).
 
-All elements in A except the maximum element comes atmost twice (once in increasing part and once in decreasing part) and maximum element comes exactly once.
+All elements in JavaInterviewQuestionsImpl.A except the maximum element comes atmost twice (once in increasing part and once in decreasing part) and maximum element comes exactly once.
 
 All elements coming in decreasing part of sequence should have come once in the increasing part of sequence.
 
-You are given a B-sequence S and Q operations. For each operation, you are given a value val. You have to insert val in S if and only if after insertion, S still remains a B-sequence .
+You are given a JavaInterviewQuestionsImpl.B-sequence S and Q operations. For each operation, you are given a value val. You have to insert val in S if and only if after insertion, S still remains a JavaInterviewQuestionsImpl.B-sequence .
 After each operation, print the size of S. After all the operations, print the sequence S.
 
 Hint: Think of using some data structure to support insertion of elements in complexity better than linear.

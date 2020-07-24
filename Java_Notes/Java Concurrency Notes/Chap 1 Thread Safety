@@ -1,5 +1,5 @@
 Thread Safety:
-A class is thread-safe if it behaves correctly when accessed from multiple threads,
+JavaInterviewQuestionsImpl.A class is thread-safe if it behaves correctly when accessed from multiple threads,
 regardless of the scheduling or interleaving of the execution of those threads by the runtime environment,
 and with no additional synchronization or other coordination on the part of the calling code.
 
@@ -33,7 +33,7 @@ by one.
 The possibility of incorrect results in the presence of unlucky timing is so important
 in concurrent programming that it has a name: a race condition.
     Race Conditions:
-    A race condition occurs when the correctness of a computation depends
+    JavaInterviewQuestionsImpl.A race condition occurs when the correctness of a computation depends
     on the relative timing or interleaving of multiple threads by the runtime; in other
     words, when getting the right answer relies on lucky timing.4 The most common
     type of race condition is check-then-act, where a potentially stale observation is
@@ -56,17 +56,17 @@ in concurrent programming that it has a name: a race condition.
         }
 
         LazyInitRace has race conditions that can undermine its correctness. Say that
-        threads A and B execute getInstance at the same time. A sees that instance
-        is null, and instantiates a new ExpensiveObject. B also checks if instance is
+        threads JavaInterviewQuestionsImpl.A and JavaInterviewQuestionsImpl.B execute getInstance at the same time. JavaInterviewQuestionsImpl.A sees that instance
+        is null, and instantiates a new ExpensiveObject. JavaInterviewQuestionsImpl.B also checks if instance is
         null. Whether instance is null at this point depends unpredictably on timing,
-        including the vagaries of scheduling and how long A takes to instantiate the ExpensiveObject
-        and set the instance field. If instance is null when B examines
+        including the vagaries of scheduling and how long JavaInterviewQuestionsImpl.A takes to instantiate the ExpensiveObject
+        and set the instance field. If instance is null when JavaInterviewQuestionsImpl.B examines
         it, the two callers to getInstance may receive two different results, even though
         getInstance is always supposed to return the same instance.
 
-        Operations A and B are atomic with respect to each other if, from the
-        perspective of a thread executing A, when another thread executes B,
-        either all of B has executed or none of it has. An atomic operation is one
+        Operations JavaInterviewQuestionsImpl.A and JavaInterviewQuestionsImpl.B are atomic with respect to each other if, from the
+        perspective of a thread executing JavaInterviewQuestionsImpl.A, when another thread executes JavaInterviewQuestionsImpl.B,
+        either all of JavaInterviewQuestionsImpl.B has executed or none of it has. An atomic operation is one
         that is atomic with respect to all operations, including itself, that operate
         on the same state.
 
@@ -93,9 +93,9 @@ in concurrent programming that it has a name: a race condition.
     Intrinsic Locks:
         Java provides a built-in locking mechanism for enforcing atomicity: the synchronized
         block. (There is also another critical aspect to locking and other synchronization
-        mechanisms—visibility—which is covered in Chapter 3.) A synchronized
+        mechanisms—visibility—which is covered in Chapter 3.) JavaInterviewQuestionsImpl.A synchronized
         block has two parts: a reference to an object that will serve as the lock, and a
-        block of code to be guarded by that lock. A synchronized method is a shorthand
+        block of code to be guarded by that lock. JavaInterviewQuestionsImpl.A synchronized method is a shorthand
         for a synchronized block that spans an entire method body, and whose lock is
         the object on which the method is being invoked. (Static synchronized methods
         use the Class object for the lock.)
@@ -107,8 +107,8 @@ in concurrent programming that it has a name: a race condition.
         This Lock id ACQUIRED BEFORE ENTERING the sync block and RELEASED upon EXITING(normally/exception) the block.
 
         Intrinsic locks in Java act as mutexes (or mutual exclusion locks), which means that at most one thread may own the lock.
-        When thread A attempts to acquire a lock held by thread B, A must wait, or block, until B releases it.
-        If B never releases the lock, A waits forever.
+        When thread JavaInterviewQuestionsImpl.A attempts to acquire a lock held by thread JavaInterviewQuestionsImpl.B, JavaInterviewQuestionsImpl.A must wait, or block, until JavaInterviewQuestionsImpl.B releases it.
+        If JavaInterviewQuestionsImpl.B never releases the lock, JavaInterviewQuestionsImpl.A waits forever.
 
         @ThreadSafe
         public class SynchronizedFactorizer implements Servlet {

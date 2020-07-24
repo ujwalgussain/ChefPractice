@@ -114,7 +114,7 @@ In case of (x, y) -> x + y; if used in a correct context type can be inferred fr
 
 Q) What is block lambda expression?
 
-   A block lambda is the lambda expression where the right side of the lambda expression is a block of code.
+   JavaInterviewQuestionsImpl.A block lambda is the lambda expression where the right side of the lambda expression is a block of code.
 
    As example -
 
@@ -171,7 +171,7 @@ Q) Why lambda expression is called a poly expression?
 
  Since lambda expression doesn't have type parameters of its own so it can't be generic. But the functional interface that specifies the target type for the lambda expression can be generic.
  As example-
- A generic functional interface -
+ JavaInterviewQuestionsImpl.A generic functional interface -
 
  @FunctionalInterface
  interface GenInterface<T, U, R> {

@@ -44,13 +44,13 @@ Nonatomic 64-bit operations (Except other primitive values, nonvolatile long/dou
     Conclusion: Even if you don’t care about stale values, it is not safe to use shared mutable long and double variables in multithreaded programs
     unless they are declared volatile or guarded by a lock.
 
-Locking and visibility.(With sync access on same Object, Thread B will see all the changes made by Thread A)
+Locking and visibility.(With sync access on same Object, Thread JavaInterviewQuestionsImpl.B will see all the changes made by Thread JavaInterviewQuestionsImpl.A)
     Intrinsic locking can be used to guarantee that one thread sees the effects of another in a predictable manner.
-    When thread A executes a synchronized block, and subsequently thread B enters a synchronized block guarded by the same lock,
-    the values of variables that were visible to A prior to releasing the lock are guaranteed to be visible to B
+    When thread JavaInterviewQuestionsImpl.A executes a synchronized block, and subsequently thread JavaInterviewQuestionsImpl.B enters a synchronized block guarded by the same lock,
+    the values of variables that were visible to JavaInterviewQuestionsImpl.A prior to releasing the lock are guaranteed to be visible to JavaInterviewQuestionsImpl.B
     upon acquiring the lock.
 
-    Conclusion: In other words, everything A did in or prior to a synchronized block is visible to B when it executes
+    Conclusion: In other words, everything JavaInterviewQuestionsImpl.A did in or prior to a synchronized block is visible to JavaInterviewQuestionsImpl.B when it executes
     a synchronized block guarded by the same lock.  Without synchronization, there is no such guarantee.
 
 Volatile variables
@@ -59,13 +59,13 @@ Volatile variables
     When a field is declared volatile, the compiler and runtime are put on notice that this variable is shared and
     that operations on it should not be reordered with other memory operations.
 
-    IT IS GUARANTEED THAT A READ TO volatile variable ALWAYS RETURNS MOST RECENT WRITE by any thread.
+    IT IS GUARANTEED THAT JavaInterviewQuestionsImpl.A READ TO volatile variable ALWAYS RETURNS MOST RECENT WRITE by any thread.
 
     Why weaker form of synchronization? Ans: Because, it ensures most recent write is available w/o acquiring any lock.
 
     HAPPENS BEFORE RELATION:
-    When thread A writes to a volatile variable and subsequently thread B reads that same variable, the values of all variables that were
-    visible to A prior to writing to the volatile variable become visible to B after reading the volatile variable.
+    When thread JavaInterviewQuestionsImpl.A writes to a volatile variable and subsequently thread JavaInterviewQuestionsImpl.B reads that same variable, the values of all variables that were
+    visible to JavaInterviewQuestionsImpl.A prior to writing to the volatile variable become visible to JavaInterviewQuestionsImpl.B after reading the volatile variable.
 
     So from a memory visibility perspective, WRITING a volatile variable is like EXITING a synchronized block and READING a volatile
     variable is like ENTERING a synchronized block.

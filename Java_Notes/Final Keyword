@@ -13,19 +13,19 @@ Q) What is the final Keyword?
         In Java, the final variable is used to restrict the user from updating it.
         If we initialize the final variable, we can't change its value.
     Final Blank Variable:
-        Instance - A non-static final blank variable which is not initialized can only be assigned through the class constructor.
+        Instance - JavaInterviewQuestionsImpl.A non-static final blank variable which is not initialized can only be assigned through the class constructor.
         Eg:
-            class B
+            class JavaInterviewQuestionsImpl.B
             {
                 final int Z;
-                B(int x)
+                JavaInterviewQuestionsImpl.B(int x)
                 {
                     Z=x;
                 }
             }
-        Static- A static final blank variable which is not initialized can only be assigned through a static block.
+        Static- JavaInterviewQuestionsImpl.A static final blank variable which is not initialized can only be assigned through a static block.
         Eg:
-            class B
+            class JavaInterviewQuestionsImpl.B
             {
                 final static int Z;
                 static

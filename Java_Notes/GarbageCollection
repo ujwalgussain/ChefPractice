@@ -9,7 +9,7 @@ Hence Heap is split in 2 types:
     Young Gen   -   Minor Collection. Most GC is run here. All Objects first come here and are GCed if they are unused(die young)
     Old Gen     -   Major Collection. Class level variables have longer life. If such variables are not eligible for GC for a long period of time they promoted to Old Gen
                     ie., Objects in young Gen that survived multiple minor collections / If they are too big for younger Gen.
-                    Whenever there are lot of objects in Old Gen, Then GC is triggered in Old Gen( A diff GC algo is used ).
+                    Whenever there are lot of objects in Old Gen, Then GC is triggered in Old Gen( JavaInterviewQuestionsImpl.A diff GC algo is used ).
 
 
 Young Gen:

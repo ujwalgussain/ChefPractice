@@ -1,5 +1,6 @@
 Rules for Constructors:
 1. Constructors can use any access modifier, including private.
+Note: A class with private constructor cannot be extended.
 2. The constructor name must match the name of the class.
 3. Constructors must not have a return type.
 4. It’s legal (but stupid) to have a method with the same name as the class.

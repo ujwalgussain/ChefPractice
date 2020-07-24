@@ -1,7 +1,7 @@
 Things you can mark as static:
     ■ Methods
     ■ Variables
-    ■ A class nested within another class, but not within a method
+    ■ JavaInterviewQuestionsImpl.A class nested within another class, but not within a method
     ■ Initialization blocks
 
 Things you can't mark as static:

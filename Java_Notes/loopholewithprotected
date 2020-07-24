@@ -4,23 +4,23 @@ Protected:
     Eg:
     ------------------------------------------------------------------------------
     package p1;
-    class A{
+    class JavaInterviewQuestionsImpl.A{
         protected void m1()
         {     }
     }
     ------------------------------------------------------------------------------
     package p2;
-    class B extends A{
+    class JavaInterviewQuestionsImpl.B extends JavaInterviewQuestionsImpl.A{
         public static void main(String args[])
         {
-            A a=new A();
-            a.m1() //CError: m1 has protected access in p1.A
+            JavaInterviewQuestionsImpl.A a=new JavaInterviewQuestionsImpl.A();
+            a.m1() //CError: m1 has protected access in p1.JavaInterviewQuestionsImpl.A
 
-            B b = new B();
+            JavaInterviewQuestionsImpl.B b = new JavaInterviewQuestionsImpl.B();
             b.m1();
 
-            A a1 = new B();
-            b.m1();//CError: m1 has protected access in p1.A
+            JavaInterviewQuestionsImpl.A a1 = new JavaInterviewQuestionsImpl.B();
+            b.m1();//CError: m1 has protected access in p1.JavaInterviewQuestionsImpl.A
         }
     }
     ------------------------------------------------------------------------------

@@ -6,32 +6,32 @@ Q) Rules for Method Overriding:
    5. Static/final/private methods cant be overriden.
 
 Q) Overriding with Polymorphic Reference
-    class A{
+    class JavaInterviewQuestionsImpl.A{
         public void m1() throws Exception
         {
-            System.out.println("In A");
+            System.out.println("In JavaInterviewQuestionsImpl.A");
         }
     }
-    class B extends A{
+    class JavaInterviewQuestionsImpl.B extends JavaInterviewQuestionsImpl.A{
         public void m1()throws SQLDataException
         {
-            System.out.println("In B");
+            System.out.println("In JavaInterviewQuestionsImpl.B");
         }
         public void m2()
         {
-            System.out.println("m2 B");
+            System.out.println("m2 JavaInterviewQuestionsImpl.B");
         }
     }
 
     1.  This is allowed. But not vice versa
-        A.m1() -> throws Exception
-        B.m1() -> throws SQLDataException
+        JavaInterviewQuestionsImpl.A.m1() -> throws Exception
+        JavaInterviewQuestionsImpl.B.m1() -> throws SQLDataException
 
     2.  In case of polymorphic reference, it will have access to all methods in superclass and (overridden methods in subclass during runtime)
-        B a = new B();
+        JavaInterviewQuestionsImpl.B a = new JavaInterviewQuestionsImpl.B();
         a.m1(); // this throws SQLDataException
-        A poly=new B();
-        poly.m1(); // this throws Exception as it resolved to A's m1() during compilation....which will resolve to B's m1() during runtime
+        JavaInterviewQuestionsImpl.A poly=new JavaInterviewQuestionsImpl.B();
+        poly.m1(); // this throws Exception as it resolved to JavaInterviewQuestionsImpl.A's m1() during compilation....which will resolve to JavaInterviewQuestionsImpl.B's m1() during runtime
         Hence becoz of the subtype/narrower exception you will always have to handle the parent class Exception
 
 

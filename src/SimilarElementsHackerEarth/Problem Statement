@@ -1,4 +1,4 @@
-Given an array A having N integers .Two elements of the array  and  are called similar iff Ai = Aj+1  or Aj = Ai+1 .
+Given an array JavaInterviewQuestionsImpl.A having N integers .Two elements of the array  and  are called similar iff Ai = Aj+1  or Aj = Ai+1 .
 Also, the similarity follows transitivity. If Ai   and Aj are similar and  Aj and Ak are similar, then Ai and Ak are also similar.
 Note: i,j ,k and  are all distinct.
 

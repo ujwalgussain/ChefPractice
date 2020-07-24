@@ -9,7 +9,7 @@ In any part of the code which is executed by the thread we can access its Thread
 Note: 1. ThreadLocal class intoduced in 1.2 version and Enhanced in 1.5 version.
       2.  ThreadLocal can be associated with Thread Scope
       3. Total Code which is executed by the thread has access to Corresponding ThreadLocal variables.
-      4. A Thread can access its own local variables and can't access other threads local Variables.
+      4. JavaInterviewQuestionsImpl.A Thread can access its own local variables and can't access other threads local Variables.
       5. Once a thread entered into dead state, all its local variables are by default eligible for garbage collection.
 
 How to Create ThreadLocal variable

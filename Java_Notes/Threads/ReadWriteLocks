@@ -51,14 +51,14 @@ public class ReadWriteLocksSample {
                 int d =(int)Math.random();
                 r1.write(d);
                 System.out.println(Thread.currentThread().getName()+" wrote "+ (d));
-            },"Writer "+((char)'A'+i)));
+            },"Writer "+((char)'JavaInterviewQuestionsImpl.A'+i)));
         }
         for(int i=0;i<4;i++)
         {
             ex.submit(new Thread(()->{
                 List<Integer> l = r1.read();
                 System.out.println(Thread.currentThread().getName()+" read "+l);
-            },"Reader "+((char)'A'+i)));
+            },"Reader "+((char)'JavaInterviewQuestionsImpl.A'+i)));
         }
 
     }

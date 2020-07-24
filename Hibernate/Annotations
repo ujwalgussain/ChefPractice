@@ -14,7 +14,7 @@ Column Level/instance Variable Level
     private Long id;
 
 @ColumnDefault- Default values for column.
-     @ColumnDefault("'N/A'")
+     @ColumnDefault("'N/JavaInterviewQuestionsImpl.A'")
         private String name;
       @ColumnDefault("-1")
          private Long clientId;

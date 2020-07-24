@@ -1,4 +1,4 @@
-A graph has 2 sets: G(V,E)
+JavaInterviewQuestionsImpl.A graph has 2 sets: G(V,E)
     Vertex , Edges
 
 finite graph: finite no of edges and vertices

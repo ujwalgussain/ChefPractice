@@ -14,25 +14,25 @@ The following is a legal interface declaration:
 
 ------------------------------------------------------------------------------------------
 Diamond problem with default keyword:
-interface A{
+interface JavaInterviewQuestionsImpl.A{
     default public void m1()
     {
-        System.out.println("A.m1()");
+        System.out.println("JavaInterviewQuestionsImpl.A.m1()");
     }
 }
-interface B{
+interface JavaInterviewQuestionsImpl.B{
     default public void m1()
     {
-        System.out.println("B.m1()");
+        System.out.println("JavaInterviewQuestionsImpl.B.m1()");
     }
 }
-class C implements A,B
+class C implements JavaInterviewQuestionsImpl.A,JavaInterviewQuestionsImpl.B
 {
-    //This will throw a compilation Error as m1 is present in both A,B. Hence we will need to provide a implementation for m1() in C as well
+    //This will throw a compilation Error as m1 is present in both JavaInterviewQuestionsImpl.A,JavaInterviewQuestionsImpl.B. Hence we will need to provide a implementation for m1() in C as well
 }
  ***Note: Diamond problem doesnt arise in the following scenarios:
-    Case 1: if A's m1() is default and B's m1() is static
-    Case 2: If both A's and B's m1() is static or abstract.
+    Case 1: if JavaInterviewQuestionsImpl.A's m1() is default and JavaInterviewQuestionsImpl.B's m1() is static
+    Case 2: If both JavaInterviewQuestionsImpl.A's and JavaInterviewQuestionsImpl.B's m1() is static or abstract.
 
 Hence we can say that Diamond problem arises only with default keyword.
 ------------------------------------------------------------------------------

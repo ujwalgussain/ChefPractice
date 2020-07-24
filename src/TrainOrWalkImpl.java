@@ -46,7 +46,7 @@ public class TrainOrWalkImpl {
             {
                 cities[j] = sc.nextInt();
             }
-           // System.out.println(calculate(1,0,N, A, B, C, D, P, Q, Y,cities));
+           // System.out.println(calculate(1,0,N, JavaInterviewQuestionsImpl.A, JavaInterviewQuestionsImpl.B, C, D, P, Q, Y,cities));
             System.out.println(calculate1(N, A, B, C, D, P, Q, Y,cities));
         }
 
@@ -58,8 +58,8 @@ public class TrainOrWalkImpl {
     }
     static int calculate1(int N, int A, int B, int C, int D, int P, int Q, int Y, int[] cities)
     {
-        //walk b/w src and dest is |A-B|*P
-        //train -> (|A-C|*P) + (Y-|A-C|*P)only if Y>timeElapsed + |C-D|*Q + |D-C|*P
+        //walk b/w src and dest is |JavaInterviewQuestionsImpl.A-JavaInterviewQuestionsImpl.B|*P
+        //train -> (|JavaInterviewQuestionsImpl.A-C|*P) + (Y-|JavaInterviewQuestionsImpl.A-C|*P)only if Y>timeElapsed + |C-D|*Q + |D-C|*P
         int walk =walk(A,B,P,cities);
         int train = Integer.MAX_VALUE;
         int timeElapsed = walk(A,C,P,cities);
