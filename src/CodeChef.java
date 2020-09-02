@@ -27,12 +27,16 @@ class Cat extends Animal
 }
 class Codechef
 {
-    static void myMethod(Animal a)
+    static int myMethod()
     {
-        if(a instanceof Dog)
-            ((Dog)a).run();
-        if(a instanceof Cat)
-            ((Cat)a).run();
+        int a=0;
+        try{
+
+            return a;
+        }
+        finally {
+            System.out.println("finally block");
+        }
     }
     static void test(int i)
     {
@@ -40,13 +44,7 @@ class Codechef
         test(i-1);
     }
     public static void main(String[] args) {
-        try {
-    test(10);
-        } catch (Throwable e) {
-            // TODO: handle exception
-
-            System.out.println("Error occured" + e.getClass());
-        }
+        System.out.println(myMethod());
     }
     /*
     public static void main (String[] args) throws java.lang.Exception

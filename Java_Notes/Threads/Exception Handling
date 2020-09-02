@@ -1,0 +1,41 @@
+try{
+
+} catch(Throwable t)
+{
+
+}
+finally{
+
+}
+Q) Throwable hierarchy
+        Throwable
+        /      \
+       /        \
+     Exception  Error
+
+
+Q) Exception vs Error
+
+Q) Can we catch Error?
+Yes we can but it is not recommended
+
+Q)Consider the following code:
+        static int myMethod()
+        {
+            int a=0;
+            try{
+
+                return a;
+            }
+            finally {
+                System.out.println("finally block");
+            }
+        }
+      O/p:
+      finally block
+      0
+Note:
+The finally block will always execute inspite of the return statement earlier.
+If catch block would have been added then we will have to add return statement else we will get a compiler error.
+
+
