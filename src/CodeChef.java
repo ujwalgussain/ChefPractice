@@ -4,8 +4,51 @@ import java.lang.*;
 import java.io.*;
 
 /* Name of the class has to be "Main" only if the class is public. */
+class Animal
+{
+    public void run()
+    {
+        System.out.println("Animals run");
+    }
+}
+class Dog extends Animal
+{
+    @Override
+    public void run() {
+        System.out.println("Dog run");
+    }
+}
+class Cat extends Animal
+{
+    @Override
+    public void run() {
+        System.out.println("Cats run");
+    }
+}
 class Codechef
 {
+    static void myMethod(Animal a)
+    {
+        if(a instanceof Dog)
+            ((Dog)a).run();
+        if(a instanceof Cat)
+            ((Cat)a).run();
+    }
+    static void test(int i)
+    {
+        test(i+1);
+        test(i-1);
+    }
+    public static void main(String[] args) {
+        try {
+    test(10);
+        } catch (Throwable e) {
+            // TODO: handle exception
+
+            System.out.println("Error occured" + e.getClass());
+        }
+    }
+    /*
     public static void main (String[] args) throws java.lang.Exception
     {
         Scanner s = new Scanner(System.in);
@@ -56,5 +99,5 @@ class Codechef
         }
 
 
-    }
+    }*/
 }

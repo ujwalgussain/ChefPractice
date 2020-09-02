@@ -1,6 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
-import org.json.*;
+//import org.json.*;
 public class ChefAndMissingNumberImpl {
     static long limit =(long)Math.pow(10,12);
     static HashMap<String,Integer> power_map= new HashMap<>();
