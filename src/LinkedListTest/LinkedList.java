@@ -7,11 +7,32 @@ class Node{
     {
         data=i;
     }
+
+    @Override
+    public String toString() {
+        return data+"";
+    }
 }
 
 public class LinkedList {
     Node head;
     int length;
+
+    @Override
+    public String toString() {
+        StringBuilder listData = new StringBuilder();
+        if(head!=null)
+        {
+            Node t = head;
+            while(t.next!=null){
+                listData.append(t.data).append("->");
+                t=t.next;
+            }
+            listData.append(t.data);
+        }
+        return String.format("{%s}",listData.toString());
+    }
+
     void insertAll(int ...data)
     {
         for(int i:data)

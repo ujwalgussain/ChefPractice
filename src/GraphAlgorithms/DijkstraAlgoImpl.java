@@ -9,16 +9,9 @@ import java.util.HashSet;
  * S4: Select minCost node which is not present in mstSet
  * S5: Perform S3 to S5 until all nodes are visited*/
 public class DijkstraAlgoImpl {
-    public static void Dijsktra(int[][] g, int[] costmtx, HashSet<Integer> mstSet, int currNode)
-    {
-        //costmtx[]
-        //mstSet
-        //currNode
-        System.out.println(currNode);
-        if(mstSet.size()==g.length)
-            return;
-        //Relax all neighbours of curr node & select min cost node
 
+     static void relax(int[][] g, int[] costmtx, HashSet<Integer> mstSet, int currNode)
+    {
         for(int i=0;i<g.length;i++)
         {
             if(!mstSet.contains(i))
@@ -29,20 +22,35 @@ public class DijkstraAlgoImpl {
                 }
             }
         }
-        System.out.print(Arrays.toString(costmtx));
-        //add mincostneighbour to
-        int mincostneighbour=-1, mincost=Integer.MAX_VALUE;
+    }
+    public static int findMinCostNode(int[] costmtx,HashSet<Integer> mstSet)
+    {
+        int minCostNode=-1, mincost=Integer.MAX_VALUE;
         for(int i=0;i<costmtx.length;i++)
         {
             if(!mstSet.contains(i) && mincost>costmtx[i])
             {
-                mincostneighbour=i;
+                minCostNode=i;
                 mincost=costmtx[i];
             }
         }
-        System.out.println(" neigh "+mincostneighbour);
-        mstSet.add(mincostneighbour);
-        Dijsktra(g,costmtx,mstSet,mincostneighbour);
+        return minCostNode;
+    }
+    public static void Dijsktra(int[][] g, int[] costmtx, HashSet<Integer> mstSet, int currNode)
+    {
+        //System.out.println(currNode);
+        if(mstSet.size()==g.length)
+            return;
+        //Relax all neighbours of curr node & select min cost node
+        relax(g,costmtx,mstSet,currNode);
+
+        //System.out.print(Arrays.toString(costmtx));
+        //add mincostneighbour to
+        int minCostNode=findMinCostNode(costmtx,mstSet);
+
+        System.out.println(" minCostNode ->"+minCostNode);
+        mstSet.add(minCostNode);
+        Dijsktra(g,costmtx,mstSet,minCostNode);
     }
     public static int I=200;
     public static void main(String[] args) {

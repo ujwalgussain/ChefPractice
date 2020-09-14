@@ -2,14 +2,14 @@ package JavaInterviewQuestionsImpl;
 
 import java.util.HashMap;
 
-class EmployeeWithHashCode implements Cloneable{
+class HashCodeOverride implements Cloneable{
     int id;
     String name;
-    EmployeeWithHashCode()
+    HashCodeOverride()
     {
 
     }
-    EmployeeWithHashCode(int id,String name)
+    HashCodeOverride(int id, String name)
     {
         this.id=id;
         this.name=name;
@@ -28,14 +28,14 @@ class EmployeeWithHashCode implements Cloneable{
         return "[ID-"+id+", Name="+name+"]";
     }
 }
-class EmployeeWithEquals implements Cloneable{
+class EqualsOverride implements Cloneable{
     int id;
     String name;
-    EmployeeWithEquals()
+    EqualsOverride()
     {
 
     }
-    EmployeeWithEquals(int id,String name)
+    EqualsOverride(int id, String name)
     {
         this.id=id;
         this.name=name;
@@ -45,9 +45,9 @@ class EmployeeWithEquals implements Cloneable{
     public boolean equals(Object obj) {
         if(this==obj)
             return true;
-        if(!(obj instanceof EmployeeWithEquals))
+        if(!(obj instanceof EqualsOverride))
             return false;
-        EmployeeWithEquals e1 = (EmployeeWithEquals)obj;
+        EqualsOverride e1 = (EqualsOverride)obj;
         return e1.id==this.id && this.name == e1.name;
     }
 
@@ -65,15 +65,15 @@ public class ClassAsKeyInHashMapImpl {
 
     public static void main(String[] args) throws CloneNotSupportedException {
         /*If we override HashCode only then*/{
-            EmployeeWithHashCode e1 = new EmployeeWithHashCode(1,"Adarsh");
-            EmployeeWithHashCode e2 = new EmployeeWithHashCode(2,"Ujwal");
+            HashCodeOverride e1 = new HashCodeOverride(1,"Adarsh");
+            HashCodeOverride e2 = new HashCodeOverride(2,"Ujwal");
 
-            EmployeeWithHashCode e2_duplicate= new EmployeeWithHashCode(2,"Ujwal");
-            EmployeeWithHashCode e2_clone= (EmployeeWithHashCode)e2.clone();
+            HashCodeOverride e2_duplicate= new HashCodeOverride(2,"Ujwal");
+            HashCodeOverride e2_clone= (HashCodeOverride)e2.clone();
 
-            EmployeeWithHashCode e3 = new EmployeeWithHashCode(3,"Rama");
-            EmployeeWithHashCode e4 = new EmployeeWithHashCode(4,"Dinesh");
-            HashMap<EmployeeWithHashCode,String> map1= new HashMap<>();
+            HashCodeOverride e3 = new HashCodeOverride(3,"Rama");
+            HashCodeOverride e4 = new HashCodeOverride(4,"Dinesh");
+            HashMap<HashCodeOverride,String> map1= new HashMap<>();
             map1.put(e1,"e1");
             map1.put(e2,"e2");
             map1.put(e2_duplicate,"e2_duplicate");//inserted a duplicate object.
@@ -84,27 +84,27 @@ public class ClassAsKeyInHashMapImpl {
             System.out.println("Map With HashCode override "+map1);
 
             System.out.println("Same Object as inserted is used then");
-            System.out.println("\te2 is used "+map1.get(e2));//We will get a response
-            System.out.println("\te2_duplicate is used "+map1.get(e2_duplicate));
-            System.out.println("\te2_clone is used "+map1.get(e2_clone));
+            System.out.println("\tmap1.get(e2) "+map1.get(e2));//We will get a response
+            System.out.println("\tmap1.get(e2_duplicate) "+map1.get(e2_duplicate));
+            System.out.println("\tmap1.get(e2_clone)"+map1.get(e2_clone));
             System.out.println("Different Object is used then");
             //Different object/clone with same data used will give null
-            System.out.println("\tIf a new object with same Data as e2 used then -"+map1.get(new EmployeeWithHashCode(1,"Ujwal")));
-            System.out.println("\tIf a clone of e2 is used " +map1.get((EmployeeWithHashCode) e2.clone()));
+            System.out.println("\tmap1.get(new EmployeeWithHashCode(1,\"Ujwal\")) -"+map1.get(new HashCodeOverride(1,"Ujwal")));
+            System.out.println("\tmap1.get((EmployeeWithHashCode) e2.clone())" +map1.get((HashCodeOverride) e2.clone()));
             //Same Object used will return the corresponding data even if the Objects are clone of each other
 
         }
         {
             System.out.println("If Only Equals is Overridden then");
-            EmployeeWithEquals e1 = new EmployeeWithEquals(1,"Adarsh");
-            EmployeeWithEquals e2 = new EmployeeWithEquals(2,"Ujwal");
+            EqualsOverride e1 = new EqualsOverride(1,"Adarsh");
+            EqualsOverride e2 = new EqualsOverride(2,"Ujwal");
 
-            EmployeeWithEquals e2_duplicate= new EmployeeWithEquals(2,"Ujwal");
-            EmployeeWithEquals e2_clone= (EmployeeWithEquals)e2.clone();
+            EqualsOverride e2_duplicate= new EqualsOverride(2,"Ujwal");
+            EqualsOverride e2_clone= (EqualsOverride)e2.clone();
 
-            EmployeeWithEquals e3 = new EmployeeWithEquals(3,"Rama");
-            EmployeeWithEquals e4 = new EmployeeWithEquals(4,"Dinesh");
-            HashMap<EmployeeWithEquals,String> map1= new HashMap<>();
+            EqualsOverride e3 = new EqualsOverride(3,"Rama");
+            EqualsOverride e4 = new EqualsOverride(4,"Dinesh");
+            HashMap<EqualsOverride,String> map1= new HashMap<>();
             map1.put(e1,"e1");
             map1.put(e2,"e2");
             map1.put(e2_duplicate,"e2_duplicate");//inserted a duplicate object.
@@ -113,22 +113,17 @@ public class ClassAsKeyInHashMapImpl {
             map1.put(e4,"e4");
 
 
-            System.out.println("Map With HashCode override "+map1);
+            System.out.println("Map With Equals override "+map1);
 
             System.out.println("Same Object as inserted is used then");
-            System.out.println("\te2 is used "+map1.get(e2));//We will get a response
-            System.out.println("\te2_duplicate is used "+map1.get(e2_duplicate));
-            System.out.println("\te2_clone is used "+map1.get(e2_clone));
+            System.out.println("\tmap1.get(e2) -  "+map1.get(e2));//We will get a response
+            System.out.println("\tmap1.get(e2_duplicate) - "+map1.get(e2_duplicate));
+            System.out.println("\tmap1.get(e2_clone) - "+map1.get(e2_clone));
             System.out.println("Different Object is used then");
             //Different object/clone with same data used will give null
-            System.out.println("\tIf a new object with same Data as e2 used then -"+map1.get(new EmployeeWithHashCode(1,"Ujwal")));
-            System.out.println("\tIf a clone of e2 is used " +map1.get((EmployeeWithEquals) e2.clone()));
+            System.out.println("\tmap1.get(new Employee(1,\"Ujwal\")) -"+map1.get(new HashCodeOverride(1,"Ujwal")));
+            System.out.println("\tmap1.get((EmployeeWithEquals) e2.clone()) - " +map1.get((EqualsOverride) e2.clone()));
             //Same Object used will return the corresponding data even if the Objects are clone of each other
-
-
-
-
-
         }
 
     }

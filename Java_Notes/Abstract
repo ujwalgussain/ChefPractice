@@ -14,5 +14,51 @@ interface i1{
     public void m1();
 }
 abstract class Sample implements i1{
-    //Does it need to implement m1() -> No. The first concrete subclass has to implementv ******
+    //Does it need to implement m1() -> No. The first concrete subclass has to implement v******
 }
+
+Difference b/w abstract & interface After Java 8:
+1. Only  one Abstract class can be extended whereas multiple interfaces can be implemented
+2. Abstract class has a constructor whereas interface doesnt
+3. We can modify the state variables of Abstract class but not of interface as they are static and final
+
+1) Can abstract class have constructors in Java? Yes
+ what is the purpose of a constructor, if you can not instantiate abstract class?
+ it can still be used to initialize common variables, which are declared inside an abstract class, and used by the various implementation.
+Also even if you don’t provide any constructor, the compiler will add default no-argument constructor in an abstract class, without that your subclass will not compile, since the first statement in any constructor implicitly calls super(), default superclass constructor in Java.
+
+
+
+2) Can abstract class implements interface in Java? do they require to implement all methods?
+Yes, an abstract class can implement an interface by using the implements keyword. Since they are abstract, they don’t need to implement all methods. It’s good practice to provide an abstract base class, along with an interface to declare Type. One example of this is java.util.List interface and corresponding java.util.AbstractList abstract class.
+
+3) Can an abstract class be final in Java?
+No, an abstract class can not be final in Java. Making them final will stop the abstract class from being extended, which is the only way to use an abstract class. They are also opposite of each other, abstract keyword enforces to extend a class, for using it, on the other hand, final keyword prevents a class from being extended. In real world also, abstract signifies incompleteness, while final is used to demonstrate completeness. Bottom line is, you can not make your class abstract and final in Java, at same time, it’s a compile time error.
+
+4) Can abstract class have static methods in Java?
+Yes, an abstract class can declare and define static methods, nothing prevents from doing that. But, you must follow guidelines for making a method static in Java, as it’s not welcomed in a object oriented design, because static methods can not be overridden in Java. It’s very rare, you see static methods inside abstract class, but as I said, if you have very good reason of doing it, then nothing stops you.
+
+5) Can you create an instance of abstract class?
+No, you can not create instance of abstract class in Java, they are incomplete. Even though, if your abstract class don’t contain any abstract method, you can not create instance of it. By making a class abstract,  you told compiler that, it’s incomplete and should not be instantiated. Java compiler will throw error, when a code tries to instantiate abstract class.
+
+6) Is it necessary for an abstract class to have an abstract method?
+No, It’s not mandatory for an abstract class to have any abstract method. You can make a class abstract in Java, by just using abstract keyword in class declaration. Compiler will enforce all structural restriction, applied to abstract class, e.g. now allowing to create any instance. By the way, it’s debatable whether you should have abstract method inside abstract class or interface. In my opinion, abstract class should have abstract methods, because that’s the first thing programmer assumes, when he see that class. That would also go nicely along principle of least surprise.
+
+7) Difference between abstract class and interface in Java?
+This is the most important and one of the classic Java Interview question. I don’t know, how many times I have seen this question at all most all levels of Java interviews. One reason, which makes this question interesting is the ability to produce example. It’s easy to answers questions on core OOPS concepts like Abstraction, Encapsulation, Polymorphism and Inheritance, but when it comes to subtle points like this, candidate more often fumbled. You can see this post for all syntactical difference between abstract class and interface, but it deserve a post on it’s own.
+
+8) When do you favor abstract class over interface?
+This is the follow-up of previous interview questions on abstract class and interface. If you know syntactical difference, you can answer this question quite easily, as they are the one, which drives the decision. Since it’s almost impossible to add a new method on a published interface, it’s better to use abstract class, when evolution is concern. Abstract class in Java evolves better than interface. Similarly, if you have too many methods inside interface, you are creating pain for all it’s implementation, consider providing an abstract class for default implementation. This is the pattern followed in Java collection package, you can see AbstractList provides default implementation for List interface.
+
+9) What is abstract method in Java?
+An abstract method is a method without body. You just declare method, without defining it and use abstract keyword in method declaration.  All method declared inside Java Interface are by default abstract. Here is an example of abstract method in Java
+
+                public void abstract printVersion();
+
+Now, In order to implement this method, you need to extend abstract class and override this method.
+
+
+
+10) Can abstract class contains main method in Java ?
+Yes, abstract class can contain main method, it just another static method and you can execute Abstract class with main method, until you don’t create any instance.
+

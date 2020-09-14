@@ -1,13 +1,30 @@
+@FunctionalInterface
+public interface Comparator<T>
+
+Caution should be exercised when using a comparator capable of imposing an ordering inconsistent with equals to order a sorted set (or sorted map). Suppose a sorted set (or sorted map) with an explicit comparator c is used with elements (or keys) drawn from a set S. If the ordering imposed by c on S is inconsistent with equals, the sorted set (or sorted map) will behave "strangely." In particular the sorted set (or sorted map) will violate the general contract for set (or map), which is defined in terms of equals.
+
+For example, suppose one adds two elements a and b such that (a.equals(b) && c.compare(a, b) != 0) to an empty TreeSet with comparator c. The second add operation will return true (and the size of the tree set will increase) because a and b are not equivalent from the tree set's perspective, even though this is contrary to the specification of the Set.add method.
+
+Note: It is generally a good idea for comparators to also implement java.io.Serializable, as they may be used as ordering methods in serializable data structures (like TreeSet, TreeMap). In order for the data structure to serialize successfully, the comparator (if provided) must implement Serializable.
+
+
+
+Working of compareTo():
+If we are comparing 2 objects A,B
+    If A<B ans is -1
+    If A==B ans is 0
+    If A>B ans is 1
+
 Q) Consider the following class:
     class Person{
         String firstName,lastName;
     }
-    Write a comparator to sort Collection of Persons in ascending order by lastName and then firstName.
+Q) Write a comparator to sort Collection of Persons in ascending order by lastName and then firstName.
     Consider non null values of firstName/lastName
 Ans:
-        new Comparator<Comparator_With_Nulls_First>() {
+        new Comparator<Person>() {
                     @Override
-                    public int compare(Comparator_With_Nulls_First o1, Comparator_With_Nulls_First o2) {
+                    public int compare(Person  o1, Person o2) {
 
                         if(o1.lastName.equals(o2.lastName)){
                             return o1.firstName.compareTo(o2.lastName);
@@ -48,3 +65,20 @@ Ans:
                    return o1.lastName.compareTo(o2.lastName);
                }
            })
+
+Q) Comparator vs Comparable
+Comparable in Java	Comparator in Java
+Comparable interface is used to sort the objects with natural ordering.
+Comparator in Java is used to sort attributes of different objects.
+
+Comparable interface compares “this” reference with the object specified.
+Comparator in Java compares two different class objects provided.
+
+Comparable is present in java.lang package.
+A Comparator is present in the java.util package.
+
+Comparable affects the original class, i.e., the actual class is modified.
+Comparator doesn’t affect the original class
+
+Comparable provides compareTo() method to sort elements.
+Comparator provides compare() method, equals() method to sort elements.

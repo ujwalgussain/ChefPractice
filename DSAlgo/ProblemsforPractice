@@ -1,26 +1,43 @@
 Problems for Practice:
-Find all subsets/pairs/triplets in array whose sum=K
-Find GCD/LCM of number
-    GCD - normal, Euclidean
-Sieve of Eratosthenes
-Find Pythagorean Triplet
-    1)Naive Approach 2)Efficient Approach C:\Users\capiot\IdeaProjects\ChefPractice\src\PythagoreanTripletImpl.java
+Arrays:
+    Find start and end of occurence of elements in sorted array
+    Ans:
+        1. Use binary search to find the element. Go left and right to count occurences
+        2. Use binary search to
+            find 1st occurence by using the following
+            if((mid==0 || arr[mid-1]<search_val) && arr[mid]==search_val)
+            find last occurence by using the following
+            if((mid==0 || search_val<arr[mid+1]) && arr[mid]==search_val)
 
-Max subarray sum(Divide&Conquer, Kadane's)
-MO's Algo for range sum/max/min
-Find longest Increasing Sequence
-Print all possible permutations of string
-Find whether a string can be rearranged to become palindrome.(if strlen is even then occurence of all chars should be even else one char occurence can be odd)
+    Find all subsets/pairs/triplets in array whose sum=K
+    Find GCD/LCM of number
+        GCD - normal, Euclidean
+    Sieve of Eratosthenes
+    Find Pythagorean Triplet
+        1)Naive Approach 2)Efficient Approach C:\Users\capiot\IdeaProjects\ChefPractice\src\PythagoreanTripletImpl.java
 
-Count min swaps to make string palindrome
-    C:\Users\capiot\IdeaProjects\ChefPractice\src\CountMinSwapsToMakePalindromeImpl.java
+    Max subarray sum(Divide&Conquer, Kadane's)
+    MO's Algo for range sum/max/min
+    Find longest Increasing Sequence
+    Print all possible permutations of string
+    Find whether a string can be rearranged to become palindrome.(if strlen is even then occurence of all chars should be even else one char occurence can be odd)
+    Find k largest elements in array
+        Approach 1: Bubble sort
+        Approach 2: use temp[k] add first k elems in temp[] and find min.for each element x after k to length if x > min of temp replace min and find new min
+        Approach 3: use max heap
+        Approach 4: sort array.\\
 
-Find k largest elements in array
-    Approach 1: Bubble sort
-    Approach 2: use temp[k] add first k elems in temp[] and find min.for each element x after k to length if x > min of temp replace min and find new min
-    Approach 3: use max heap
-    Approach 4: sort array.\\
+String:
+    Palindrome:
+        Note: A Palindromic String will have even no of occurences of each digit.
+        1.Count min swaps to make string palindrome
+            ChefPractice\src\CountMinSwapsToMakePalindromeImpl.java
+        2. Find the Number of Palindromic SubString
+        3. Longest Palindromic Substring
+        4. Print all Palindromic Substring
+        5. Number of characters to be added to create a palindromic substring
 
+Miscellaneous
 Multiply a number using + and bitwise operator
     https://www.geeksforgeeks.org/russian-peasant-multiply-two-numbers-using-bitwise-operators/
 Arrival and Departure time of train is given. Find min number of platforms.
@@ -68,3 +85,4 @@ Give an algorithm for constructing binary tree from given Inorder and Preorder t
 Give an algorithm for constructing binary tree from given Inorder and Postorder traversals.
 Give an algorithm for printing all the ancestors of a node in a Binary tree.
 Give an algorithm for finding LCA (Least Common Ancestor) of two nodes in a Binary Tree.
+

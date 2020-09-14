@@ -4,7 +4,7 @@ Non Access Modifiers:
     final,static,abstract,transient,volatile, synchronized, native, strictfp
 
 Applicable to Class:
-    JavaInterviewQuestionsImpl.A class may be declared with one or more modifiers which affect its runtime behavior:
+    A class may be declared with one or more modifiers which affect its runtime behavior:
     Outer: public strictfp, final, abstract
     Inner: public, protected, private ,static, final, strictfp.
 
@@ -28,5 +28,5 @@ Q) INSTANCE variables:
         strictfp, synchronized, native,
 
 **Note: 1. Local variables are always on the stack, not the heap.
-        2. JavaInterviewQuestionsImpl.A local variable must be initialized before you try to use it. because—unlike instance variables—local variables don't get
+        2. A local variable must be initialized before you try to use it. because—unlike instance variables—local variables don't get
            default values.
