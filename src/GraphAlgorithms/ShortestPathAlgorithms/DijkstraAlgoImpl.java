@@ -1,4 +1,4 @@
-package GraphAlgorithms;
+package GraphAlgorithms.ShortestPathAlgorithms;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -52,7 +52,7 @@ public class DijkstraAlgoImpl {
         mstSet.add(minCostNode);
         Dijsktra(g,costmtx,mstSet,minCostNode);
     }
-    public static int I=200;
+    public static int I=Integer.MAX_VALUE;
     public static void main(String[] args) {
 
         int g[][] = new int[][]{

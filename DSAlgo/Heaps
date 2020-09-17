@@ -1,0 +1,20 @@
+Heaps:
+Time Complexity:
+    buildHeap -> O(n)
+    extract -> 0(log n)
+    increase -> 0(log n)
+    insert   -> 0(log n)
+
+INSERT(S, x) inserts the element x into the set S, which is equivalent to the operation.
+MAXIMUM(S) returns the element of S with the largest key.
+EXTRACT-MAX(S) removes and returns the element of S with the largest key.
+    HEAP-EXTRACT-MAX(A)
+    1 if A.heap-size < 1
+    2 error “heap underflow”
+    3 max =A[1]
+    4 A[1]=A[A.heap-size]
+    5 A.heap-size = A.heap-size - 1
+    6 MAX-HEAPIFY(A,1)
+    7 return max
+INCREASE-KEY(S, x, k) increases the value of element x’s key to the new value k,
+which is assumed to be at least as large as x’s current key value.

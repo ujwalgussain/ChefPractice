@@ -1,29 +1,25 @@
 package LinkedListTest;
 
-class Node{
-    int data;
-    Node next;
-    Node(int i)
-    {
-        data=i;
-    }
 
-    @Override
-    public String toString() {
-        return data+"";
-    }
-}
 
 public class LinkedList {
-    Node head;
+    LLNode head;
     int length;
+
+    public LLNode getHead() {
+        return head;
+    }
+
+    public void setHead(LLNode head) {
+        this.head = head;
+    }
 
     @Override
     public String toString() {
         StringBuilder listData = new StringBuilder();
         if(head!=null)
         {
-            Node t = head;
+            LLNode t = head;
             while(t.next!=null){
                 listData.append(t.data).append("->");
                 t=t.next;
@@ -33,34 +29,34 @@ public class LinkedList {
         return String.format("{%s}",listData.toString());
     }
 
-    void insertAll(int ...data)
+    public void insertAll(int ...data)
     {
         for(int i:data)
         {
             insert(i);
         }
     }
-    void insertNode(Node n)
+    public void insertNode(LLNode n)
     {
         if(head==null)
             head=n;
         else
         {
-            Node t = head;
+            LLNode t = head;
             while(t.next!=null)
                 t=t.next;
             t.next=n;
         }
         length++;
     }
-    void insert(int i)
+    public void insert(int i)
     {
-        Node n = new Node(i);
+        LLNode n = new LLNode(i);
         insertNode(n);
     }
-    void insert(int i, int pos)
+    public void insert(int i, int pos)
     {
-        Node n = new Node(i);
+        LLNode n = new LLNode(i);
         if(head==null)
             head=n;
         else
@@ -71,7 +67,7 @@ public class LinkedList {
                 head=n;
             }
             else {
-                Node t = head;
+                LLNode t = head;
                 int curr = 1;
                 while (t.next != null && curr < pos - 1) {
                     curr++;
@@ -83,9 +79,9 @@ public class LinkedList {
         }
         length++;
     }
-    void reverse()
+    public void reverse()
     {
-        Node t = head,prev=null,next=null;
+        LLNode t = head,prev=null,next=null;
         while(t!=null)
         {
             next = t.next;
@@ -95,13 +91,13 @@ public class LinkedList {
         }
         head=prev;
     }
-    void display()
+    public void display()
     {
         if(head==null)
             System.out.println("Empty");
         else
         {
-            Node t = head;
+            LLNode t = head;
             while(t!=null){
                 System.out.print(t.data+" ");
                 t=t.next;
@@ -109,11 +105,11 @@ public class LinkedList {
             System.out.println();
         }
     }
-    void rotateLeft(int times)
-    {
+    public void rotateLeft(int times)
+     {
         int pos=times%length;
-        Node t=head;
-        Node oldhead=head;
+        LLNode t=head;
+        LLNode oldhead=head;
         for(int i=0;i<pos-1;i++)
         {
 

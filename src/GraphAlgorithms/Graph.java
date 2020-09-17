@@ -1,5 +1,5 @@
 package GraphAlgorithms;
 
-interface Graph {
+public interface Graph {
     void addEdge(int u, int v);
 }

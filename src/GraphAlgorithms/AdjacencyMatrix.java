@@ -4,10 +4,27 @@ import java.util.Arrays;
 
 public class AdjacencyMatrix implements Graph{
 
-    int[][] G;
-    int V;
-    int E;
-    boolean isDirected;
+    private int[][] G;
+    private int V;
+    private int E;
+    private boolean isDirected;
+
+    public int[][] getG() {
+        return G;
+    }
+
+    public int getV() {
+        return V;
+    }
+
+    public int getE() {
+        return E;
+    }
+
+    public boolean isDirected() {
+        return isDirected;
+    }
+
     AdjacencyMatrix()
     {
 
@@ -18,7 +35,7 @@ public class AdjacencyMatrix implements Graph{
         G=new int[x][x];
         isDirected=false;
     }
-    AdjacencyMatrix(int x, boolean isDirected)
+    public AdjacencyMatrix(int x, boolean isDirected)
     {
         V=x;
         G=new int[x][x];

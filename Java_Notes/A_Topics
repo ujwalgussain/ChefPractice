@@ -1,0 +1,142 @@
+CORE Java
+1. Access Modifiers:
+    public, private, protected, default.
+    abstract, final, static, transient, synchronized, strictfp, native
+    special case of protected
+2. static methods, variables
+3. abstract class/method
+4. interfaces
+5. interfaces in Java 8
+6. abstract class vs interface after Java 8
+7. Object class in Java
+8. Enum in Java
+9. Utility methods in ArraysClass
+9.
+
+
+Collections:
+    Arrays vs Collection
+    Collection Hierarchy
+    List vs Set
+    List vs Map
+    Internal Working of HashMap
+    Hashmap with equals() override/hashCode() override
+    Internal Working of TreeMap
+    Will TreeMap work w/o equals and hashcode?
+    Uility methods in Collections Class
+    Concurrent Collections
+
+
+Streams:
+    Intermediate Operations - Transform the Stream
+        map, mapToInt, mapToDouble....
+        flatMap
+        filter
+        skip
+        distinct
+        limit
+    Terminal Operations
+        reduce
+        collect
+        forEach
+
+    What is flatMap? map vs flatMap?
+    Ans: flatMap is used to flatten a nested Stream for eg: Convert a List<List<String>> into a single List
+
+    intermediate vs terminal operation?
+    Ans: The intermediate Stream operation returns another Stream, which means you can further call other methods of Stream class
+        to compose a pipeline.
+        For example after calling map() or flatMap() you can still call filter() method on Stream.
+
+        On the other hand, the terminal operation produces a result other than Streams like a value or a Collection.
+        Once a terminal method like forEach() or collect() is called, you cannot call any other method of Stream or reuse the Stream.
+
+    #> Collectors.toMap()
+    convert List to Map?
+    Ans: Stream<String> stream = Stream.of("Adarsh","Reena","Kunal","Tendhrall");
+         System.out.println(stream.collect(Collectors.toMap(o -> o.charAt(0),o->o)));
+
+
+    What if in the above case we have key conflicts?
+    Ans: We will get an exception namely java.lang.IllegalStateException: Duplicate key <keyName>
+        Stream<String> stream = Stream.of("Adarsh","Reena","Kunal","Tendhrall","Amit");
+        System.out.println(stream.collect(Collectors.toMap(o -> o.charAt(0),o->o)));
+        o/p: Exception in thread "main" java.lang.IllegalStateException: Duplicate key Adarsh
+             	at java.util.stream.Collectors.lambda$throwingMerger$0(Collectors.java:133)
+             	at java.util.HashMap.merge(HashMap.java:1254)
+             	at java.util.stream.Collectors.lambda$toMap$58(Collectors.java:1320)
+             	at java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
+             	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+             	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+             	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+             	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+             	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+             	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+             	at test.main(test.java:63)
+
+    Solution to the above problem?
+    Ans: Collector<T, ?, M> toMap(
+                Function<? super T, ? extends K> keyMapper,  // key
+                Function<? super T, ? extends U> valueMapper, //Value
+                BinaryOperator<U> mergeFunction //resolve collisions
+                )
+         Ex:
+         // Replace the Existing Entry
+         Stream<String> stream = Stream.of("Adarsh","Reena","Kunal","Tendhrall","Amit");
+                 System.out.println(
+                         stream.collect(Collectors.toMap(
+                                             o -> o.charAt(0),
+                                             Function.identity(),
+                                             (existing, replacement) -> replacement  //THIS WILL REPLACE THE EXISTING ENTRY
+                                         )
+                 ));
+
+
+         // Keep the Existing Entry
+         Stream<String> stream = Stream.of("Adarsh","Reena","Kunal","Tendhrall","Amit");
+                          System.out.println(
+                                  stream.collect(Collectors.toMap(
+                                                      o -> o.charAt(0),
+                                                      Function.identity(),
+                                                      (existing, replacement) -> existing  //THIS WILL KEEP THE EXISTING ENTRY
+                                                  )
+                          ));
+
+
+    What is Function.identity()?
+    Ans: return the object Ex: o -> {return o;}
+
+    What is the Type of Map returned by Collectors.toMap()?
+        Ans: HashMap
+
+    Is it possible to get different type of Map
+    Ans: Yes.
+            Collector<T, ?, M> toMap(Function<? super T, ? extends K> keyMapper,
+              Function<? super T, ? extends U> valueMapper,
+              BinaryOperator<U> mergeFunction,
+              Supplier<M> mapSupplier) //give an empty map of ur choice
+        Example:
+            Stream<String> stream = Stream.of("Adarsh","Reena","Kunal","Tendhrall","Amit");
+                    System.out.println(
+                            stream.collect(
+                                    Collectors.toMap(
+                                            X->X.charAt(0),
+                                            Function.identity(),
+                                            (o1, o2) -> o1,
+                                            () -> new TreeMap<Character,String>() /*********/
+                                            )
+                            ));
+
+MultiThreading
+    Creating Threads
+    Synchronized keyword
+    Executors
+    Runnable vs Callable
+    Locks
+        Rentrant
+        Read/Write
+    ThreadLocal
+    ThreadGroup
+    Volatile vs Atomic Classes
+    Java Memory Model
+    CompletableFuture

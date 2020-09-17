@@ -15,18 +15,18 @@ public class ProblemsForPractice {
     {
         l = new LinkedList();
         l.insertAll(1,2,3,4,5,6);
-        Node temp=l.head;
+        LLNode temp=l.head;
         while(temp.next!=null) {
             temp = temp.next;
         }
 
-        Node n = new Node(7);
+        LLNode n = new LLNode(7);
         temp.next=n;
         n.next = l.head.next.next;
     }
     static boolean findAns(LinkedList l, int N)
     {
-        Node temp = l.head;
+        LLNode temp = l.head;
         HashSet<Integer> traversed = new HashSet<>();
         while (temp!=null)
         {
@@ -39,11 +39,11 @@ public class ProblemsForPractice {
         }
         return false;
     }
-    static Node getNthNode(int n)
+    static LLNode getNthNode(int n)
     {
         int c=1;
-        Node res=null;
-        Node temp=l.head;
+        LLNode res=null;
+        LLNode temp=l.head;
         while(temp!=null)
         {
             temp=temp.next;
@@ -56,9 +56,9 @@ public class ProblemsForPractice {
         return res;
 
     }
-    static Node getNthNodefromEnd(int n)
+    static LLNode getNthNodefromEnd(int n)
     {
-        Node temp=l.head;
+        LLNode temp=l.head;
         int c=0;
         while(temp!=null && c<n)
         {
@@ -66,7 +66,7 @@ public class ProblemsForPractice {
         }
         if(temp==null)
             return null;
-        Node nthLastNode = l.head;
+        LLNode nthLastNode = l.head;
         while(temp != null)
         {
             temp=temp.next;
@@ -75,13 +75,13 @@ public class ProblemsForPractice {
         return nthLastNode;
 
     }
-    static Node getMiddleOfLinkedList()
+    static LLNode getMiddleOfLinkedList()
     {
         /*In odd length fastptr will come at lastNode
            In even length slowptr will come at secondLast node
         * */
         buildLinkedList();
-        Node fastptr=l.head,slowptr=l.head;
+        LLNode fastptr=l.head,slowptr=l.head;
         while(fastptr!=null && fastptr.next!=null)
         {
             fastptr=fastptr.next.next;
@@ -95,7 +95,7 @@ public class ProblemsForPractice {
         * Approach 1: Visit each Node and put in hashset. While traversing check whether Node is already visited
         * Approach 2: Use Floyd's cycle detection algorithm*/
         buildLoopedLinkedList();
-        Node fast_p=l.head,slow_p=l.head;
+        LLNode fast_p=l.head,slow_p=l.head;
         while (slow_p != null && fast_p != null && fast_p.next != null) {
             slow_p = slow_p.next;
             fast_p = fast_p.next.next;
@@ -109,7 +109,7 @@ public class ProblemsForPractice {
     static int getLengthOfLoopInLinkedList()
     {
         buildLoopedLinkedList();
-        Node fastptr = l.head,slowptr = l.head;
+        LLNode fastptr = l.head,slowptr = l.head;
         while(fastptr!=null && fastptr.next!=null)
         {
             fastptr = fastptr.next.next;
@@ -138,14 +138,14 @@ public class ProblemsForPractice {
         Approach 2:
         * */
         buildPalindromicLinkedList();
-        Node fastptr=l.head,mid=l.head;
+        LLNode fastptr=l.head,mid=l.head;
         Stack<Integer> stack = new Stack<>();
         while(fastptr!=null && fastptr.next !=null)
         {
             fastptr=fastptr.next.next;
             mid=mid.next;
         }
-        Node temp=mid;
+        LLNode temp=mid;
         while(temp!=null)
         {
             stack.push(temp.data);
@@ -169,7 +169,7 @@ public class ProblemsForPractice {
         l = new LinkedList();
         l.insertAll(1,1,2,2,2,2,3,3,3,3,3,4,4,4,5);
         System.out.println("Created LinkedList "+l);
-        Node temp = l.head;
+        LLNode temp = l.head;
         while(temp !=null)
         {
             System.out.println("For "+temp.data);
@@ -177,7 +177,7 @@ public class ProblemsForPractice {
             {
                 System.out.println("found duplicate");
                 //delete the next node
-                Node nextNode = temp.next;
+                LLNode nextNode = temp.next;
                 temp.next=nextNode.next;
                 nextNode.next=null;
             }
@@ -202,9 +202,9 @@ public class ProblemsForPractice {
             return;
         else
         {
-            Node temp=l.head;
-            Node prev = null,prevX=null,prevY=null;
-            Node X=null,Y=null;
+            LLNode temp=l.head;
+            LLNode prev = null,prevX=null,prevY=null;
+            LLNode X=null,Y=null;
             while(temp!=null)
             {
                 if(temp.data==x)
@@ -222,7 +222,7 @@ public class ProblemsForPractice {
                 prev=temp;
                 temp=temp.next;
             }
-            Node nextX=X.next;
+            LLNode nextX=X.next;
             X.next=Y.next;
             if(prevY !=null)
                 prevY.next=X;

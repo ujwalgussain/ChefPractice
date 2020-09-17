@@ -89,7 +89,7 @@ public class TopologicalSort {
         g.addEdge(4, 1);
         g.addEdge(2, 3);
         g.addEdge(3, 1);
-        topologicalSort(g.G, g.V);
+        topologicalSort(g.getG(), g.getV());
     }
 
 }

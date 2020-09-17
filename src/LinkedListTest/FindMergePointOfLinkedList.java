@@ -6,7 +6,7 @@ public class FindMergePointOfLinkedList {
     *               lists and check whether next of both nodes is same. If yes then return*/
     static void findMergePoint(LinkedList list1, LinkedList list2)/*Approach 2*/
     {
-        Node temp1=list1.head,temp2=list2.head;
+        LLNode temp1=list1.head,temp2=list2.head;
 
         if(list1.length>list2.length)
         {
@@ -40,13 +40,13 @@ public class FindMergePointOfLinkedList {
         *       /
         *   4-5
         * */
-        Node n1 = new Node(1);
-        Node n2 = new Node(2);
-        Node n3 = new Node(3);
-        Node n4 = new Node(4);
-        Node n5 = new Node(5);
-        Node n6 = new Node(6);
-        Node n7 = new Node(7);
+        LLNode n1 = new LLNode(1);
+        LLNode n2 = new LLNode(2);
+        LLNode n3 = new LLNode(3);
+        LLNode n4 = new LLNode(4);
+        LLNode n5 = new LLNode(5);
+        LLNode n6 = new LLNode(6);
+        LLNode n7 = new LLNode(7);
         LinkedList list1=new LinkedList();
         list1.insertNode(n1);
         list1.insertNode(n2);
