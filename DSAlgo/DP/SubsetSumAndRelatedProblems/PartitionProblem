@@ -1,0 +1,13 @@
+Partition Problem:
+Check whether an array can be partitioned into K parts with Equal Sum.
+Ex:
+    a[] = {1,5,5,11}
+    S1: Find total Sum of the array:
+        1+5+5+11=22
+    S2: Check if Array can be partitioned
+        if(totalsum%K == 0)
+            then it is possible to divide the array
+        else
+            not possible
+        As 22%2==0 partitioning is possible
+    S3: Perform Subset Sum for sum = sum/K

@@ -2,37 +2,32 @@ package TreeLevelRelatedQueries.BSTProblems;
 
 import java.util.LinkedList;
 
-class Node{
-    int data;
-    Node left;
-    Node right;
-    Node(int data)
-    {
-        this.data=data;
+public class BinarySearchTree {
+    TreeNode root;
+
+    public TreeNode getRoot() {
+        return root;
     }
 
-    @Override
-    public String toString() {
-        return Integer.toString(data);
+    public void setRoot(TreeNode root) {
+        this.root = root;
     }
-}
-public class BinarySearchTree {
-    Node root;
-    void insertAll(int ...args)
+
+    public void insertAll(int ...args)
     {
         for(int i:args)
             insert(i);
     }
     void insert(int d)
     {
-        Node n = new Node(d);
+        TreeNode n = new TreeNode(d);
         if(root==null)
         {
             root = n;
         }
         else
         {
-            Node x = root,y=null;
+            TreeNode x = root,y=null;
             while(x!=null)
             {
                 y=x;
@@ -51,7 +46,7 @@ public class BinarySearchTree {
     {
         delete_Rec(root,key);
     }
-    private Node delete_Rec(Node root,int key)
+    private TreeNode delete_Rec(TreeNode root, int key)
     {
         if(root==null)
             return null;
@@ -78,7 +73,7 @@ public class BinarySearchTree {
         }
         return root;
     }
-    int getMinValue(Node root)
+    int getMinValue(TreeNode root)
     {
         int min=root.data;
         while(root.left!=null)
@@ -88,18 +83,18 @@ public class BinarySearchTree {
         }
         return min;
     }
-    void display(Travesal travesal)
+    void display(Traversal travesal)
     {
         switch (travesal)
         {
             case LEVELORDER:
             {
-                LinkedList<Node> list=new LinkedList<>();
+                LinkedList<TreeNode> list=new LinkedList<>();
                 list.add(root);
                 System.out.print("LOT - ");
                 while(!list.isEmpty())
                 {
-                    Node t = list.pollFirst();
+                    TreeNode t = list.pollFirst();
                     System.out.print(t.data+" ");
                     if(t.left!=null)
                         list.add(t.left);
@@ -110,7 +105,4 @@ public class BinarySearchTree {
             }
         }
     }
-}
-enum Travesal{
-    INORDER,PREORDER,POSTORDER,LEVELORDER;
 }

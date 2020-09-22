@@ -1,0 +1,20 @@
+Here we need to use a similar approach as Subset Sum
+Each Cell i j represents the max profit possible with sum=i and set of elements from 0 to j-1
+Ex:
+     int wt[] = {1,2,3};
+     int cost[] = {10,15,40};
+     w=6
+
+	0	1	2	3
+0	0	0	0	0
+1	0	10	10	10
+2	0	10	15	15
+3	0	10	25	40
+4	0	10	25	50
+5	0	10	25	55
+6	0	10	25	65
+
+For each cell i j
+    val1 = In left column on previous row go arr[j-1] times up + cost[j-1]
+    val2 = dp[i][j-1] ie cell to the left
+    cell(i,j) = max of val1 and val2

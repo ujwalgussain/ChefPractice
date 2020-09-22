@@ -4,6 +4,12 @@ import LinkedListTest.LLNode;
 import LinkedListTest.LinkedList;
 
 public class ReverseLLInGroupsofK {
+    /*Approach:
+        Reverse(start,K)
+        1. Reverse k elements from Start
+        2. As start will become the last element after reversing
+            Next of start Element = Reverse(Last,K)
+    * */
     static boolean headChanged=false;
     static LLNode reverse(LinkedList list, LLNode start, int count)
     {
@@ -29,6 +35,9 @@ public class ReverseLLInGroupsofK {
 
         return prev;
     }
+
+
+
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         list.insertAll(1,2,3,4,5,6);

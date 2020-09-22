@@ -2,14 +2,14 @@ package TreeLevelRelatedQueries.BSTProblems;
 
 public class CreateTreeUsingInOrderAndPreOrderImpl {
     static int preIndex=0;
-    Node buildTree(char in[], char pre[], int inStrt, int inEnd)
+    TreeNode buildTree(char in[], char pre[], int inStrt, int inEnd)
     {
         if (inStrt > inEnd)
             return null;
 
         /* Pick current node from Preorder traversal using preIndex
            and increment preIndex */
-        Node tNode = new Node(pre[preIndex++]);
+        TreeNode tNode = new TreeNode(pre[preIndex++]);
 
         /* If this node has no children then return */
         if (inStrt == inEnd)

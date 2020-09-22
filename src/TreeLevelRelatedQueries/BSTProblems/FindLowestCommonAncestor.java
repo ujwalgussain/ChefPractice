@@ -2,17 +2,17 @@ package TreeLevelRelatedQueries.BSTProblems;
 
 public class FindLowestCommonAncestor {
     static boolean v1,v2; //getLCAUtil will return one of the two nodes if one if absent in the tree hence we use 2 flags
-    public static Node getLCA(Node root,int n1,int n2)
+    public static TreeNode getLCA(TreeNode root, int n1, int n2)
     {
         v1=false;v2=false;
-        Node LCA=getLCAUtil(root,n1,n2);
+        TreeNode LCA=getLCAUtil(root,n1,n2);
         if(v1 && v2)
             return LCA;
         return null;
     }
-    public static Node getLCAInBST(Node root,int n1,int n2)
+    public static TreeNode getLCAInBST(TreeNode root, int n1, int n2)
     {
-        Node ans=null;
+        TreeNode ans=null;
         if(root==null) {
             return null;
         }
@@ -27,7 +27,7 @@ public class FindLowestCommonAncestor {
         }
         return ans;
     }
-    private static Node getLCAUtil(Node n,int n1, int n2)
+    private static TreeNode getLCAUtil(TreeNode n, int n1, int n2)
     {
         if(n==null)
             return null;
@@ -40,8 +40,8 @@ public class FindLowestCommonAncestor {
             v2=true;
             return n;
         }
-        Node leftLCA = getLCA(n.left,n1,n2);
-        Node rightLCA = getLCA(n.right,n1,n2);
+        TreeNode leftLCA = getLCA(n.left,n1,n2);
+        TreeNode rightLCA = getLCA(n.right,n1,n2);
         if(leftLCA!=null && rightLCA!=null)
             return n;
         return leftLCA!=null?leftLCA:rightLCA;

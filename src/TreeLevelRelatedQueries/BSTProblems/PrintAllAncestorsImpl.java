@@ -1,7 +1,7 @@
 package TreeLevelRelatedQueries.BSTProblems;
 
 public class PrintAllAncestorsImpl {
-    static boolean printAllAncestors(Node root, int key)
+    static boolean printAllAncestors(TreeNode root, int key)
     {
         if(root==null)
             return false;

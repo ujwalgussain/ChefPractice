@@ -2,7 +2,6 @@ package TreeLevelRelatedQueries.BSTProblems;
 
 import javafx.util.Pair;
 
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -10,7 +9,7 @@ public class PrintingViewsImpl {
     enum View{LEFT,RIGHT,TOP,BOTTOM};
     static BinarySearchTree bst;
     static int maxLevel=0;
-    static void printLeftViewRec(Node n,int level)
+    static void printLeftViewRec(TreeNode n, int level)
     {
         if(n==null)
             return;
@@ -21,7 +20,7 @@ public class PrintingViewsImpl {
         printLeftViewRec(n.left,level+1);
         printLeftViewRec(n.right,level+1);
     }
-    static void printRightViewRec(Node n,int level)
+    static void printRightViewRec(TreeNode n, int level)
     {
         if(n==null)
             return;
@@ -34,15 +33,15 @@ public class PrintingViewsImpl {
     }
     static void printTopView()
     {
-        LinkedList<Pair<Integer,Node>> q = new LinkedList<>();
+        LinkedList<Pair<Integer, TreeNode>> q = new LinkedList<>();
         int hd=0;
         q.add(new Pair<>(hd,bst.root));
         HashMap<Integer,Integer> map = new HashMap<>();
         while(!q.isEmpty())
         {
-            Pair<Integer,Node> curr = q.poll();
+            Pair<Integer, TreeNode> curr = q.poll();
             hd = curr.getKey();
-            Node n = curr.getValue();
+            TreeNode n = curr.getValue();
             if(!map.containsKey(hd))
             {
                 map.put(hd,n.data);
@@ -58,15 +57,15 @@ public class PrintingViewsImpl {
 
     static void printBottomView()
     {
-        LinkedList<Pair<Integer,Node>> q = new LinkedList<>();
+        LinkedList<Pair<Integer, TreeNode>> q = new LinkedList<>();
         int hd=0;
         q.add(new Pair<>(hd,bst.root));
         HashMap<Integer,Integer> map = new HashMap<>();
         while(!q.isEmpty())
         {
-            Pair<Integer,Node> curr = q.poll();
+            Pair<Integer, TreeNode> curr = q.poll();
             hd = curr.getKey();
-            Node n = curr.getValue();
+            TreeNode n = curr.getValue();
             map.put(hd,n.data);
             if(n.left!=null)
                 q.addLast(new Pair<>(hd-1,n.left));

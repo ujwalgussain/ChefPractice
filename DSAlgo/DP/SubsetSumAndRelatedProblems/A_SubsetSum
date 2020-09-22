@@ -1,0 +1,62 @@
+Problem Statement:
+Given a set of non-negative integers, and a value sum, determine if there is a subset of the given set with sum equal to given sum.
+Ex:
+    Input: set[] = {3, 34, 4, 12, 5, 2}, sum = 9
+    Output: True
+    There is a subset (4, 5) with sum 9.
+
+    Input: set[] = {3, 34, 4, 12, 5, 2}, sum = 30
+    Output: False
+    There is no subset that add up to 30.
+
+Logic:
+Recursive Approach:
+    static boolean recursiveApproach(int a[], int idx,int sum)
+        {
+            if(sum==0)
+                return true;
+            if(idx<0)
+                return false;
+            if(a[idx]>sum)
+                return recursiveApproach(a,idx-1,sum);
+            return recursiveApproach(a,idx-1,sum-a[idx]) || recursiveApproach(a,idx-1,sum);
+        }
+
+Bottom Up Approach:
+    Consider the following ex:
+        int a[] = {1,5,5,10}
+        sum = 11
+    S1: create a array dp[sum+1][N+1]
+        A cell 2,3 indicates whether we can form a sum of 2 using set {1,5}
+        Ex: Cell 5,2 indicates whether we can form a sum of 5 using  {1,5} which is true
+        
+    S2: Perform initialization:
+        Here 1st row indicates whether we can form 0 using any subset.We can do this using an empty set. Hence initialize to true.
+        Here 1st column indicates if we can form any sum w/o including any element. Except sum=0 we cant do it. Hence intialize to false.
+        
+    S2: for Each cell starting from row=1 and col=1
+            dp[i][j]=dp[i][j-1]
+            if(i>=arr[j-1]) //it is possible to create sum only if sum >= current element
+                dp[i][j] ||=dp[i-[j-1]][j-1]    
+             
+     
+
+arr[]           1   5   5   10
+            0   1   2   3   4
+
+        0	T	T	T	T	T
+        1	F	T	T	T	T
+        2	F	F	F	F	F
+        3	F	F	F	F	F
+        4	F	F	F	F	F
+        5	F	F	T	T	T
+        6	F	F	T	T	T
+        7	F	F	F	F	F
+        8	F	F	F	F	F
+        9	F	F	F	F	F
+        10	F	F	F	T	T
+        11	F	F	F	T	T
+        ^
+       sum
+       
+Same Logic is applicable to
