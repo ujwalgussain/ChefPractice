@@ -1,0 +1,31 @@
+An immutable object is an object whose internal state remains constant after it has been entirely created.
+
+1. String Pool:
+    Java String Pool is the special memory region where Strings are stored by the JVM.
+    Since Strings are immutable in Java, the JVM optimizes the amount of memory allocated for them by storing
+    only one copy of each literal String in the pool. This process is called interning
+
+2. Security:
+    The String is widely used in Java applications to store sensitive pieces of information like usernames, passwords,
+    connection URLs, network connections, etc.
+    let's say that we received a String object from an untrustworthy source.
+    We're doing all necessary security checks initially to check if the String is only alphanumeric, followed by some more operations.
+    Remember that our unreliable source caller method still has reference to this userName object.
+    If Strings were mutable, then by the time we execute the update, we can't be sure that the String we received,
+    even after performing security checks, would be safe.
+    The untrustworthy caller method still has the reference and can change the String between integrity checks.
+    Thus making our query prone to SQL injections in this case. So mutable Strings could lead to degradation of security over time.
+    It could also happen that the String userName is visible to another thread, which could then change its value
+    after the integrity check.
+    In general, immutability comes to our rescue in this case because it's easier to operate
+    with sensitive code when values don't change because there are fewer interleavings of operations that might affect the result.
+
+3. Synchronization
+Being immutable automatically makes the String thread safe since they won't be changed when accessed from multiple threads.
+
+
+4. HashCode Caching:
+The immutability guarantees Strings that their value won’t change.
+So the hashCode() method is overridden in String class to facilitate caching, such that the hash is calculated
+and cached during the first hashCode() call and the same value is returned ever since.
+This, in turn, improves the performance of collections that uses hash implementations when operated with String objects.

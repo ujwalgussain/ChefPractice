@@ -1,10 +1,10 @@
 Ques:
 1. BFS vs DFS
-2. Inorder w/o recursion
+2. Inorder/PreOrder/PostOrder w/o recursion
 3. Inorder Tree Traversal without recursion and without stack! **** Morris Traversal
 4. Lowest Common Ancestor
 5. Print Left/Right/Bottom/Top View
-
+6. Clone a Tree with Random Pointers
 
 
 

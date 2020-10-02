@@ -9,69 +9,67 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /* Name of the class has to be "Main" only if the class is public. */
-class test
+
+public class test implements Serializable
 {
-    Integer i;
-    boolean flag;
-    synchronized void consume()
+    static int maxProfit(int[] price,
+                         int n,
+                         int k)
     {
-        while(!flag)
-        {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("\tConsumed "+ i);
-        flag=false;
-        notify();
-    }
-    synchronized void produce(int x)
-    {
-        while(flag)
-        {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        this.i=x;
-        System.out.println("Produced "+ i);
-        flag=true;
-        notify();
-    }
 
-    public static void main(String[] args) throws InterruptedException {
-        /*test t = new test();
-        new Thread(()->{
-            for (int i = 0; i < 10; i++) {
-                t.produce(i);
-            }
-        }).start();
+        // table to store results
+        // of subproblems
+        // profit[t][i] stores
+        // maximum profit using
+        // atmost t transactions up
+        // to day i (including day i)
+        int[][] profit = new int[k + 1][n + 1];
 
-        new Thread(()->{
-            for(int i=0;i<10;i++)
+        // For day 0, you can't
+        // earn money irrespective
+        // of how many times you trade
+        for (int i = 0; i <= k; i++)
+            profit[i][0] = 0;
+
+        // profit is 0 if we don't
+        // do any transation
+        // (i.e. k =0)
+        for (int j = 0; j <= n; j++)
+            profit[0][j] = 0;
+
+        // fill the table in
+        // bottom-up fashion
+        for (int i = 1; i <= k; i++)
+        {
+            for (int j = 1; j < n; j++)
             {
-                t.consume();
+                int max_so_far = 0;
+
+                for (int m = 0; m < j; m++)
+                    max_so_far = Math.max(max_so_far, price[j] -
+                            price[m] + profit[i - 1][m]);
+
+                profit[i][j] = Math.max(profit[i] [j - 1],
+                        max_so_far);
             }
+        }
+        for (int[] i:profit)
+            System.out.println(Arrays.toString(i));
+        return profit[k][n - 1];
+    }
 
-
-        }).start();*/
-        Stream<String> stream = Stream.of("Adarsh","Reena","Kunal","Tendhrall","Amit");
-        System.out.println(
-                stream.collect(
-                        Collectors.toMap(
-                                X->X.charAt(0),
-                                Function.identity(),
-                                (o1, o2) -> o1,
-                                () -> new TreeMap<Character,String>()
-                                )
-                ));
+    // Driver code
+    public static void main(String []args)
+    {
+        int k = 2;
+        int[] price = { 10, 22, 5, 75, 65, 80 };
+        int n = price.length;
+        System.out.println("Maximum profit is: " +
+                maxProfit(price, n, k));
     }
 }
 

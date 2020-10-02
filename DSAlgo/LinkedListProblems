@@ -1,0 +1,62 @@
+Introduction to Linked List
+
+Search an element in a Linked List (Iterative and Recursive)
+
+Write a function to get Nth node in a Linked List
+
+Nth node from the end of a Linked List ****
+
+Print the middle of a given linked list ****
+
+Write a function that counts the number of times a given int occurs in a Linked List
+
+Detect loop in a linked list ***
+
+Find length of loop in linked list ***
+
+Function to check if a singly linked list is palindrome ***
+
+Remove duplicates from a sorted linked list
+
+Remove duplicates from an unsorted linked list
+
+Swap nodes in a linked list without swapping data
+
+Pairwise swap elements of a given linked list
+
+Move last element to front of a given Linked List
+
+Intersection of two Sorted Linked Lists
+
+Intersection point of two Linked Lists.
+
+
+QuickSort on Singly Linked List
+
+Segregate even and odd nodes in a Linked List
+
+Reverse a linked list
+
+Delete a node from linkedlist w/o head ptr and only the reference to the Node to be deleted
+
+Print middle of list 1) use fast slow ptrs
+
+Reverse a linked list 1) Stack 2) in O(1)
+
+Delete a node from the linked list where the pointer to that node is given and head pointer is not given.
+	Step 1 insert a copy of node after the node.
+	Step 2 Add org.next.random=org.random.next;
+	Step 3: Remove all duplicate Nodes
+
+
+Clone a Linked list having next and random pointer(can point to any other node in a linked list).
+	Ans: 1. Replace the data of node to be deleted with next node data.
+	     2. Now delete next node as normal delete
+
+Nth node from the end of a Linked List
+
+Print the middle of a given linked list
+
+Find length of loop in linked list
+
+Function to check if a singly linked list is palindrome

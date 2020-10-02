@@ -1,0 +1,140 @@
+Questions:
+Q 1) Find a single element in sorted array of elements which repeat twice
+Q 2) Find start and end occurence of element in a sorted array of repeating elements
+Q 3) Given an array in such a way that the elements stored in array are in increasing order initially and then after reaching to a peak element , elements stored are in decreasing order. Find the highest element.
+    Note: A[i] != A[i+1]
+   Input:
+   11
+   1 2 3 4 5 6 5 4 3 2 1
+   Output: 6
+   Explanation: Highest element is 6.
+   Example 2:
+
+   Input:
+   5
+   1 2 3 4 5
+   Output: 5
+   Explanation: Highest element is 5.
+
+   Expected Time Complexity: O(log(n))
+   Expected Space Complexity: O(1)
+
+Answers:
+
+Q 1) Find a single element in sorted array of elements which repeat twice
+
+    Solution 1: Use formula
+                ((set(array)*2) - total_sum)/2;
+    Solution 2: Use Binary Search
+        void search(int arr[], int low, int high)
+        {
+            // Base cases
+            if (low > high)
+                return;
+
+            if (low == high)
+            {
+                cout << "The required element is "
+                     << arr[low];
+                return;
+            }
+
+            // Find the middle point
+            int mid = (low + high) / 2;
+
+            // If mid is even and element next to mid is
+            // same as mid, then output element lies on
+            // right side, else on left side
+            if (mid % 2 == 0)
+            {
+                if (arr[mid] == arr[mid + 1])
+                    search(arr, mid + 2, high);
+                else
+                    search(arr, low, mid);
+            }
+
+            // If mid is odd
+            else
+            {
+                if (arr[mid] == arr[mid - 1])
+                    search(arr, mid + 1, high);
+                else
+                    search(arr, low, mid - 1);
+            }
+        }
+Q 2) Find start and end occurence of element in a sorted array of repeating elements
+Ans:
+    Example: Consider a[] =  1 1 2 2 2 2 3 3 3 7 7 8 8
+    For finding 1st occurence of 2, it would be the ... 1 2 2 ....... the 2 after 1. If we reach the 0th element then return.
+          a) If (high >= low)
+          b) Calculate  mid = low + (high - low)/2;
+          c) If ((mid == 0 || x > arr[mid-1]) && arr[mid] == x)
+                 return mid;
+          d) Else if (x > arr[mid])
+                return first(arr, (mid + 1), high, x, n);
+          e) Else
+                return first(arr, low, (mid -1), x, n);
+          f) Otherwise return -1;
+
+    For finding last occurence of 2, it would be the ...2 2 3 3....... the 2 before 3. If we reach the last element then return.
+         a) if (high >= low)
+         b) calculate mid = low + (high - low)/2;
+         c)if( ( mid == n-1 || x < arr[mid+1]) && arr[mid] == x )
+                return mid;
+         d) else if(x < arr[mid])
+               return last(arr, low, (mid -1), x, n);
+         e) else
+              return last(arr, (mid + 1), high, x, n);
+         f) otherwise return -1;
+
+
+Q 3) Given an array in such a way that the elements stored in array are in increasing order initially and then after reaching to a peak element , elements stored are in decreasing order. Find the highest element.
+    Note: A[i] != A[i+1]
+   Example 1L
+       Input:
+       11
+       1 2 3 4 5 6 5 4 3 2 1
+       Output: 6
+       Explanation: Highest element is 6.
+
+   Example 2:
+        Input:
+        5
+        1 2 3 4 5
+        Output: 5
+       Explanation: Highest element is 5.
+   Expected Time Complexity: O(log(n))
+   Expected Space Complexity: O(1)
+
+   Solution:
+   We can use Binary Search with a little change
+   Consider 1 2 3 4 5 6 5 4 3 2 1.
+   The solution is 6 where 5>6<4.....so this will be the answer
+   There are 2 conditions:
+       if the array in increasing only return hi
+       If we are in the increasing part just go right
+       If we are in the decreasing part just go left
+   Algo:
+
+                int lo=0, hi=a.length-1;
+               // System.out.println("lo"+"\t\t\t"+"mid"+"\t\t\t"+"hi");
+               if(a[lo]<a[hi] && a[hi-1]<a[hi])
+                    return a[hi];
+                while(lo<=hi)
+                {
+                    int mid=(lo+hi)/2;
+                   // System.out.println(String.format("a[%d]=%d\t\ta[%d]=%d\t\ta[%d]=%d",lo,a[lo],mid,a[mid],hi,a[hi]));
+                    if(a[mid]>a[mid+1] && a[mid-1]<a[mid])
+                        return a[mid];
+                    else
+                    if(a[mid]>a[mid+1])
+                    {
+                        //go left
+                        hi=mid-1;
+                    }
+                    else
+                    {
+                        lo=mid+1;
+                    }
+                }
+                return -1;
