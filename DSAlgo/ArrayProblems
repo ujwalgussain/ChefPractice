@@ -150,8 +150,10 @@ Arrays:
         }
     }
 
-
-
-
-
+    Print the sum of all subsets
+    Solution:
+        Consider following example:
+        Ex1- Set = {1,2} -> {1}, {2}, {1,2}
+        Ex2 - Set={1,2,3} -> {1}, {2}, {3},{1,2},{2,3},{1,3},{1,2,3}
+        So occurence of each element in all sun
 
