@@ -16,6 +16,6 @@ public class ReverseWordOrderInStringImpl {
     }
     static public void main(String a[])
     {
-        System.out.println(reverse_new("I lov emy india"));
+        System.out.println(reverse_new("I love my india"));
     }
 }
