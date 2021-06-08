@@ -1,4 +1,4 @@
-package SimilarElementsHackerEarth;
+package ChefProblems.SimilarElementsHackerEarth;
 
 import java.util.Arrays;
 

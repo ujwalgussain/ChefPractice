@@ -1,4 +1,4 @@
-package MirrorImageImpl;
+package ChefProblems.MirrorImageImpl;
 
 import java.util.*;
 

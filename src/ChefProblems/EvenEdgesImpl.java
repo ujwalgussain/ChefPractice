@@ -1,3 +1,5 @@
+package ChefProblems;
+
 import java.util.*;
 
 public class EvenEdgesImpl {

@@ -1,4 +1,4 @@
-package HardCashImpl;
+package ChefProblems.HardCashImpl;
 
 import java.util.Scanner;
 

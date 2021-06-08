@@ -83,8 +83,8 @@ Hence we can say that Final variable has no effect on Final Variables
 Serialization of Multiple Objects in one File: But we should deserialize them in same order they were Serialized.
 Otherwise we will get ClassCastException
 Ex:
-    Dog d = new Dog();
-    Cat c = new Cat();
+    ChefProblems.Dog d = new ChefProblems.Dog();
+    ChefProblems.Cat c = new ChefProblems.Cat();
     Rat r= new Rat();
     FileOutputStream file = new FileOutputStream(filename);
     ObjectOutputStream out = new ObjectOutputStream(file);
@@ -99,19 +99,19 @@ Ex:
     FileInputStream file = new FileInputStream(filename);
      ObjectInputStream in = new ObjectInputStream(file);
     // Method for deserialization of object
-    Dog d1 = (Dog)in.readObject();
-    Cat c1 = (Cat)in.readObject();
+    ChefProblems.Dog d1 = (ChefProblems.Dog)in.readObject();
+    ChefProblems.Cat c1 = (ChefProblems.Cat)in.readObject();
     Rat r1 = (Rat)in.readObject();
     in.close();
     file.close();
 
     How can we handle the scenario if we dont know order of serialization:
     Object o = ois.readObject()
-    if(o instanceOf Dog)
-        Dog d1=(Dog)o;
+    if(o instanceOf ChefProblems.Dog)
+        ChefProblems.Dog d1=(ChefProblems.Dog)o;
     else
-        if(o instanceOf Cat)
-           Cat c1=(Cat)o;
+        if(o instanceOf ChefProblems.Cat)
+           ChefProblems.Cat c1=(ChefProblems.Cat)o;
         else
             Rat r1= (Rat)o;
 
@@ -119,10 +119,10 @@ Object Graph:
 If dog object is serialized then all objects reachable from dog object will also be serialized. this is called Object graph.
 In Object Graph all objects should be serializable.
 Ex: dog->cat->rat
-     class Dog implements Serializable {
-        Cat c = new Cat();
+     class ChefProblems.Dog implements Serializable {
+        ChefProblems.Cat c = new ChefProblems.Cat();
      }
-     class Cat implements Serializable {
+     class ChefProblems.Cat implements Serializable {
         Rat r = new Rat();
      }
      class Rat implements Serializable {

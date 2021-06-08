@@ -15,7 +15,7 @@ insert a no-arg call to super() for you as the very first statement in the const
 11. A no-arg constructor is not necessarily the default (that is, compiler-supplied)constructor, although the default constructor is always a no-arg constructor. The default
 constructor is the one the compiler provides! Although the default constructor is always a noargconstructor, you’re free to put in your own no-arg constructor.
 12. You cannot make a call to an instance method or access an instance variable until after the super constructor runs.
-13. Only static variables and methods can be accessed as part of the call to super() or this(). (Example: super(Animal.NAME) is OK, because NAME is declared as a static
+13. Only static variables and methods can be accessed as part of the call to super() or this(). (Example: super(ChefProblems.Animal.NAME) is OK, because NAME is declared as a static
 variable.)
 14. Abstract classes have constructors, and those constructors are always called when a concrete subclass is instantiated.
 15. Interfaces do not have constructors. Interfaces are not part of an object’s inheritancetree.

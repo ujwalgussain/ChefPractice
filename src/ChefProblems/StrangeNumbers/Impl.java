@@ -1,4 +1,4 @@
-package StrangeNumbers;
+package ChefProblems.StrangeNumbers;
 
 import java.util.Arrays;
 import java.util.Scanner;

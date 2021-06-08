@@ -1,4 +1,4 @@
-package MonkAndCursedTree;
+package ChefProblems.MonkAndCursedTree;
 /* IMPORTANT: Multiple classes and nested static classes are supported */
 
 /*

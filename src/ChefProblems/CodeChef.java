@@ -1,3 +1,4 @@
+package ChefProblems;
 
 import java.util.*;
 import java.lang.*;
@@ -15,7 +16,7 @@ class Dog extends Animal
 {
     @Override
     public void run() {
-        System.out.println("Dog run");
+        System.out.println("ChefProblems.Dog run");
     }
 }
 class Cat extends Animal

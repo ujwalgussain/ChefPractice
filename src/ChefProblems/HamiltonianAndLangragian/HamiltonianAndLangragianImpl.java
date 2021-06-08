@@ -1,4 +1,4 @@
-package HamiltonianAndLangragian;
+package ChefProblems.HamiltonianAndLangragian;
 
 import java.util.Scanner;
 

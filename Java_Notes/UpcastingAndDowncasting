@@ -1,20 +1,20 @@
 
 Downcasting a superclass:
 
-class Animal {}
-class Dog extends Animal {}
+class ChefProblems.Animal {}
+class ChefProblems.Dog extends ChefProblems.Animal {}
 class DogTest {
     public static void main(String[] args) {
 
-        Animal animal = new Animal();
-        Dog d = (Dog) animal; // compiles but fails during runtime -> java.lang.ClassCastException
+        ChefProblems.Animal animal = new ChefProblems.Animal();
+        ChefProblems.Dog d = (ChefProblems.Dog) animal; // compiles but fails during runtime -> java.lang.ClassCastException
 
 
-        Dog d = new Dog();
-        Animal a1 = d; // upcast ok with no explicit cast
-        Animal a2 = (Animal) d; // upcast ok with an explicit cast
+        ChefProblems.Dog d = new ChefProblems.Dog();
+        ChefProblems.Animal a1 = d; // upcast ok with no explicit cast
+        ChefProblems.Animal a2 = (ChefProblems.Animal) d; // upcast ok with an explicit cast
 
-        Dog d1=(Dog)a1;//DownCast is only allowed if Object is instance of same type as LHS. *************
+        ChefProblems.Dog d1=(ChefProblems.Dog)a1;//DownCast is only allowed if Object is instance of same type as LHS. *************
     }
 }
 

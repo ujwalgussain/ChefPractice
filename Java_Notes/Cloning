@@ -25,9 +25,9 @@ If we are trying to perform cloning for non cloneable Objects then we will get r
 
 Shallow Cloning and Deep Cloning:
 Ex :
-class Dog implements Cloneable{
+class ChefProblems.Dog implements Cloneable{
     int i=10;
-    Cat c= new Cat();//contained Object
+    ChefProblems.Cat c= new ChefProblems.Cat();//contained Object
 }
 The process of creating Bitwise Copy of an Object is called Shallow Cloning.
 
@@ -36,18 +36,18 @@ In shallow Cloning for main Object:
     For Object references - a duplicate reference will be created pointing to the same Object as the original and no new Object is created.
 Object class clone() is meant for shallow cloning
 Ex:
-    class Cat{
+    class ChefProblems.Cat{
         int c;
-        Cat(int x)
+        ChefProblems.Cat(int x)
         {
             c=x;
         }
     }
-    class Dog implements Cloneable
+    class ChefProblems.Dog implements Cloneable
     {
         int d;
-        Cat cat;
-        Dog(int d, Cat c)
+        ChefProblems.Cat cat;
+        ChefProblems.Dog(int d, ChefProblems.Cat c)
         {
             this.cat=c;
             this.d = d;
@@ -64,26 +64,26 @@ In Deep Cloning if the main Object contains any primitive variables then in the 
 If main Object contains any contained Object then in the clone Object duplicate Objects will be created.
 By default Object class clone method meant for shallow cloning but we can implement deep cloning explicity by overriding clone method in our class.
 Ex:
-class Cat{
+class ChefProblems.Cat{
     int c;
-    Cat(int x)
+    ChefProblems.Cat(int x)
     {
         c=x;
     }
 }
-class Dog implements Cloneable
+class ChefProblems.Dog implements Cloneable
 {
     int d;
-    Cat cat;
-    Dog(int d, Cat c)
+    ChefProblems.Cat cat;
+    ChefProblems.Dog(int d, ChefProblems.Cat c)
     {
         this.cat=c;
         this.d = d;
     }
     public Object clone() throws CloneNotSupportedException
     {
-        Cat c1 = new Cat(cat.c);
-        Dog d1 = new Dog(d,c1);
+        ChefProblems.Cat c1 = new ChefProblems.Cat(cat.c);
+        ChefProblems.Dog d1 = new ChefProblems.Dog(d,c1);
         return d1;
     }
 }
