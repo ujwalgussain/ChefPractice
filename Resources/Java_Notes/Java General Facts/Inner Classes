@@ -1,0 +1,69 @@
+Refer src/Java_Basics/InnerClassTest.java
+
+Static Inner Classes:
+    Outer.StaticInner staticInner = new Outer.StaticInner(); // No reference to outer class
+    - construction is fast as doesnt require outer class to be instantiated before.
+    - has access to all static members of outer class including private
+    - is not associated with the instance of the class. Hence we cant obtain access using this.
+    - Hence if inner class is independent of Outer class always use static
+
+
+Instance Inner Classes:
+    //Requires a reference of Outer class.
+    Outer.NonStaticInner nonStaticInner = outer.new NonStaticInner();
+
+    - construction is slow as it requires outer class to be instantiated before.
+    - can cause problem during garbage collection if we are using Instance Inner class that doesnt depend on outer class
+    - has access to all members of outer class including private
+    - It is associated with instance of Inner class
+    - we can obtain the reference of Outer class using this.
+    = We can use it for creating adapter classes. Eg Maps.keySet() and valuesSet() -> these are Instance Inner classes to return different view of map data.
+
+
+
+Conclusion:
+    Use static modifier for inner class that doesnt require access to the Outer class.
+    If you omit this modifier, each instance will have a hidden extraneous reference to
+    its enclosing instance and storing this reference takes time and space.
+    More seriously, it can result in the enclosing instance being retained when it would otherwise be eligible for garbage collection.
+    The resulting memory leak difficult to detect because the reference is invisible.
+
+
+
+EXAMPLE :
+
+class Outer {
+    private int a;
+
+    public void outerMethod()
+    {
+        System.out.println("outer method");
+    }
+    class NonStaticInner {
+        int b;
+        public void m1()
+        {
+            System.out.println(a);
+            System.out.println(b);
+            outerMethod();
+        }
+    }
+
+    static class StaticInner {
+        int c;
+        public void m2()
+        {
+            System.out.println(a); ///ERRORRRR :Non-static field 'a' cannot be referenced from a static context
+            System.out.println(b); ///ERRORRRR
+            outerMethod(); ///ERRORRRR
+
+        }
+    }
+    Outer()
+    {
+        NonStaticInner non_staticInner = this. new NonStaticInner();// association with outer Object
+        StaticInner staticInner = new StaticInner();
+    }
+}
+
+

@@ -1,0 +1,3 @@
+Collections Interface has a default Method removeIf(). But this doesnt handle synchronization.
+So if we use removeIf() with synchronized collection we are bound to get an ConcurrentModificationException.
+
