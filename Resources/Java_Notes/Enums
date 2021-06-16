@@ -1,39 +1,41 @@
 Enums:
 ----------------------------------------------------------------------------------------------
-Creating and declaring Enums:
-enum CoffeeSize { BIG, HUGE, OVERWHELMING };
+Enum Constants with no value:
+    enum CoffeeSize { BIG, HUGE, OVERWHELMING };
 
-CoffeeSize cs = CoffeeSize.BIG;
------------------------------------------------------------------------------------------------
-A sample program:
-enum Animals {
-    DOG("woof"), CAT("meow"), FISH("burble");
-    String sound;
-    Animals(String s) { sound = s; }
-}
+    CoffeeSize cs = CoffeeSize.BIG;
 
-public class Test123 {
-    static Animals a; //is allowed
-    final Animals d = Animals.DOG; //is allowed
-    public static void main(String[] args) {
-        Animals a=Animals.DOG;
-        switch (a)
-        {
-            //in switch case just specify the enum constant name ******
-            case DOG:
-                System.out.println("dogs bark");
-            case FISH:
-                System.out.println("fish swims");
-            case CAT:
-                System.out.println("cat meows");
-        }
-        //otherwise use fully qualified name *******
-        if(a==Animals.DOG)
-        {
-            System.out.println("Dogs Bark");
+
+Enum Constant with Values:
+    enum Animals {
+        DOG("woof"), CAT("meow"), FISH("burble");
+        String sound;
+        Animals(String s) { sound = s; }
+    }
+
+
+    public class Test123 {
+        static Animals a; //is allowed
+        final Animals d = Animals.DOG; //is allowed
+        public static void main(String[] args) {
+            Animals a=Animals.DOG;
+            switch (a)
+            {
+                //in switch case just specify the enum constant name ******
+                case DOG:
+                    System.out.println("dogs bark");
+                case FISH:
+                    System.out.println("fish swims");
+                case CAT:
+                    System.out.println("cat meows");
+            }
+            //otherwise use fully qualified name *******
+            if(a==Animals.DOG)
+            {
+                System.out.println("Dogs Bark");
+            }
         }
     }
-}
 
 ------------------------------------------------------------------------------------------------
 Declaring an enum outside a class:
@@ -168,6 +170,12 @@ public enum Planet {
 }
 -------------------------------------------------------------------------------------------------
 Therefore we can say that:
+From Effective Java:
+1. Enums are immutable
+2. Enums can have fields or methods
+3. Enums provide high quality Implementation of Object class methods and also in
+
+FROM SCJP :
 1. Enums can be declared outside or within the class.(the way to access them changes)
 2. Enums cannot be declared inside methods.
 3. Semicolon after enums is optional.
@@ -185,3 +193,6 @@ Therefore we can say that:
 11. MyEnum.values() returns an array of MyEnum's values.
 12. All enums implicitly extend java.lang.Enum
 13. List of Enum Constants must always end with a semicolon
+
+
+

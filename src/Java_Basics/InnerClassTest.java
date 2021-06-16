@@ -1,6 +1,7 @@
 package Java_Basics;
 
 
+import java.util.AbstractMap;
 import java.util.HashMap;
 
 class Outer {
@@ -24,11 +25,14 @@ class Outer {
         int c;
         public void m2()
         {
-            /*System.out.println(a);
+            /*
+            System.out.println(a);
             System.out.println(b);
-            outerMethod();*/
+            outerMethod();
+            */
         }
     }
+
     Outer()
     {
         NonStaticInner non_staticInner = this. new NonStaticInner();// association with outer Object
@@ -38,7 +42,12 @@ class Outer {
 
 public class InnerClassTest {
 
+    enum Status{
+        ACTIVE("Active");
 
+        Status(String active) {
+        }
+    }
     public static void main(String[] args) {
         Outer outer = new Outer();
 
@@ -46,6 +55,9 @@ public class InnerClassTest {
 
         Outer.StaticInner staticInner = new Outer.StaticInner(); // No reference to outer class
 
+        Status active = Status.valueOf("inactive");
+
+        System.out.println();
     }
 
 
