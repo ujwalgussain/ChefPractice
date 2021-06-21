@@ -1,4 +1,4 @@
-package Java_Basics;
+package Java_Basics.Enums;
 
 public class EnumsPractice {
     enum Status{
@@ -28,6 +28,7 @@ public class EnumsPractice {
 
     }
 
+
     enum EnumWithAbsMethod{
         INDIVIDUAL{
             @Override
@@ -44,8 +45,8 @@ public class EnumsPractice {
 
     }
     public static void main(String[] args) {
-        Status.valueOf("invalid value");
-        //throws an exception Exception in thread "main" java.lang.IllegalArgumentException: No enum constant Java_Basics.EnumsPractice.Status.In-active
+        Status s = Status.valueOf("ACTIVE");
+        //throws an exception Exception in thread "main" java.lang.IllegalArgumentException: No enum constant Java_Basics.Enums.EnumsPractice.Status.In-active
 
     }
 }

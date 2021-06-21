@@ -1,17 +1,18 @@
 CORE Java
-1. Access Modifiers:
-    public, private, protected, default.
-    abstract, final, static, transient, synchronized, strictfp, native
-    special case of protected
-2. static methods, variables
-3. abstract class/method
-4. interfaces
-5. interfaces in Java 8
-6. abstract class vs interface after Java 8
-7. Object class in Java
-8. Enum in Java
-9. Utility methods in ArraysClass
-9.
+    1. Access Modifiers:
+        public, private, protected, default.
+        abstract, final, static, transient, synchronized, strictfp, native
+        special case of protected
+    2. static methods, variables
+    3. abstract class/method
+    4. interfaces
+    5. interfaces in Java 8
+    6. abstract class vs interface after Java 8
+    7. Object class in Java
+    8. Enum in Java (C:\Users\ugussain\IdeaProjects\ChefPractice\Resources\Java_Notes\Enums)
+        - different types of declarations.
+        - inheritance of enums.
+    9. Type Inference in Java (Yet to be studied)
 
 
 Collections:
@@ -23,7 +24,8 @@ Collections:
     Hashmap with equals() override/hashCode() override
     Internal Working of TreeMap
     Will TreeMap work w/o equals and hashcode?
-    Uility methods in Collections Class
+    Arrays and Collections Class
+
     Concurrent Collections
 
 
@@ -140,3 +142,19 @@ MultiThreading
     Volatile vs Atomic Classes
     Java Memory Model
     CompletableFuture
+
+JAVA 8:
+    Functional Interfaces :
+        1. Function - accept input and return output
+        2. BinaryOperator - accept 2 inputs apply operator and return result
+        3. UnaryOperator - accept 1 input apply operator and return result
+        4. Supplier - return data of type T
+        5. Consumer - accept Data of type T
+        6. Predicate - accept T apply condition and return result
+    Comparator methods:
+        -comparing()
+        -reversed()
+
+    Can we cast an object to interface type if the object implements the interface method but not the interface itself?
+    Is it possible with only Functional interfaces or with normal interfaces too?
+    ex: Streams and Iterable.

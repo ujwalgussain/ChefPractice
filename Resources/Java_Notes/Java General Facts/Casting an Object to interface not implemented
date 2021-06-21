@@ -1,0 +1,16 @@
+class Process{
+    static List<Integer> processes;
+    static public Stream<Integer> getProcesses()
+    {
+        return processes.stream();
+    }
+}
+public class TestClass {
+
+    public static void main(String[] args) {
+        for(Integer i : (Iterable<Integer>)Process.getProcesses().iterator())
+        {
+
+        }
+    }
+}

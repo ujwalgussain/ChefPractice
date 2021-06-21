@@ -1,0 +1,55 @@
+- Always Validate the parameters
+    we can use  1. Objects.requireNonNull()
+                2. assert
+
+
+- Always use defensive copies of mutable object.
+    - use defensive copies of mutable constructor parameters. Always
+        public Period(Date start, Date end) {
+            this.start = new Date(start.getTime());
+            this.end = new Date(end.getTime());
+            if (this.start.compareTo(this.end) > 0)
+                throw new IllegalArgumentException(
+                this.start + " after " + this.end);
+        }
+
+        validate copies rather than original: It protects the class against changes to the parameters from another
+                                              thread during the window of vulnerability between the time the parameters are
+                                              checked and the time they are copied. In the computer security community, this
+                                              is known as a time-of-check/time-of-use or TOCTOU attack
+
+
+    - dont use clone to return copies
+    - return defensive copies of mutable internal fields
+        public Date start() {
+        return new Date(start.getTime());
+        }
+        public Date end() {
+        return new Date(end.getTime());
+        }
+    - Prefer two-element enum types to boolean parameters unless the meaning of the boolean is clear from the method name
+
+    - Use overloading judiciously :
+        - A safe, conservative policy is never to export two overloadings with the same number of parameters.
+          Never overload a method with varargs, or with same parameters. create different method names
+          Ex:
+          for (int i = 0; i < 3; i++) {
+              set.remove(i); -> will remove object i because i will be autoboxed into Integer.
+              list.remove(i); -> will remove at position i because remove() is overloaded in List with int-> pos and Integer -> object
+              list.remove((Integer) i); // or remove(Integer.valueOf(i)) // will remove object i
+          }
+        - do not overload methods to take different functional interfaces in the same argument position.
+            WRONG
+            new Thread(System.out::println).start(); -> works fine
+            ExecutorService exec = Executors.newCachedThreadPool();
+            exec.submit(System.out::println); -> gives an error. even if return type is void println is overloaded
+
+            // Error java: reference to submit is ambiguous
+                       both method <T>submit(java.util.concurrent.Callable<T>) in java.util.concurrent.ExecutorService and method submit(java.lang.Runnable) in java.util.concurrent.ExecutorService match
+
+            It is the combination of the overloading of the referenced method (println) and the invoked method (submit) that prevents the overload resolution algorithm from behaving as
+            you’d expect.
+
+
+
+

@@ -1,18 +1,20 @@
 Enums:
-----------------------------------------------------------------------------------------------
-Enum Constants with no value:
-    enum CoffeeSize { BIG, HUGE, OVERWHELMING };
 
-    CoffeeSize cs = CoffeeSize.BIG;
+1. Enum Constants with no value:
+        enum CoffeeSize { BIG, HUGE, OVERWHELMING };
+
+        CoffeeSize cs = CoffeeSize.BIG;
 
 
-Enum Constant with Values:
-    enum Animals {
-        DOG("woof"), CAT("meow"), FISH("burble");
-        String sound;
-        Animals(String s) { sound = s; }
-    }
+2. Enum Constant with Values:
+    We need to use a constructors
+        enum Animals {
+            DOG("woof"), CAT("meow"), FISH("burble");
 
+            String sound; // This can be accessed outside class if public -> Ex. Animals.DOG.sound
+
+            Animals(String s) { sound = s; }
+        }
 
     public class Test123 {
         static Animals a; //is allowed
@@ -37,143 +39,282 @@ Enum Constant with Values:
         }
     }
 
-------------------------------------------------------------------------------------------------
-Declaring an enum outside a class:
+3. ENUM with methods :
 
-enum CoffeeSize { BIG, HUGE, OVERWHELMING } // this cannot be private or protected
-class Coffee {
-    CoffeeSize size;
-}
-public class CoffeeTest1 {
-    public static void main(String[] args) {
-        Coffee drink = new Coffee();
-        drink.size = CoffeeSize.BIG; // enum outside class
-    }
-}
---------------------------------------------------------------------------------------------------
-Here's an example of declaring an enum inside a class:
-class Coffee2 {
-    enum CoffeeSize {BIG, HUGE, OVERWHELMING }
-    CoffeeSize size;
-}
-public class CoffeeTest2 {
-    public static void main(String[] args) {
-        Coffee2 drink = new Coffee2();
-        drink.size = Coffee2.CoffeeSize.BIG; // enclosing class name required
-    }
-}
--------------------------------------------------------------------------------------------------------
-Enum with constructor:
-enum CoffeeSize {
-    // 8, 10 & 16 are passed to the constructor
-    BIG(8), HUGE(10), OVERWHELMING(16);
-
-    CoffeeSize(int ounces) { // constructor
-        this.ounces = ounces;
-    }
-    private int ounces; // an instance variable
-    public int getOunces() {
-        return ounces;
-    }
-}
-class Coffee {
-    CoffeeSize size; // each instance of Coffee has an enum
-
-    public static void main(String[] args) {
-        Coffee drink1 = new Coffee();
-        drink1.size = CoffeeSize.BIG;
-        Coffee drink2 = new Coffee();
-        drink2.size = CoffeeSize.OVERWHELMING;
-        System.out.println(drink1.size.getOunces()); // prints 8
-        for(CoffeeSize cs: CoffeeSize.values())
-            System.out.println(cs + " " + cs.getOunces());
-            /*outputs
-                BIG 8
-                HUGE 10
-                OVERWHELMING 16
-             */
-    }
-}
---------------------------------------------------------------------------------------------
-Enum with multiple methods/values
-
-Imagine this scenario: you want enums to have two methods—
-    one for ounces
-    and one for lid code (a String).
-Now imagine that most coffee sizes use the same lid code, "B", but the OVERWHELMING size uses type "A".
-You can define a  getLidCode() method in the CoffeeSize enum that returns "B",
-    but then you need  a way to override it for OVERWHELMING.
-You don't want to do some hard-to-maintain if/then code in the getLidCode() method, so the best approach might be
-to somehow have the OVERWHELMING constant override the getLidCode()
-method.
-
-enum CoffeeSize {
-    BIG(8),HUGE(10),
-    OVERWHELMING(16) { // start a code block that defines the "body" for this constant
-            public String getLidCode() { // override the method defined in CoffeeSize
-                return "A";
+    enum CorpCode{
+            IL("IL1"){
+                @Override
+                public String getNurseLineNo() {
+                    return "IL number";
+                }
+            },TX("TX1"){
+                @Override
+                public String getNurseLineNo() {
+                    return "TX Number";
+                }
+            };
+            String s;
+            CorpCode(String s) {
+                this.s = s;
             }
-     }; // the semicolon is REQUIRED when more code follows
-    CoffeeSize(int ounces) {
-        this.ounces = ounces;
-    }
-    private int ounces;
-    public int getOunces() {
-        return ounces;
-    }
-    public String getLidCode() { // this method is overridden by the OVERWHELMING constant
-        return "B"; // the default value we want to return for CoffeeSize constants
-    }
-}
-
-
-Eg 2: Enum with 2 values.
-public enum Planet {
-    MERCURY (3.303e+23, 2.4397e6),
-    VENUS   (4.869e+24, 6.0518e6),
-    EARTH   (5.976e+24, 6.37814e6),
-    MARS    (6.421e+23, 3.3972e6),
-    JUPITER (1.9e+27,   7.1492e7),
-    SATURN  (5.688e+26, 6.0268e7),
-    URANUS  (8.686e+25, 2.5559e7),
-    NEPTUNE (1.024e+26, 2.4746e7);
-
-    private final double mass;   // in kilograms
-    private final double radius; // in meters
-    Planet(double mass, double radius) {
-        this.mass = mass;
-        this.radius = radius;
-    }
-    private double mass() { return mass; }
-    private double radius() { return radius; }
-
-    // universal gravitational constant  (m3 kg-1 s-2)
-    public static final double G = 6.67300E-11;
-
-    double surfaceGravity() {
-        return G * mass / (radius * radius);
-    }
-    double surfaceWeight(double otherMass) {
-        return otherMass * surfaceGravity();
-    }
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.err.println("Usage: java Planet <earth_weight>");
-            System.exit(-1);
+            public abstract String getNurseLineNo();
         }
-        double earthWeight = Double.parseDouble(args[0]);
-        double mass = earthWeight/EARTH.surfaceGravity();
-        for (Planet p : Planet.values())
-           System.out.printf("Your weight on %s is %f%n",
-                             p, p.surfaceWeight(mass));
+
+
+
+ENUM DECLARATION:
+1. Declaring an enum outside a class:
+
+    enum CoffeeSize { BIG, HUGE, OVERWHELMING } // this cannot be private or protected
+    class Coffee {
+        CoffeeSize size;
     }
-}
--------------------------------------------------------------------------------------------------
+    public class CoffeeTest1 {
+        public static void main(String[] args) {
+            Coffee drink = new Coffee();
+            drink.size = CoffeeSize.BIG; // enum outside class
+        }
+    }
+
+2. Here's an example of declaring an enum inside a class:
+        class Coffee2 {
+            enum CoffeeSize {BIG, HUGE, OVERWHELMING }
+            CoffeeSize size;
+        }
+        public class CoffeeTest2 {
+            public static void main(String[] args) {
+                Coffee2 drink = new Coffee2();
+                drink.size = Coffee2.CoffeeSize.BIG; // enclosing class name required
+            }
+        }
+
+
+3. Enum with Instance Methods/Values :-
+    Ex1:
+        Imagine this scenario: you want enums to have two methods—
+            one for ounces
+            and one for lid code (a String).
+        Now imagine that most coffee sizes use the same lid code, "B", but the OVERWHELMING size uses type "A".
+        You can define a  getLidCode() method in the CoffeeSize enum that returns "B",
+            but then you need  a way to override it for OVERWHELMING.
+        You don't want to do some hard-to-maintain if/then code in the getLidCode() method, so the best approach might be
+        to somehow have the OVERWHELMING constant override the getLidCode()
+        method.
+
+        enum CoffeeSize {
+            BIG(8),HUGE(10),
+            OVERWHELMING(16) { // start a code block that defines the "body" for this constant
+                    public String getLidCode() { // override the method defined in CoffeeSize
+                        return "A";
+                    }
+             }; // the semicolon is REQUIRED when more code follows
+            CoffeeSize(int ounces) {
+                this.ounces = ounces;
+            }
+            private int ounces;
+            public int getOunces() {
+                return ounces;
+            }
+            public String getLidCode() { // this method is overridden by the OVERWHELMING constant
+                return "B"; // the default value we want to return for CoffeeSize constants
+            }
+        }
+
+    Ex 2: If we have instance with different names for each enum then those methods are only accessible inside the enum {} scope:
+
+
+4. Just another example:
+Eg 2: Enum with 2 values.
+        public enum Planet {
+            MERCURY (3.303e+23, 2.4397e6),
+            VENUS   (4.869e+24, 6.0518e6),
+            EARTH   (5.976e+24, 6.37814e6),
+            MARS    (6.421e+23, 3.3972e6),
+            JUPITER (1.9e+27,   7.1492e7),
+            SATURN  (5.688e+26, 6.0268e7),
+            URANUS  (8.686e+25, 2.5559e7),
+            NEPTUNE (1.024e+26, 2.4746e7);
+
+            private final double mass;   // in kilograms
+            private final double radius; // in meters
+            Planet(double mass, double radius) {
+                this.mass = mass;
+                this.radius = radius;
+            }
+
+            /*These are instance methods applicable to each EnumType*/
+            private double mass() { return mass; }
+            private double radius() { return radius; }
+
+            // universal gravitational constant  (m3 kg-1 s-2)
+            public static final double G = 6.67300E-11;
+
+            double surfaceGravity() {
+                return G * mass / (radius * radius);
+            }
+            double surfaceWeight(double otherMass) {
+                return otherMass * surfaceGravity();
+            }
+            public static void main(String[] args) {
+                if (args.length != 1) {
+                    System.err.println("Usage: java Planet <earth_weight>");
+                    System.exit(-1);
+                }
+                double earthWeight = Double.parseDouble(args[0]);
+                double mass = earthWeight/EARTH.surfaceGravity();
+                for (Planet p : Planet.values())
+                   System.out.printf("Your weight on %s is %f%n",
+                                     p, p.surfaceWeight(mass));
+            }
+        }
+
+
+Enum methods:
+    values() -> Returns all enum types inside enum. For Coffee will return CoffeeSize.HUGE, Coffee.OVERWHELMING etc
+    ordinal() -> returns index
+
+We can create abstract methods in enum which has to be overriden by each enum. We could use it for switch cases.
+
+
 Therefore we can say that:
 From Effective Java:
 1. Enums are immutable
 2. Enums can have fields or methods
-3. Enums provide high quality Implementation of Object class methods and also in
+3. Enums provide high quality Implementation of Object class methods.
+4. Enum constructors aren’t permitted to access the enum’s static fields, with the exception of constant variables.
+    This restriction is necessary because static fields have not yet been initialized when enum constructors run.
+5. Enum types have an automatically generated valueOf(String) method that translates a constant’s name into the constant itself.
+6. We can access enum Constant calling instance method using this keyword.
+    Note this is not the optimal approach
+    Ex: Suppose we are calculating payroll where week days have different calculations and weekends have different calculation.
+        Note this is not optimal approach - Becoz if we add a constant and forget to add in switch then program will compile but will be logically incorrect.
+        Hence all ways prefer overriding such methods to avoid errors. Another approach is shown below
+         enum PayrollDay
+         {
+            MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY,
+            SATURDAY, SUNDAY;
+            private static final int MINS_PER_SHIFT = 8 * 60;
+
+            int pay(int minutesWorked, int payRate) {
+                int basePay = minutesWorked * payRate;
+                int overtimePay;
+                 switch (this) {
+                    case SATURDAY:
+                    case SUNDAY: // Weekend
+                        overtimePay = basePay / 2;
+                        break;
+                    default: // Weekday
+                        overtimePay = minutesWorked <= MINS_PER_SHIFT
+                        ? 0
+                        : (minutesWorked - MINS_PER_SHIFT) * payRate / 2;
+                 }
+                 return basePay + overtimePay;
+            }
+         }
+         OPTIMAL APPROACH: Here we have 2 enums, one representing day and other representing payment calculation.
+                      It provides us the flexibility for having different paytypes for same day
+         enum PayrollDay {
+                 MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY,
+                 SATURDAY(PayType.WEEKEND), SUNDAY(PayType.WEEKEND);
+                 private final PayType payType;
+
+                 PayrollDay(PayType payType) {
+                     this.payType = payType;
+                 }
+
+                 PayrollDay() {
+                     this(PayType.WEEKDAY);
+                 } // Default
+
+                 int pay(int minutesWorked, int payRate) {
+                     return payType.pay(minutesWorked, payRate);
+                 }
+
+                 // The strategy enum type
+                 private enum PayType {
+                     WEEKDAY {
+                         int overtimePay(int minsWorked, int payRate) {
+                             return minsWorked <= MINS_PER_SHIFT ? 0 :
+                                     (minsWorked - MINS_PER_SHIFT) * payRate / 2;
+                         }
+                     },
+                     WEEKEND {
+                         int overtimePay(int minsWorked, int payRate) {
+                             return minsWorked * payRate / 2;
+                         }
+                     };
+
+                     abstract int overtimePay(int mins, int payRate);
+
+                     private static final int MINS_PER_SHIFT = 8 * 60;
+
+                     int pay(int minsWorked, int payRate) {
+                         int basePay = minsWorked * payRate;
+                         return basePay + overtimePay(minsWorked, payRate);
+                     }
+                 }
+             }
+7. A minor performance disadvantage of enums is that there is a space and time cost to load and initialize enum types, but it is unlikely to be noticeable in practice.
+8. Use enums any time you need a set of
+   constants whose members are known at compile time.
+
+
+Some findings:
+1. Enum can have main() method.
+2. Enum can have instance methods:
+    a. All instance methods outside the enum Type are shared by all enum constants and can be overridden to provide specific implementations
+        Ex:
+            enum Status{
+                    ACTIVE,INACTIVE;
+                    public String instanceMethod()  // This enum constant will have this method with same implementation
+                    {
+                        return "some-string";
+                    }
+                }
+    b. Each Enum Constant can have instance method but it wont be accessible outside the constant declaration.
+        We can use such methods for private methods for Enum Constant
+        Ex:
+            enum Status{
+                    ACTIVE{
+                        //Accessible only within ACTIVE {} brackets
+                        String m1()
+                        {
+                            return "active";
+                        }
+                    },
+                    INACTIVE{
+                        //Accessible only within INACTIVE {} brackets
+                        String m1()
+                        {
+                            return "inactive";
+                        }
+                    }
+                }
+3. Enum can have static method.
+    For Ex: we can have fromString(String label) method as static since it is independent
+4. Never use switch statements inside enums.
+5. Most programmers will have no use for ordinal() method.
+    It is designed for use by general-purpose enum based data structures such as EnumSet and EnumMap
+    Hence Never use ordinal(). Instead use instance fields.
+    Here in the below example if we rearrange the constants the numberOfMusicians() will return wrong result
+    For instance if we move solo to last it will return 10 but logically iy should return 2.
+      public enum Ensemble {
+            SOLO, DUET, TRIO, QUARTET, QUINTET,
+            SEXTET, SEPTET, OCTET, NONET, DECTET;
+            //WHAT WILL THIS METHOD RETURN FOR SOLO -> 1 since ordinal() is an instance method.
+            public int numberOfMusicians() {
+                return ordinal() + 1;
+            }
+        }
+6. Use EnumSet and EnumMaps wherever possible. Both have their own performance and space advantages over regular set and map.
+    EnumSet - for applying a set of enum values.
+            - based on bit fields and uses bit arithmetic to manipulate(add/remove) data
+            - Ex : we have Enum of Styles like BOLD, ITALIC, UNDERLINE and string can have one or more styles. Here EnumSet will use bit fields to represent each of the constants
+    EnumMap - for segregating based on enum value
+            - Its speed is comparable to an indexed array. It uses such an array internally, but it hides this implementation detail from the programmer
+7. Extend the Enum using interface:
+    For Ex:
+
 
 FROM SCJP :
 1. Enums can be declared outside or within the class.(the way to access them changes)
@@ -194,5 +335,124 @@ FROM SCJP :
 12. All enums implicitly extend java.lang.Enum
 13. List of Enum Constants must always end with a semicolon
 
+
+
+BEST PRACTICES :-
+1) Instead of Having Constant Class use Enums.
+    We can segregate the constants based on type.
+    Here we can compare POLICY STATUS with LOB.. which is wrong but will be unnoticed
+   Consider eg: This looks clumsy.
+   public class Constants{
+        public static final POLICY_STATUS_ACTIVE = "Active";
+
+        public static final POLICY_STATUS_INACTIVE = "Inactive";
+
+        public static final LOB_GOVT = "GOVERNMENT";
+
+        public static final LOB_GROUP = "GROUP";
+   }
+
+
+   Constants are well segregated.
+   We cant cant compare POLICY STATUS TO LOB.
+   enum PolicyStatus{
+        ACTIVE("Active"),INACTIVE("Inactive");
+        String s;
+        PolicyStatus(String s)
+        {
+            this.s = s;
+        }
+   }
+
+   enum LOB{
+        GOVERNMENT("Government"), GROUP("GROUP")
+        String s;
+                PolicyStatus(String s)
+                {
+                    this.s = s;
+                }
+   }
+
+2) For switch cases we can use Enum with Methods
+    suppose the logic is like:
+        switch(corpcode)
+            IL -> then return IL Number
+            TX -> then return TX Number
+   enum CorpCode{
+           IL("IL1"){
+               @Override
+               public String getNurseLineNo() {
+                   return "IL number";
+               }
+           },TX("TX1"){
+               @Override
+               public String getNurseLineNo() {
+                   return "TX Number";
+               }
+           };
+           String s;
+           CorpCode(String s) {
+               this.s = s;
+           }
+           public abstract String getNurseLineNo();  ->
+       }
+3) If for any Enum we want to perform Different Operation:
+     public enum Operation {
+            PLUS {
+                public double apply(double x, double y) {
+                    return x + y;
+                }
+            },
+            MINUS {
+                public double apply(double x, double y) {
+                    return x - y;
+                }
+            },
+            TIMES {
+                public double apply(double x, double y) {
+                    return x * y;
+                }
+            },
+            DIVIDE {
+                public double apply(double x, double y) {
+                    return x / y;
+                }
+            };
+
+            public abstract double apply(double x, double y); -> This is the operation that we want to perform
+        }
+4. If we override toString() then always create a method for fromString:
+    Ex:
+        enum CorpCode{
+                IL("IL1"){
+                    @Override
+                    public String getNurseLineNo() {
+                        return "IL number";
+                    }
+                },TX("TX1"){
+                    @Override
+                    public String getNurseLineNo() {
+                        return "TX Number";
+                    }
+                };
+                String s; //we can access from outside if public
+                private static HashMap<String,CorpCode> valuesMap = new HashMap<>(); // to avoid O(n) complexity
+                CorpCode(String s) {
+                    this.s = s;
+                }
+                private static void populateValueMap()
+                {
+                    for(CorpCode corpCode : CorpCode.values())
+                        valuesMap.put(corpCode.s,corpCode);
+                }
+                public static CorpCode from(String value)
+                {
+                    //here we can handle default operation also
+                    if(valuesMap.isEmpty())
+                        populateValueMap();
+                    return valuesMap.get(value);
+                }
+                public abstract String getNurseLineNo();
+            }
 
 

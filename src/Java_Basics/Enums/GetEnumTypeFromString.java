@@ -1,8 +1,11 @@
 package Java_Basics.Enums;
 
 import java.util.HashMap;
+import java.util.stream.Stream;
 
-public class GetEnumTypeFromValue {
+public class GetEnumTypeFromString {
+
+
     enum CorpCode{
         IL("IL1"){
             @Override
@@ -16,18 +19,19 @@ public class GetEnumTypeFromValue {
             }
         };
         String s; //we can access from outside if public
-        private static HashMap<String,CorpCode> valuesMap = new HashMap<>();
+        private static HashMap<String,CorpCode> valuesMap = new HashMap<>(); // to avoid O(n) complexity
         CorpCode(String s) {
             this.s = s;
         }
         private static void populateValueMap()
         {
-            for(CorpCode corpCode : CorpCode.values())
-                valuesMap.put(corpCode.s,corpCode);
+            /*for(CorpCode corpCode : CorpCode.values())
+                valuesMap.put(corpCode.s,corpCode);*/
+            Stream.of(CorpCode.values()).forEach(corpCode -> valuesMap.put(corpCode.s, corpCode));
         }
         public static CorpCode from(String value)
         {
-            //here we can handle default operation also\
+            //here we can handle default operation also
             if(valuesMap.isEmpty())
                 populateValueMap();
             return valuesMap.get(value);

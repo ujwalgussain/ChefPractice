@@ -1,0 +1,182 @@
+#Generics:
+    - Used for Type Safety
+    - Compiler will determine type at end of compilation process
+    BOUNDED TYPE:
+        Ex:
+            Here T is a type parameter.
+            class Test<T>
+            {
+                ...
+                //we can use T anywhere within this class
+
+                public <X> void m1(X obj)
+                {
+                    ...
+                    //we can use X anywhere within this method
+                }
+            }
+            a) T should be any subclass of Number
+                class Test<T extends Number>{...}
+            b) T should be any implementation of Runnable
+                class Test<T extends Runnable>{...}
+            c) T should be any (subclass of Number and implementation of Runnable both)
+                class Test<T extends Number & Runnable>{...}
+
+        Note 1: "extends" is valid for both Class and interface. Don't use "implements" or "super"
+                Therefore
+                    class Test<T implements Runnable>{...}  X
+                    class Test<T super Number>{...}   X
+                Both are invalid
+
+        Note 2: In case of Ex (c), always class should be before interface.
+                Therefore
+                    class Test<T extends Runnable & Number>{...} X
+                is invalid
+
+        Note 3: T cant extend 2 classes since Java doesn't support multiple inheritance
+                Therefore
+                    class Test<T extends Number & Thread>{...} X
+                is invalid
+
+        Note 4: All are valid
+                class Test<T> {...}
+                class Test<X> {...}
+                class Test<Y> {...}
+        We can give any name to Type Parameter. But T is preferred.
+
+        Examples:
+            1.  public void m1(ArrayList<String> l)
+                {
+                    l.add("Str1"); //Valid
+                    l.add(10); //Invalid
+                }
+            2.  public void m1(ArrayList<?> l) //? means any Type. Should only be used for readonly purposes
+                {
+                    //below 3 are invalid. Because they are not valid anyType
+                    l.add(10);
+                    l.add(10.5);
+                    l.add("Str1");
+
+                    //below 2 are valid. Because null is a valid anyType
+                    l.add(null);
+                    sout(l); //Valid Usage
+                }
+            3.  public void m1(ArrayList<? extends X> l) //Here also type of X is not known. Should only be used for readonly purposes
+                {
+                    //below 3 are invalid. Because they are not valid anyType
+                    l.add(10);
+                    l.add(10.5);
+                    l.add("Str1");
+
+                    //below 2 are valid. Because null is a valid anyType
+                    l.add(null);
+                    sout(l); //Valid Usage
+                }
+            4.  public void m1(ArrayList<? super X> l)
+                {
+                    // super works with ?
+                    // <? super X> means any superclass of X. X or its superclass of implementation class of X [VERIFY]
+
+
+                }
+
+                    Object          Runnable
+                        \           /
+                         \         /
+                          \       /
+                            Thread
+                Here Object will be considered.
+                Ex:
+                    public class TestClass {
+                        static <T> void m1(ArrayList<? super T>  list) {
+                        }
+
+                        public static void main(String[] args) {
+                            m1(new ArrayList<>()); //Valid
+                            m1(new ArrayList<Object>()); //Valid
+                        }
+                    }
+
+
+            5.
+                ArrayList<String> list = new ArrayList<>();
+                ArrayList<String> list = new ArrayList<>();
+
+                ArrayList<?> list = new ArrayList<Integer>();
+                ArrayList<? extends Number> list = new ArrayList<Integer>();
+
+                //Both are invalid since Bounded type are allowed on declaration and not on Initialization
+                ArrayList<?> list = new ArrayList<?>();
+                ArrayList<?> list = new ArrayList<? extends Thread>();
+
+
+            6.  Generic Object to non Generic Area - behaves non Generic
+                Non Generic Object to Generic Area - behaves like Generic
+
+                Ex:
+                    public class TestClass {
+                        static  void m1(ArrayList  list) {
+                            //list will behave as a non generic type list ie., List<Object>
+                            list.add(20.0);
+                            list.add(20);
+                            list.add("string");
+                        }
+
+                        public static void main(String[] args) {
+
+                            ArrayList<String> al = new ArrayList<String>();
+                           /*
+                            //Below 2 statments are invalid since al can hold String type data.
+                            al.add(10);
+                            al.add(20.0);
+                            */
+                            // Only String is allowed
+                            al.add("string");
+                            m1(al); // Sending Generic Object to non generic area
+                            System.out.println(al);
+
+                        }
+                    }
+
+                7. ArrayList al = new ArrayList<String>();
+                    al.add(10);
+                    al.add(20.0);
+                    al.add("string");
+
+                    All are valid since we haven't specified type in declaration ie., ArrayList al.
+                    new ArrayList<String>() -> Type initialization doesn't matter
+                    Since compiler will convert it into List of Objects.
+
+                    Therefore,
+                        ArrayList listOfString = new ArrayList<String>();
+                        ArrayList listOfInteger = new ArrayList<Integer>();
+                        ArrayList listOfDouble = new ArrayList<Double>();
+
+                        System.out.println(listOfDouble.equals(listOfInteger)); //true
+                        System.out.println(listOfString.equals(listOfDouble)); //true
+
+                        ie., listOfString = listOfInteger = listOfDouble since we havent specified the type at declaration level
+                        and for the compiler they are simply ArrayList of Objects
+
+                8.  The following code represents invalid overloading
+                    class Test{
+                        public void m1(int i)
+                        {..}
+                        public int m1(int i)
+                        {..}
+                    }
+
+                    Similarly, this is also invalid
+                    class Test{
+                        public void m1(ArrayList<String> i)
+                        {..}
+                        public int m1(ArrayList<Integer> i)
+                        {..}
+                    }
+
+                   Because for the compiler it is an ArrayList and hence we have 2 methods witn same name and same arguments.
+
+
+
+
+

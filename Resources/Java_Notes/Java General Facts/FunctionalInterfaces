@@ -1,0 +1,11 @@
+Functional Interfaces:
+Interfaces with only one abstract method.
+It can have multiple static and default methods
+Always annotate your functional interfaces with the @FunctionalInterface annotation
+
+1. Function - accept input and return output
+2. BinaryOperator - accept 2 inputs apply operator and return result
+3. UnaryOperator - accept 1 input apply operator and return result
+4. Supplier - return data of type T
+5. Consumer - accept Data of type T
+6. Predicate - accept T apply condition and return result
