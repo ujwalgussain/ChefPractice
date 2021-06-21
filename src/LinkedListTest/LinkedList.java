@@ -3,8 +3,8 @@ package LinkedListTest;
 
 
 public class LinkedList {
-    LLNode head;
-    int length;
+    public LLNode head;
+    public int length;
 
     public LLNode getHead() {
         return head;

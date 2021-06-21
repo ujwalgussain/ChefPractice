@@ -1,8 +1,8 @@
 package LinkedListTest;
 
 public class LLNode {
-        int data;
-        LinkedListTest.LLNode next;
+        public int data;
+        public LinkedListTest.LLNode next;
         LLNode(int i)
         {
             data=i;
