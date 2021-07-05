@@ -1,12 +1,20 @@
-try{
+SYNTAX:
+    try{
 
-} catch(Throwable t)
-{
+    } catch(Throwable t)
+    {
 
-}
-finally{
+    }
+    finally{
 
-}
+    }
+
+Q) Why should we extend RuntimeException for userdefined exceptions?
+    subclass of RuntimeException donot need to be thrown or handled. -> UNCHECKED
+
+    subclass od Exception should be either handled or thrown. -> CHECKED
+
+
 Q) Throwable hierarchy
         Throwable
         /      \

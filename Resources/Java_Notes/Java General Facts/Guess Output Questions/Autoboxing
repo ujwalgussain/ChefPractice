@@ -1,0 +1,29 @@
+AUTOBOXING:
+
+>   Example : Guess the output of following
+    Comparator<Integer> naturalOrder = (i, j) -> (i < j) ? -1 : (i == j ? 0 : 1);
+
+    naturalOrder.compare(42,42). -> returns 0 ... correct
+
+    naturalOrder.compare(new Integer(42), new Integer(42)). -> return 1 ....Incorrect
+
+    Reason:
+        i<j wont be true since i and j will be unboxed and compared...but for == they will be compared as objects and hence the incorrect answer
+
+> Example : This is a very slow program
+    Long sum = new Long(0);
+    for(int i=0;i<100;i++)
+    {
+        sum+=i; --> this will be slow because of repeated boxing and unboxing of sum
+    }
+
+> Example: This code will throw NPE
+    public class Unbelievable {
+        static Integer i;
+        public static void main(String[] args) {
+            if (i == 42) //----> We will get NPE because JVM will try to unbox null
+            System.out.println("Unbelievable");
+        }
+    }
+
+

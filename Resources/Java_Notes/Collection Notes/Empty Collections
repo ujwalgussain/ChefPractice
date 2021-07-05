@@ -1,0 +1,12 @@
+EMPTY COLLECTIONS:
+    EmptyList
+    EmptySet
+    EmptyMap
+
+All of these constants are effectively immutable ie., they return same object but that object cannot be modified.
+Empty List class is a static class which doesn't hold data but implements all methods of List interface just throwing exceptions for the operations.
+
+          List empty = Collections.emptyList();
+          empty.add(10); - > throws UnSupportedOperationException
+          System.out.println(Collections.emptyList() == Collections.emptyList()); -> true
+          System.out.println(empty.stream() == empty.stream()); // Stream returns immutable object

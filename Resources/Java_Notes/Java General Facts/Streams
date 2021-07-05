@@ -11,7 +11,26 @@ Streams:
          method is declared to throw;
        From a lambda you can do none of these things.
 
-- Always return Collection and not Stream Object from method. Because Stream doesn't implement Iterable. But Collection implements both Stream and Iterable
+- Always return Collection and not Stream Object from method.
+    Because Stream doesn't implement Iterable. But Collection implements both Stream and Iterable
+
+- SHORT CIRCUITING OPERATIONS: anyMatch(), allMatch(), noneMatch()
+
+PARELLEL STREAM :
+- For Parellel Streams, use forEachOrdered() instead of forEach() which is guaranteed to traverse parallel streams in encounter order
+- Donot parallelize Stream with linear operations like limit() or Stream.iterate() operations.
+- Performance gains from parallelism are best on streams over ArrayList, HashMap, HashSet, and ConcurrentHashMap instances;
+  arrays; int ranges; and long ranges. because they can be accurately and cheaply split into subranges. This acheived using splitIterator()
+- Even if we efficiently using a parellel stream, we would get the performance benefit only if the number of elements in the stream
+  times the number of lines of code executed per element should be at least a hundred thousand.
+- To parallelize a stream of random numbers, start with a SplittableRandom instance rather than a ThreadLocalRandom (or the
+  essentially obsolete Random). SplittableRandom is designed for precisely this use, and has the potential for linear speedup.
+  ThreadLocalRandom is designed for use by a single thread, and will adapt itself to function as a parallel stream source, but won’t be as
+  fast as SplittableRandom.
+  Random synchronizes on every operation, so it will result in excessive, parallelism-killing contention.
+
+
+
 
 
 

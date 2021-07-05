@@ -1,27 +1,76 @@
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 
-public class TestClass {
-    static  void m1(ArrayList  list) {
-        list.add(20.0);
-        list.add(20);
-        list.add("string");
+class RawMembership{
+    List<Policy> policies;
+    public RawMembership()
+    {
+
+    }
+    public RawMembership(List<Policy> policies) {
+        this.policies = policies;
     }
 
-    public static void main(String[] args) {
-        ArrayList listOfString = new ArrayList<String>();
-        ArrayList listOfInteger = new ArrayList<Integer>();
-        ArrayList listOfDouble = new ArrayList<Double>();
+    public List<Policy> getPolicies() {
+        return policies;
+    }
 
-        System.out.println(listOfDouble.equals(listOfInteger));
-        System.out.println(listOfString.equals(listOfDouble));
-
-
+    public void setPolicies(List<Policy> policies) {
+        this.policies = policies;
     }
 }
+class Policy{
+    int id;
+
+    public Policy(int id) {
+        this.id = id;
+    }
+}
+public class TestClass {
+
+
+    public static void main(String[] args) {
+        RawMembership rawMembership = new RawMembership(Arrays.asList(new Policy(123),new Policy(234)));
+        System.out.println(Optional.ofNullable(rawMembership).map(RawMembership::getPolicies).orElseThrow(RuntimeException::new));
+        rawMembership = new RawMembership();
+        System.out.println(Optional.ofNullable(rawMembership).map(RawMembership::getPolicies).orElseThrow(RuntimeException::new));
+    }
+
+    public static int numSubarrayBoundedMax(int[] nums, int left, int right) {
+        int inc = 0, exc = 0;
+
+        Function<Integer,Integer> getTotalNoOfSubArrays = (n) -> (n * (n-1))/2;
+        int res = 0;
+        for(int i=0; i<nums.length;i++)
+        {
+            if(nums[i] > right)
+            {
+                res += getTotalNoOfSubArrays.apply(inc) - getTotalNoOfSubArrays.apply(exc);
+                inc = 0;
+                exc = 0;
+            }
+            else if(nums[i] < left)
+            {
+                exc ++; inc ++;
+            }
+            else
+            {
+                res -= getTotalNoOfSubArrays.apply(exc);
+                exc=0;
+                inc++;
+            }
+        }
+        res += getTotalNoOfSubArrays.apply(inc)- getTotalNoOfSubArrays.apply(exc);
+
+        return res;
+    }
+
+
+
+}
+

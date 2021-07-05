@@ -15,8 +15,8 @@ public class PartitionProblem {
         return SubsetSumProblemDynamicProg.solveUsingDP(a,total/K);
     }
     public static void main(String[] args) {
-        int K=3;
-        int a[] = {1,5,2,4,3,3};
+        int K=4;
+        int a[] = {2,6};
         System.out.println(isPartitionPossible(a,K));
     }
 }
