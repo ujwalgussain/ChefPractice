@@ -1,0 +1,2 @@
+Find subset with sum is K
+Is it possible to partition set into 2 subset with equal sum.

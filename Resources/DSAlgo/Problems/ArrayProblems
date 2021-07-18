@@ -1,0 +1,164 @@
+Arrays:
+    Find all pairs/
+            triplets/
+             subset
+             in array whose sum=K
+        Some Variations:
+            Find idx of pairs that form a sum in unsorted array
+            Find idx of pairs that form a sum in sorted array in decreasing order
+
+    Find Pythagorean Triplet
+        1)Naive Approach 2)Efficient Approach C:\Users\capiot\IdeaProjects\ChefPractice\src\PythagoreanTripletImpl.java
+
+    Max subarray sum(Divide&Conquer, Kadane's)
+
+    MO's Algo for range sum/max/min
+
+    Find longest Increasing Sequence
+
+    Find k largest elements in array
+        Approach 1: Bubble sort
+        Approach 2: use temp[k] add first k elems in temp[] and find min.for each element x after k to length if x > min of temp replace min and find new min
+        Approach 3: use max heap
+        Approach 4: sort array.\\
+
+    Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+            Note:
+            Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+            Input: [2,2,1]
+            Output: 1
+            Ans: Use XOR 2^2^1
+
+
+    Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+        Return the answer in an array.
+            Input: nums = [8,1,2,2,3]
+            Output: [4,0,1,1,3]
+            Explanation:
+            For nums[0]=8 there exist four smaller numbers than it (1, 2, 2 and 3).
+            For nums[1]=1 does not exist any smaller number than it.
+            For nums[2]=2 there exist one smaller number than it (1).
+            For nums[3]=2 there exist one smaller number than it (1).
+            For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
+       Ans:
+            Create a temp array (length should be greater than largest number)
+            We will require 3 loops:
+            1st loop - for each element num[i], temp[num[i]+1]++ ie., idx num[i]+1 will indicate the freqency of the  number
+            2nd loop - iterate on temp[] and make temp[i]=temp[i]+temp[i-1]
+            3rd loop - temp[nums[i]] will give count of all smaller elements
+
+
+
+    You are given an integer array nums and you have to return a new counts array.
+    The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+    Example 1:
+
+    Input: nums = [5,2,6,1]
+    Output: [2,1,1,0]
+    Explanation:
+    To the right of 5 there are 2 smaller elements (2 and 1).
+    To the right of 2 there is only 1 smaller element (1).
+    To the right of 6 there is 1 smaller element (1).
+    To the right of 1 there is 0 smaller element.
+
+    We will use BST for this purpose.
+    Consider BST
+            10
+            / \
+           5   15
+          /\   /\
+         4  8 11 18
+
+       For 18 all elements smaller are present in left subtrees of 10 & 15
+       Similarly for 11  all elements smaller are present in left subtrees of 10
+    In this way we can conclude all smaller elements are present in left subtrees from each predecessor node which is on right.
+    Dont consider predecessors on the left.
+
+    Hence the algo is
+
+    class Solution {
+        class Node{
+            int key,size;
+            Node left,right;
+            Node(int key)
+            {
+                this.key=key;
+            }
+            public String toString()
+            {
+                return String.format("key=%d,size=%d",key,size);
+            }
+        }
+        Node root = null;
+        public List<Integer> countSmaller(int[] nums) {
+            ArrayList<Integer> list = new ArrayList<>();
+
+            for(int i=nums.length-1;i>=0;i--)
+            {
+                int current = nums[i];
+                count = 0;
+               // System.out.println(" For Element " +current);
+                root = insert(root,current);
+                list.add(count);
+            }
+            // display();
+            Collections.reverse(list);
+            return list;
+        }
+        int count=0;
+        public Node insert(Node root,int key)
+        {
+            if(root ==null)
+            {
+                Node n = new Node(key);
+                n.size=1;
+                return n;
+            }
+            if(key<=root.key)
+            {
+                root.left = insert(root.left, key);
+            }
+            else
+            {
+                root.right = insert(root.right,key);
+
+                count += ((root.left != null)?root.left.size:0)+1;
+                // System.out.printf("On Node %s -> count=%d+1 =%d\n",(root.left != null)?"Empty":root.key,(root.left != null)?root.left.size:0,count);
+            }
+            root.size+=1;
+            return root;
+        }
+        public void display()
+        {
+            LinkedList<Node> list = new LinkedList<>();
+            list.add(root);
+            while(!list.isEmpty())
+            {
+                Node c = list.poll();
+                System.out.println(c);
+                if(c.left!=null)
+                    list.add(c.left);
+                if(c.right!=null)
+                    list.add(c.right);
+            }
+        }
+    }
+
+
+Print the sum of all subsets
+    fORMULA
+    Solution:
+        Consider following example:
+        Ex1- Set = {1,2} -> {1}, {2}, {1,2}
+        Ex2 - Set={1,2,3} -> {1}, {2}, {3},{1,2},{2,3},{1,3},{1,2,3}
+        So occurrence of each element in all subsets
+
+Find start and end of occurence of elements in sorted array
+    Ans:
+        1. Use binary search to find the element. Go left and right to count occurences
+        2. Use binary search to
+            find 1st occurence by using the following
+            if((mid==0 || arr[mid-1]<search_val) && arr[mid]==search_val)
+            find last occurence by using the following
+            if((mid==0 || search_val<arr[mid+1]) && arr[mid]==search_val)
+

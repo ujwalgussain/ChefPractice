@@ -1,6 +1,7 @@
 package Amazon_Interview_Questions.SubSetSumProblem;
 
 public class PartitionProblem {
+    //ONLY FOR EQUAL SUM
     static boolean isPartitionPossible(int a[],int K)
     {
         int total = 0;
@@ -12,6 +13,7 @@ public class PartitionProblem {
         {
             return false;
         }
+        //This is wrong approch works only for dividing in 2 parts with equal sum
         return SubsetSumProblemDynamicProg.solveUsingDP(a,total/K);
     }
     public static void main(String[] args) {

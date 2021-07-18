@@ -1,76 +1,65 @@
+import ChefProblems.src.Test;
+
 import java.lang.reflect.Type;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 
-class RawMembership{
-    List<Policy> policies;
-    public RawMembership()
-    {
-
-    }
-    public RawMembership(List<Policy> policies) {
-        this.policies = policies;
-    }
-
-    public List<Policy> getPolicies() {
-        return policies;
-    }
-
-    public void setPolicies(List<Policy> policies) {
-        this.policies = policies;
-    }
-}
-class Policy{
-    int id;
-
-    public Policy(int id) {
-        this.id = id;
-    }
-}
 public class TestClass {
 
-
     public static void main(String[] args) {
-        RawMembership rawMembership = new RawMembership(Arrays.asList(new Policy(123),new Policy(234)));
-        System.out.println(Optional.ofNullable(rawMembership).map(RawMembership::getPolicies).orElseThrow(RuntimeException::new));
-        rawMembership = new RawMembership();
-        System.out.println(Optional.ofNullable(rawMembership).map(RawMembership::getPolicies).orElseThrow(RuntimeException::new));
+        System.out.println(threeSum(new int[]{-1,0,1,2,-1,-4}));
     }
 
-    public static int numSubarrayBoundedMax(int[] nums, int left, int right) {
-        int inc = 0, exc = 0;
-
-        Function<Integer,Integer> getTotalNoOfSubArrays = (n) -> (n * (n-1))/2;
-        int res = 0;
-        for(int i=0; i<nums.length;i++)
+    public static List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> list = new ArrayList<>();
+        for(int i=0;i<nums.length-2;i++)
         {
-            if(nums[i] > right)
-            {
-                res += getTotalNoOfSubArrays.apply(inc) - getTotalNoOfSubArrays.apply(exc);
-                inc = 0;
-                exc = 0;
-            }
-            else if(nums[i] < left)
-            {
-                exc ++; inc ++;
-            }
-            else
-            {
-                res -= getTotalNoOfSubArrays.apply(exc);
-                exc=0;
-                inc++;
+            //Once Sorted we will know
+            if(i>0 && nums[i] == nums[i-1])
+                continue;
+            int l=i+1,r=nums.length-1;
+            while(l<r){
+                int ans = nums[i]+nums[l]+nums[r];
+                if(ans==0)
+                {
+                    list.add(Arrays.asList(nums[i],nums[l],nums[r]));
+                    l++;r--;
+                }
+                else
+                {
+                    if(ans>0)
+                    {
+                        r--;
+                    }
+                    else
+                    {
+                        l++;
+                    }
+                }
             }
         }
-        res += getTotalNoOfSubArrays.apply(inc)- getTotalNoOfSubArrays.apply(exc);
-
-        return res;
+        return list;
     }
-
-
-
+    public static String longestCommonPrefix(String[] strs) {
+        int len = Integer.MAX_VALUE;
+        for(String s :strs)
+            len = Math.min(len,s.length());
+        String prefix = "";
+        out:for(int i=0;i<len;i++)
+        {
+            char c = strs[0].charAt(i);
+            for(int j=1;j<strs.length;j++)
+            {
+                if(strs[j].charAt(i)!=c)
+                    break out;
+            }
+            prefix+=c;
+        }
+        return prefix;
+    }
 }
 

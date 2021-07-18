@@ -13,12 +13,10 @@ Subarray
         4
     Formula - for array of size n, no of subarrays = n*(n+1)/2
 
+Imp :
+      https://www.geeksforgeeks.org/number-subarrays-maximum-value-given-range/
 
-
-    Imp :
-        https://www.geeksforgeeks.org/number-subarrays-maximum-value-given-range/
-
-        class GFG {
+      class GFG {
 
                 // function to calculate N*(N+1)/2
                 static long countSubarrys(long n) {

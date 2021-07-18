@@ -1,0 +1,100 @@
+Problems for Practice:
+Arrays:
+    Find start and end of occurence of elements in sorted array
+    Ans:
+        1. Use binary search to find the element. Go left and right to count occurences
+        2. Use binary search to
+            find 1st occurence by using the following
+            if((mid==0 || arr[mid-1]<search_val) && arr[mid]==search_val)
+            find last occurence by using the following
+            if((mid==0 || search_val<arr[mid+1]) && arr[mid]==search_val)
+
+    Find all subsets/pairs/triplets in array whose sum=K
+    Find GCD/LCM of number
+        GCD - normal, Euclidean
+    Sieve of Eratosthenes
+    Find Pythagorean Triplet
+        1)Naive Approach 2)Efficient Approach C:\Users\capiot\IdeaProjects\ChefPractice\src\PythagoreanTripletImpl.java
+
+    Max subarray sum(Divide&Conquer, Kadane's)
+    MO's Algo for range sum/max/min
+    Find longest Increasing Sequence
+    Print all possible permutations of string
+    Find whether a string can be rearranged to become palindrome.(if strlen is even then occurence of all chars should be even else one char occurence can be odd)
+    Find k largest elements in array
+        Approach 1: Bubble sort
+        Approach 2: use temp[k] add first k elems in temp[] and find min.for each element x after k to length if x > min of temp replace min and find new min
+        Approach 3: use max heap
+        Approach 4: sort array.\\
+
+    Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+    Return the answer in an array.
+        Input: nums = [8,1,2,2,3]
+        Output: [4,0,1,1,3]
+        Explanation:
+        For nums[0]=8 there exist four smaller numbers than it (1, 2, 2 and 3).
+        For nums[1]=1 does not exist any smaller number than it.
+        For nums[2]=2 there exist one smaller number than it (1).
+        For nums[3]=2 there exist one smaller number than it (1).
+        For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
+String:
+    Palindrome:
+        Note: A Palindromic String will have even no of occurences of each digit.
+        Count min swaps to make string palindrome
+            ChefPractice\src\PracticeProblems.StringProblems.palindrome.CountMinSwapsToMakePalindromeImpl.java
+        Find the Number of Palindromic SubString
+        Longest Palindromic Substring
+        Print all Palindromic Substring
+        Number of characters to be added to create a palindromic substring
+        Find whether a string can be rearranged to become palindrome.(if strlen is even then occurence of all chars should be even else one char occurence can be odd)
+
+
+Miscellaneous
+Multiply a number using + and bitwise operator
+    https://www.geeksforgeeks.org/russian-peasant-multiply-two-numbers-using-bitwise-operators/
+Arrival and Departure time of train is given. Find min number of platforms.
+    https://www.geeksforgeeks.org/minimum-number-platforms-required-railwaybus-station/
+
+Stacks:
+Find next greatest/smallest element in array.
+Find no of smaller elements to the left of an array
+Implement Queue using stack
+
+LinkedList:
+Print middle of list 1) use fast slow ptrs
+Reverse a linked list 1) Stack 2) in O(1)
+Delete a node from the linked list where the pointer to that node is given and head pointer is not given.
+	Step 1 insert a copy of node after the node.
+	Step 2 Add org.next.random=org.random.next;
+	Step 3: Remove all duplicate Nodes
+Clone a Linked list having next and random pointer(can point to any other node in a linked list).
+	Ans: 1. Replace the data of node to be deleted with next node data.
+	     2. Now delete next node as normal delete
+Nth node from the end of a Linked List
+Print the middle of a given linked list
+Find length of loop in linked list
+Function to check if a singly linked list is palindrome
+
+Graphs:
+    Detect a cycle in undirected graph.(https://www.geeksforgeeks.org/detect-cycle-undirected-graph/)
+    Detect a cycle in directed graph.(https://www.geeksforgeeks.org/detect-cycle-in-a-graph/)
+
+Trees:
+find depth of Tree.
+Find maxdepth/mindepth node of tree.
+Search Node in a Tree.
+Find no of leaf nodes/full nodes/halfnodes in tree
+Check if two trees are structurally identical.
+Find Diameter/longest path b/w 2 leaves of Tree
+Find max no of nodes at any level in a tree
+ZigZagTraversal
+Find level which has maximum sum.
+Find all paths till leaf in the tree.
+Give an algorithm for checking the existence of path with given sum
+Find sum of all elements in tree
+Given two trees, give an algorithm for checking whether they are mirrors of each other.
+Give an algorithm for constructing binary tree from given Inorder and Preorder traversals.
+Give an algorithm for constructing binary tree from given Inorder and Postorder traversals.
+Give an algorithm for printing all the ancestors of a node in a Binary tree.
+Give an algorithm for finding LCA (Least Common Ancestor) of two nodes in a Binary Tree.
+
