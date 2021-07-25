@@ -1,0 +1,43 @@
+AVL Tree is also called as height balanced tree.
+
+For every insertion, always check height of left subtree and right subtree if node is balanced or not.
+A node is balanced if and only if left_height - right_height = [-1 or 0 or 1]
+If not then we need to perform rotations to balance out the trees.
+Note: [Reference Abdul Bari Sir's Video]
+    Always remember, Rotations are performed between 3 nodes only.
+    While balancing, from bottom to top balance the 1st imbalanced node, as it will balance the upper tree also.
+
+Rotations:
+Case 1: Insert 10,20,30 [LL Rotation]
+    10                                     20
+    /    Insertion at Left of left        /  \
+   20    ------------------------>      10   30
+  /
+ 30
+
+Case 2: Insert 20,10,30 [RR Rotation]
+    10                                                    20
+      \               Insertion at Right of Right        /  \
+      20           ---------------------------->        10   30
+        \
+        30
+
+Case 3 : Insert 30,10,20 [RL Rotation]
+
+    30
+   / ^                                      20
+  /  :       Insertion at Right of left     / \
+ 10  :       --------------------->       10   30
+  \  :     Rotate 10-20 to right from 10
+   \ :     Rotate 30-20-10 to left from 20
+    20
+
+Case 4 : Insert 10,30,20
+
+  10
+  ^ \
+  :  \                                          20
+  :   30   --------------------------->        /  \
+  :   /                                      10    30
+  :  /    Rotate 30-20 to left from 30
+  20      Rotate 10-20-30 to right from 20

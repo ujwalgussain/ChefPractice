@@ -1,7 +1,7 @@
 package Amazon_Interview_Questions;
 
-import LinkedListTest.LLNode;
-import LinkedListTest.LinkedList;
+import a_practiceproblems.linkedlistproblems.LLNode;
+import a_practiceproblems.linkedlistproblems.LinkedList;
 
 public class ReverseLLInGroupsofK {
     /*Approach:

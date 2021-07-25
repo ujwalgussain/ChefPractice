@@ -1,4 +1,30 @@
 BST
     Insertion -
     Deletion -
-    LCA - src/PracticeProblems.TreeProblems/BSTProblems/FindLowestCommonAncestor.java
+    Find inorder successor
+    Find inorder predecessor
+    Find min value of bst
+    Find max value of bst
+
+    Determine whether a binary tree is bst [Inorder traversal].
+
+    LCA OR SHORTEST PATH between nodes - src/a_practiceproblems.TreeProblems/BSTProblems/FindLowestCommonAncestor.java
+
+    Convert BST To DLL. - src/a_practiceproblems/TreeProblems/BSTProblems/ConvertBSTToDLL.java
+
+    Convert Sorted DLL to BST - src/a_practiceproblems/TreeProblems/BSTProblems/ConvertSortedDLLToBalancedBST.java
+
+    Convert Array to BST - src/a_practiceproblems/TreeProblems/BSTProblems/CreateBSTFromUnsortedArray.java
+        a. Constuct balanced BST from array - Sort the array then create BST
+
+    Find Kth smallest/largest element in BST
+    print all nodes in range - src/a_practiceproblems/TreeProblems/BSTProblems/PrintAllNodesInRange.java
+    trim tree with nodes in range - use above logic and then convert the ans in bst.
+
+    For each element in the array, Find the next greater element in the right - src/a_practiceproblems/TreeProblems/BSTProblems/avltrees/problems/NextGreaterElementInRight.java
+        Ex : 50,70,65.80,72,90 -> 65,72,72,90,90,-1
+
+
+
+
+

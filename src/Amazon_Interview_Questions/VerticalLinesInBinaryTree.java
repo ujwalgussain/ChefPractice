@@ -1,7 +1,7 @@
 package Amazon_Interview_Questions;
 
-import PracticeProblems.TreeProblems.BSTProblems.BinarySearchTree;
-import PracticeProblems.TreeProblems.tree.TreeNode;
+import a_practiceproblems.TreeProblems.BSTProblems.BinarySearchTree;
+import a_practiceproblems.TreeProblems.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;

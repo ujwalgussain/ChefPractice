@@ -41,7 +41,7 @@ String:
     Palindrome:
         Note: A Palindromic String will have even no of occurences of each digit.
         Count min swaps to make string palindrome
-            ChefPractice\src\PracticeProblems.StringProblems.palindrome.CountMinSwapsToMakePalindromeImpl.java
+            ChefPractice\src\a_practiceproblems.StringProblems.palindrome.CountMinSwapsToMakePalindromeImpl.java
         Find the Number of Palindromic SubString
         Longest Palindromic Substring
         Print all Palindromic Substring

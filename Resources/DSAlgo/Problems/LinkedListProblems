@@ -2,14 +2,14 @@ Introduction to Linked List
 
 Search an element in a Linked List (Iterative and Recursive)
 
-Reverse a linked List - src/LinkedListTest/Problems/ReverseLinkedList.java
+Reverse a linked List - src/a_practiceproblems.linkedlistproblems/Problems/ReverseLinkedList.java
 
 Write a function to get Nth node in a Linked List
-    from start - src/LinkedListTest/Problems/GetNthNode.java
-    from end - src/LinkedListTest/Problems/GetNthNodeFromEnd.java
+    from start - src/a_practiceproblems.linkedlistproblems/Problems/GetNthNode.java
+    from end - src/a_practiceproblems.linkedlistproblems/Problems/GetNthNodeFromEnd.java
 
 Print the middle of a given linked list ****
-    src/LinkedListTest/Problems/FindMiddleOfLinkedList.java
+    src/a_practiceproblems.linkedlistproblems/Problems/FindMiddleOfLinkedList.java
 
 Write a function that counts the number of times a given int occurs in a Linked List
 
