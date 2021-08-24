@@ -1,6 +1,6 @@
-package a_practiceproblems.ArrayProblems;
+package a_practiceproblems.heaps.problems;
 
-import a_practiceproblems.heaps.*;
+import a_practiceproblems.heaps.MinHeap;
 
 import java.util.Arrays;
 

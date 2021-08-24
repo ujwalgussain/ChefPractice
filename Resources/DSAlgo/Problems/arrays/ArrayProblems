@@ -1,0 +1,450 @@
+Arrays:
+    Array Rotation Problems
+        Matrix Rotation by 90 degree:
+    Pairs/Triplets/Quadraplets
+             sum=K
+             sum<K
+             sum>K
+             sum within a range
+             unique Pairs/Triplets/Quadraplets
+
+             difference = K
+
+    https://leetcode.com/problems/3sum/
+
+        Some Variations:
+            Find idx of pairs that form a sum in unsorted array
+            Find idx of pairs that form a sum in sorted array in decreasing order
+
+    Find Pythagorean Triplet
+        1)Naive Approach 2)Efficient Approach C:\Users\capiot\IdeaProjects\ChefPractice\src\PythagoreanTripletImpl.java
+
+    Max subarray sum(Divide&Conquer, Kadane's)
+
+    MO's Algo for range sum/max/min
+
+    Find longest Increasing Sequence
+
+    Find k largest elements in array
+        Approach 1: Bubble sort
+        Approach 2: use temp[k] add first k elems in temp[] and find min.for each element x after k to length if x > min of temp replace min and find new min
+        Approach 3: use max heap
+        Approach 4: sort array.\\
+
+    Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+            Note:
+            Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+            Input: [2,2,1]
+            Output: 1
+            Ans: Use XOR 2^2^1
+
+
+    Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+        Return the answer in an array.
+            Input: nums = [8,1,2,2,3]
+            Output: [4,0,1,1,3]
+            Explanation:
+            For nums[0]=8 there exist four smaller numbers than it (1, 2, 2 and 3).
+            For nums[1]=1 does not exist any smaller number than it.
+            For nums[2]=2 there exist one smaller number than it (1).
+            For nums[3]=2 there exist one smaller number than it (1).
+            For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
+       Ans:
+            Create a temp array (length should be greater than largest number)
+            We will require 3 loops:
+            1st loop - for each element num[i], temp[num[i]+1]++ ie., idx num[i]+1 will indicate the freqency of the  number
+            2nd loop - iterate on temp[] and make temp[i]=temp[i]+temp[i-1]
+            3rd loop - temp[nums[i]] will give count of all smaller elements
+
+
+
+    You are given an integer array nums and you have to return a new counts array.
+    The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+    Example 1:
+
+    Input: nums = [5,2,6,1]
+    Output: [2,1,1,0]
+    Explanation:
+    To the right of 5 there are 2 smaller elements (2 and 1).
+    To the right of 2 there is only 1 smaller element (1).
+    To the right of 6 there is 1 smaller element (1).
+    To the right of 1 there is 0 smaller element.
+
+    We will use BST for this purpose.
+    Consider BST
+            10
+            / \
+           5   15
+          /\   /\
+         4  8 11 18
+
+       For 18 all elements smaller are present in left subtrees of 10 & 15
+       Similarly for 11  all elements smaller are present in left subtrees of 10
+    In this way we can conclude all smaller elements are present in left subtrees from each predecessor node which is on right.
+    Dont consider predecessors on the left.
+
+    Hence the algo is
+
+    class Solution {
+        class Node{
+            int key,size;
+            Node left,right;
+            Node(int key)
+            {
+                this.key=key;
+            }
+            public String toString()
+            {
+                return String.format("key=%d,size=%d",key,size);
+            }
+        }
+        Node root = null;
+        public List<Integer> countSmaller(int[] nums) {
+            ArrayList<Integer> list = new ArrayList<>();
+
+            for(int i=nums.length-1;i>=0;i--)
+            {
+                int current = nums[i];
+                count = 0;
+               // System.out.println(" For Element " +current);
+                root = insert(root,current);
+                list.add(count);
+            }
+            // display();
+            Collections.reverse(list);
+            return list;
+        }
+        int count=0;
+        public Node insert(Node root,int key)
+        {
+            if(root ==null)
+            {
+                Node n = new Node(key);
+                n.size=1;
+                return n;
+            }
+            if(key<=root.key)
+            {
+                root.left = insert(root.left, key);
+            }
+            else
+            {
+                root.right = insert(root.right,key);
+
+                count += ((root.left != null)?root.left.size:0)+1;
+                // System.out.printf("On Node %s -> count=%d+1 =%d\n",(root.left != null)?"Empty":root.key,(root.left != null)?root.left.size:0,count);
+            }
+            root.size+=1;
+            return root;
+        }
+        public void display()
+        {
+            LinkedList<Node> list = new LinkedList<>();
+            list.add(root);
+            while(!list.isEmpty())
+            {
+                Node c = list.poll();
+                System.out.println(c);
+                if(c.left!=null)
+                    list.add(c.left);
+                if(c.right!=null)
+                    list.add(c.right);
+            }
+        }
+    }
+
+
+Print the sum of all subsets
+    Formula
+    Solution:
+        Consider following example:
+        Ex1- Set = {1,2} -> {1}, {2}, {1,2}
+        Ex2 - Set={1,2,3} -> {1}, {2}, {3},{1,2},{2,3},{1,3},{1,2,3}
+        So occurrence of each element in all subsets
+
+Find start and end of occurence of elements in sorted array
+    Ans:
+        1. Use binary search to find the element. Go left and right to count occurences
+        2. Use binary search to
+            find 1st occurence by using the following
+            if((mid==0 || arr[mid-1]<search_val) && arr[mid]==search_val)
+            find last occurence by using the following
+            if((mid==0 || search_val<arr[mid+1]) && arr[mid]==search_val)
+
+
+
+Merge M sorted arrays [Use n ptr technique]
+    Ex:
+        [ 10, 20, 30, 40 ]
+        [ 15, 25, 35, 45 ]
+        [ 27, 29, 37, 48 ]
+        [ 32, 33, 39, 50 ]
+        [ 16, 18, 22, 28 ]
+    O/P:
+    10 15 16 18 20 22 25 27 28 29 30 32 33 35 37 39 40 45 48 50
+
+
+
+
+ROTATE MATRIX BY 90 Degree: https://www.geeksforgeeks.org/rotate-a-matrix-by-90-degree-in-clockwise-direction-without-using-any-extra-space/
+In Place Rotation
+    If the array is
+
+    [
+        [1, 2],
+        [3, 4]
+    ]
+    Then the rotated array becomes:
+
+    [
+        [3, 1],
+        [4, 2]
+    ]
+Solution:
+    for (int i = 0; i < N / 2; i++)
+        {
+            for (int j = i; j < N - i - 1; j++)
+            {
+
+                // Swap elements of each cycle
+                // in clockwise direction
+                int temp = a[i][j];
+                a[i][j] = a[N - 1 - j][i];
+                a[N - 1 - j][i] = a[N - 1 - i][N - 1 - j];
+                a[N - 1 - i][N - 1 - j] = a[j][N - 1 - i];
+                a[j][N - 1 - i] = temp;
+            }
+        }
+
+
+PICK FROM BOTH SIDES https://www.interviewbit.com/problems/pick-from-both-sides/
+    Given an integer array A of size N.
+    You can pick B elements from either left or right end of the array A to get maximum sum.
+    Find and return this maximum possible sum.
+    NOTE: Suppose B = 4 and array A contains 10 elements then
+    You can pick first four elements or can pick last four elements or can pick 1 from front and 3 from back etc . you need to return the maximum possible sum of elements you can pick.
+    Example Input
+    Input 1:
+
+     A = [5, -2, 3 , 1, 2]
+     B = 3
+    Input 2:
+
+     A = [1, 2]
+     B = 1
+
+
+    Example Output
+    Output 1:
+
+     8
+    Output 2:
+
+     2
+
+
+    Example Explanation
+    Explanation 1:
+
+     Pick element 5 from front and element (1, 2) from back so we get 5 + 1 + 2 = 8
+    Explanation 2:
+
+     Pick element 2 from end as this is the maximum we can get
+int r=A.size()-1;
+    int sum=INT_MIN;
+    int temp=0;
+    for(int i=0;i<B;i++)
+    {
+        temp+=A[i];
+    }
+    sum=max(temp,sum);
+   // cout<<temp<<endl;
+    int l=B-1;
+    while(B-- && l>=0)
+    {
+           // cout<<sum<<endl;
+        temp=temp+A[r]-A[l];
+        l--;
+        r--;
+        sum=max(temp,sum);
+    }
+
+    return sum;
+
+
+Balanced Array:
+Problem Description
+
+Given an integer array A of size N. You need to count the number of special elements in the given array.
+
+A element is special if removal of that element make the array balanced.
+
+Array will be balanced if sum of even index element equal to sum of odd index element.
+
+
+Input 1:
+
+ A = [2, 1, 6, 4]
+Input 2:
+
+ A = [5, 5, 2, 5, 8]
+
+
+Example Output
+Output 1:
+
+ 1
+Output 2:
+
+ 2
+
+
+Example Explanation
+Explanation 1:
+
+ After deleting 1 from array : {2,6,4}
+    (2+4) = (6)
+ Hence 1 is the only special element, so count is 1
+Explanation 2:
+
+ If we delete A[0] or A[1] , array will be balanced
+    (5+5) = (2+8)
+ So A[0] and A[1] are special elements, so count is 2.
+     public int solve(int[] A) {
+            int N = A.length;
+            int left_Even[] = new int[N];
+            int left_Odd[] = new int[N];
+            left_Even[0]=0;
+            left_Odd[0]=0;
+            for (int i = 1; i<N; i++) {
+                if((i&1)==0) {
+                    left_Odd[i] = left_Odd[i - 1] + A[i - 1];
+                    left_Even[i] =left_Even[i-1];
+                }
+                else {
+                    left_Even[i] = left_Even[i - 1] + A[i - 1];
+                    left_Odd[i] = left_Odd[i-1];
+                }
+            }
+
+            int right_Odd[] = new int[N];
+            int right_Even[] = new int[N];
+            right_Even[0]=0;
+            right_Odd[0]=0;
+            for (int i =N-2; i>=0; i--) {
+
+                right_Odd[i] = right_Even[i+1];
+
+                right_Even[i] = right_Odd[i+1]+A[i+1];
+            }
+          /*  System.out.println(Arrays.toString(left_Odd));
+            System.out.println(Arrays.toString(left_Even));
+            System.out.println(Arrays.toString(right_Odd));
+            System.out.println(Arrays.toString(right_Even));*/
+            int cnt=0;
+            for(int i=0;i<N;i++)
+            {
+                if(left_Even[i]+right_Odd[i] == left_Odd[i] + right_Even[i]) {
+                    //System.out.println(A[i]);
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+
+Perfect Peak of Array
+Problem Description: https://www.interviewbit.com/problems/perfect-peak-of-array/
+Given an integer array A of size N.
+You need to check that whether there exist a element which is strictly greater than all the elements on left of it and strictly smaller than all the elements on right of it.
+If it exists return 1 else return 0.
+
+
+Noble Element - https://www.interviewbit.com/problems/noble-integer/
+Given an integer array A, find if an integer p exists in the array such that the number of integers greater than p in the array equals to p.
+
+Output Format
+Return 1 if any such integer p is found else return -1.
+
+
+
+Example Input
+Input 1:
+
+ A = [3, 2, 1, 3]
+Input 2:
+
+ A = [1, 1, 3, 3]
+
+
+Example Output
+Output 1:
+
+ 1
+Output 2:
+
+ -1
+
+
+Example Explanation
+Explanation 1:
+
+ For integer 2, there are 2 greater elements in the array. So, return 1.
+Explanation 2:
+
+ There is no such integer exists.
+
+
+
+    public class Solution {
+        public int solve(int[] A) {
+            int N = A.length;
+            if(N==1 && A[0]==0)
+                return 1;
+            Arrays.sort(A);
+            if(A[N-1]==0)
+                return 1;
+            out:for(int i=0;i<N;i++)
+            {
+                if(i+1<N && N-1-i==A[i] && A[i+1]!=A[i]){
+                    return 1;
+                }
+                if(N-1-i<A[i])
+                    break;
+            }
+            return -1;
+        }
+    }
+
+Problem Desc: https://www.interviewbit.com/problems/minimum-lights-to-activate/
+There is a corridor in a Jail which is N units long. Given an array A of size N. The ith index of this array is 0 if the light at ith position is faulty otherwise it is 1.
+All the lights are of specific power B which if is placed at position X, it can light the corridor from [ X-B+1, X+B-1].
+Initially all lights are off.
+Return the minimum number of lights to be turned ON to light the whole corridor or -1 if the whole corridor cannot be lighted.
+
+Input Format
+First argument is an integer array A where A[i] is either 0 or 1.
+Second argument is an integer B.
+
+Output Format
+Return the minimum number of lights to be turned ON to light the whole corridor or -1 if the whole corridor cannot be lighted.
+
+Example Input
+Input 1:
+A = [ 0, 0, 1, 1, 1, 0, 0, 1].
+B = 3
+Input 2:
+A = [ 0, 0, 0, 1, 0].
+B = 3
+Example Output
+Output 1:
+2
+Output 2:
+-1
+Example Explanation
+Explanation 1:
+
+In the first configuration, Turn on the lights at 3rd and 8th index.
+Light at 3rd index covers from [ 1, 5] and light at 8th index covers [ 6, 8].
+Explanation 2:
+
+In the second configuration, there is no light which can light the first corridor.

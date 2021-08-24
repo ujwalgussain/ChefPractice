@@ -1,5 +1,6 @@
 Find longest substring with non repeating characters.
 Find first non repeating/repeating character
+Find Kth non repeating character/K non repeating characters - src/a_practiceproblems/StringProblems/KthNonRepeatingCharacter.java
 Print all possible permutations of string
 Find whether a string can be rearranged to become palindrome.(if strlen is even then occurence of all chars should be even else one char occurence can be odd)
 

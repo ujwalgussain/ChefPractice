@@ -43,7 +43,7 @@ public class FindInorderSuccessor {
        */
 
     public static void main(String[] args) {
-        TreeNode root = BSTUtils.createFullBST();
+        TreeNode root = BSTUtils.createFullBSTAndReturnRoot();
         System.out.println(findInorderSuccessor(root.right.right)); //15
     }
 }

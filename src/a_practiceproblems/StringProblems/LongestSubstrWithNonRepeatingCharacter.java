@@ -2,7 +2,7 @@ package a_practiceproblems.StringProblems;
 
 import java.util.HashMap;
 
-public class LongestSubstrWithNonReapeatingCharacter {
+public class LongestSubstrWithNonRepeatingCharacter {
     //Test Cases:
     //Case 1: "abcabcbb" - 3
     //Case 2: "abba" - 2

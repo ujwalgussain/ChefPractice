@@ -87,6 +87,39 @@ Ans:
               return last(arr, (mid + 1), high, x, n);
          f) otherwise return -1;
 
+Q)  https://practice.geeksforgeeks.org/problems/find-transition-point/1#
+    Given a sorted array containing only 0s and 1s, find the transition point.
+    Example 1:
+    Input:
+        N = 5
+        arr[] = {0,0,0,1,1}
+    Output: 3
+    Explanation: index 3 is the transition point where 1 begins.
+
+    Ans: int transitionPoint(int arr[], int n) {
+             // code here
+             if(arr[0]==1)
+                 return 0;
+             if(arr[n-1]==0)
+                 return -1;
+             int l=0,h=n-1;
+             while(l<=h)
+             {
+                 int mid= (l+h)/2;
+                 if((mid==0 || arr[mid-1]==0) && arr[mid]==1)
+                     return mid;
+                 else
+                     if(arr[mid]==0)
+                     {
+                         l=mid+1;
+                     }
+                     else{
+
+                          h=mid-1;
+                     }
+             }
+             return -1;
+         }
 
 Q 3) Given an array in such a way that the elements stored in array are in increasing order initially and then after reaching to a peak element , elements stored are in decreasing order. Find the highest element.
     Note: A[i] != A[i+1]
@@ -138,3 +171,4 @@ Q 3) Given an array in such a way that the elements stored in array are in incre
                     }
                 }
                 return -1;
+

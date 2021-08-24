@@ -105,6 +105,20 @@ public class LinkedList {
             System.out.println();
         }
     }
+    public static void display(LLNode head)
+    {
+        if(head==null)
+            System.out.println("Empty");
+        else
+        {
+            LLNode t = head;
+            while(t!=null){
+                System.out.print(t.data+" ");
+                t=t.next;
+            }
+            System.out.println();
+        }
+    }
     public void rotateLeft(int times)
      {
         int pos=times%length;

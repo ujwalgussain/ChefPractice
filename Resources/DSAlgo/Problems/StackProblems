@@ -1,0 +1,64 @@
+Implement Queue using stacks
+    Using 2 stacks we can do it in foll ways:
+        1. Make enqueue costly-
+            For each insertion pop out all existing stack1 elements to stack2,
+            insert the new element in stack1 and pop stack 2 back to stack1
+        2. Make dequeue costly-
+            For each deletion - pop out stack1 to stack2
+            pop stack2
+            pop rest of elems in stack2 to stack1
+
+Implement stack using queue
+    // x is the element to be pushed and s is stack
+    push(s, x)
+      1) Let size of q be s.
+      1) Enqueue x to q
+      2) One by one Dequeue s items from queue and enqueue them.
+
+    // Removes an item from stack
+    pop(s)
+      1) Dequeue an item from q
+
+Implement 2 stacks in an array - https://www.geeksforgeeks.org/implement-two-stacks-in-an-array/
+
+Design a stack with operations on middle element
+
+Design a stack that supports getMin() in O(1) time and O(1) extra space - https://www.geeksforgeeks.org/design-a-stack-that-supports-getmin-in-o1-time-and-o1-extra-space/
+
+Expression Conversion
+Infix
+    to PostFix:
+        for all char c in expression
+            if c is operand -> append to result
+            if c is operator
+                if '(' -> push
+                if ')' -> pop all operands until '(' is encountered and append to result
+                if any other operator -> pop all operators in stack with greater precedence and push
+        At last, pop all operators out of stack
+
+    to Prefix:
+
+
+Prefix
+    to Infix:
+        for all char c in expression (in Reverse Order)
+            if c is operand -> push to stack
+            if c is operator -> push('(' + pop() + c + pop()+ ')')
+    to Postfix:
+        for all char c in expression (in Reverse Order)
+            if c is operand -> push to stack
+            if c is operator -> push( pop() + pop() + c)
+Postfix
+    to Infix:
+        for all char c in expression (in Reverse Order)
+            if c is operand -> push to stack
+            if c is operator ->
+                operand2 = pop()
+                operand1 = pop()
+                push('(' + operand1 + c + operand2+ ')')
+    to Prefix:
+        for all char c in expression (in Reverse Order)
+            if c is operand  -> push to stack
+            if c is operator -> operand2 = pop()
+                                operand1 = pop()
+                                push(c + operand1 + operand2)

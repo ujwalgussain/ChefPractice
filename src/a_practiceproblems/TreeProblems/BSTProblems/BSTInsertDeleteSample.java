@@ -1,6 +1,6 @@
 package a_practiceproblems.TreeProblems.BSTProblems;
 
-import a_practiceproblems.TreeProblems.Traversal;
+import a_practiceproblems.TreeProblems.traversalproblems.traversal.Traversal;
 
 public class BSTInsertDeleteSample {
     public static void main(String[] args) {

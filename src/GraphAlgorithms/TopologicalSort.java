@@ -51,6 +51,7 @@ Topological Sort ->5 4 2 3 1 0
 public class TopologicalSort {
     static void topologicalSort(int[][] G, int V)
     {
+        //V-> no of vertices
         boolean visited[] = new boolean[V];
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < V; i++) {
@@ -63,22 +64,21 @@ public class TopologicalSort {
         while(!stack.isEmpty())
             System.out.print(stack.pop()+ " ");
     }
-    static void topologicalSort_Util(int[][] G,int V, int vertex, boolean visited[], Stack<Integer> stack)
+    static void topologicalSort_Util(int[][] G,int V, int current_vertex, boolean visited[], Stack<Integer> stack)
     {
         /*This method ensures a node is added to stack in following cases:
             1. If node doesnt have any neighbours
             2. If all neighbours are explored
         * */
-        visited[vertex]=true;
+        visited[current_vertex]=true;
         for (int i = 0; i < V; i++) {
-            if(G[vertex][i]==1){
-                if(visited[i]) {
-                    continue;
+            if(G[current_vertex][i]==1){
+                if(!visited[i]) {
+                    topologicalSort_Util(G,V,i,visited,stack);
                 }
-                topologicalSort_Util(G,V,i,visited,stack);
             }
         }
-        stack.push(vertex);
+        stack.push(current_vertex);
     }
 
     public static void main(String[] args) {

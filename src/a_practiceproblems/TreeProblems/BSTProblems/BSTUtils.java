@@ -25,7 +25,7 @@ public class BSTUtils {
         return binarySearchTree.root;
     }
 
-    public static TreeNode createFullBST()
+    public static TreeNode createFullBSTAndReturnRoot()
     {
         BinarySearchTree binarySearchTree = new BinarySearchTree();
         binarySearchTree.insertAll(10,5,15,3,8,13,19,2,4,6,9,11,14,18,20);
@@ -43,6 +43,19 @@ public class BSTUtils {
         */
     }
 
+    public static TreeNode createLeftSkewedTree()
+    {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insertAll(10,9,8,7,6);
+        return binarySearchTree.root;
+    }
+
+    public static TreeNode createRightSkewedTree()
+    {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insertAll(1,2,3,4,5,6);
+        return binarySearchTree.root;
+    }
     public static TreeNode searchNode(TreeNode root, int key)
     {
         while(root != null)
@@ -56,5 +69,4 @@ public class BSTUtils {
         }
         return null;
     }
-
 }

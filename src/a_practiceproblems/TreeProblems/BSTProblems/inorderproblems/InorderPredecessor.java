@@ -39,7 +39,7 @@ public class InorderPredecessor {
     */
 
     public static void main(String[] args) {
-        TreeNode root = BSTUtils.createFullBST();
+        TreeNode root = BSTUtils.createFullBSTAndReturnRoot();
         TreeNode n_15 = BSTUtils.searchNode(root, 15);
         System.out.println("Predecessor for 15 is " + findInorderPredecessor(n_15)); //15
 

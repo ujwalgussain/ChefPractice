@@ -1,0 +1,292 @@
+SLIDING WINDOW PROBLEMS:
+Videos : https://youtu.be/7Q1uylXOatU
+Please follow this template:
+    int ans=0,start=0;
+    for(int end = 0 to N)
+    {
+        //check if adding the element will satisfy the condition
+        //if not then move the start using while loop
+        //add the element
+        //calculate the ans
+    }
+
+
+
+
+
+
+
+
+
+
+Max SubArray Sum
+https://www.interviewbit.com/problems/max-product-subarray/
+
+Given an array of integers of size ‘n’.Find the maximum sum of ‘k’ consecutive elements in the array.
+        https://www.geeksforgeeks.org/window-sliding-technique/
+    Input  : arr[] = {100, 200, 300, 400}
+ k = 2
+    Output : 700
+
+    Solution :
+            static int maxSum(int arr[], int n, int k)
+            {
+                // Initialize result
+                int max_sum = Integer.MIN_VALUE;
+
+                // Consider all blocks starting with i.
+                for (int i = 0; i < n - k + 1; i++) {
+                        int current_sum = 0;
+                        for (int j = 0; j < k; j++)
+                            current_sum = current_sum + arr[i + j];
+
+                        // Update result if required.
+                        max_sum = Math.max(current_sum, max_sum);
+                }
+
+                    return max_sum;
+            }
+
+
+
+
+
+
+    Find Minimum length subarray which has sum = K
+    src/a_practiceproblems/ArrayProblems/slidingwindow/MinSubArrayWithSumGreaterThanEqualToK.java
+    Algo :
+        1. Fix Start, End At 0
+        2. Move End from 0 to N
+            sum = sum + A[i]
+            until sum >= K
+                calculate len of array from start to end
+                check if len < min len and update min len
+                remove element at start pos from sum
+                    ie., sum-=A[start++]
+
+    Ex:
+        2   3   1   2   4   3
+        S
+        E   E   E   E
+    X   2   5   6   8
+
+    Now From 0 to 3 idx -> sum = 8 >=7, this is one solution
+        2   3   1   2   4   3
+            S
+    E   E
+    X               6   10
+    Now From 1 to 4 idx -> sum = 10 >=7, this is one solution
+        2   3   1   2   4   3
+S
+        E
+    X   7
+    Now From 2 to 4 idx -> sum = 7 >=7, this is one solution
+        2   3   1   2   4   3
+    S
+        E   E
+    X   6   9
+    Now From 3 to 5 idx -> sum = 9 >=7, this is one solution
+
+        2   3   1   2   4   3
+        S
+            E
+    X       7
+    Now From 4 to 5 idx -> sum = 7 >=7, this is one solution
+
+    Ans will be 4 to 5 idx
+    
+    
+
+
+Find the all anagrams in s1 from s2.
+Ex:
+    s1 = "abcba" s2 = "abc"
+    Ans = 2 [abc,cba]
+
+    Algo:
+    maintain count of each char in s2 in alphabet array
+        Note: In alphabet array all characters with
+            count > 0 is part of s2
+            count < 0 is not
+    Also maintain a integer diff to check how close are we to the soln
+    parse each char in s2
+        1. if curr window size is greater than length of s2 then
+                1. remove char in start of window
+                    a. increment the count by 1 in alphabet array
+                    b. increment start
+                2. Update diff : after removing check if count of removed char
+                    if count > 0 this means it was part of s2 -> increment diff [we are one step further to solution]
+                    if count <= 0 this means it is not the part of s2 [initially the count was 0 and when it was added to the window the count was decremented to negative]
+
+        2. Now we can add the current char.
+                1. add the current char to window :
+                    a. decrement the count of curr char
+                2. Update diff :
+                    if count <0 this means it is not the part of s2
+                    if count>=0 this means it was part of s2 -> decrement diff [we are one step nearer to solution]
+
+        3. check if diff==0
+            current window is part of the solution
+
+
+
+
+
+
+
+https://leetcode.com/problems/sliding-window-maximum/submissions/
+
+    BF Solution:
+        K = 3
+        Case 1: If new element is greater than old max irrespective of old max is present/not present in the new window
+            Insert 10...the new element is max
+                Case 1-  old window max is in middle then
+                    Ex: max is 5 for - 2 4 5 10 / 4 2 5 10
+                    max for current window will be 10 [4,5,10/2,5,10]
+                    max = A[new_end]***********************
+                Case 2-
+                    5 2 4 10
+                    max for current window will be 10 [2,4,10]
+                    max = A[new_end] ************************
+        Case 1: If new element is smaller than old max then we need to check
+            Insert 3:
+                Case 1: old window max is in middle then
+                        2 4 5 3
+                        max = old max **************************
+                Case 2: 5 4 2 3
+                        max = max(2,4,3) *****************************
+
+        class Solution {
+            public int[] maxSlidingWindow(int[] nums, int k) {
+                if(k==1)
+                    return nums;
+                int n = nums.length;
+                int ans[] = new int[n-k+1];
+                ans[0] = Integer.MIN_VALUE;
+                for(int i=0;i<k;i++){
+                    ans[0] = Math.max(ans[0],nums[i]);
+                }
+                int idx=1;
+                int start=1;
+                for(int end=start+k-1;end<n;end++)
+                {
+                    //if old window max is old start then and if new end is greater that max
+                    if(nums[end]>ans[idx-1])
+                    {
+                        ans[idx++]=nums[end];
+                    }
+                    else
+                    {
+                        if(ans[idx-1] == nums[start-1])
+                        {
+                            int max = Integer.MIN_VALUE;
+                            for(int i=start;i<=end;i++)
+                            {
+                                max = Math.max(nums[i],max);
+                            }
+                            ans[idx++]=max;
+                        }
+                        else{
+                            ans[idx] = ans[idx-1];
+                            idx++;
+                        }
+
+                    }
+                    start++;
+                }
+                return ans;
+            }
+        }
+    Optimized Solution:
+    Use Deque
+
+    for ...
+        1. remove first element from deque until
+                deque.first().idx <= i-k ...element is outside current window
+                    Or
+                deque.isEmpty()
+
+        2. remove last element from deque until
+                deque.last().val <= curr scanned element
+                    Or
+                deque.isEmpty()
+        3. Add the curr scanned element and its idx to deque
+        4. if i>= k-1
+               ans[i-(k-1)] = deque.first().idx
+
+
+
+
+
+Minimum Window Substring: https://leetcode.com/problems/minimum-window-substring/
+ Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+ The testcases will be generated such that the answer is unique.
+ A substring is a contiguous sequence of characters within the string.
+
+ Input: s = "ADOBECODEBANC", t = "ABC"
+ Output: "BANC"
+ Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+
+ Ans : src/a_practiceproblems/ArrayProblems/slidingwindow/MinimumWindowSubstring.java
+
+
+
+
+
+Shortest Subarray with Sum at Least K - https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/
+src/a_practiceproblems/ArrayProblems/slidingwindow/MinSubArrayWithSumGreaterThanEqualToK.java
+Given an integer array nums and an integer k, return the length of the shortest non-empty subarray of nums with a sum of at least k
+If there is no such subarray, return -1.
+A subarray is a contiguous part of an array.
+
+    Example 1:
+    Input: nums = [1], k = 1
+    Output: 1
+
+    Example 2:
+    Input: nums = [1,2], k = 4
+    Output: -1
+
+    Example 3:
+    Input: nums = [2,-1,2], k = 3
+    Output: 3
+
+
+
+
+
+
+
+
+interviewbit.com/problems/max-continuous-series-of-1s/ ****
+
+public class Solution {
+    public ArrayList<Integer> maxone(ArrayList<Integer> A, int B) {
+        int cnt = 0, l = 0;
+        int maxlen=0, maxhi=0,maxlo=0;
+        for(int r = 0; r<A.size(); r++)
+        {
+            if(A.get(r) == 0)
+            {
+                cnt++;
+            }
+            while(cnt>B)
+            {
+                if(A.get(l)==0)
+                    cnt--;
+                l++;
+            }
+            int len = r - l +1;
+            if(len>maxlen)
+            {
+                maxlo = l;
+                maxhi = r;
+                maxlen = len;
+            }
+        }
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i=maxlo; i<=maxhi;i++)
+            ans.add(i);
+        return ans;
+    }
+}
