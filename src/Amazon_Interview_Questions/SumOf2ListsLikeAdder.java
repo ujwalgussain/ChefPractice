@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 public class SumOf2ListsLikeAdder {
 
     public static void main(String[] args) {
-        LinkedList<Integer> list1 = Stream.of(1,9,3).collect(Collectors.toCollection(LinkedList::new));
-        LinkedList<Integer> list2 = Stream.of(1,5,4).collect(Collectors.toCollection(LinkedList::new));
+        LinkedList<Integer> list1 = Stream.of(9,9).collect(Collectors.toCollection(LinkedList::new));
+        LinkedList<Integer> list2 = Stream.of(9,9).collect(Collectors.toCollection(LinkedList::new));
         int carry=0;
         LinkedList<Integer>  ansList = new LinkedList<>();
         while(!list1.isEmpty() || !list1.isEmpty())
@@ -25,7 +25,15 @@ public class SumOf2ListsLikeAdder {
                 carry=ans/10;
                 ans=ans%10;
             }
+            else
+            {
+                carry = 0;
+            }
             ansList.add(ans);
+        }
+        if(carry>0)
+        {
+            ansList.add(carry);
         }
         System.out.println(ansList);
     }

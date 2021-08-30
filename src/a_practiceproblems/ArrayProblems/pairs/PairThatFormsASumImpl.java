@@ -1,4 +1,4 @@
-package a_practiceproblems.ArrayProblems;
+package a_practiceproblems.ArrayProblems.pairs;
 
 import java.util.HashMap;
 

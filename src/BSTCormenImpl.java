@@ -1,5 +1,3 @@
-package Dynamic_Programming;
-
 public class BSTCormenImpl {
     class Node{
         int data;

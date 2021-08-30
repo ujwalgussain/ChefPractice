@@ -1,5 +1,3 @@
-package Dynamic_Programming;
-
 import java.util.LinkedList;
 
 public class BinaryTreeProblemsImpl {

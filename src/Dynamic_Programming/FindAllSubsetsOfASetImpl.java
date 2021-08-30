@@ -3,7 +3,7 @@ package Dynamic_Programming;
 import java.util.TreeSet;
 
 public class FindAllSubsetsOfASetImpl {
-    TreeSet<String>  set = new TreeSet<>(); //This is for The recusrsive approach
+    TreeSet<String>  set = new TreeSet<>(); //This is for the recursive approach
 
     public static void rec_printAllSubsets(int arr[], int i, TreeSet<Integer> s)
     {
@@ -38,11 +38,8 @@ public class FindAllSubsetsOfASetImpl {
     }
     static public void main(String args[])
     {
-
         rec_printAllSubsets(new int[]{1,12,23,45},0,new TreeSet<>());
-
-            //iterative_printAllSubsets(new int[]{1,2,3});
-
+        //iterative_printAllSubsets(new int[]{1,2,3});
     }
 
 

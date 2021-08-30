@@ -3,7 +3,7 @@ package a_practiceproblems.ArrayProblems.slidingwindow;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class MinSubArrayWithSumGreaterThanEqualToK {
+public class A_MinSubArrayWithSumGreaterThanEqualToK {
     /*Algo:
     1. Fix Start, End At 0
     2. Move End from 0 to N

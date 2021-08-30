@@ -1,47 +1,43 @@
-
-import a_practiceproblems.linkedlistproblems.LinkedList;
-
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 
 public class TestClass {
 
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        Arrays.sort(candidates);
-        dfs(0,new ArrayList<>(),0,candidates, target);
-        return ans;
+    public ArrayList<ArrayList<Integer>> threeSum(ArrayList<Integer> A) {
+        Collections.sort(A);
+        HashSet<ArrayList<Integer>> ans = new HashSet<>();
+        for(int i = 0; i<A.size()-2;i++)
+        {
+            if(i>0 && A.get(i-1)==A.get(i))
+                continue;
+            int l = i+1,r=A.size()-1;
+            while(l<r)
+            {
+                System.out.printf("%s-%s-%s\n",i,l,r);
+                double sum  = ((double)A.get(i)) + A.get(l) + A.get(r);
+                if(sum==0)
+                {
+                    ArrayList<Integer> a = new ArrayList<>();
+                    a.add(A.get(i));
+                    a.add(A.get(l));
+                    a.add(A.get(r));
+                    ans.add(a);
+                    l++;
+                }
+                else
+                {
+                    if(sum>0)
+                        r--;
+                    else
+                        l++;
+                }
+            }
+        }
+        return new ArrayList<>(ans);
     }
-    List<List<Integer>> ans = new ArrayList<>();
-    public void dfs(int i, List<Integer> list, int total, int a[], int t)
-    {
-        if(total == t)
-        {
-            ans.add(new ArrayList<>(list));
-            return;
-        }
-        if(i>=a.length || total>t)
-            return;
-        if(list.contains(a[i]))
-        {
-            list.add(a[i]);
-            dfs(i+1,list,total+a[i],a,t);
-            list.remove(list.size()-1);
-        }
-        else
-        {
-            list.add(a[i]);
-            dfs(i+1,list,total+a[i],a,t);
-            list.remove(list.size()-1);
-            dfs(i+1,list,total,a,t);
-        }
-
-    }
-
 
     public static void main(String[] args) {
-        System.out.println(new TestClass().combinationSum2(new int[]{10,1,2,7,6,1,5},8));
+        System.out.println(new TestClass().threeSum(new ArrayList<>(Arrays.asList(2147483647,-2147483648,-2147483648,0,1))));
     }
 }
 
