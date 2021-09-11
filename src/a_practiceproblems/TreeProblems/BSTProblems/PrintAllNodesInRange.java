@@ -7,11 +7,11 @@ public class PrintAllNodesInRange {
     {
         if(root!=null)
         {
-            if(min <= root.data)
+            if(min <= root.val)
                 print(root.left,min,max);
-            if(min <= root.data && root.data <=max)
-                System.out.println(root.data);
-            if(root.data <= max)
+            if(min <= root.val && root.val <=max)
+                System.out.println(root.val);
+            if(root.val <= max)
                 print(root.right,min,max);
         }
     }

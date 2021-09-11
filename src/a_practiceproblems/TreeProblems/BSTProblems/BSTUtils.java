@@ -1,7 +1,6 @@
 package a_practiceproblems.TreeProblems.BSTProblems;
 
 import a_practiceproblems.TreeProblems.tree.TreeNode;
-import sun.reflect.generics.tree.Tree;
 
 public class BSTUtils {
       /*
@@ -60,9 +59,9 @@ public class BSTUtils {
     {
         while(root != null)
         {
-            if(root.data == key)
+            if(root.val == key)
                 return root;
-            if(key < root.data)
+            if(key < root.val)
                 root = root.left;
             else
                 root = root.right;

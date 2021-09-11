@@ -16,13 +16,12 @@ public class FindFloor {
             return root;
         //Go Left
         TreeNode left = getFloorNode(root.left,key);
-
         //Visit
         if(left != null)
             return left;
-        if(root.data == key)
+        if(root.val == key)
             return root;
-        if(root.data > key)
+        if(root.val > key)
             return prev;
         prev = root;
 
@@ -31,7 +30,7 @@ public class FindFloor {
     }
 
     public static void main(String[] args) {
-        int ans = getFloorNode(BSTUtils.createBSTAndReturnRoot(),12).getData();
+        int ans = getFloorNode(BSTUtils.createBSTAndReturnRoot(),12).getVal();
         System.out.println(ans);
     }
 }

@@ -10,9 +10,9 @@ public class TrimBST {
             return null;
         root.left = trimNodesOutsideRange(root.left,min,max);
         root.right = trimNodesOutsideRange(root.right,min,max);
-        if(root.data < min)
+        if(root.val < min)
             return root.right;
-        if(root.data>max)
+        if(root.val >max)
             return root.left;
         return root;
 

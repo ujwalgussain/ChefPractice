@@ -57,7 +57,7 @@ public class TopologicalSort {
         for (int i = 0; i < V; i++) {
             if(visited[i])
                 continue;
-            System.out.println("Calling ");
+           // System.out.println("Calling ");
             topologicalSort_Util(G,V,i,visited,stack);
         }
         System.out.print("Topological Sort ->");

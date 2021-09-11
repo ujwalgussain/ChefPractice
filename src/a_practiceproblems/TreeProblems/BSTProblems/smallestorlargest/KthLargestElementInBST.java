@@ -23,6 +23,6 @@ public class KthLargestElementInBST {
 
     public static void main(String[] args) {
         BinarySearchTree binarySearchTree = BSTUtils.createBST();
-        System.out.println(get(binarySearchTree.root,2).data);
+        System.out.println(get(binarySearchTree.root,2).val);
     }
 }

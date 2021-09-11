@@ -5,8 +5,19 @@ import a_practiceproblems.TreeProblems.tree.TreeNode;
 
 public class FindInorderSuccessor {
     /*Inorder successor will either be
-    *   1. leftmost element in right subtree
-    *   2. The first parent(bottom to up) for which root is the part of left subtree */
+    *   1. If root is non-leaf node and has right subtree then,  leftmost element in right subtree
+    *   2. If root is leaf node then, The first parent(bottom to up) for which root is the part of left subtree 
+    *       Case 1: 
+    *            A
+    *           / \   -> For B ans is A ie., B itself is left child.
+    *           B  C
+    *       Case 2: 
+    *            A
+    *           / \
+    *           B  C 
+    *           \
+    *            E    For E, ans is A ie., the first ancestor which is left child.
+    * */
     public static TreeNode findInorderSuccessor(TreeNode root) {
         if (root == null)
             return null;
@@ -45,5 +56,6 @@ public class FindInorderSuccessor {
     public static void main(String[] args) {
         TreeNode root = BSTUtils.createFullBSTAndReturnRoot();
         System.out.println(findInorderSuccessor(root.right.right)); //15
+        System.out.println(findInorderSuccessor(root));
     }
 }

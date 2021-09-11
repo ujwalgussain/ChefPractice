@@ -16,7 +16,7 @@ public class PrintingViewsImpl {
         if(n==null)
             return;
         if(level>maxLevel) {
-            System.out.print(n.data + " ");
+            System.out.print(n.val + " ");
             maxLevel=level;
         }
         printLeftViewRec(n.left,level+1);
@@ -27,7 +27,7 @@ public class PrintingViewsImpl {
         if(n==null)
             return;
         if(level>maxLevel) {
-            System.out.print(n.data + " ");
+            System.out.print(n.val + " ");
             maxLevel=level;
         }
         printRightViewRec(n.right,level+1);
@@ -46,8 +46,8 @@ public class PrintingViewsImpl {
             TreeNode n = curr.getValue();
             if(!map.containsKey(hd))
             {
-                map.put(hd,n.data);
-                System.out.print(n.data+" ");
+                map.put(hd,n.val);
+                System.out.print(n.val +" ");
             }
             if(n.left!=null)
                 q.addLast(new Pair<>(hd-1,n.left));
@@ -68,7 +68,7 @@ public class PrintingViewsImpl {
             Pair<Integer, TreeNode> curr = q.poll();
             hd = curr.getKey();
             TreeNode n = curr.getValue();
-            map.put(hd,n.data);
+            map.put(hd,n.val);
             if(n.left!=null)
                 q.addLast(new Pair<>(hd-1,n.left));
             if(n.left!=null)

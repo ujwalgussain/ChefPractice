@@ -25,7 +25,7 @@ public enum TraversalWithoutRecursion
 
                 //If all nodes are not traversed, print and got right
                 root = stack.pop();
-                stringBuilder.append(root.data+" ");
+                stringBuilder.append(root.val +" ");
                 root = root.right;
             }
         }

@@ -18,11 +18,11 @@ public class FindLowestCommonAncestor {
         if(root==null) {
             return null;
         }
-        if(n1<=root.data && root.data<=n2)
+        if(n1<=root.val && root.val <=n2)
             ans= root;
         else
         {
-            if(root.data>Math.max(n1,n2))
+            if(root.val >Math.max(n1,n2))
                 ans=getLCAInBST(root.left,n1,n2);
             else
                 ans = getLCAInBST(root.right,n1,n2);
@@ -34,11 +34,11 @@ public class FindLowestCommonAncestor {
     {
         if(n==null)
             return null;
-        if(n.data==n1) {
+        if(n.val ==n1) {
             v1=true;
             return n;
         }
-        if(n.data==n2)
+        if(n.val ==n2)
         {
             v2=true;
             return n;

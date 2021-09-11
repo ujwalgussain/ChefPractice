@@ -18,7 +18,7 @@ public class CreateTreeUsingInOrderAndPreOrderImpl {
             return tNode;
 
         /* Else find the index of this node in Inorder traversal */
-        int inIndex = search(in, inStrt, inEnd, tNode.data);
+        int inIndex = search(in, inStrt, inEnd, tNode.val);
 
         /* Using index in Inorder traversal, construct left and
            right subtress */

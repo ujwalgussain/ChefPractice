@@ -7,19 +7,36 @@ public class FindCeil {
     /*Logic :
         Use Reverse inorder traversal R-V-L
     * */
-    static TreeNode prev;
+
     //ceil-> next greaterThanEqualTo
     static int ceil(TreeNode root, int key) {
         if (root == null)
             return Integer.MAX_VALUE;
-        if(root.data == key)
-            return root.data;
-        if(root.data<key)
+        if(root.val == key)
+            return root.val;
+        if(root.val <key)
             return ceil(root.right,key);
-        return Math.min(root.data,ceil(root.left,key));
+        return Math.min(root.val,ceil(root.left,key));
+    }
+    static TreeNode next = null;
+    static TreeNode ceil2(TreeNode root, int key) {
+        if (root == null)
+            return null;
+        TreeNode right = ceil2(root.right,key);
+        if(right!=null)
+            return right;
+        if(root.val ==key)
+            return root;
+        if(root.val <key)
+            return next;
+        next=root;
+        return ceil2(root.left,key);
     }
 
     public static void main(String[] args) {
-        System.out.println(ceil(BSTUtils.createBSTAndReturnRoot(), 39));
+
+        TreeNode root = BSTUtils.createBSTAndReturnRoot();
+        System.out.println(ceil(root, 39));
+        System.out.println(ceil2(root, 39));
     }
 }

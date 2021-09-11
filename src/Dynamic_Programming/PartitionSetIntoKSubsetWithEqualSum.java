@@ -2,7 +2,7 @@ package Dynamic_Programming;
 
 import java.util.stream.IntStream;
 
-public class PartitonSetIntoKSubsetWithEqualSum {
+public class PartitionSetIntoKSubsetWithEqualSum {
     public boolean canPartitionKSubsets(int[] nums, int k) {
         int sum = IntStream.of(nums).sum();
 
@@ -43,6 +43,6 @@ public class PartitonSetIntoKSubsetWithEqualSum {
     }
 
     public static void main(String[] args) {
-        System.out.println(new PartitonSetIntoKSubsetWithEqualSum().canPartitionKSubsets(new int[]{5,1, 4,2,3,2,3},4));
+        System.out.println(new PartitionSetIntoKSubsetWithEqualSum().canPartitionKSubsets(new int[]{5,1, 4,2,3,2,3},4));
     }
 }

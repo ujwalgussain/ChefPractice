@@ -15,11 +15,11 @@ public class VerticalLinesInBinaryTree {
             return;
         }
         if(map.containsKey(level))
-            map.get(level).add(root.getData());
+            map.get(level).add(root.getVal());
         else
         {
             ArrayList<Integer> list = new ArrayList<>();
-            list.add(root.getData());
+            list.add(root.getVal());
             map.put(level,list);
         }
         printVerticalLinesUtil(root.getLeft(),map,level-1);

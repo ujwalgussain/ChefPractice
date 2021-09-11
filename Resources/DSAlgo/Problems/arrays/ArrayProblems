@@ -225,44 +225,39 @@ PICK FROM BOTH SIDES https://www.interviewbit.com/problems/pick-from-both-sides/
     You can pick first four elements or can pick last four elements or can pick 1 from front and 3 from back etc . you need to return the maximum possible sum of elements you can pick.
     Example Input
     Input 1:
-
      A = [5, -2, 3 , 1, 2]
      B = 3
-    Input 2:
+    Output 1:
+          8
+    Explanation 1:
+        Pick element 5 from front and element (1, 2) from back so we get 5 + 1 + 2 = 8
 
+    Input 2:
      A = [1, 2]
      B = 1
 
-
-    Example Output
-    Output 1:
-
-     8
     Output 2:
-
      2
-
-
-    Example Explanation
-    Explanation 1:
-
-     Pick element 5 from front and element (1, 2) from back so we get 5 + 1 + 2 = 8
     Explanation 2:
 
-     Pick element 2 from end as this is the maximum we can get
-int r=A.size()-1;
+    Pick element 2 from end as this is the maximum we can get
+
+
     int sum=INT_MIN;
     int temp=0;
+
     for(int i=0;i<B;i++)
     {
         temp+=A[i];
     }
+
     sum=max(temp,sum);
-   // cout<<temp<<endl;
+
+    int r=A.size()-1;
     int l=B-1;
+
     while(B-- && l>=0)
     {
-           // cout<<sum<<endl;
         temp=temp+A[r]-A[l];
         l--;
         r--;
@@ -274,13 +269,9 @@ int r=A.size()-1;
 
 Balanced Array:
 Problem Description
-
 Given an integer array A of size N. You need to count the number of special elements in the given array.
-
 A element is special if removal of that element make the array balanced.
-
 Array will be balanced if sum of even index element equal to sum of odd index element.
-
 
 Input 1:
 

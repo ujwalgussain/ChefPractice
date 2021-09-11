@@ -44,7 +44,9 @@ public class LongestPalindromicSubString {
                     }
                     else
                     {
-                        //This means that the whole string starting from idx j to i is palindrome
+                        //This means that it is possible that
+                        // the whole string starting from idx j to i is palindrome
+                        //only if j+1 to i-1 is palindrome
                         dp[j][i] = dp[j + 1][i - 1];
                     }
                     if(dp[j][i])

@@ -33,7 +33,7 @@ public class ConvertBSTToDLL {
         TreeNode temp = head;
         while(temp != null)
         {
-            System.out.print(temp.data + " ");
+            System.out.print(temp.val + " ");
             temp = temp.right;
         }
     }

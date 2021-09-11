@@ -1,11 +1,10 @@
 package a_practiceproblems.ArrayProblems.slidingwindow;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static a_practiceproblems.ArrayProblems.slidingwindow.CountSubArraysWithAtmostKDistinctElements.countSubArraysWithAtmostKElements;
 
-//https://www.interviewbit.com/problems/subarrays-with-distinct-integers/
+//Link : https://www.interviewbit.com/problems/subarrays-with-distinct-integers/
 public class SubarraysWithDistinctIntegers {
 
     /*Problem Statement:
@@ -23,6 +22,6 @@ public class SubarraysWithDistinctIntegers {
     * and then removing all sub-arrays with less than or equal to K-1 elements
     * */
     public int solve(ArrayList<Integer> A, int B) {
-        return countSubArraysWithAtmostKElements(A,B) - countSubArraysWithAtmostKElements(A,B-1);
+        return countSubArraysWithAtmostKElements(A, B) - countSubArraysWithAtmostKElements(A, B - 1);
     }
 }

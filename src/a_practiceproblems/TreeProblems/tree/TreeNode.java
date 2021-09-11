@@ -1,7 +1,7 @@
 package a_practiceproblems.TreeProblems.tree;
 
 public class TreeNode {
-    public int data;
+    public int val;
     public TreeNode left;
     public TreeNode right;
     public TreeNode parent;
@@ -11,15 +11,15 @@ public class TreeNode {
     }
     public TreeNode(int data)
     {
-        this.data=data;
+        this.val =data;
     }
 
-    public int getData() {
-        return data;
+    public int getVal() {
+        return val;
     }
 
-    public void setData(int data) {
-        this.data = data;
+    public void setVal(int val) {
+        this.val = val;
     }
 
     public TreeNode getLeft() {
@@ -40,6 +40,6 @@ public class TreeNode {
 
     @Override
     public String toString() {
-        return Integer.toString(data);
+        return Integer.toString(val);
     }
 }

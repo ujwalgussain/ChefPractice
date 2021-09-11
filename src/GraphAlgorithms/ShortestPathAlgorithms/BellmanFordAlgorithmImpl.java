@@ -3,6 +3,7 @@ package GraphAlgorithms.ShortestPathAlgorithms;
 import GraphAlgorithms.AdjacencyMatrix;
 
 import java.util.Arrays;
+
 /*Reference: https://www.youtube.com/watch?v=FtN3BYH2Zes
             https://cp-algorithms.com/graph/bellman_ford.html
 It uses the Dynamic Programming Approach
@@ -46,48 +47,47 @@ public class BellmanFordAlgorithmImpl {
     int[] parent;
     int[][] G;
     int V;
-    static final int INFINITY=Integer.MAX_VALUE;
-    void initialize(int[][] G)
-    {
-        this.G=G;
+    static final int INFINITY = Integer.MAX_VALUE;
+
+    void initialize(int[][] G) {
+        this.G = G;
         V = G.length;
-        d=new int[V];
-        parent= new int[V];
-        Arrays.fill(d,INFINITY);
-        d[0]=0;
-        parent[0]=-1;
+        d = new int[V];
+        parent = new int[V];
+        Arrays.fill(d, INFINITY);
+        d[0] = 0;
+        parent[0] = -1;
     }
-    void applyBellmanFordAlgo(int[][] G)
-    {
+
+    void applyBellmanFordAlgo(int[][] G) {
         /*Repeat the following V-1 times
             For Each Edge u,v
                 Relax(u,v)
         * */
         initialize(G);
-        for (int i = 0; i < V-1; i++) {
-            boolean isRelaxed=false; // Improves the Time Complexity
+        for (int i = 0; i < V - 1; i++) {
+            boolean isRelaxed = false; // Improves the Time Complexity
             for (int u = 0; u < V; u++) {
                 for (int v = 0; v < V; v++) {
-                    if(G[u][v]!=INFINITY) //for each valid edge
+                    if (G[u][v] != INFINITY) //for each valid edge
                     {
                         //Relax
-                        if(d[u]+G[u][v]<d[v])
-                        {
-                            d[v]=d[u]+G[u][v];
-                            parent[v]=u;
-                            isRelaxed =true;
+                        if (d[u] + G[u][v] < d[v]) {
+                            d[v] = d[u] + G[u][v];
+                            parent[v] = u;
+                            isRelaxed = true;
                         }
                     }
                 }
             }
-            if(!isRelaxed) {
-                if(i<V-1)
-                System.out.println("isOptimized");
+            if (!isRelaxed) {
+                if (i < V - 1)
+                    System.out.println("isOptimized");
                 break;
             }
         }
-        System.out.println("Distance "+Arrays.toString(d));
-        System.out.println("parent "+Arrays.toString(parent));
+        System.out.println("Distance " + Arrays.toString(d));
+        System.out.println("parent " + Arrays.toString(parent));
 
     }
 
@@ -96,13 +96,13 @@ public class BellmanFordAlgorithmImpl {
         int i = INFINITY;
         int[][] G = new int[][]
                 {
-                        {i,6,5,5,i,i,i},
-                        {i,i,i,i,-1,i,i},
-                        {i,-2,i,i,1,i,i},
-                        {i,i,-2,i,i,-1,i},
-                        {i,i,i,i,i,i,3},
-                        {i,i,i,i,i,i,3},
-                        {i,i,i,i,i,i,i}
+                        {i, 6, 5, 5, i, i, i},
+                        {i, i, i, i, -1, i, i},
+                        {i, -2, i, i, 1, i, i},
+                        {i, i, -2, i, i, -1, i},
+                        {i, i, i, i, i, i, 3},
+                        {i, i, i, i, i, i, 3},
+                        {i, i, i, i, i, i, i}
                 };
         obj.applyBellmanFordAlgo(G);
 
@@ -110,10 +110,10 @@ public class BellmanFordAlgorithmImpl {
         System.out.println("Negative Weights Cycle ");
         G = new int[][]
                 {
-                        {i,4,i,5},
-                        {i,i,i,5},
-                        {i,-10,i,i},
-                        {i,i,3,i}
+                        {i, 4, i, 5},
+                        {i, i, i, 5},
+                        {i, -10, i, i},
+                        {i, i, 3, i}
                 };
         obj.applyBellmanFordAlgo(G);
     }

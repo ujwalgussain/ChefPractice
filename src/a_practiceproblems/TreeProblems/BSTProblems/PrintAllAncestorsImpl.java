@@ -7,11 +7,11 @@ public class PrintAllAncestorsImpl {
     {
         if(root==null)
             return false;
-        if(root.data==key)
+        if(root.val ==key)
             return true;
         boolean res = printAllAncestors(root.left,key) || printAllAncestors(root.right,key);
         if(res)
-            System.out.println(root.data);
+            System.out.println(root.val);
         return res;
     }
 

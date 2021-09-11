@@ -22,7 +22,7 @@ public class NextGreaterElementInRight {
             if(inorderSuccessor==null)
                 ans[i] = -1;
             else
-                ans[i] = inorderSuccessor.data;
+                ans[i] = inorderSuccessor.val;
         }
         return ans;
     }

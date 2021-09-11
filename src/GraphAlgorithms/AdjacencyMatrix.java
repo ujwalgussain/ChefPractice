@@ -2,7 +2,7 @@ package GraphAlgorithms;
 
 import java.util.Arrays;
 
-public class AdjacencyMatrix implements Graph{
+public class AdjacencyMatrix implements Graph {
 
     private int[][] G;
     private int V;
@@ -25,40 +25,38 @@ public class AdjacencyMatrix implements Graph{
         return isDirected;
     }
 
-    AdjacencyMatrix()
-    {
+    AdjacencyMatrix() {
 
     }
-    AdjacencyMatrix(int x)
-    {
-        V=x;
-        G=new int[x][x];
-        isDirected=false;
+
+    AdjacencyMatrix(int x) {
+        V = x;
+        G = new int[x][x];
+        isDirected = false;
     }
-    public AdjacencyMatrix(int x, boolean isDirected)
-    {
-        V=x;
-        G=new int[x][x];
-        this.isDirected=isDirected;
+
+    public AdjacencyMatrix(int x, boolean isDirected) {
+        V = x;
+        G = new int[x][x];
+        this.isDirected = isDirected;
     }
 
     @Override
     public void addEdge(int u, int v) {
         E++;
-        G[u][v]=1;
-        if(!isDirected)
-        {
-            G[v][u]=1;
+        G[u][v] = 1;
+        if (!isDirected) {
+            G[v][u] = 1;
         }
     }
 
     @Override
     public String toString() {
-        StringBuilder adjMtx=new StringBuilder();
+        StringBuilder adjMtx = new StringBuilder();
         adjMtx.append("{\n");
-        for(int[] i:G)
+        for (int[] i : G)
             adjMtx.append(Arrays.toString(i));
         adjMtx.append("\n}\n");
-        return String.format("Adjacency Matrix->%s, Edges-%d, Vertices-%d",adjMtx.toString(),E,V);
+        return String.format("Adjacency Matrix->%s, Edges-%d, Vertices-%d", adjMtx.toString(), E, V);
     }
 }

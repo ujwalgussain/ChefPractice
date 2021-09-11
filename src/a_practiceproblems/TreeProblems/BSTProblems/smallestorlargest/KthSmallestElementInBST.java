@@ -14,6 +14,7 @@ public class KthSmallestElementInBST {
         if(root == null)
             return null;
         TreeNode left = get(root.left,k);
+        // if k'th smallest is found in left subtree, return it
         if(left != null)
             return left;
         if(++c == k)
@@ -23,6 +24,6 @@ public class KthSmallestElementInBST {
 
     public static void main(String[] args) {
         BinarySearchTree binarySearchTree = BSTUtils.createBST();
-        System.out.println(get(binarySearchTree.root,2).data);
+        System.out.println(get(binarySearchTree.root,2).val);
     }
 }
