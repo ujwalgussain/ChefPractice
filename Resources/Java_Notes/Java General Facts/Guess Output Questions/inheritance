@@ -28,3 +28,92 @@ What will be the output:
      //1 -> Sub() -> Super() -> overrideMe() -> dynamic method dispatch -> call Sub.overrideMe()
         prints null since Instant is not initialized
      //2 prints Instant.
+
+
+
+//===================================================================================================================
+
+ public class Super {
+        // Broken - constructor invokes an overridable method
+        String overridenData = "Parent";
+
+        public Super() {
+            overrideMe();
+        }
+        public void overrideMe() {
+            System.out.println("Parent Version of OverrideMe");
+        }
+
+        public String getOverridenData() {
+            return overridenData;
+        }
+
+        public void setOverridenData(String overridenData) {
+            this.overridenData = overridenData;
+        }
+    }
+
+    public final class Sub extends Super {
+        // Blank final, set by constructor
+        String overridenData = "Child";
+        public String getOverridenData() {
+            return overridenData;
+        }
+
+        public void setOverridenData(String overridenData) {
+            this.overridenData = overridenData;
+        }
+
+        private final Instant instant;
+        Sub() {
+            instant = Instant.now();
+        }
+        // Overriding method invoked by superclass constructor
+        @Override public void overrideMe() {
+            System.out.println("Child Version of OverrideMe");
+            System.out.println(instant);
+        }
+
+    }
+    public static void main(String[] args) {
+        System.out.println("Create sub Object with Sub reference");
+        Sub sub = new TestClass1().new Sub(); // Child Version of OverrideMe
+                                                     null
+        System.out.println("Calling overrideMe");
+        sub.overrideMe(); // Calling overrideMe
+                                 Child Version of OverrideMe
+        System.out.println("Access Directly " + sub.overridenData); //Access Directly Child
+        System.out.println("Access Through Getter " + sub.getOverridenData()); //Access Through Getter Child
+
+        System.out.println("Create sub Object with Super reference");
+        Super super1 =  new TestClass1().new Sub(); // Child Version of OverrideMe
+                                                          null
+
+        System.out.println("Calling overrideMe");
+        super1.overrideMe(); //Child Version of OverrideMe
+                                   2021-09-14T03:52:52.064Z
+        System.out.println("Access Directly " + super1.overridenData); //Access Directly Parent
+        System.out.println("Access Through Getter " + super1.getOverridenData()); // Access Through Getter Child
+    }
+
+    Output:
+    Create sub Object with Sub reference
+    Child Version of OverrideMe
+    null
+    Calling overrideMe
+    Child Version of OverrideMe
+    2021-09-14T03:52:51.946Z
+    Access Directly Child
+    Access Through Getter Child
+    Create sub Object with Super reference
+    Child Version of OverrideMe
+    null
+    Calling overrideMe
+    Child Version of OverrideMe
+    2021-09-14T03:52:52.064Z
+    Access Directly Parent
+    Access Through Getter Child
+
+
+
+

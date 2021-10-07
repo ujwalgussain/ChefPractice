@@ -27,10 +27,8 @@ public class DutchFlagAlgoImpl {
                and a 0 at right.  Exchange arr[left] and arr[right]*/
             if (left < right)
             {
-                arr[left] = 0;
-                arr[right] = 1;
-                left++;
-                right--;
+                arr[left++ ] = 0;
+                arr[right--] = 1;
             }
         }
     }

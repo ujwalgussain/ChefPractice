@@ -17,7 +17,7 @@ In concurrenthashmap uses bucket level lock for update operations
 1) Based on Hash Table DS.
 2) allows concurrent read access but allows thread safe concurrent write access.***
 3) Doesn't require total hashmap level lock, requires segment/bucket level lock.
-4) Concurrent update is acheieved by dividing hashmap into parts which is concurrency level(default is 16)**
+4) Concurrent update is achieved by dividing hashmap into parts which is concurrency level(default is 16)**
 5) Doesn't allow null key and value.**
 6) When one thread iterating, other thread can update.
 

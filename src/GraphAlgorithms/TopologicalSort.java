@@ -37,7 +37,7 @@ We start with any random vertex, and check following:
            X /
             3
 
-Current Visted      Stack           Description
+Current Visited      Stack           Description
 0       0           0               No neighbours...hence add to stack
 1       1           0,1             No neighbours...hence add to stack
 2       2           0,1             Go to 3
@@ -49,32 +49,31 @@ Current Visted      Stack           Description
 Topological Sort ->5 4 2 3 1 0
 */
 public class TopologicalSort {
-    static void topologicalSort(int[][] G, int V)
-    {
+    static void topologicalSort(int[][] G, int V) {
         //V-> no of vertices
         boolean visited[] = new boolean[V];
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < V; i++) {
-            if(visited[i])
+            if (visited[i])
                 continue;
-           // System.out.println("Calling ");
-            topologicalSort_Util(G,V,i,visited,stack);
+            // System.out.println("Calling ");
+            topologicalSort_Util(G, V, i, visited, stack);
         }
         System.out.print("Topological Sort ->");
-        while(!stack.isEmpty())
-            System.out.print(stack.pop()+ " ");
+        while (!stack.isEmpty())
+            System.out.print(stack.pop() + " ");
     }
-    static void topologicalSort_Util(int[][] G,int V, int current_vertex, boolean visited[], Stack<Integer> stack)
-    {
+
+    static void topologicalSort_Util(int[][] G, int V, int current_vertex, boolean visited[], Stack<Integer> stack) {
         /*This method ensures a node is added to stack in following cases:
             1. If node doesnt have any neighbours
             2. If all neighbours are explored
         * */
-        visited[current_vertex]=true;
+        visited[current_vertex] = true;
         for (int i = 0; i < V; i++) {
-            if(G[current_vertex][i]==1){
-                if(!visited[i]) {
-                    topologicalSort_Util(G,V,i,visited,stack);
+            if (G[current_vertex][i] == 1) {
+                if (!visited[i]) {
+                    topologicalSort_Util(G, V, i, visited, stack);
                 }
             }
         }
@@ -82,7 +81,7 @@ public class TopologicalSort {
     }
 
     public static void main(String[] args) {
-        AdjacencyMatrix g = new AdjacencyMatrix(6,true);
+        AdjacencyMatrix g = new AdjacencyMatrix(6, true);
         g.addEdge(5, 2);
         g.addEdge(5, 0);
         g.addEdge(4, 0);

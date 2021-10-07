@@ -3,73 +3,41 @@
 // transformation from source
 // to target
 
+import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 class TestClass1 {
-    public int numDecodings(String A) {
-        int N = A.length();
-        if (N > 0 && A.charAt(0) == '0')
-            return 0;
-        int dp[] = new int[N + 1];
-        dp[0] = 1;
-        dp[1] = 1;
-        int mod = 1000000007;
-        char str[] = A.toCharArray();
-        for (int i = 2; i < dp.length; i++) {
-            if (str[i - 1] != '0')
-                dp[i] = dp[i - 1]%mod;
-            if (isValid(str, i))
-                dp[i] += dp[i - 2]%mod;
-            // System.out.printf("i=%s, dp=%s\n",i,Arrays.toString(dp));
-        }
-        return dp[dp.length - 1];
-    }
-
-    public boolean isValid(char str[], int i) {
-        return str[i - 2] == '1' ||
-                (str[i - 2] == '2' &&
-                        str[i - 1] < '7');
-    }
-
-     int countDecodingDP(char digits[],
-                               int n)
-    {
-        // A table to store results of subproblems
-        int count[] = new int[n + 1];
-        count[0] = 1;
-        count[1] = 1;
-        if(digits[0]=='0')   //for base condition "01123" should return 0
-            return 0;
-        for (int i = 2; i <= n; i++)
+    public static int subarraySum(int[] nums, int k) {
+        int n = nums.length;
+        int sum=0,start=0,end=0,cnt=0;
+        while(end<n)
         {
-            count[i] = 0;
-
-            // If the last digit is not 0,
-            // then last digit must add to
-            // the number of words
-            if (digits[i - 1] > '0')
-                count[i] = count[i - 1];
-
-            // If second last digit is smaller
-            // than 2 and last digit is smaller
-            // than 7, then last two digits
-            // form a valid character
-            if (digits[i - 2] == '1' ||
-                    (digits[i - 2] == '2' &&
-                            digits[i - 1] < '7'))
-                count[i] += count[i - 2];
-            System.out.printf("i=%s, dp=%s\n",i,Arrays.toString(count));
+            while(end<n && sum<=k)
+            {
+                sum+=nums[end++];
+            }
+            if(sum==k)
+                cnt++;
+            while(start<end && sum>k)
+            {
+                sum-=nums[start++];
+            }
         }
-        return count[n];
+        return cnt;
+
     }
 
-    // Driver program to test above function
     public static void main(String[] args) {
-        System.out.println(new TestClass1().numDecodings("26110"));
-        System.out.println(new TestClass1().countDecodingDP("26110".toCharArray(),5));
+        //System.out.println(hotel(asList(1,2,3),asList(2,3,4),1));
+       /* System.out.println(ZonedDateTime.now(Clock.systemDefaultZone()).withZoneSameInstant(ZoneId.of("America/Chicago")));
+        ZonedDateTime time = ZonedDateTime.now(ZoneId.of(ZoneId.SHORT_IDS.get("CST")));
+        System.out.println(time);
+       ///ZoneId.getAvailableZoneIds().stream().sorted().forEach(System.out::println);
+
+        System.out.println(time.toLocalDateTime());*/
+        //Clock.fixed(LocalDateTime.of(2020,2,1,11,00,00).toInstant(ZoneId.systemDefault()))
+        System.out.println(subarraySum(new int[]{-1,-1,1},0));
     }
 
     public static <T> ArrayList<T> asList(T... values) {
@@ -78,5 +46,6 @@ class TestClass1 {
             ans.add(t);
         return ans;
     }
+
 }
 

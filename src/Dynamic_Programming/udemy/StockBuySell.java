@@ -3,14 +3,15 @@ package Dynamic_Programming.udemy;
 public class StockBuySell {
     /*
         Logic
-        Maximum Profit will be the maximun difference between buy and sell
-        buy should be minimun and sell should be maximum
+        Maximum Profit will be the maximum difference between buy and sell
+        buy should be minimum and sell should be maximum
 
                 7	1	5	3	6	4
         min		    1	1	1	1	1
         Profit	    0	4	2	5	3
 
      */
+    //find max difference
     public int maxProfit(int[] prices) {
         int min_upto = prices[0];
         int max_profit = 0;

@@ -55,8 +55,7 @@ public class LinkedListWithRandomPointers {
         }
         System.out.println("Copied LL");
         display();
-       /* LinkedListWithRandomPointers l = new LinkedListWithRandomPointers();
-        l.head=head.next;*/
+
         temp=head;
         while(temp!=null)
         {

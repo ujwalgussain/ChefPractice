@@ -1,0 +1,56 @@
+Infix to PostFix:
+    for each char c from L to R
+        if c is operand
+            append to result
+        else if c is '('
+            push c
+        else if c is ')'
+            pop all operators until '(' is encountered and append to result
+        else
+            pop all operators until precedence of c < precedence of top
+            push c
+    pop all operators in stack and append to result
+
+Infix to Prefix:
+    Step 1: Reverse the infix expression i.e A+B*C will become C*B+A. Note while reversing each ‘(‘ will become ‘)’ and each ‘)’ becomes ‘(‘.
+    Step 2: Obtain the “nearly” postfix expression of the modified expression i.e CB*A+.
+    Step 3: Reverse the postfix expression. Hence in our example prefix is +A*BC.
+
+    for each char c from R to L
+        if c is operand
+            push c
+        else if c is ')'
+            push c
+        else if c is '('
+            pop and append to start until ')' is encountered
+        else
+            pop and append to start until pred(top)<pred(c)
+        pop all operators in stack and append to result
+
+
+Postfix to Infix :
+    for each char c from L to R
+        if c is operand
+            push c
+        else
+            op2 = pop
+            op1 = pop
+            push ( + op1+ c + op2 +)
+
+    return pop
+
+
+PostFix to Prefix :
+    same as Postfix to Infix except create expression op + pop2+ pop1
+
+Prefix to Infix:
+    same as Postfix to Infix
+        1. except scan from R to L and
+        2. create expression pop1 + op + pop2
+
+Prefix to Postfix:
+    same as Postfix to Infix
+            1. except scan from R to L and
+            2. create expression pop1 + pop2 + op
+
+

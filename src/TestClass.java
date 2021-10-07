@@ -1,4 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class TestClass {
@@ -83,51 +88,59 @@ public class TestClass {
         return ans;
      */
 
-
-
-    //TLE...!!
-    static List<Integer> minPartition(int N)
-    {
-        // code here
-        int[] dp = new int[N+1];
-        int coins[] = {1, 2, 5, 10, 20, 50, 100, 200, 500, 2000};
-        List[] answer = new ArrayList[N+1];
-        for(int coin: coins)
+    public ArrayList<Integer> plusOne(ArrayList<Integer> B){
+        int n = B.size();
+        int carry=0;
+        Stack<Integer> stack = new Stack<>();
+        if(B.get(n-1)==9)
         {
-            if(coin==N)
-                return new ArrayList(){{add(coin);}};
-            if(coin<N){
-                dp[coin] = 1;
-                answer[coin] = new ArrayList(){{add(coin);}};
-            }
-            else
-                break;
+            stack.push(0);
+            carry = 1;
         }
-        for(int i=3;i<=N;i++)
+        else{
+            stack.push(B.get(n-1)+1);
+        }
+        for(int i=n-2;i>=0;i--)
         {
-            if(dp[i]==1)
-                continue;
-            int min_val = Integer.MAX_VALUE;
-            List<Integer> ans =null;
-            for(int j=i-1;j>=i-j;j--)
+            if(carry==1)
             {
-                int coins_req =dp[j] + dp[i-j];
-                if(min_val>coins_req){
-                    min_val = coins_req;
-                    ans = new ArrayList<>();
-                    ans.addAll(answer[i-j]);
-                    ans.addAll(answer[j]);
+                if(B.get(i)==9)
+                {
+                    stack.push(0);
+                    carry = 1;
+                }
+                else
+                {
+                    stack.push(B.get(i)+1);
+                    carry=0;
                 }
             }
-            dp[i] = min_val;
-            answer[i] = ans;
+            else
+            {
+                stack.push(B.get(i));
+            }
         }
-        return answer[N];
+        if(carry==1)
+            stack.push(1);
+        ArrayList<Integer> ans = new ArrayList<>();
+        while(!stack.isEmpty() && stack.peek()==0)
+            stack.pop();
+        while(!stack.isEmpty())
+            ans.add(stack.pop());
+        return ans;
     }
+    enum test{A};
     public static void main(String[] args) {
-        System.out.println(new TestClass().rowWithMax1s(
-                new int[][] {{0,0,1,1},{1,0,0,0},{0,1,0,0}},3,4
-        ));
+        //.out.println(LocalDateTime.now().toLocalDate());
+        //System.out.println(new TestClass().plusOne(asList(0,9,9)));
+        //System.out.println(Optional.ofNullable("a").map(x->null).orElseThrow(RuntimeException::new));
+        System.out.println("".isBlank());
+    }
+    public static <T> ArrayList<T> asList(T... values) {
+        ArrayList<T> ans = new ArrayList<>();
+        for (T t : values)
+            ans.add(t);
+        return ans;
     }
 }
 

@@ -10,7 +10,7 @@ public class SetOfNosThatFormASumCSDojo {
         if(i==data.length || total<0)
             return;
         if(total==0){
-            System.out.println("*");
+            //System.out.println("*");
             sets.add(s);
             return;
         }

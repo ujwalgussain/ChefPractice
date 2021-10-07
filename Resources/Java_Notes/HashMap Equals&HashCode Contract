@@ -2,10 +2,6 @@ What is initial Capacity and load factor of HashMap?
 
 Internal Working of HashMap:
 
-
-
-
-
 What if we override hashCode/equals method?
 In both the cases we will end up having DUPLICATE KEYS in hashMap.
 with map.get() we will have following cases:

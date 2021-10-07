@@ -31,7 +31,7 @@ public class PostfixToInfix {
                 expressionStack.push(Character.toString(c));
         }
         if(expressionStack.size() != 1)
-            throw new RuntimeException("Invalid Prefix Expression");
+            throw new RuntimeException("Invalid PostFix Expression");
         return expressionStack.pop();
     }
 

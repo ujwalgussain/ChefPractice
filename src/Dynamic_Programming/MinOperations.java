@@ -26,13 +26,18 @@ public class MinOperations {
         dp[3] = 3;
 
         for (int i = 4; i <= n; i++) {
-            if ((i & 1) == 0) {
+            if (isEven(i)) {
                 dp[i] = dp[i / 2] + 1;
             } else {
                 dp[i] = dp[i - 1] + 1;
             }
         }
         return dp[n];
+    }
+
+    public static boolean isEven(int i)
+    {
+        return (i & 1) == 0;
     }
 
 }
