@@ -57,4 +57,33 @@ Question 2:
         }
         return ans;
     }
+
+    public static int climbStairs(int n, int[] cost) {
+        /*int n1 = 1, n2 = 1;
+        int ans = 0;
+        if(n<=1)
+            return n1;
+        for(int i=2;i<=n;i++)
+        {
+            ans = n1 + n2;
+            n1 = n2;
+            n2 = ans;
+        }
+        return ans;*/
+        int dp[] = new int[n+1];
+        dp[0] = 0;
+        dp[1] = cost[0];
+        for(int i=2;i<=n;i++)
+        {
+            dp[i] = Math.min(
+                    cost[i-1] + dp[i-1],
+                    cost[i-2] + dp[i-2]
+            );
+        }
+        return dp[n];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(climbStairs(3,new int[]{1,2,3}));
+    }
 }
