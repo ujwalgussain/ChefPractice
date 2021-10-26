@@ -104,6 +104,7 @@ public class Test1 {
                         e.printStackTrace();
                     } finally {
                         downLatch.countDown();
+
                     }
 
                 }).exceptionally(ex -> {throw new RuntimeException("Error");});
