@@ -7,7 +7,7 @@ public class FindMiddleOfLinkedList {
     public static LLNode getMiddleOfLinkedList(LinkedList l)
     {
         /*In odd length fastptr will come at lastNode
-           In even length slowptr will come at secondLast node
+          In even length fastPtr will come at null
         * */
         //LinkedList l = LinkedListUtils.NORMAL;
         LLNode fastptr=l.head,slowptr=l.head;

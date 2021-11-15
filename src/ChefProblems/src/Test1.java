@@ -44,7 +44,7 @@ public class Test1 {
         return maxGap;
     }
 
-    public static void main(String... a) {
+    public static void main(String... a) throws ExecutionException, InterruptedException {
         /*CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             try {
                 Thread.sleep(10000);
@@ -63,7 +63,7 @@ public class Test1 {
         });
         future.get();
         future1.get();*/
-        /*CompletableFuture all = CompletableFuture.anyOf(
+       /* CompletableFuture all = CompletableFuture.allOf(
                 CompletableFuture.runAsync(
                 () -> {
                     try {
@@ -72,14 +72,14 @@ public class Test1 {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //throw new RuntimeException("Error T1");
-                    System.out.println("T1 ended");
+                    throw new InterruptedException();
+                    //System.out.println("T1 ended");
                 }),
                 CompletableFuture.runAsync(
                         () -> {
                     System.out.println("T2 start");
                     try {
-                        Thread.sleep(4000);
+                        Thread.sleep(14000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -90,9 +90,10 @@ public class Test1 {
             all.get();
         } catch (Exception ex){
             System.out.println("exception " + ex);
-        }*/
-        CountDownLatch downLatch = new CountDownLatch(2);
-        CompletableFuture.runAsync(
+        }
+*/
+        //CountDownLatch downLatch = new CountDownLatch(2);
+        /*CompletableFuture.runAsync(
                 () -> {
                     try {
                         System.out.println("T1 start");
@@ -102,10 +103,6 @@ public class Test1 {
                     } catch (Exception e) {
                         System.out.println("T1 blew with " + e);
                         e.printStackTrace();
-                    } finally {
-                        downLatch.countDown();
-
-
                     }
 
                 }).exceptionally(ex -> {throw new RuntimeException("Error");});
@@ -113,20 +110,37 @@ public class Test1 {
                 () -> {
                     System.out.println("T2 start");
                     try {
-                        Thread.sleep(4000);
+                        Thread.sleep(6000);
                         System.out.println("T2 exe");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    } finally {
-                        downLatch.countDown();
                     }
-                });
-        try {
-            downLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("main ended");
+                });*/
+        CompletableFuture<String> c1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //throw new RuntimeException();
+            System.out.println("Completed s1");
+            return "s1";
+        });
+        CompletableFuture<String> c2 = CompletableFuture.supplyAsync(() ->
+                {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Completed s2");
+                    return "s2";
+                }
+        );
+        String s1 = c1.get();
+        String s2 = c2.get();
+        System.out.println(s1 + s2);
+
     }
 
     public static CompletableFuture<Object> handle(CompletableFuture<Void>... futures) {

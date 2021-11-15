@@ -8,6 +8,8 @@ Write a function to get Nth node in a Linked List
     from start - src/a_practiceproblems.linkedlistproblems/Problems/GetNthNode.java
     from end - src/a_practiceproblems.linkedlistproblems/Problems/GetNthNodeFromEnd.java
 
+    https://www.interviewbit.com/problems/remove-nth-node-from-list-end/
+
 Print the middle of a given linked list ****
     src/a_practiceproblems.linkedlistproblems/Problems/FindMiddleOfLinkedList.java
 
@@ -62,4 +64,8 @@ Print the middle of a given linked list
 
 Find length of loop in linked list
 
-Function to check if a singly linked list is palindrome
+Function to check if a singly linked list is palindrome - interview bit/solved a_practiceproblems.linkedlistproblems.Problems.FindMiddleOfLinkedList
+
+Remove duplicate elements from sorted Linked List
+    https://www.interviewbit.com/problems/remove-duplicates-from-sorted-list/ - Easy
+    https://www.interviewbit.com/problems/remove-duplicates-from-sorted-list-ii/ - Medium
