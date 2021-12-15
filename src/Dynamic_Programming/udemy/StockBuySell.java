@@ -15,8 +15,7 @@ public class StockBuySell {
     public int maxProfit(int[] prices) {
         int min_upto = prices[0];
         int max_profit = 0;
-        for(int i=1; i<prices.length;i++)
-        {
+        for(int i=1; i<prices.length;i++) {
             min_upto = Math.min(min_upto, prices[i]);
             if(min_upto<prices[i])
             {

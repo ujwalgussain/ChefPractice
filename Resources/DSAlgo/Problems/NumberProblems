@@ -5,6 +5,7 @@ Sieve of Eratosthenes
 
 Convert Roman to Decimal-
 
+
 https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero/submissions/
 Problem Statement :
     Given an integer n, return any array containing n unique integers such that they add up to 0.
@@ -30,3 +31,32 @@ Logic:
     n=4 -> [1,2,-1,2,0]
 
 
+Find Sqrt w/o using Math function:
+Approach 1: For perfect squares we can use Binary Search
+    https://www.interviewbit.com/problems/square-root-of-integer/x
+    public int sqrt(int A) {
+            long lo = 0;
+            long hi = A;
+            while(lo<=hi){
+                long mid = (lo+hi)/2;
+                long sq = mid * mid;
+                if(sq == A)
+                    return (int)mid;
+                if(sq < A)
+                    lo = mid +1;
+                else
+                    hi = mid -1;
+            }
+            return (int)hi;
+        }
+
+Approach 2: Works for all
+    double number = 52;
+    double result;
+    double squareRoot = number / 2;
+    do {
+                result = squareRoot;
+                squareRoot = (result + (number / result)) / 2;
+                System.out.printf("%s %s\n", result, squareRoot);
+    } while (result != squareRoot);
+    System.out.println("Result:" + squareRoot);

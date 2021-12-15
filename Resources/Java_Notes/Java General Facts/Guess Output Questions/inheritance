@@ -1,4 +1,22 @@
 =============================================Inheritance================================================
+Dynamic Method Dispatch:
+class A{
+    public void overrideMe(){
+        System.out.println("A");
+    }
+}
+class B extends A{
+    public void overrideMe(){
+        System.out.println("B");
+    }
+
+    public static void main(String[] args) {
+        B b = new B();
+        b.overrideMe(); // prints B
+        A a = new B(); //-> has access to only A's methods and overriden implementations from B.
+        a.overrideMe(); // prints B.
+    }
+}
 
 public class Super {
     // Broken - constructor invokes an overridable method

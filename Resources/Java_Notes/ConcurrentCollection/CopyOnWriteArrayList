@@ -1,5 +1,6 @@
 This is a thread safe ArrayList.
-Thread safety is achieved by creating a clone of the current object and then performing updation for each update operation.Hence the name
+Thread safety is achieved by creating a clone of the current object and then performing updation for each update operation.
+Hence the name
 This is not at all recommended for large no of write operations.
 Extra method:
 addIfAbsent()

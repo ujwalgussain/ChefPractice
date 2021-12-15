@@ -84,9 +84,9 @@ public class BinarySearchTree {
     private TreeNode delete_Rec(TreeNode root, int key) {
         if (root == null)
             return null;
-        if (root.val < key) {
+        if (root.val < key)
             root.right = delete_Rec(root.right, key);
-        } else {
+        else {
             if (root.val > key) {
                 root.left = delete_Rec(root.left, key);
             } else {

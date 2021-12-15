@@ -1,4 +1,4 @@
-package a_practiceproblems.linkedlistproblems.Problems;
+package a_practiceproblems.linkedlistproblems.Problems.ReversingLL;
 
 import a_practiceproblems.linkedlistproblems.LLNode;
 

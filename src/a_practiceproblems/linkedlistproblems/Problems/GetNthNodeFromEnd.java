@@ -1,13 +1,13 @@
 package a_practiceproblems.linkedlistproblems.Problems;
 
 import a_practiceproblems.linkedlistproblems.LLNode;
-import a_practiceproblems.linkedlistproblems.LinkedList;
+
 
 public class GetNthNodeFromEnd {
-    public static LLNode getNthNodefromEnd(LinkedList l,int n)
+    public static LLNode getNthNodefromEnd(LLNode head,int n)
     {
         //LinkedList l = LinkedListUtils.NORMAL;
-        LLNode temp=l.head;
+        LLNode temp=head;
         int c=0;
         while(temp!=null && c<n)
         {
@@ -15,7 +15,7 @@ public class GetNthNodeFromEnd {
         }
         if(temp==null)
             return null;
-        LLNode nthLastNode = l.head;
+        LLNode nthLastNode = head;
         while(temp != null)
         {
             temp=temp.next;

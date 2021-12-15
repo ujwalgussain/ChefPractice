@@ -37,7 +37,7 @@ public class A_MinSubArrayWithSumGreaterThanEqualToK {
 
     public static int findMinLengthWithNegatives(int[] nums, int k)
     {
-        /** nums = {84, -37, 32, 40, 95}            k = 167
+        /** nums = {    84, -37, 32, 40, 95}            k = 167
          * PreSum=  0,  84,  47, 79, 119, 214]
          * Ex:
          * i=0 queue=[]
@@ -62,7 +62,7 @@ public class A_MinSubArrayWithSumGreaterThanEqualToK {
 
         System.out.println("PreSum" + Arrays.toString(preSums));
 
-        int res = len + 1;
+        int res = Integer.MAX_VALUE;
 
         //This will keep track of only +ve elems so when we move right we move from one +ve to next +ve
         //1st while loop will remove all -ves
@@ -88,7 +88,7 @@ public class A_MinSubArrayWithSumGreaterThanEqualToK {
 
             queue.add(i);
         }
-        return res == len+1 ? -1 : res;
+        return res == Integer.MAX_VALUE ? -1 : res;
     }
 
     public static void main(String[] args) {

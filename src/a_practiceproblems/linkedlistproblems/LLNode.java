@@ -28,4 +28,19 @@ public class LLNode {
     public void setNext(LLNode next) {
         this.next = next;
     }
+
+    public static LLNode createList(int... val) {
+        LLNode head = null;
+        LLNode temp = head;
+        for (int i : val) {
+            if (head == null) {
+                head = new LLNode(i);
+                temp = head;
+            } else {
+                temp.next = new LLNode(i);
+                temp = temp.next;
+            }
+        }
+        return head;
+    }
 }

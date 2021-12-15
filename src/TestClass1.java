@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.Collectors;
+
 
 class TestClass1 {
     static class ListNode {
@@ -16,7 +15,7 @@ class TestClass1 {
 
     static public void display(ListNode head) {
         ListNode temp = head;
-        if(head==null)
+        if (head == null)
             System.out.println("null");
         while (temp != null) {
             System.out.printf(temp.val + " ");
@@ -39,91 +38,118 @@ class TestClass1 {
         return head;
     }
 
-    public ListNode insertionSortList(ListNode A) {
-        ListNode sortedHead = new ListNode(-1); //dummy node
-        ListNode curr = A, next = null;
-        while (curr != null) {
+    public ListNode reverse(ListNode A) {
+        if (A == null) {
+            return null;
+        }
+        ListNode prev = null;
+        ListNode curr = A;
+        ListNode next = null;
+        for (int i = 0; i < 2 && curr != null; i++) {
             next = curr.next;
-            //We need these pointers for insertion
-            ListNode prevSorted = sortedHead;
-            ListNode tempSorted = sortedHead.next;
-
-            while(tempSorted != null) {
-                if(tempSorted.val>curr.val)//if we change the sign list will be sorted in descending order.
-                    break;
-                prevSorted = tempSorted;
-                tempSorted = tempSorted.next;
-            }
-            //either end of list or tempSorted will point the first element greater than curr
-            //just change the next pointers to insert
-            prevSorted.next = curr;
-            curr.next = tempSorted;
+            curr.next = prev;
+            prev = curr;
             curr = next;
         }
-        return sortedHead.next;
-    }
-
-    /*public ListNode deleteDuplicates(ListNode A) {
-        ListNode curr = A;
-        ListNode prev = null;
-        ListNode next= null;
-        HashMap<Integer,Integer> map = new HashMap<>();
-        while(curr!=null) {
-            next = curr.next;
-            if(curr.next!=null && curr.val== next.val){
-                while(next!=null && next.val==curr.val) {
-                    next=next.next;
-                }
-                if(prev==null){
-
-                }
-                else
-            }
-            else{
-
-            }
-        }
-    }*/
-
-    public ListNode solve(ListNode A) {
-        if(A==null || A.next == null || A.next.next==null)
-            return A;
-        Stack<ListNode> stack = new Stack<>();
-        ListNode curr_prev = A, curr_next= null;
-        ListNode curr = A.next;
-        while(curr!=null){
-            curr_next = curr.next;
-            curr_prev.next = curr_next;
-            curr.next=null;
-            stack.push(curr);
-            if(curr_next==null)  //even length should stop here
-                break;
-            curr_prev=curr_next;
-            curr = curr_next.next; //odd length should stop here
-        }
-        ListNode prev = A;
-        curr = A;
-        while (!stack.isEmpty()){
-            ListNode temp = stack.pop();
-            //remove curr and add temp
-            temp.next = curr.next;
-            curr.next = temp;
-            curr = curr.next.next;
-        }
-        return A;
+        if (curr != null)
+            A.next = reverse(curr);
+        return prev;
     }
 
     public static void main(String[] args) {
-        //display(new TestClass1().insertionSortList(createList(1,4,3,2,5,2)));
-        //System.out.println(new TestClass1().lPalin(createList(1,2,3)));
-        display(new TestClass1().solve(createList(1,2)));
+        System.out.println(new TestClass1().solve(2,new ArrayList<>(List.of(
+                new ArrayList<>(List.of(1,2))
+        ))));
     }
 
-    public static <T> ArrayList<T> asList(T... values) {
-        ArrayList<T> ans = new ArrayList<>();
-        for (T t : values)
-            ans.add(t);
-        return ans;
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+            left = null;
+            right = null;
+        }
+    }
+
+    int check(TreeNode A)
+    {
+        if(A==null)
+            return 0;
+        int left = check(A.left);
+        if(left==-1)
+            return -1;
+        int right = check(A.right);
+        if(right==-1)
+            return -1;
+        if(Math.abs(left-right)>1)
+            return -1;
+        return 1+Math.max(left,right);
+
+    }
+    public int solve(int A, ArrayList<ArrayList<Integer>> B) {
+        HashMap<Integer,HashSet<Integer>> adjList = new HashMap<>();
+        for(ArrayList<Integer> entry : B){
+            Integer u = entry.get(0), v= entry.get(1);
+            if(adjList.containsKey(u)){
+                adjList.get(u).add(v);
+            }else{
+                HashSet<Integer> set = new HashSet<>();
+                set.add(v);
+                adjList.put(u,set);
+            }
+            if(adjList.containsKey(v)){
+                adjList.get(v).add(u);
+            }else{
+                HashSet<Integer> set = new HashSet<>();
+                set.add(u);
+                adjList.put(v,set);
+            }
+        }
+        find(adjList,new HashSet<>(),1);
+        return res;
+    }
+    static int res = 0;
+    public int find(HashMap<Integer,HashSet<Integer>> adjList, HashSet<Integer> visited, Integer root){
+        visited.add(root);
+        int count = 0;
+        for(Integer v : adjList.get(root)){
+            if(visited.contains(v))
+                continue;
+            int subres = find(adjList,visited,v);
+            if((subres&1)==0)
+                res++;
+            else
+                count+=subres;
+        }
+        return 1+count;
+    }
+    public static void merge(long arr1[], long arr2[], int n, int m)
+    {
+        // code here
+        for(int i=m;i>=0;i--){
+            long last = arr1[n-1];
+            int j;
+            for(j=n-1;j>=0 && arr1[j]>arr2[i];i--)
+                arr1[j+1]=arr1[j];
+            if(j!=n-1 || last>arr2[i]){
+                arr1[j]=arr2[i];
+                arr2[i]=last;
+            }
+        }
+    }
+    static ArrayList<Integer> leaders(int arr[], int n){
+        // Your code here
+        Stack<Integer> stack = new Stack<>();
+        for(int i:arr){
+            while(!stack.isEmpty() && stack.peek()<=i)
+                stack.pop();
+            stack.push(i);
+        }
+        ArrayList<Integer> result = new ArrayList<>(stack);
+        Collections.reverse(result);
+        return result;
     }
 }
-

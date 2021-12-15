@@ -1,17 +1,17 @@
 package a_practiceproblems.linkedlistproblems.Problems;
 
 import a_practiceproblems.linkedlistproblems.LLNode;
-import a_practiceproblems.linkedlistproblems.LinkedList;
+
 
 public class SwapNodes {
-    static void swap2Nodes(LinkedList l,int x, int y)
+    static void swap2Nodes(LLNode head,int x, int y)
     {
         //LinkedList l = LinkedListUtils.NORMAL;
         if(x == y)
             return;
         else
         {
-            LLNode temp=l.head;
+            LLNode temp=head;
             LLNode prev = null,prevX=null,prevY=null;
             LLNode X=null,Y=null;
             while(temp!=null)
@@ -38,11 +38,11 @@ public class SwapNodes {
             Y.next=nextX;
             if(prevX != null)
                 prevX.next=Y;
-            if(l.head==X)
-                l.head=Y;
-            if(l.head==Y)
-                l.head=X;
-            System.out.println("After Swap "+l);
+            if(head==X)
+                head=Y;
+            if(head==Y)
+                head=X;
+            System.out.println("After Swap "+head);
         }
     }
 }

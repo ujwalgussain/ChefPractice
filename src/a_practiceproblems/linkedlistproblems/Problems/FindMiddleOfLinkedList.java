@@ -1,16 +1,16 @@
 package a_practiceproblems.linkedlistproblems.Problems;
 
 import a_practiceproblems.linkedlistproblems.LLNode;
-import a_practiceproblems.linkedlistproblems.LinkedList;
+
 
 public class FindMiddleOfLinkedList {
-    public static LLNode getMiddleOfLinkedList(LinkedList l)
+    public static LLNode getMiddleOfLinkedList(LLNode head)
     {
         /*In odd length fastptr will come at lastNode
           In even length fastPtr will come at null
         * */
         //LinkedList l = LinkedListUtils.NORMAL;
-        LLNode fastptr=l.head,slowptr=l.head;
+        LLNode fastptr=head,slowptr=head;
         while(fastptr!=null && fastptr.next!=null)
         {
             fastptr=fastptr.next.next;

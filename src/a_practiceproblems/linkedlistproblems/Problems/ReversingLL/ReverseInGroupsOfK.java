@@ -1,7 +1,7 @@
 package a_practiceproblems.linkedlistproblems.Problems.ReversingLL;
 
 import a_practiceproblems.linkedlistproblems.LLNode;
-import a_practiceproblems.linkedlistproblems.LinkedList;
+
 import a_practiceproblems.linkedlistproblems.LinkedListUtils;
 
 public class ReverseInGroupsOfK {
@@ -42,7 +42,7 @@ public class ReverseInGroupsOfK {
         }
     }
     public static void main(String[] args) {
-        LinkedList l = LinkedListUtils.NORMAL.buildAndReturn();
-        printFromHead(reverseInGroupsOfK(l.head,3));
+        /*LinkedList l = LinkedListUtils.NORMAL.buildAndReturn();
+        printFromHead(reverseInGroupsOfK(l.head,3));*/
     }
 }

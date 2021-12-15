@@ -1,12 +1,13 @@
 package a_practiceproblems.linkedlistproblems.Problems;
 
 import a_practiceproblems.linkedlistproblems.LLNode;
-import a_practiceproblems.linkedlistproblems.LinkedList;
+
 
 public class LengthOfLoop {
-    static int getLengthOfLoopInLinkedList(LinkedList loopedLinkedList) {
+    static int getLengthOfLoopInLinkedList(LLNode head) {
+
         //LinkedList l = LinkedListUtils.LOOPED;
-        LLNode fastptr = loopedLinkedList.head, slowptr = loopedLinkedList.head;
+        LLNode fastptr = head, slowptr = head;
         while (fastptr != null && fastptr.next != null) {
             fastptr = fastptr.next.next;
             slowptr = slowptr.next;

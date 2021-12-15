@@ -1,47 +1,59 @@
 package a_practiceproblems.linkedlistproblems.Problems;
 
 import a_practiceproblems.linkedlistproblems.LLNode;
-import a_practiceproblems.linkedlistproblems.LinkedList;
 
 import java.util.Stack;
 
 public class FindIfLinkedListIsPalindrome {
-    static boolean isPalindromeWithStack(LinkedList palindromicLinkedList)
+    static boolean isPalindromeWithStack(LLNode head)
     {
-        /*Approach 1: Put all the data of Linked List in the Stack. Traverse the list again and pop element if matched
-        Approach 2:
-        * */
+        //Approach 1: Put all the data of Linked List in the Stack. Traverse the list again and pop element if matched
+
        // LinkedListUtils.buildPalindromicLinkedList();
-        LLNode fastptr=palindromicLinkedList.head,mid=palindromicLinkedList.head;
         Stack<Integer> stack = new Stack<>();
-        while(fastptr!=null && fastptr.next !=null)
-        {
-            fastptr=fastptr.next.next;
-            mid=mid.next;
-        }
-        LLNode temp=mid;
-        while(temp!=null)
-        {
+        LLNode temp = head;
+        while(temp!=null) {
             stack.push(temp.data);
             temp=temp.next;
         }
-        temp=palindromicLinkedList.head;
-        while(temp!=mid)
-        {
-            if(stack.peek() != temp.data)
-                return false;
-            stack.pop();
-            temp=temp.next;
 
+        temp = head;
+        while(temp!=null) {
+            if(temp.data!=stack.pop())
+                return false;
+            temp=temp.next;
         }
-        if(stack.size()>1)
-            return false;
         return true;
     }
 
 
-    //Second Way
-    public LLNode reverse(LLNode head) {
+    //Second Way : reverse list from the middle node of the stack. and then compare.
+    //Note : Even- fast stops at null and Odd - fast stops at last element
+    static boolean lPalin(LLNode A) {
+        LLNode fast = A, slow =A;
+
+        //Even- fast stops at null
+        //Odd - fast stops at last element
+        while(fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        LLNode secondHalf = slow;
+        if(fast != null){
+            secondHalf = slow.next;
+        }
+        secondHalf = reverse(secondHalf);
+        LLNode firstHalf = A;
+        while (secondHalf != null) {
+            if(firstHalf.data != secondHalf.data)
+                return false;
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+        return true;
+    }
+
+    private static LLNode reverse(LLNode head) {
         LLNode prev = null;
         LLNode curr = head;
         LLNode next = null;
@@ -53,33 +65,4 @@ public class FindIfLinkedListIsPalindrome {
         }
         return prev;
     }
-    public int lPalin(LLNode A) {
-        LLNode fast = A, slow =A;
-
-        //Even- fast stops at null
-        //Odd - fast stops at last element
-        while(fast!=null && fast.next!=null){
-            fast = fast.next.next;
-            slow = slow.next;
-        }
-
-        LLNode secondHalf = slow;
-
-        if(fast != null){
-            secondHalf = slow.next;
-        }
-
-        secondHalf = reverse(secondHalf);
-
-        LLNode firstHalf = A;
-        while (secondHalf != null) {
-            if(firstHalf.data != secondHalf.data)
-                return 0;
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
-        }
-        return 1;
-    }
-
-
 }

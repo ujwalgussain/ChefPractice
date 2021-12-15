@@ -14,3 +14,8 @@ Find whether a string can be rearranged to become palindrome.(if strlen is even 
         Number of characters to be added to create a palindromic substring
         Find whether a string can be rearranged to become palindrome.(if strlen is even then occurence of all chars should be even else one char occurence can be odd)
 
+
+
+Pattern Matching:
+    KMP Algo :
+        Reference : https://www.youtube.com/watch?v=V5-7GzOfADQ -Abdul Bari

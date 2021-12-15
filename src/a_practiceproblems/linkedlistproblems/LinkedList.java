@@ -2,6 +2,7 @@ package a_practiceproblems.linkedlistproblems;
 
 
 
+/*
 public class LinkedList {
     public LLNode head;
     public int length;
@@ -142,3 +143,4 @@ public class LinkedList {
         list.display();
     }
 }
+*/

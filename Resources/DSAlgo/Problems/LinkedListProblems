@@ -69,3 +69,153 @@ Function to check if a singly linked list is palindrome - interview bit/solved a
 Remove duplicate elements from sorted Linked List
     https://www.interviewbit.com/problems/remove-duplicates-from-sorted-list/ - Easy
     https://www.interviewbit.com/problems/remove-duplicates-from-sorted-list-ii/ - Medium
+
+
+Linked List Deletion (Deleting a key at given position)
+
+Write a function to delete a Linked List
+
+Find Length of a Linked List (Iterative and Recursive)
+
+Search an element in a Linked List (Iterative and Recursive)
+
+Write a function to get Nth node in a Linked List
+Nth node from the end of a Linked List
+Print the middle of a given linked list
+Write a function that counts the number of times a given int occurs in a Linked List
+Detect loop in a linked list
+Find length of loop in linked list
+Function to check if a singly linked list is palindrome
+Remove duplicates from a sorted linked list
+Remove duplicates from an unsorted linked list
+Swap nodes in a linked list without swapping data
+Pairwise swap elements of a given linked list
+Move last element to front of a given Linked List
+Intersection of two Sorted Linked Lists
+Intersection point of two Linked Lists.
+QuickSort on Singly Linked List
+Segregate even and odd nodes in a Linked List
+Reverse a linked list
+Recursive function to print reverse of a Linked List
+Iteratively Reverse a linked list using only 2 pointers (An Interesting Method)
+Merge two sorted linked lists such that merged list is in reverse order
+Reverse a Linked List in groups of given size
+Reverse a Linked List in groups of given size | Set 2
+Reverse alternate K nodes in a Singly Linked List
+Alternate Odd and Even Nodes in a Singly Linked List
+Delete alternate nodes of a Linked List
+Alternating split of a given Singly Linked List
+Identical Linked Lists
+
+
+Delete nodes which have a greater value on right
+    Solution:
+    public static Node deleteNodesOnRightSide(Node head){
+        if(head == null || head.next == null)
+            return head;
+        Node nextNode = deleteNodesOnRightSide(head.next);
+        if(nextNode.data > head.data) return nextNode;
+            head.next = nextNode;
+        return head;
+    }
+
+Add two numbers represented by linked lists | Set 1
+Delete a given node in Linked List under given constraints
+Find a triplet from three linked lists with sum equal to a given number
+Rotate a Linked List
+Flattening a Linked List
+Add two numbers represented by linked lists | Set 2
+Sort a linked list of 0s, 1s and 2s
+Flatten a multilevel linked list
+Delete N nodes after M nodes of a linked list
+
+
+Pairwise swap elements of a given linked list by changing links
+Solution:
+    public ListNode swapPairs(ListNode A) {
+            if(A==null)
+                return null;
+            if(A.next == null)
+                return A;
+            ListNode curr = A.next;
+            ListNode next = curr.next;
+            curr.next = A;
+            A.next = swapPairs(next);
+            return curr;
+        }
+
+Given a linked list of line segments, remove middle points
+
+
+Clone a linked list with next and random pointer | Set 1
+
+
+Clone a linked list with next and random pointer | Set 2
+
+
+Insertion Sort for Singly Linked List
+
+
+Point to next higher value node in a linked list with an arbitrary pointer
+
+
+Rearrange a given linked list in-place.
+
+
+Sort a linked list that is sorted alternating ascending and descending orders.
+
+
+Select a Random Node from a Singly Linked List
+
+
+Compare two strings represented as linked lists
+
+
+Rearrange a linked list such that all even and odd positioned nodes are together
+
+
+Rearrange a Linked List in Zig-Zag fashion
+Add 1 to a number represented as linked list
+Point arbit pointer to greatest value right side node in a linked list
+Generic Linked List in C
+Check if a linked list of strings forms a palindrome
+Sort linked list which is already sorted on absolute values
+Delete last occurrence of an item from linked list
+Delete a Linked List node at a given position
+Linked List in java
+Decimal Equivalent of Binary Linked List
+Flatten a multi-level linked list | Set 2 (Depth wise)
+Rearrange a given list such that it consists of alternating minimum maximum elements
+Subtract Two Numbers represented as Linked Lists
+Find pair for given sum in a sorted singly linked without extra space
+Partitioning a linked list around a given value and keeping the original order
+Check linked list with a loop is palindrome or not
+Clone a linked list with next and random pointer in O(1) space
+Length of longest palindrome list in a linked list using O(1) extra space
+Adding two polynomials using Linked List
+Implementing Iterator pattern of a single Linked List
+Move all occurrences of an element to end in a linked list
+Remove all occurrences of duplicates from a sorted Linked List
+Remove every k-th node of the linked list
+Check whether the length of given linked list is Even or Odd
+Multiply two numbers represented by Linked Lists
+Find the sum of last n nodes of the given Linked List
+Count pairs from two linked lists whose sum is equal to a given value
+Merge Sort for Linked Lists
+Merge two sorted linked lists
+Merge a linked list into another linked list at alternate positions
+In-place Merge two linked lists without changing links of first list
+Delete middle of linked list
+Merge K sorted linked lists | Set 1
+Merge k sorted linked lists | Set 2 (Using Min Heap)
+Merge two sorted lists (in-place)
+Union and Intersection of two Linked Lists
+Union and Intersection of two linked lists | Set-2 (Using Merge Sort)
+Union and Intersection of two linked lists | Set-3 (Hashing)
+Recursive selection sort for singly linked list | Swapping node links
+Insert node into the middle of the linked list
+Sort a linked list of 0s, 1s and 2s by changing links
+Insert a node after the n-th node from the end
+Rotate Linked List block wise
+Count rotations in sorted and rotated linked list
+Make middle node head in a linked list
