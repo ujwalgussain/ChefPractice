@@ -42,13 +42,15 @@ public class FindAllAnagramsOfStr2InStr1 {
             //after
             if(alphabets[temp-'a']>=0)
                 diff--;
-            if(diff==0)
+            if(diff==0) {
+                System.out.println("start" + start);
                 soln++;
+            }
         }
         return soln;
     }
 
     public static void main(String[] args) {
-        System.out.println(find("abcba","abc"));
+        System.out.println(find("barfoofoobarthefoobarman","barfoothe"));
     }
 }

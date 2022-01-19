@@ -1,0 +1,8 @@
+NoClassDefFoundError:
+For HardCoded Class Name if .class file not found at runtime then
+Ex: Test t = new Test(); -> If Test .class file not found during runtime then
+
+ClassNotFoundException:
+For Dynamically provided className, if .class file not found during runtime
+Ex: Object o = Class.forName(args[0]).newInstance(); -> If className specified by args[0] not found
+This is a checked exception. Hence JVM makes the programmer to handle the case when class is not found.

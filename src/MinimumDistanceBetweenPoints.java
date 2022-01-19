@@ -1,5 +1,3 @@
-package a_practiceproblems;
-
 public class MinimumDistanceBetweenPoints {
     /*
 In a infinite grid find min moves required to reach from Point A to B.

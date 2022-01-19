@@ -1,5 +1,3 @@
-package a_practiceproblems;
-
 public class ExcelSheetColumn {
     public Integer convertToDecimal(String A){
         if(A.equals(""))

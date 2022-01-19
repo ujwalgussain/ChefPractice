@@ -30,10 +30,9 @@ public class MorrisTraversal {
                 curr = curr.right;
             } else {
                 TreeNode pred = curr.left;
-                while (
-                        pred.right != null
-                                && pred.right != curr  //important
-                )
+                while (pred.right != null &&
+                        pred.right != curr  //important
+                 )
                     pred = pred.right;
                 if (pred.right == null) {
                     pred.right = curr;
@@ -46,5 +45,30 @@ public class MorrisTraversal {
             }
         }
         return inorder;
+    }
+    public ArrayList<Integer> preorderTraversal(TreeNode A) {
+        TreeNode curr = A;
+        ArrayList<Integer> preOrder = new ArrayList<>();
+        while (curr != null) {
+            if (curr.left == null) {
+                preOrder.add(curr.val);
+                curr = curr.right;
+            } else {
+                TreeNode pred = curr.left;
+                while (pred.right != null &&
+                        pred.right != curr  //important
+                )
+                    pred = pred.right;
+                if (pred.right == null) {
+                    preOrder.add(curr.val);
+                    pred.right = curr;
+                    curr = curr.left;
+                } else {
+                    pred.right = null;
+                    curr = curr.right;
+                }
+            }
+        }
+        return preOrder;
     }
 }

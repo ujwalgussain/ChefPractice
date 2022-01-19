@@ -28,7 +28,7 @@ What if the object doesnt implement Serializable?
 Ans: We will get a runtimeException: NotSerializableException
 
 transient:
-    At the time of Ser, if we dont want to save the variable use transient.
+    At the time of Ser, if we don't want to save the variable use transient.
     JVM will ignore org value ignored and default value will be saved(Sensitive data like password).
     It doesn't work with static and final.
     For eg:
@@ -71,7 +71,7 @@ Final variables:
      }
      After Serialization/deserialization we will get i=10 j=20
 
-Hence we can say that Final variable has no effect on Final Variables
+Hence we can say that Final variable has no effect on transient Variables
      class Foo implements Serializable
      {
                  int i=10;
@@ -105,7 +105,7 @@ Ex:
     in.close();
     file.close();
 
-    How can we handle the scenario if we dont know order of serialization:
+    How can we handle the scenario if we don't know order of serialization:
     Object o = ois.readObject()
     if(o instanceOf ChefProblems.Dog)
         ChefProblems.Dog d1=(ChefProblems.Dog)o;

@@ -7,21 +7,33 @@ public class GrayCode {
     //https://www.geeksforgeeks.org/backtracking-approach-generate-n-bit-gray-codes/
     /*
 	Ex:  n = 2 ->
-	n=2 num=0
-		n=1 num=0
-			n=0 num=0
-				add(0) return
-			update num
-			n=0 num=1
-				add(1) return
-			update num
-		n=1 num=3
-			n=0 num=3
-				add(3) return
-			update num
-			n=0 num=2
-				add(2) return
-
+	f(2)
+    {
+        f(1)
+        {
+            f(0)
+            {
+                add(0);         [0]
+            }
+            num = 0^1 = 1
+            f(0)
+            {
+                add(1)          [0,1]
+            }
+        }
+        num = 1^2 = 3
+        f(1)
+        {
+            f(0)
+            {
+                add(3);         [0,1,3]
+            }
+            num=3^1=2
+            f(0)
+            {
+                add(2)          [0,1,3,2]
+            }
+        }
 	*/
     int num=0;
     public ArrayList<Integer> grayCode(int a) {

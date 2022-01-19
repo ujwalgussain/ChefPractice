@@ -1,4 +1,4 @@
-package a_practiceproblems.TreeProblems;
+package a_practiceproblems.TreeProblems.traversalproblems.constructtree;
 
 import a_practiceproblems.TreeProblems.tree.TreeNode;
 

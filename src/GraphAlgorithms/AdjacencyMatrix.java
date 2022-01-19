@@ -9,7 +9,7 @@ public class AdjacencyMatrix implements Graph {
     private int E;
     private boolean isDirected;
 
-    public int[][] getG() {
+    public int[][] getAdjMatrix() {
         return G;
     }
 

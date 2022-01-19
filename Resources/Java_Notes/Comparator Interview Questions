@@ -34,7 +34,7 @@ Ans:
                     public int compare(Person  o1, Person o2) {
 
                         if(o1.lastName.equals(o2.lastName)){
-                            return o1.firstName.compareTo(o2.lastName);
+                            return o1.firstName.(o2.lastName);
                         }
                         return o1.lastName.compareTo(o2.lastName);
                     }

@@ -1,4 +1,4 @@
-package a_practiceproblems.TreeProblems.BSTProblems.inorderproblems;
+package a_practiceproblems.TreeProblems.traversalproblems.inorderproblems;
 
 import a_practiceproblems.TreeProblems.BSTProblems.BSTUtils;
 import a_practiceproblems.TreeProblems.tree.TreeNode;

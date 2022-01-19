@@ -88,17 +88,7 @@ public class BinaryTreeProblemsImpl {
             System.out.println();
         }
     }
-    static int diameter = 0;
-    int getDiameter(Node n)
-    {
-        if(n == null)
-            return 0;
-        int left = getDiameter(n.left);
-        int right = getDiameter(n.right);
-        if(left + right > diameter)
-            diameter = left+right;
-        return Math.max(left,right)+1;
-    }
+
 
     public  static void main(String args[])
     {
@@ -110,7 +100,6 @@ public class BinaryTreeProblemsImpl {
         tree.insertLOT(5);
         tree.insertLOT(6);
         */tree.displayLOT();
-        System.out.println(tree.getDiameter(tree.root));
     }
 
 }

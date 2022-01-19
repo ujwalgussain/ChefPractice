@@ -1,7 +1,7 @@
 package a_practiceproblems.TreeProblems.BSTProblems.avltrees.problems;
 
 import a_practiceproblems.TreeProblems.BSTProblems.BinarySearchTree;
-import a_practiceproblems.TreeProblems.BSTProblems.inorderproblems.FindInorderSuccessor;
+import a_practiceproblems.TreeProblems.traversalproblems.inorderproblems.FindInorderSuccessor;
 import a_practiceproblems.TreeProblems.tree.TreeNode;
 
 import java.util.Arrays;
@@ -19,6 +19,7 @@ public class NextGreaterElementInRight {
         {
             TreeNode insertedNode = bst.insertAndReturnNode(arr[i]);
             TreeNode inorderSuccessor = FindInorderSuccessor.findInorderSuccessor(insertedNode);
+
             if(inorderSuccessor==null)
                 ans[i] = -1;
             else

@@ -255,8 +255,7 @@ From Effective Java:
                  }
              }
 7. A minor performance disadvantage of enums is that there is a space and time cost to load and initialize enum types, but it is unlikely to be noticeable in practice.
-8. Use enums any time you need a set of
-   constants whose members are known at compile time.
+8. Use enums any time you need a set of constants whose members are known at compile time.
 
 
 Some findings:

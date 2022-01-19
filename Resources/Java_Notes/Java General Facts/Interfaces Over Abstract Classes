@@ -1,11 +1,11 @@
-Type hierarchies are great for organizing some things, but other things don’t fall
-neatly into a rigid hierarchy. For example, suppose we have an interface
-representing a singer and another representing a songwriter:
+Type hierarchies are great for organizing some things, but other things don’t fall neatly into a rigid hierarchy.
+For example, suppose we have an interface representing a singer and another representing a songwriter:
 
 public interface Singer {
-AudioClip sing(Song s);
-}public interface Songwriter {
-Song compose(int chartPosition);
+    AudioClip sing(Song s);
+}
+public interface Songwriter {
+    Song compose(int chartPosition);
 }
 In real life, some singers are also songwriters. Because we used interfaces
 rather than abstract classes to define these types, it is perfectly permissible for a

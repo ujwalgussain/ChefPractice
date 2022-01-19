@@ -1,19 +1,21 @@
 package a_practiceproblems.TreeProblems.tree;
 
+import com.sun.source.tree.Tree;
+
 public class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;
     public TreeNode parent;
-    public TreeNode()
-    {
-
-    }
+    public TreeNode() {}
     public TreeNode(int data)
     {
         this.val =data;
     }
 
+    public static TreeNode of(int val) {
+        return new TreeNode(val);
+    }
     public int getVal() {
         return val;
     }

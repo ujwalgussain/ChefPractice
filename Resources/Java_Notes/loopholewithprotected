@@ -20,7 +20,7 @@ Protected:
             b.m1();
 
             A a1 = new B();
-            b.m1();//CError: m1 has protected access in p1.A
+            a1.m1();//CError: m1 has protected access in p1.A
         }
     }
     ------------------------------------------------------------------------------

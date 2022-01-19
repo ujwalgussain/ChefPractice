@@ -1,5 +1,5 @@
 #Abstract Class:
-    JavaInterviewQuestionsImpl.A class which has abstract method must be declared abstract.
+    A class which has abstract method must be declared abstract.
     But a abstract class may or may not contain abstract methods.
 ---------------------------------------------------------------------
 #Abstract Method:
@@ -19,7 +19,7 @@ abstract class Sample implements i1{
 
 Difference b/w abstract & interface After Java 8:
 1. Only  one Abstract class can be extended whereas multiple interfaces can be implemented
-2. Abstract class has a constructor whereas interface doesnt
+2. Abstract class has a constructor whereas interface doesn't
 3. We can modify the state variables of Abstract class but not of interface as they are static and final
 
 1) Can abstract class have constructors in Java? Yes
