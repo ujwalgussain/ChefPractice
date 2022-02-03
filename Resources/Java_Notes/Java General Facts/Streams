@@ -42,7 +42,7 @@ flatMap()
 
 
 Streams.iterate()
-- We can generate Streams using Stream.iterate() :\src\Java_Basics\Streams\GenerateEvenNos.java
+- We can generate Streams using Stream.iterate() :\src\java_basics\Streams\GenerateEvenNos.java
 
 
 

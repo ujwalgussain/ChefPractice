@@ -1,4 +1,4 @@
-Refer src/Java_Basics/InnerClassTest.java
+Refer src/java_basics/InnerClassTest.java
 
 Static Inner Classes:
     Outer.StaticInner staticInner = new Outer.StaticInner(); // No reference to outer class

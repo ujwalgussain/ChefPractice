@@ -6,6 +6,8 @@ public class SumEqualToK {
     //Hashing Tech
     //https://leetcode.com/problems/subarray-sum-equals-k/submissions/
     public int subarraySum(int[] nums, int k) {
+        //If we want idx range for subset..then add 0,[-1] in map...
+        //if sum-k is present in map then range is from map.get(sum-k)+1 to i.
         HashMap<Integer,Integer> sumCountMap = new HashMap<>();
         int sum = 0;
         int cnt = 0;

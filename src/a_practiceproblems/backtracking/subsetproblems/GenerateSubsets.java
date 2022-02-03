@@ -2,7 +2,9 @@ package a_practiceproblems.backtracking.subsetproblems;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GenerateSubsets {
     //------------------------GENERATE SORTED SUBSET--------------------------------------------//
@@ -61,6 +63,36 @@ public class GenerateSubsets {
 
 
     //--------------------------------------Generate Subsets of Size K-----------------------------------------//
+
+
+    //----------------------------------------Print subsets with target sum-------------------------------------//
+
+    static List<String> answer = new ArrayList<>();
+    static void printSubsets(int num[], int idx, int target, List<Integer> list) {
+
+        for (int j = idx; j < num.length; j++) {
+            if (target >= num[j]) {
+                target = target - num[j];
+                list.add(j);
+                //System.out.println(list + " " + target);
+                if (target == 0)
+                    answer.add(list.stream().map(String::valueOf).collect(Collectors.joining(" ")));
+                printSubsets(num, j + 1, target, list);
+                target = target + num[j];
+                list.remove(list.size() - 1);
+            }
+        }
+
+    }
+    /*public static void main(String[] args) {
+        printSubsets(new int[]{4, 2, 7, 1, 3}, 0, 10, new ArrayList<>());
+        if (answer.size()==0)
+            System.out.println("false");
+        else
+            System.out.println("true");
+        answer.stream().sorted(Comparator.comparingInt(value -> value.length())).forEach(System.out::println);
+    }*/
+    //===========================================================================================================
 
     public static void main(String[] args) {
         System.out.println(new GenerateSubsets().subsets(new ArrayList<>(List.of(1,2,3))));

@@ -30,7 +30,7 @@ Ans: We will get a runtimeException: NotSerializableException
 transient:
     At the time of Ser, if we don't want to save the variable use transient.
     JVM will ignore org value ignored and default value will be saved(Sensitive data like password).
-    It doesn't work with static and final.
+    It doesn't work with static and final.  .............V. IMP
     For eg:
      int i=10;
      transient int j=20
@@ -83,8 +83,8 @@ Hence we can say that Final variable has no effect on transient Variables
 Serialization of Multiple Objects in one File: But we should deserialize them in same order they were Serialized.
 Otherwise we will get ClassCastException
 Ex:
-    ChefProblems.Dog d = new ChefProblems.Dog();
-    ChefProblems.Cat c = new ChefProblems.Cat();
+    Dog d = new Dog();
+    Cat c = new Cat();
     Rat r= new Rat();
     FileOutputStream file = new FileOutputStream(filename);
     ObjectOutputStream out = new ObjectOutputStream(file);
@@ -99,19 +99,19 @@ Ex:
     FileInputStream file = new FileInputStream(filename);
      ObjectInputStream in = new ObjectInputStream(file);
     // Method for deserialization of object
-    ChefProblems.Dog d1 = (ChefProblems.Dog)in.readObject();
-    ChefProblems.Cat c1 = (ChefProblems.Cat)in.readObject();
+    Dog d1 = (Dog)in.readObject();
+    Cat c1 = (Cat)in.readObject();
     Rat r1 = (Rat)in.readObject();
     in.close();
     file.close();
 
     How can we handle the scenario if we don't know order of serialization:
     Object o = ois.readObject()
-    if(o instanceOf ChefProblems.Dog)
-        ChefProblems.Dog d1=(ChefProblems.Dog)o;
+    if(o instanceOf Dog)
+        Dog d1=(Dog)o;
     else
-        if(o instanceOf ChefProblems.Cat)
-           ChefProblems.Cat c1=(ChefProblems.Cat)o;
+        if(o instanceOf Cat)
+           Cat c1=(Cat)o;
         else
             Rat r1= (Rat)o;
 
@@ -119,10 +119,10 @@ Object Graph:
 If dog object is serialized then all objects reachable from dog object will also be serialized. this is called Object graph.
 In Object Graph all objects should be serializable.
 Ex: dog->cat->rat
-     class ChefProblems.Dog implements Serializable {
-        ChefProblems.Cat c = new ChefProblems.Cat();
+     class Dog implements Serializable {
+        Cat c = new Cat();
      }
-     class ChefProblems.Cat implements Serializable {
+     class Cat implements Serializable {
         Rat r = new Rat();
      }
      class Rat implements Serializable {

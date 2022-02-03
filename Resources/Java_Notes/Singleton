@@ -31,6 +31,8 @@ Ways to make a Singleton Object
     }
 
 PROBLEMS:
+Check - src/java_basics/Singleton.java
+
 The Singleton Property could be destroyed using Reflection, Serialization, Cloning
 Overcome reflection issue:
     enum Singleton{
@@ -147,3 +149,6 @@ public class GFG {
             instance2.hashCode());
     }
 }
+
+
+//

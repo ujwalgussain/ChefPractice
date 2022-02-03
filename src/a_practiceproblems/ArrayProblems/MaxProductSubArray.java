@@ -1,5 +1,7 @@
 package a_practiceproblems.ArrayProblems;
 
+import a_practiceproblems.TestClass3;
+
 public class MaxProductSubArray {
 /*
 0, -3, 4, -10, -1, -6, 0, 8, -8, -6, -5, -5, 0, -3, -9, 1, 5, -8, 0, 6, 1, -6, -8, 3, 0, -8, -9, 6, 8, 5
@@ -54,4 +56,5 @@ Solution 2:
         }
         return maxProd;
     }
+
 }

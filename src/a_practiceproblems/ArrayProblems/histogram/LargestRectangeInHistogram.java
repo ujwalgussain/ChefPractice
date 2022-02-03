@@ -17,17 +17,27 @@ public class LargestRectangeInHistogram {
         for(;i<heights.length;i++){
             while(!idxStack.isEmpty() && heights[idxStack.peek()]>=heights[i]){
                 int pop = idxStack.pop();
-                int area = heights[pop] * (idxStack.isEmpty()?i:i-idxStack.peek()-1);
+                int area = heights[pop] * (idxStack.isEmpty()
+                        ?i
+                        :i-idxStack.peek()-1
+                );
                 maxArea = Math.max(maxArea,area);
             }
             idxStack.push(i);
         }
         while(!idxStack.isEmpty()){
             int pop = idxStack.pop();
-            int area = heights[pop] * (idxStack.isEmpty()?i:i-idxStack.peek()-1);
+            int area = heights[pop] * (idxStack.isEmpty()
+                    ?i //as if there are no elems in stack rectangle will be formed from 0 to heights.length
+                    :i-idxStack.peek()-1
+            );
             maxArea = Math.max(maxArea,area);
         }
         return maxArea;
         //Also see Max Rectangular Area in Matrix - src/a_practiceproblems/ArrayProblems/matrix/MaxRectangleArea.java
+    }
+
+    public static void main(String[] args) {
+        System.out.println(largestRectangleArea(new int[]{1,2,3,4,5}));
     }
 }

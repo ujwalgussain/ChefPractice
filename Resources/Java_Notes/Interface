@@ -1,5 +1,5 @@
 Interface:
-    1.All interface methods are implicitly public and abstract.(After Java8 static & default)
+    1. All interface methods are implicitly public and abstract.(After Java8 static & default)
     2. All variables defined in an interface must be public, static, and final.(constants)
     3. Interface methods must not be static.
     4. Because interface methods are abstract, they cannot be marked final,strictfp, or native. (More on these modifiers later.)
@@ -17,13 +17,13 @@ Diamond problem with default keyword:
 interface A{
     default public void m1()
     {
-        System.out.println("JavaInterviewQuestionsImpl.A.m1()");
+        System.out.println("A.m1()");
     }
 }
 interface B{
     default public void m1()
     {
-        System.out.println("JavaInterviewQuestionsImpl.B.m1()");
+        System.out.println("B.m1()");
     }
 }
 class C implements A,B
@@ -37,30 +37,17 @@ class C implements A,B
 
 Hence we can say that Diamond problem arises only with default keyword.
 ------------------------------------------------------------------------------
-interface MyInterface1{
-   public static int num = 100;
-   public default void display() {
-      System.out.println("display method of MyInterface1");
-   }
-}
-interface MyInterface2{
-   public static int num = 1000;
-   public default void display() {
-      System.out.println("display method of MyInterface2");
-   }
-}
-public class InterfaceExample implements MyInterface1, MyInterface2{
-   public void display() {
-      MyInterface1.super.display(); //***************
-      //or,
-      MyInterface2.super.display();//***************************
-   }
-   public static void main(String args[]) {
-      InterfaceExample obj = new InterfaceExample();
-      obj.display();
-   }
-}
-
+  public class C implements A, B {
+        public void display() {
+            A.super.display(); //***************
+            //or,
+            B.super.display();//***************************
+        }
+    }
+    public static void main(String args[]) {
+        C obj = new C();
+        obj.display();
+    }
 JAVA 8:
 Why do we need static methods in interface?
 Ref: https://www.baeldung.com/java-static-default-methods
