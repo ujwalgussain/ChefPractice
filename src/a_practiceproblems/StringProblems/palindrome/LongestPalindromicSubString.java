@@ -67,7 +67,7 @@ public class LongestPalindromicSubString {
 
     public static void main(String[] args) {
 
-        System.out.println(dp("cbbd"));
+        System.out.println(dp("bebdeeedaddecebbbbbabebedc"));
     }
     /*Test Cases:
     * 1. babad - bab/aba

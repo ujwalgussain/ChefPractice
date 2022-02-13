@@ -87,7 +87,7 @@
                             Thread
                 Here Object will be considered.
                 Ex:
-                    public class TestClass {
+                    public class SampleTest {
                         static <T> void m1(ArrayList<? super T>  list) {
                         }
 
@@ -114,7 +114,7 @@
                 Non Generic Object to Generic Area - behaves like Generic
 
                 Ex:
-                    public class TestClass {
+                    public class SampleTest {
                         static  void m1(ArrayList  list) {
                             //list will behave as a non generic type list ie., List<Object>
                             list.add(20.0);

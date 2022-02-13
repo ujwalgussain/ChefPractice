@@ -1,4 +1,4 @@
-package Dynamic_Programming;
+package Dynamic_Programming.longestcommonsubsequence;
 
 public class LongestCommonSubSequenceImpl {
     static int LCS_topDown(String p,String q, int m, int n)

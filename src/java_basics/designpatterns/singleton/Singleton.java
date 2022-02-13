@@ -1,4 +1,4 @@
-package java_basics;
+package java_basics.designpatterns.singleton;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -7,12 +7,16 @@ public class Singleton implements Serializable {
 
     // Refer - https://dzone.com/articles/prevent-breaking-a-singleton-class-pattern
 
-
-    public static Singleton INSTANCE;
+    //Head First - The volatile keyword ensures that multiple threads handle the uniqueInstance variable correctly
+    //when it is being initialized to the Singleton instance.
+    public static volatile Singleton INSTANCE;
 
     public static Singleton getInstance(){
         if(INSTANCE==null){
+            //Check for an instance and if there isn’t one, enter a synchronized block
+            //Note we only synchronize the first time through!
             synchronized (Singleton.class){
+                //Once in the block, check again and if still null, create an instance.
                 if(INSTANCE==null)
                     INSTANCE = new Singleton();
             }
@@ -40,7 +44,7 @@ public class Singleton implements Serializable {
     //Solve the reflection issue
     private Singleton(){
         if (INSTANCE!=null)
-            throw new RuntimeException("Cannot create instance");
+            throw new RuntimeException("Cannot create instance"); //Ideally throw CheckedException.
     }
 
 

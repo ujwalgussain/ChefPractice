@@ -2,6 +2,7 @@ package a_practiceproblems;
 
 import a_practiceproblems.TreeProblems.tree.TreeNode;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -1146,6 +1147,10 @@ public class TestClass3 {
     }
 
     public static void main(String[] args) {
-        solution(new int[]{10,22,9,33,21,50,41,60,80,1});
+        String orgStr = "Ujwal";
+        String encodedStr = Base64.getEncoder().encodeToString(orgStr.getBytes());
+        String decodedStr = new String(Base64.getDecoder().decode(encodedStr));
+        System.out.println("Encoded "  + encodedStr);
+        System.out.println("Decoded " + decodedStr);
     }
 }

@@ -1,4 +1,6 @@
-package GraphAlgorithms;
+package GraphAlgorithms.topologicalsort;
+
+import GraphAlgorithms.AdjacencyMatrix;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -84,42 +86,14 @@ public class TopologicalSort {
     }
 
     public static void main(String[] args) {
-       /* AdjacencyMatrix g = new AdjacencyMatrix(6, true);
+        AdjacencyMatrix g = new AdjacencyMatrix(6, true);
         g.addEdge(5, 2);
         g.addEdge(5, 0);
         g.addEdge(4, 0);
         g.addEdge(4, 1);
         g.addEdge(2, 3);
         g.addEdge(3, 1);
-        topologicalSort(g.getAdjMatrix(), g.getV());*/
-
-        HashMap<String,String> map = new HashMap<>(Map.of("Ajay","Ramesh","Mohan","Ajay","Rahul","Mohan","Deepsh","Animesh"));
-        FindHierarchy f = new TopologicalSort().new FindHierarchy();
-        f.topSort(map);
+        topologicalSort(g.getAdjMatrix(), g.getV());
     }
 
-    class FindHierarchy {
-        void topSort(HashMap<String, String> graph) {
-            HashSet<String> visitedSet = new HashSet<>();
-            Stack<String> stack = new Stack<>();
-            for (String key :
-                    graph.keySet()) {
-                if (visitedSet.contains(key))
-                    continue;
-                topSortUtil(key, graph, visitedSet, stack);
-
-            }
-            System.out.println(stack);
-        }
-
-        void topSortUtil(String u, HashMap<String, String> graph, HashSet<String> visitedSet, Stack<String> stack) {
-            visitedSet.add(u);
-            String v = graph.get(u);
-            if (v != null && !visitedSet.contains(v)) {
-                topSortUtil(v, graph, visitedSet, stack);
-            }
-            stack.add(u);
-        }
-
-    }
 }

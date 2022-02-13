@@ -51,7 +51,7 @@ public class PreviousOrNextSmallerElement {
                 s.push(currElement);
             }
             else
-                pse.add(s.isEmpty()?-1:s.peek());
+                pse.add(s.peek());
 
         }
         System.out.println(pse);

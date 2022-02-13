@@ -5,7 +5,7 @@ class Process{
         return processes.stream();
     }
 }
-public class TestClass {
+public class SampleTest {
 
     public static void main(String[] args) {
         for(Integer i : (Iterable<Integer>)Process.getProcesses().iterator())

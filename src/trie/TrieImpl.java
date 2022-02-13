@@ -1,4 +1,4 @@
-package Trie;
+package trie;
 
 public class TrieImpl {
     TrieNode root;
