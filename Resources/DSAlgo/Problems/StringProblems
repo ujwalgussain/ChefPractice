@@ -7,7 +7,7 @@ Find whether a string can be rearranged to become palindrome.(if strlen is even 
  Palindrome:
         Note: A Palindromic String will have even no of occurences of each digit.
         Count min swaps to make string palindrome
-            ChefPractice\src\a_practiceproblems.StringProblems.palindrome.CountMinSwapsToMakePalindromeImpl.java
+            ChefPractice\src\a_practiceproblems.StringProblems.palindrome.CountMinAdjSwapsToMakePalindromeImpl.java
         Find the Number of Palindromic SubString
         Longest Palindromic Substring ----> src/a_practiceproblems/StringProblems/LongestPalindromicSubString.java
         Print all Palindromic Substring

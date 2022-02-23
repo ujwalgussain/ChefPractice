@@ -1,6 +1,9 @@
 package LargestCycle_DiameterProblem;
 
+import a_practiceproblems.TreeProblems.tree.TreeNode;
+
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -418,9 +421,6 @@ public class TestClass {
         return l;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new TestClass().countVowelSubstrings("aeiouu"));
-    }
 
     public int solve(String A) {
         int len = A.length();
@@ -541,41 +541,376 @@ public class TestClass {
         return result;
     }
 
-    public int isMatch(final String A, final String B) {
-        return isMatch(A, B, 0, 0) ? 1 : 0;
+    /*public int solve(ArrayList<ArrayList<Integer>> A) {
+        int rows = A.size();
+        int cols = A.get(0).size();
+        int dp[][] = new int[rows][cols];
+        //add column heights
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (get(A, i, j) != 0)
+                    if (i == 0)
+                        dp[i][j] = 1;
+                    else
+                        dp[i][j] = get(A, i, j) + dp[i - 1][j];
+            }
+        }
+        //sort rows
+        int maxArea = Integer.MIN_VALUE;
+        for (int[] row : dp) {
+            Arrays.sort(row);
+            for (int i = cols - 1; i >= 0; i--) {
+                maxArea = Math.max(maxArea, row[i] * (cols - i));
+            }
+        }
+        return maxArea;
+    }
+*/
+    public int get(ArrayList<ArrayList<Integer>> A, int i, int j) {
+        return A.get(i).get(j);
     }
 
-    public boolean isMatch(String A, String B, int i, int j) {
-        boolean result;
-        String key = i + "-" + j;
-        if (map.containsKey(key))
-            return map.get(key);
-        //Pattern is Processed
-        if (j == B.length()) {
-            result = i == A.length();
-        } else if (i == A.length()) { //String is Processed
-            while (j < B.length() && B.charAt(j) == '*') {
-                j++;
-            }
-            result = j == B.length(); //Continue any char other than * is found or pattern ends
-        } else if (Character.isLetter(B.charAt(j))) {
-            while (i<A.length() && j<B.length() && Character.isLetter(B.charAt(j)) ) {
-                if(A.charAt(i) != B.charAt(j))
-                    return false;
-                i++;
-                j++;
-            }
-            result =   isMatch(A, B, i , j);
-        } else if (B.charAt(j) == '?') {
-            /*while (B.charAt(j) == '?') {
-                i++;
-                j++;
-            }*/
-            result = isMatch(A, B, i + 1, j + 1);
-        } else {
-            result = isMatch(A, B, i + 1, j) || isMatch(A, B, i, j + 1);
+
+    public int solve(ArrayList<ArrayList<Integer>> A) {
+        int houses = A.size();
+        int[][] dp = new int[houses][3];
+        dp[0][0] = A.get(0).get(0);
+        dp[0][1] = A.get(0).get(1);
+        dp[0][3] = A.get(0).get(2);
+        /*
+        So dp[i][0] = A[i][0] + min(dp[i-1][1],dp[i-1][2])
+        Similarly:
+        dp[i][1] = A[i][1] + min(dp[i-1][0], dp[i-1][2])
+        dp[i][2] = A[i][2] + min(dp[i-1][0], dp[i-1][1])
+         */
+        for (int i = 1; i < houses; i++) {
+            dp[i][0] = A.get(i).get(0) // paint curr house red
+                    + Math.max(dp[i - 1][1], dp[i - 1][2]); //prev house can be painted green/blue
+            dp[i][1] = A.get(i).get(0) // paint curr house green
+                    + Math.max(dp[i - 1][0], dp[i - 1][2]); //prev house can be painted red/blue
+            dp[i][2] = A.get(i).get(0) // paint curr house blue
+                    + Math.max(dp[i - 1][0], dp[i - 1][1]);//prev house can be painted red/green
         }
-        map.put(key, result);
+        return Math.min(dp[houses - 1][0], Math.min(dp[houses - 1][1], dp[houses - 1][2]));
+        /*rec(A,0,-1,0);
+        return minCost;*/
+
+    }
+
+    int minCost;
+
+    public void rec(ArrayList<ArrayList<Integer>> A, int house, int lastPaint, int cost) {
+        if (house == A.size()) {
+            minCost = Math.min(minCost, cost);
+            return;
+        }
+        int minCost = Integer.MAX_VALUE;
+        for (int i = 0; i < 3; i++) {
+            if (i == lastPaint)
+                continue;
+            rec(A, house + 1, i, cost + A.get(house).get(i));
+        }
+    }
+
+    public ArrayList<String> reorderLogs(ArrayList<String> A) {
+        class Log {
+            String id;
+            String content;
+            boolean isDigitLog;
+            String logStr;
+            int idx;
+
+            public Log(String logStr, int idx) {
+                this.logStr = logStr;
+                int i = logStr.indexOf('-');
+                id = logStr.substring(0, i);
+                content = logStr.substring(i + 1);
+                isDigitLog = isDigitLog(content);
+                idx = i;
+            }
+        }
+        HashMap<String, Log> map = new HashMap<>();
+        for (int i = 0; i < A.size(); i++) {
+            map.put(A.get(i), new Log(A.get(i), i));
+        }
+
+        return A.stream().sorted((x, y) -> {
+            Log a = map.get(x);
+            Log b = map.get(y);
+            if (a.isDigitLog) {
+                if (b.isDigitLog) {
+                    //compare idx
+                    return Integer.compare(a.idx, b.idx);
+                } else {
+                    return -1;
+                }
+            } else {
+                //a is letter log
+                if (b.isDigitLog) {
+                    return 1;
+                } else {
+                    if (a.content.equals(b.content))
+                        return a.id.compareTo(b.id);
+                    else
+                        return a.content.compareTo(b.content);
+                }
+            }
+        }).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    boolean isDigitLog(String log) {
+        String logStr = log.substring(log.indexOf('-') + 1);
+        return logStr.matches("(.)*(\\d)(.)*");
+    }
+
+    public int calculateMinimumHP(int[][] dungeon) {
+        //Going from 0,0 to n,n will not work with same approach
+        if (dungeon == null || dungeon.length == 0 || dungeon[0].length == 0) return 0;
+
+        int m = dungeon.length;
+        int n = dungeon[0].length;
+
+        int[][] dp = new int[m][n];
+
+        dp[m - 1][n - 1] = Math.max(1 - dungeon[m - 1][n - 1], 1);
+
+        for (int i = m - 2; i >= 0; i--) {
+            dp[i][n - 1] = Math.max(dp[i + 1][n - 1] - dungeon[i][n - 1], 1);
+        }
+
+        for (int j = n - 2; j >= 0; j--) {
+            dp[m - 1][j] = Math.max(dp[m - 1][j + 1] - dungeon[m - 1][j], 1);
+        }
+
+        for (int i = m - 2; i >= 0; i--) {
+            for (int j = n - 2; j >= 0; j--) {
+                int down = Math.max(dp[i + 1][j] - dungeon[i][j], 1);
+                int right = Math.max(dp[i][j + 1] - dungeon[i][j], 1);
+                dp[i][j] = Math.min(right, down);
+            }
+        }
+        return dp[0][0];
+    }
+
+    public String FirstNonRepeating(String A) {
+        // code here
+        char[] arr = A.toCharArray();
+        int freq[] = new int[26];
+        String answer = "";
+        LinkedHashSet<Character> nonRepeatingChars = new LinkedHashSet<>();
+        for (char c :
+                arr) {
+            if (++freq[c - 'a'] > 1) {
+                //repeating
+                nonRepeatingChars.remove(c);
+            } else {
+                nonRepeatingChars.add(c);
+            }
+            answer += nonRepeatingChars.isEmpty() ? "#" : nonRepeatingChars.iterator().next();
+        }
+        return answer;
+    }
+
+
+    public static void test(String s) {
+        /*int len = s.length();
+        for(int i=0;i<len;i++){
+            for (int j = i; j < len; j++) {
+                HashSet<Character> set = new HashSet<>();
+                boolean f = false;
+                for (int k = i; k <=j ; k++) {
+                    if(set.contains(s.charAt(k))) {
+                        f = true;
+                        break;
+                    }
+                    set.add(s.charAt(k));
+                }
+                if(!f)
+                    System.out.println(s.substring(i,j+1));
+            }
+        }*/
+
+        int max = 1, start = 0;
+        HashSet<Character> set = new HashSet<>();
+        char arr[] = s.toCharArray();
+        for (int i = 0; i < s.length(); i++) {
+            while (set.contains(arr[i])) {
+                set.remove(arr[start++]);
+            }
+            int len = i - start + 1;
+            max = Math.max(max, len);
+            set.add(arr[i]);
+        }
+        System.out.println(max);
+    }
+
+
+    static Boolean isSubsetSum(int N, int arr[], int sum) {
+        int rows = arr.length;
+        int cols = sum;
+        boolean[][] dp = new boolean[rows + 1][cols + 1];
+        for (int currSum = 0; currSum <= rows; currSum++) {
+            for (int j = 0; j <= cols; j++) {
+                if (currSum == 0) {
+                    dp[0][j] = true;
+                } else if (j == 0) {
+                    dp[currSum][0] = false;
+                } else if (arr[j - 1] > currSum) {
+                    dp[currSum][j] = dp[currSum][j - 1];
+                } else {
+                    dp[currSum][j] = dp[currSum][j - 1] || dp[currSum - arr[j - 1]][j];
+                }
+            }
+        }
+        return dp[rows][cols];
+    }
+
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int num :
+                nums) {
+            minHeap.offer(num);
+            if (minHeap.size() > k)
+                minHeap.poll();
+
+        }
+        return minHeap.peek();
+    }
+
+
+    public List<Integer> findAnagrams(String s, String p) {
+        int k = p.length();
+        int n = s.length();
+        int diff = s.length();
+        int[] freq = new int[26];
+        List<Integer> answer = new ArrayList<>();
+        for (char c :
+                p.toCharArray()) {
+            freq[c - 'a']++;
+        }
+        for (int i = 0; i < n; i++) {
+            if (i >= k) {
+                //start removing
+                if (++freq[s.charAt(i - k) - 'a'] > 0)
+                    diff++;
+            }
+            if (--freq[s.charAt(i)] >= 0)
+                diff--;
+            if (diff == 0) {
+                answer.add(i - k + 1);
+            }
+        }
+        return answer;
+    }
+
+
+    public String longestNiceSubstring(String s) {
+        //base case
+        if(s.equals(""))
+            return "";
+        HashSet<Character> set =new HashSet<>();
+        s.chars().forEach(c -> set.add((char)c));
+        for (int i = 0; i < s.length(); i++) {
+            if(!(set.contains(Character.toLowerCase(s.charAt(i))) && set.contains(Character.toUpperCase(s.charAt(i))))){
+                String firstHalf = longestNiceSubstring(s.substring(0,i));
+                String secondHalf = longestNiceSubstring(s.substring(i+1));
+                return firstHalf.length()>=secondHalf.length()?firstHalf : secondHalf;
+            }
+        }
+        return s;
+    }
+    public int longestSubarray(int[] nums) {
+        int start = 0;
+        int zeroCnt = 0;
+        int maxV = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            while(zeroCnt>1){
+                if(nums[start]==0)
+                    zeroCnt--;
+                start++;
+            }
+            if(nums[i]==0){
+                zeroCnt++;
+            }
+            if(zeroCnt==1){
+                maxV = Math.max(maxV,i-start);
+            }
+        }
+        return maxV;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new TestClass().nthUglyNumber(7));
+    }
+
+    public int nthUglyNumber(int n) {
+        List<Integer> uglyNos = new ArrayList<Integer>();
+        uglyNos.add(1);
+        int i2 = 0, i3 = 0, i5 = 0;
+        System.out.println("n2\tn3\tn5\ti2\ti3\ti5\tuglyNos");
+        while (uglyNos.size()<n){
+            int n2 = uglyNos.get(i2) * 2;
+            int n3 = uglyNos.get(i3) * 3;
+            int n5 = uglyNos.get(i5) * 5;
+            int next = Math.min(n2,Math.min(n3,n5));
+            System.out.printf("%d\t%d\t%d\t%d\t%d\t%d\t%s\t",n2,n3,n5,i2,i3,i5,uglyNos);
+            System.out.println("Min = "+next);
+            if(next==n2)
+                i2++;
+            if(next==n3)
+                i3++;
+            if(next==n5)
+                i5++;
+            uglyNos.add(next);
+        }
+        return uglyNos.get(uglyNos.size()-1);
+    }
+    public int numSquares(int n) {
+        /*
+        n = 6 -> possible solutions are
+        1 + 1 + 1 + 1 + 1 + 1
+        1 + 1 + 4
+        1 + 4 + 1
+        4 + 1 + 1
+
+         */
+        int dp[] = new int[n+1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            int minValue = Integer.MAX_VALUE;
+            for (int j = 1; j*j <= i; j++) {
+                //we Will always enter the loop for j=1
+                //if n=10, j*j means find min of dp[10-1], dp[10-4], dp[10-9]
+                //Hence at each position we are cons
+                minValue = Math.min(minValue,dp[i-(j*j)]);
+            }
+            dp[i] = minValue+1;
+        }
+        return dp[n];
+    }
+
+    public List<TreeNode> allPossibleFBT(int n) {
+        return allPossibleFBT(1,n);
+    }
+    public List<TreeNode> allPossibleFBT(int start, int end) {
+        if(start>end)
+            return List.of(null);
+        List<TreeNode> result = new ArrayList<>();
+        for (int i = start; i <=end; i++) {
+            List<TreeNode> leftSubtrees = allPossibleFBT(start,i-1);
+            List<TreeNode> rightSubTrees = allPossibleFBT(i+1,end);
+            for (TreeNode leftSubtree: leftSubtrees) {
+                for (TreeNode rightSubtree: rightSubTrees) {
+                    TreeNode root = new TreeNode(i);
+                    root.left = leftSubtree;
+                    root.right = rightSubtree;
+                    result.add(root);
+                }
+
+            }
+        }
         return result;
     }
+
 }

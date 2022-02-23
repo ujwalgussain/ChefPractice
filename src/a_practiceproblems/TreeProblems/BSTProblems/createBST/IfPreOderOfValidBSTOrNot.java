@@ -1,4 +1,4 @@
-package a_practiceproblems.TreeProblems.BSTProblems;
+package a_practiceproblems.TreeProblems.BSTProblems.createBST;
 
 import java.util.ArrayList;
 import java.util.List;

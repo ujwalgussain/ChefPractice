@@ -4,12 +4,14 @@ import utils.ArrayUtils;
 
 import java.util.Arrays;
 //https://www.geeksforgeeks.org/count-minimum-swap-to-make-string-palindrome/
-public class CountMinSwapsToMakePalindromeImpl {
+public class CountMinAdjSwapsToMakePalindromeImpl {
     public static int solve(String s)
     {
         char arr[] = s.toCharArray();
         int n = arr.length;
         int count=0;
+        boolean invalidCharFound = false;
+        boolean isOddLen = (n&1)==1;
         for(int i = 0; i<n/2; i++)
         {
             int right = n-i-1;
@@ -21,8 +23,14 @@ public class CountMinSwapsToMakePalindromeImpl {
                 right--;
             }
             //We have parsed until mid of string
-            if(i==right)
-                return -1;
+            if(i==right){
+                if(isOddLen && !invalidCharFound){
+                    invalidCharFound = true;
+                    while(i<n/2-1){
+                        ArrayUtils.swap(arr,i,i+1);
+                    }
+                }
+            }
             else
                 if(arr[i] != arr[n-i-1])
                 {
@@ -44,7 +52,7 @@ public class CountMinSwapsToMakePalindromeImpl {
         2
          */
 
-        System.out.println(solve("mamda"));
+        System.out.println(solve("dmama")); //will re
     }
 
 

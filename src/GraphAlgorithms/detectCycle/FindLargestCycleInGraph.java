@@ -25,6 +25,7 @@ public class FindLargestCycleInGraph {
         }
     }
     static TreeMap<Integer, List<Integer>> graph = new TreeMap();
+    static int total=0, start=-1;
     public static void main(String args[] ) throws Exception {
 
         // Write your code here
@@ -58,5 +59,4 @@ public class FindLargestCycleInGraph {
             graph.put(u,al);
         }
     }
-    static int total=0, start=-1;
 }
