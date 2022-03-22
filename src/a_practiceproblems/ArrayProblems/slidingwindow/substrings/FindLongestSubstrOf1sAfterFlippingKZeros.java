@@ -1,4 +1,4 @@
-package a_practiceproblems.ArrayProblems.slidingwindow;
+package a_practiceproblems.ArrayProblems.slidingwindow.substrings;
 
 public class FindLongestSubstrOf1sAfterFlippingKZeros {
     int findlongestSubArray(int[] nums, int k) {

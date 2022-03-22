@@ -1,4 +1,4 @@
-package a_practiceproblems.ArrayProblems.slidingwindow;
+package a_practiceproblems.ArrayProblems.slidingwindow.subarrays.sum.find;
 
 public class MinLengthSubArrayWithSumGreaterThanK {
      /* https://www.techiedelight.com/length-of-smallest-subarray-with-sum-greater-number/

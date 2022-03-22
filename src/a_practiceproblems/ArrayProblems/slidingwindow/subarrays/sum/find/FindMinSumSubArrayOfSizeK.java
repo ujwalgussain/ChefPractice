@@ -1,4 +1,4 @@
-package a_practiceproblems.ArrayProblems.slidingwindow;
+package a_practiceproblems.ArrayProblems.slidingwindow.subarrays.sum.find;
 
 import java.util.List;
 

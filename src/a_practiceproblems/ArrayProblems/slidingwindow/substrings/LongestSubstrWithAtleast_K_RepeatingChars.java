@@ -1,4 +1,4 @@
-package a_practiceproblems.ArrayProblems.slidingwindow;
+package a_practiceproblems.ArrayProblems.slidingwindow.substrings;
 
 public class LongestSubstrWithAtleast_K_RepeatingChars {
     /*

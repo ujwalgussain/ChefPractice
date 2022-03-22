@@ -12,10 +12,10 @@ public class StockBuySellAtmostKTimes {
                 if (i == 0 || j == 0)
                     continue;
                 int max = Integer.MIN_VALUE;
-                for (int m = 0; m < j; m++) {
+                for (int k = 0; k < j; k++) {
                     max = Math.max(
                             max,
-                            prices[j] - prices[m] + profit[i - 1][m]
+                            prices[j] - prices[k] + profit[i - 1][k]
                     );
                 }
                 profit[i][j] = Math.max(profit[i][j - 1], max);
@@ -23,4 +23,6 @@ public class StockBuySellAtmostKTimes {
         }
         return profit[K][n - 1];
     }
+
+
 }

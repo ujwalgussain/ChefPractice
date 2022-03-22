@@ -1,7 +1,9 @@
 package LargestCycle_DiameterProblem;
 
 import a_practiceproblems.TreeProblems.tree.TreeNode;
+import com.sun.source.tree.Tree;
 
+import java.io.LineNumberInputStream;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -839,9 +841,7 @@ public class TestClass {
         return maxV;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new TestClass().nthUglyNumber(7));
-    }
+
 
     public int nthUglyNumber(int n) {
         List<Integer> uglyNos = new ArrayList<Integer>();
@@ -912,5 +912,477 @@ public class TestClass {
         }
         return result;
     }
+
+    public int countSquares(int[][] matrix) {
+        int ans = 0;
+        boolean f = false;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if(matrix[i][j]==0)
+                    continue;
+                else if(i!=0 && j!=0)
+                    matrix[i][j] = Math.min(matrix[i - 1][j], Math.min(matrix[i][j - 1], matrix[i - 1][j - 1]));
+                ans+=matrix[i][j];
+            }
+        }
+        return ans;
+    }
+
+    public int numSplits(String s) {
+        int freq[] = new int[26];
+        HashMap<Character,Integer> allCharsMap = new HashMap<>();
+        for (char c:
+             s.toCharArray()) {
+            allCharsMap.put(c,allCharsMap.getOrDefault(c,0)+1);
+        }
+        int count = 0;
+        HashMap<Character,Integer> partitionCharMap = new HashMap<>();
+        for (char c:
+                s.toCharArray()) {
+            partitionCharMap.put(c,partitionCharMap.getOrDefault(c,0)+1);
+            if(allCharsMap.get(c)==0)
+                allCharsMap.remove(c);
+            else
+                allCharsMap.put(c,allCharsMap.get(c)-1);
+            if(partitionCharMap.size()==allCharsMap.size())
+                count++;
+        }
+        return count;
+    }
+
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        LinkedList<Integer> list = new LinkedList<>();
+        LinkedList<Integer> prefix = new LinkedList<>();
+        for (int i = 0; i < arr.length; i++) {
+            while(!list.isEmpty() && arr[list.peekLast()]<arr[i])
+                list.pollLast();
+            list.add(i);
+            if(i>=k-1){
+                prefix.add(arr[list.peek()]);
+                if(list.peekFirst() == i-k+1)
+                    list.poll();
+            }
+        }
+        for (int i = 0; i < k-1; i++) {
+            prefix.addFirst(prefix.peekFirst());
+        }
+        list = new LinkedList<>();
+        int n = arr.length;
+        LinkedList<Integer> suffix = new LinkedList<>();
+        for (int i = n-1; i >= 0; i--) {
+            while(!list.isEmpty() && arr[list.peekLast()]<arr[i])
+                list.pollLast();
+            list.add(i);
+            if(n-i>=k){
+                suffix.addFirst(arr[list.peek()]);
+                if(list.peekFirst() == i+k-1)
+                    list.poll();
+            }
+        }
+        for (int i = 0; i < k-1; i++) {
+            suffix.addLast(suffix.peekLast());
+        }
+
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            System.out.println(Math.max(prefix.get(i),suffix.get(i)));
+            sum+=Math.max(prefix.get(i),suffix.get(i));
+        }
+        return sum;
+    }
+
+    List[] buildTree(int arr[]){
+        int x = (int)Math.ceil(Math.log(arr.length)/Math.log(2));
+        int len =2*(int)Math.pow(2,x);
+        List[] tree = new List[len];
+        buildTree(tree,arr,0,0,arr.length-1);
+        return tree;
+    }
+    void buildTree(List[] tree,int[] arr, int node, int lo, int hi){
+        if(lo==hi) {
+            tree[node] = List.of(arr[lo]);
+        } else {
+            int mid = (lo + hi)/2;
+            buildTree(tree, arr, 2*node+1, lo,mid);
+            buildTree(tree, arr,2*node+2,mid+1,hi);
+            PriorityQueue<Integer> queue = new PriorityQueue<>();
+            queue.addAll(tree[2*node+1]);
+            queue.addAll(tree[2*node+2]);
+            tree[node] = new ArrayList(queue);
+        }
+        System.out.println(tree[node]);
+
+    }
+
+    static void test(){
+
+        /*
+        0
+        1 0
+        2 1 0
+        3 2 1
+        4 3 2
+        */
+        for (int i = 0; i < 5; i++) {
+            int max = Integer.MIN_VALUE;
+            for (int j = 1; j <= 3 && i-j+1>=0 ; j++) {
+                System.out.println(i + " " + j);
+                System.out.printf("Max Of (%s, %s)%n",max,i-j+1);
+                max = Math.max(max,i-j+1);
+                System.out.println("max " + max);
+            }
+            System.out.println();
+        }
+    }
+
+    public int getKth(int lo, int hi, int k) {
+        class Node{
+            int data, pow;
+            Node(int data, int pow){
+                this.data = data;
+                this.pow = pow;
+            }
+
+            @Override
+            public String toString() {
+                return "Node{" +
+                        "data=" + data +
+                        ", pow=" + pow +
+                        '}';
+            }
+        }
+        PriorityQueue<Node> q = new PriorityQueue<>((x,y)->y.pow-x.pow==0?y.data-x.data:y.pow-x.pow);
+        for (int i = lo; i <= hi; i++) {
+            q.offer(new Node(i,find(i)));
+            System.out.println(q);
+            if(q.size()>k)
+                q.poll();
+        }
+        System.out.println("final q " + q);
+        return q.poll().data;
+
+
+    }
+    public int find(int num){
+        int pow = 0;
+        while(num>1){
+            if((num&1)==0)
+                num>>=1;
+            else{
+                num = (3*num)+1;
+            }
+            pow++;
+        }
+        return pow;
+    }
+
+    public int solve(final List<Integer> A) {
+        int n = A.size();
+        if(n<2)
+            return n;
+        HashMap<Integer,Integer>[] dp = new HashMap[n];
+        for (int i = 0; i < n; i++) {
+            dp[i] = new HashMap<>();
+        }
+        int max = 2;//smallest possible AP sequence
+        for (int i = 1; i < n; i++) {
+            System.out.println("i = " + i);
+            for (int j = 0; j < i; j++) {
+                System.out.println("\tj = " + j);
+                int difference = A.get(i)-A.get(j);
+                if(dp[j].containsKey(difference)){
+                    int value = dp[j].get(difference)+1;
+                    dp[i].put(difference,value);
+                    max = Math.max(max,value);
+                    System.out.println("\tValue -" +value);
+                } else {
+                    dp[i].put(difference,2);
+                }
+                System.out.println("\t"+dp[i]);
+            }
+        }
+        return max;
+    }
+    void m1(){
+        String s="abc";
+        m2(s);
+        System.out.println(s);
+    }
+    void m2(String s){
+        s="pqr";
+    }
+
+    final static HashMap<Character, List<Character>> alphabets = new HashMap(
+            Map.of('2',
+                    List.of('a', 'b', 'c'),
+                    '3',
+                    List.of('d', 'e', 'f'),
+                    '4',
+                    List.of('g', 'h', 'i'),
+                    '5',
+                    List.of('j', 'k', 'l'),
+                    '6',
+                    List.of('m', 'n', 'o'),
+                    '7',
+                    List.of('p', 'q', 'r', 's'),
+                    '8',
+                    List.of('t', 'u', 'v'),
+                    '9',
+                    List.of('w', 'x', 'y', 'z')
+            )
+    );
+
+    public static List<String> letterCombinations(String digits) {
+        List<String>[] dp = new List[digits.length()+1];
+        dp[0] = new ArrayList<>(List.of(""));
+        for (int i = 1; i <= digits.length(); i++) {
+            List<Character> curr = alphabets.get(digits.charAt(i-1));
+            ArrayList<String> currList = new ArrayList<>();
+            for (String s:
+                    dp[i-1]) {
+                for(char c: curr){
+                    currList.add(s.concat(c+""));
+                }
+            }
+            dp[i] = currList;
+        }
+        return dp[digits.length()];
+    }
+
+
+    public boolean isValidSudoku(char[][] board) {
+        for (int i = 0; i < 9; i+=3) {
+            for (int j = 0; j < 9; j+=3) {
+                isValid(board,i,j);
+            }
+        }
+        return true;
+    }
+    public boolean isValid(char[][] board,int i, int j){
+        System.out.println(i+" " + j +" to " + (i+3)+" "+(j+3));
+        boolean[] map = new boolean[10];
+        for (int k = i; k < i+3; k++) {
+            for (int l = j; l < j+3 ; l++) {
+                if(board[k][l]>='0' && board[k][l]<='9'){
+                    if(map[board[k][l]-'0'])
+                        return false;
+                    map[board[k][l]-'0']=true;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    void pollAndProcess(LinkedList<LinkedList<String>> queue, String endWord, List<String> wordList){
+
+    }
+
+    class LRUCache {
+        LinkedHashMap<Integer,Integer> cache;
+        int capacity;
+        public LRUCache(int capacity) {
+            this.capacity = capacity;
+            cache = new LinkedHashMap<>();
+        }
+
+        public int get(int key) {
+            if(map.containsKey(key)){
+                int value = cache.get(key);
+                cache.remove(key);
+                cache.put(key,value);
+                return value;
+            }
+            return -1;
+        }
+
+        public void put(int key, int value) {
+            if(cache.size()>capacity) {
+                int lastKey = (int) cache.keySet().toArray()[capacity - 1];
+                cache.remove(lastKey);
+            }
+            cache.put(key,value);
+        }
+    }
+
+
+    public void rotate(ArrayList<ArrayList<Integer>> a) {
+        for (int i = 0; i < a.size(); i++) {
+            for (int j = 0; j < a.get(0).size(); j++) {
+                int temp = a.get(i).get(j);
+                a.get(i).set(j,a.get(j).get(i));
+                a.get(j).set(i,temp);
+            }
+        }
+        for (int i = 0; i < a.size(); i++) {
+            Collections.reverse(a.get(i));
+        }
+    }
+
+    public int findDuplicate(int[] nums) {
+        int fast = nums[0], slow = nums[0];
+        do{
+            System.out.printf("fast = %s slow = %s %n",fast,slow);
+            fast = nums[nums[fast]];
+            slow = nums[slow];
+        }while(fast!=slow);
+        return slow;
+    }
+
+    public ArrayList<Integer> repeatedNumber(final List<Integer> ar) {
+        int n = ar.size();
+        boolean[] check = new boolean[n];
+        int repeatingNum = -1;
+        for (int i = 0; i < ar.size(); i++) {
+            Integer a = ar.get(i);
+            if (check[a - 1] == true) {
+                repeatingNum = a;
+            } else {
+                check[a - 1] = true;
+            }
+        }
+        int missing = -1;
+        for (int i = 0; i < n; i++) {
+            if (!check[i]) {
+                missing = i + 1;
+            }
+        }
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(repeatingNum);
+        arrayList.add(missing);
+        return arrayList;
+    }
+
+    static class TreeNode{
+        int data;
+        TreeNode left,right;
+        int rightSubtree;
+
+        public TreeNode(long data) {
+            this.data = data;
+        }
+        void insert(long x){
+            TreeNode temp = this;
+            TreeNode y = null;
+            while(temp!=null)
+            {
+                y=temp;
+                if(temp.data<x){
+                    temp.rightSubtree+=1;
+                    temp=temp.right;
+                }
+                else {
+                    if(temp.data>x)
+                        temp=temp.left;
+                }
+            }
+            if(y.data<x)
+                y.right = new TreeNode(x);
+            else
+                y.left = new TreeNode(x);
+        }
+        int cntGreaterElements(long x){
+            TreeNode temp = this;
+            int c = 0;
+            while(temp!=null)
+            {
+                if(temp.data<x){
+                    temp=temp.right;
+                }
+                else {
+                    c += 1 + rightSubtree;
+                    temp=temp.left;
+                }
+            }
+            return c;
+        }
+    }
+    static long inversionCount(long arr[], long N)
+    {
+        TreeNode root = new TreeNode(arr[0]);
+        int c = 0;
+        for (int i = 1; i<N ; i++) {
+            c+=root.cntGreaterElements(arr[i]);
+            root.insert(arr[i]);
+        }
+        return c;
+    }
+
+    public static int lengthOfLongestConsecutiveSequence(int[] arr, int N) {
+        // Write your code here.
+        PriorityQueue<Integer> priorityQueue = Arrays.stream(arr).boxed().collect(Collectors.toCollection(PriorityQueue::new));
+        int max = 1;
+        int c = 1;
+        int prev = priorityQueue.poll();
+        while(!priorityQueue.isEmpty()){
+            int next = priorityQueue.poll();
+            if(next-prev==1){
+                c++;
+            }
+            else{
+                c=1;
+            }
+            prev = next;
+            max = Math.max(max,c);
+        }
+        return max;
+    }
+    public int longestConsecutive(int[] arr)
+    {
+        HashSet<Integer> set = Arrays.stream(arr).boxed().collect(Collectors.toCollection(HashSet::new));
+        int max =0;
+        for (int num:
+             arr) {
+            if(!set.contains(num-1)){
+                int c = 1;
+                int currnum = num;
+                while(set.contains(++currnum))
+                    ++c;
+                max = Math.max(max,c);
+            }
+        }
+        return max;
+    }
+    class ListNode{
+        int val;
+        ListNode next;
+    }
+    boolean isFeasible(ArrayList<Integer> A, int B, long m){
+        //System.out.print("For " + m);
+        int sum = 0;
+        int c = 0;
+        for (int i = 0; i < A.size(); i++) {
+            if(A.get(i)>m)
+                return false;
+            sum+=A.get(i);
+            if(sum>m){
+                sum = A.get(i);
+                c++;
+            }
+        }
+        //System.out.println(" " + (c<=B));
+        return c+1<=B;
+    }
+    public int solve(ArrayList<Integer> A, int B) {
+        long total = A.stream().reduce(0,(x,y) -> x+y);
+        long min = Collections.min(A);
+        long lo = min, hi = total;
+        while(lo<hi){
+            long mid = (lo+hi)>>1;
+            if(isFeasible(A,B,mid)){
+                //System.out.println(hi);
+                hi = mid;
+            }
+            else{
+                lo=mid+1;
+            }
+        }
+        return (int)hi;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new TestClass().solve(new ArrayList<>(List.of( 3, 4, 17, 8, 8, 7, 8, 9, 13, 11, 10, 4)),14));
+    }
+
 
 }

@@ -50,14 +50,9 @@ public class FirstMissingPositiveInteger {
         while (i < len) {
             if (
                     nums[i] > 0 && nums[i] <= len //nums[i] in range of 1 to len
-                            && i+1!=nums[i] //nums[i] not at i-1 idx
+                            && nums[nums[i]-1]!=nums[i] //nums[i] not at i-1 idx
             ) {
                 int correctPos = nums[i] - 1;
-                //correctPos already has correct element
-                if(nums[correctPos]==nums[i]){
-                    i++;
-                    continue;
-                }
                 int temp = nums[i];
                 nums[i] = nums[correctPos];
                 nums[correctPos] = temp;

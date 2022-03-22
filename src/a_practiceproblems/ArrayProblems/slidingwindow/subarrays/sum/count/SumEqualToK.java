@@ -1,4 +1,4 @@
-package a_practiceproblems.ArrayProblems.slidingwindow.countingsubarrays.sum;
+package a_practiceproblems.ArrayProblems.slidingwindow.subarrays.sum.count;
 
 import java.util.HashMap;
 

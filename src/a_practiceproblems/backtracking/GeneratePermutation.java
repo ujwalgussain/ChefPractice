@@ -13,12 +13,12 @@ public class GeneratePermutation {
     public List<List<Integer>> permuteUnique(int[] nums) {
         Arrays.sort(nums);
         permute(nums,new ArrayList<>(),new boolean[nums.length]);
-        return new ArrayList<>(set);
+        return new ArrayList<>(permutations);
     }
-    ArrayList<List<Integer>> set = new ArrayList<>();
+    ArrayList<List<Integer>> permutations = new ArrayList<>();
     public void permute(int[] nums,List<Integer> permutation, boolean used[]){
         if(permutation.size()==nums.length)
-            set.add(new ArrayList<>(permutation));
+            permutations.add(new ArrayList<>(permutation));
         else{
             for (int i = 0; i < nums.length; i++) {
                 if(used[i])
@@ -34,4 +34,5 @@ public class GeneratePermutation {
             }
         }
     }
+
 }

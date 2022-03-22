@@ -1,8 +1,8 @@
-package a_practiceproblems.ArrayProblems.slidingwindow;
+package a_practiceproblems.ArrayProblems.slidingwindow.subarrays.sum.find;
 
 import java.util.ArrayList;
 
-import static a_practiceproblems.ArrayProblems.slidingwindow.CountSubArraysWithAtmostKDistinctElements.countSubArraysWithAtmostKElements;
+import static a_practiceproblems.ArrayProblems.slidingwindow.subarrays.sum.count.CountSubArraysWithAtmostKDistinctElements.countSubArraysWithAtmostKElements;
 
 //Link : https://www.interviewbit.com/problems/subarrays-with-distinct-integers/
 public class SubarraysWithDistinctIntegers {

@@ -16,10 +16,15 @@ public class ExcelSheetColumn {
     String convertToString(int A) {
         String ans = "";
         while (A != 0) {
-            char c = (char) (((A % 26) - 1) + 'A');
-            A = A / 26;
+            char c = (char) ((((A-1) % 26)) + 'A');
+            A = (A-1) / 26;
+            //System.out.println(A);
             ans = c + ans;
         }
         return ans;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new ExcelSheetColumn().convertToString(27));
     }
 }

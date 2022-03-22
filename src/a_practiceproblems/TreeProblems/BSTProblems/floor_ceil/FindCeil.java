@@ -9,14 +9,27 @@ public class FindCeil {
     * */
 
     //ceil-> next greaterThanEqualTo
-    static int ceil(TreeNode root, int key) {
+    static int ceilRecursive(TreeNode root, int key) {
         if (root == null)
             return Integer.MAX_VALUE;
         if(root.val == key)
             return root.val;
         if(root.val <key)
-            return ceil(root.right,key);
-        return Math.min(root.val,ceil(root.left,key));
+            return ceilRecursive(root.right,key);
+        return Math.min(root.val, ceilRecursive(root.left,key));
+    }
+    static int ceilIterative(TreeNode root, int key){
+        TreeNode temp = root;
+        int ceil = -1;
+        while (temp!=null){
+            if(temp.val>=key){
+                ceil = temp.val;
+                temp=temp.left;
+            } else {
+                temp = temp.right;
+            }
+        }
+        return ceil;
     }
     static TreeNode next = null;
     static TreeNode ceil2(TreeNode root, int key) {
@@ -33,10 +46,11 @@ public class FindCeil {
         return ceil2(root.left,key);
     }
 
+
     public static void main(String[] args) {
 
         TreeNode root = BSTUtils.createBSTAndReturnRoot();
-        System.out.println(ceil(root, 39));
+        System.out.println(ceilRecursive(root, 39));
         System.out.println(ceil2(root, 39));
     }
 }
