@@ -1254,7 +1254,7 @@ public class TestClass {
     }
 
     static class TreeNode{
-        int data;
+        long data;
         TreeNode left,right;
         int rightSubtree;
 

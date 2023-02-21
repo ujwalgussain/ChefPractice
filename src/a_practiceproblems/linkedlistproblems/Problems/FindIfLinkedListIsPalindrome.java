@@ -65,4 +65,7 @@ public class FindIfLinkedListIsPalindrome {
         }
         return prev;
     }
+    //Third Way : Find middle of list.
+    // If fast = null then even length ie,, start comparing from mid
+    //If fast != null then length is odd, start comparing from mid.next
 }
