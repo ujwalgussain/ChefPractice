@@ -38,6 +38,7 @@ public class MorrisTraversal {
                     pred.right = curr;
                     curr = curr.left;
                 } else {
+                    //This was the last node in subtree which has curr. Hence, go to right subtree
                     pred.right = null;
                     inorder.add(curr.val);
                     curr = curr.right;
@@ -46,6 +47,7 @@ public class MorrisTraversal {
         }
         return inorder;
     }
+
     public ArrayList<Integer> preorderTraversal(TreeNode A) {
         TreeNode curr = A;
         ArrayList<Integer> preOrder = new ArrayList<>();
