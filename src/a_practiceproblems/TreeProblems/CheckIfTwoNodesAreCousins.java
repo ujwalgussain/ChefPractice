@@ -16,6 +16,7 @@ public class CheckIfTwoNodesAreCousins {
         while (!list.isEmpty()) {
             int size = list.size();
 
+            //For All nodes at each level. Find check if node is present and initialize parent
             for (int i = 0; i < size; i++) {
                 TreeNode node = list.pollFirst();
                 TreeNode parent = parentTracker.poll();
@@ -32,6 +33,7 @@ public class CheckIfTwoNodesAreCousins {
                     parentTracker.add(node);
                 }
             }
+
             //parent of A and B should be different
             if (parentA != null && parentB != null && parentA != parentB)
                 return true;
@@ -42,6 +44,4 @@ public class CheckIfTwoNodesAreCousins {
         }
         return false;
     }
-
-
 }
