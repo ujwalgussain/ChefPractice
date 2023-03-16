@@ -1152,5 +1152,6 @@ public class TestClass3 {
         String decodedStr = new String(Base64.getDecoder().decode(encodedStr));
         System.out.println("Encoded "  + encodedStr);
         System.out.println("Decoded " + decodedStr);
+        System.out.println("Git Revert Test");
     }
 }
