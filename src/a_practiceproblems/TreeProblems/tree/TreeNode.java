@@ -44,4 +44,16 @@ public class TreeNode {
     public String toString() {
         return Integer.toString(val);
     }
+    static class TreeBuilder {
+        TreeNode root;
+        private TreeBuilder() {
+        }
+
+        public TreeNode root(int x) {
+            TreeNode n = new TreeNode(x);
+            root = n;
+            return n;
+        }
+        public TreeNode addLeft(TreeNode)
+    }
 }

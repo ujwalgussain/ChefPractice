@@ -1,3 +1,5 @@
+import com.sun.source.tree.Tree;
+
 import java.math.BigInteger;
 import java.util.*;
 
@@ -369,25 +371,35 @@ class TestClass1 {
         }
         return new ArrayList<>(sumMap.values());
     }
+
     public Long coveredNodes(TreeNode A) {
         LinkedList<TreeNode> list = new LinkedList<>();
         list.add(A);
         long total = 0;
-        long leftViewTotal = 0;
-        long rightViewTotal=0;
+        int level = 0;
+        HashMap<Integer, TreeNode> leftView = new HashMap<>();
+        HashMap<Integer, TreeNode> rightView = new HashMap<>();
+
         while(!list.isEmpty()) {
             int size = list.size();
-            leftViewTotal+=list.peekFirst().val;
-            rightViewTotal+=list.peekLast().val;
             for (int i = 0; i < size; i++) {
                 TreeNode curr = list.poll();
+                if(!leftView.containsKey(level)) {
+                    leftView.put(level, curr);
+                } else {
+                    rightView.put(level,curr);
+                }
                 total+=curr.val;
                 if (curr.left != null)
                     list.add(curr.left);
                 if (curr.right != null)
                     list.add(curr.right);
             }
+            level++;
         }
-        return total-leftViewTotal-rightViewTotal+A.val;
+        long leftViewTotal = leftView.values().stream().map(treeNode -> treeNode.val).reduce(0,(x,y) -> x+y);
+        long rightViewTotal = rightView.values().stream().map(treeNode -> treeNode.val).reduce(0,(x,y) -> x+y);
+        return total-leftViewTotal-rightViewTotal;
     }
+
 }
