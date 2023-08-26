@@ -6,7 +6,7 @@ public class StockBuySellAtmostKTimes {
     //https://www.geeksforgeeks.org/maximum-profit-by-buying-and-selling-a-share-at-most-k-times/
     public int maxProfitIterativeDP(int[] prices, int K) {
         int n = prices.length;
-        int profit[][] = new int[3][n];
+        int profit[][] = new int[K+1][n];
         for (int i = 0; i <= K; i++) {
             for (int j = 0; j < n; j++) {
                 if (i == 0 || j == 0)

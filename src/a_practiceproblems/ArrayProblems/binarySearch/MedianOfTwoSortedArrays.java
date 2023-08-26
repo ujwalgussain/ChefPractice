@@ -10,16 +10,16 @@ public class MedianOfTwoSortedArrays {
         int x = a.size();
         int y = b.size();
         int lo = 0;
-        int hi = x - 1;
-        while (lo < hi) {
+        int hi = x;
+        while (lo <= hi) {
             int partitionX = (lo + hi) / 2;
-            int partitionY = (x + y + 1) / 2 - partitionX;
+            int partitionY = ((x + y + 1) / 2) - partitionX;
 
             int maxLeftX = partitionX == 0 ? Integer.MIN_VALUE : a.get(partitionX - 1);
             int minRightX = partitionX == x ? Integer.MAX_VALUE : a.get(partitionX);
 
-            int maxLeftY = partitionY == 0 ? Integer.MIN_VALUE : a.get(partitionY - 1);
-            int minRightY = partitionY == y ? Integer.MAX_VALUE : a.get(partitionY);
+            int maxLeftY = partitionY == 0 ? Integer.MIN_VALUE : b.get(partitionY - 1);
+            int minRightY = partitionY == y ? Integer.MAX_VALUE : b.get(partitionY);
 
             if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
                 if (((x + y) & 1) == 0)
