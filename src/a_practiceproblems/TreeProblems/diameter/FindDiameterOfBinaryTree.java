@@ -10,7 +10,7 @@ public class FindDiameterOfBinaryTree {
             return 0;
         int left = getDiameter(n.left);
         int right = getDiameter(n.right);
-        if(left + right > diameter)
+        if(left + right +1 > diameter)
             diameter = left+right;
         return Math.max(left,right)+1;
     }
