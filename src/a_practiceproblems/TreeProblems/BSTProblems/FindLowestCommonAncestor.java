@@ -28,6 +28,22 @@ public class FindLowestCommonAncestor {
                 ans = getLCAInBST(root.right,n1,n2);
         }
         return ans;
+
+        /*
+        Node LCA(Node root, int n1, int n2) {
+            // code here.
+                Node temp = root;
+                while(temp!=null) {
+                    if(temp.data < n1 && temp.data <n2)
+                        temp = temp.right;
+                    else if (temp.data > n1 && temp.data > n2)
+                        temp = temp.left;
+                    else
+                        return temp;
+            }
+            return null;
+        }
+        */
     }
 
     private static TreeNode getLCAUtil(TreeNode n, int n1, int n2)
