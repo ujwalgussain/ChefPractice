@@ -40,41 +40,32 @@ public class LinkedListWithRandomPointers {
         }
         src.random=dest;
     }
-    LinkedListWithRandomPointers getCloneWithRandomPtrs()
+    Node getCloneWithRandomPtrs()
     {
-        Node temp=head;
-        //Cloned inside
-        System.out.println("Org LL");
-        display();
-        while(temp!=null)
-        {
-            Node copy = new Node(temp.data);
-            copy.next=temp.next;
-            temp.next=copy;
-            temp=copy.next;
+        Node temp = head;
+        while(temp != null) {
+            Node n = new Node(temp.data);
+            Node next = temp.next;
+            n.next = next;
+            temp.next = n;
+            temp = next;
         }
-        System.out.println("Copied LL");
-        display();
+        temp = head;
+        while(temp != null) {
+            temp.next.random = temp.random==null?null:temp.random.next;
+            temp = temp.next.next;
+        }
 
-        temp=head;
-        while(temp!=null)
-        {
-            System.out.println(temp.data);
-            temp.next.random=temp.random==null?null:temp.random.next;
-            temp=temp.next.next;
+        Node head1 = head.next;
+        temp = head;
+        while(temp != null) {
+            Node copy = temp.next;
+            temp.next = copy.next;
+            if(copy.next != null)
+                copy.next = copy.next.next;
+            temp = temp.next;
         }
-        LinkedListWithRandomPointers l = new LinkedListWithRandomPointers();
-        l.head=head.next;
-        temp=head;
-        while(temp!=null)
-        {
-            Node copy=temp.next;
-            temp.next=copy.next;
-            copy.next=copy.next.next;
-            temp=temp.next.next;
-        }
-        l.display();
-        return l;
+        return head1;
     }
     void display()
     {
