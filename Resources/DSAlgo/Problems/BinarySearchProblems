@@ -1,4 +1,22 @@
 Questions:
+
+with binary search remember:
+    it stops when lo>hi which means hi will always point at idx with element lesser than tgt
+        Ex:
+            10 20 30 40 50
+            tgt is 25
+                lo=0    mid=2   hi=5 30>25
+                lo=0    mid=0   hi=1 10<25
+                lo=1    mid=1   hi=1 20<25
+                lo=2            hi=1
+            tgt is 5 --> Edge case when tgt smaller than smallest element
+                 lo=0    mid=2   hi=5 30>5
+                 lo=0    mid=0  hi=1 10>5
+                 lo=0    mid=0   hi=0 10>5
+                 lo=0    mid=2   hi=-1 -->
+
+
+
 Q 1) Find a single element in sorted array of elements which repeat twice
 Q 2) Find start and end occurence of element in a sorted array of repeating elements
 Q 3) Given an array in such a way that the elements stored in array are in increasing order initially and then after reaching to a peak element , elements stored are in decreasing order. Find the highest element.

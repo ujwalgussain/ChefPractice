@@ -14,9 +14,11 @@ public class DijkstraAlgoImpl {
     static void relax(int[][] g, int[] costmtx, HashSet<Integer> mstSet, int currNode) {
         for (int i = 0; i < g.length; i++) {
             if (!mstSet.contains(i)) {
-                int cost = costmtx[currNode] + g[currNode][i];
-                if (cost < costmtx[i]) {
-                    costmtx[i] = cost;
+                if(g[currNode][i] != I){
+                    int cost = costmtx[currNode] + g[currNode][i];
+                    if (cost < costmtx[i]) {
+                        costmtx[i] = cost;
+                    }
                 }
             }
         }
@@ -54,7 +56,12 @@ public class DijkstraAlgoImpl {
     public static void main(String[] args) {
 
         int g[][] = new int[][]{
-                {I, 2, 4, I, I, I}, {I, I, 1, 7, I, I}, {I, I, I, I, 3, I}, {I, I, I, I, I, 1}, {I, I, I, I, I, 5}, {I, I, I, I, I, I}
+                {I, 2, 4, I, I, I},
+                {I, I, 1, 7, I, I},
+                {I, I, I, I, 3, I},
+                {I, I, I, I, I, 1},
+                {I, I, I, I, I, 5},
+                {I, I, I, I, I, I}
         };
         HashSet<Integer> mstSet = new HashSet<>();
         mstSet.add(0);
