@@ -1,0 +1,16 @@
+
+‚
+java:S1319
+"gThe type of "inOrder" should be an interface such as "List" rather than the implementation "ArrayList".(¾Ðá¨ûÿÿÿÿ
+…
+java:S1319
+"jThe type of "levelOrder" should be an interface such as "List" rather than the implementation "ArrayList".(¾Ðá¨ûÿÿÿÿ
+}
+java:S1319"gThe type of "inOrder" should be an interface such as "List" rather than the implementation "ArrayList".(Œí¢ˆ
+€
+java:S1319"jThe type of "levelOrder" should be an interface such as "List" rather than the implementation "ArrayList".(Œí¢ˆ
+Q
+java:S4973"<Strings and Boxed types should be compared using "equals()".(éÅ„&
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(„óý
+V
+java:S1119";Refactor the code to remove this label and the need for it.(èÒËúûÿÿÿÿ

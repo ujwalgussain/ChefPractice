@@ -1,0 +1,12 @@
+
+_
+java:S2259;"BA "NullPointerException" could be thrown; "head" is nullable here.(òö´8¿»‡Ôñ1
+^
+java:S2259)"AA "NullPointerException" could be thrown; "src" is nullable here.(›Ê¨ª8û¡‡Ôñ1
+A
+java:S1659"$Declare "random" on a separate line.(ûÇÒË8ü¡‡Ôñ1
+b
+java:S1659"@Declare "src" and all following declarations on a separate line.(¨°£şÿÿÿÿ8ş¡‡Ôñ1
+G	java:S106I"+Replace this use of System.out by a logger.(ÛşÎ°8€¢‡Ôñ1
+G	java:S106N"+Replace this use of System.out by a logger.(´Ö¼8€¢‡Ôñ1
+L	java:S106Q"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8€¢‡Ôñ1
