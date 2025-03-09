@@ -21,6 +21,10 @@ public class MorrisTraversal {
                 visit(current)
                 current = current.right
     */
+
+    /**
+     * Note this can be used to find predecessor and successor for a node.
+     */
     public ArrayList<Integer> inorderTraversal(TreeNode A) {
         TreeNode curr = A;
         ArrayList<Integer> inorder = new ArrayList<>();
@@ -32,8 +36,13 @@ public class MorrisTraversal {
                 TreeNode pred = curr.left;
                 while (pred.right != null &&
                         pred.right != curr  //important
-                 )
+                 ) {
                     pred = pred.right;
+                }
+                /*
+                if curr == target then pred = inorder predecessor
+                if pred == target -> then curr = inorderSuccessor
+                 */
                 if (pred.right == null) {
                     pred.right = curr;
                     curr = curr.left;
