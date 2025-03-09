@@ -3,8 +3,8 @@ public class BinarySearchTreeImpl {
 }
 
 class Node{
-    private int data;
-    private Node left = null, right = null;
+    public int data;
+    public Node left = null, right = null;
 
     Node(int data){
         this.data = data;
@@ -62,5 +62,18 @@ class BST{
     void inOrderTraversal(Node root)
     {
         System.out.println(root.getData());
+    }
+    public int inorderSuccessor(Node root, Node x) {
+        // add code here.
+        Node successor = null;
+        while(root!=null) {
+            if(x.data>=root.data) {
+                root = root.right;
+            } else {
+                successor=root;
+                root=root.left;
+            }
+        }
+        return successor != null ? successor.data : -1;
     }
 }
