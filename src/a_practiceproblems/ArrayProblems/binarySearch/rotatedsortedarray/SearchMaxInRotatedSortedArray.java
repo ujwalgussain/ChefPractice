@@ -29,4 +29,57 @@ public class SearchMaxInRotatedSortedArray {
         System.out.println(findMaxElementIdx(new int[]{6,5,4,3,2,1})); // 0
         System.out.println(findMaxElementIdx(new int[]{1})); //0
     }
+
+
+    /*public int findMax(final List<Integer> a) {
+        int n=a.size();
+        int lo=0, hi=n-1;
+        int maxEleIdx = -1;
+        while (lo<=hi) {
+            int mid=(lo+hi)/2;
+            System.out.printf("lo = %s, mid = %s, hi= %s\n",a.get(lo), a.get(mid), a.get(hi));
+            if(a.get(mid)>a.get(mid+1)) {
+                maxEleIdx = mid;
+                break;
+            }
+            if(a.get(mid) >= a.get(lo)) {
+                lo=mid+1;
+            } else {
+                hi=mid-1;
+            }
+        }
+        return maxEleIdx;
+    }
+
+    public int findMin(final List<Integer> a) {
+        int n=a.size();
+        int lo=0, hi=n-1;
+        int minEleIdx = -1;
+        while (lo<=hi) {
+            int mid=(lo+hi)/2;
+            System.out.printf("lo = %s, mid = %s, hi= %s\n",a.get(lo), a.get(mid), a.get(hi));
+            if(a.get(mid) > a.get(mid+1)) {
+                minEleIdx = mid+1;
+                break;
+            }
+            if(a.get(mid) >= a.get(lo)) {
+                lo=mid+1;
+            } else {
+                hi=mid-1;
+            }
+        }
+        return minEleIdx;
+    }
+
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>(Arrays.asList(1,2,3,4,5,6));
+        for (int i = 0; i < list.size()-1; i++) {
+            Integer ele= list.pollLast();
+            list.addFirst(ele);
+            System.out.println("List : " + list);
+            System.out.println(new Scratch().findMin(new ArrayList<>(list)));
+            System.out.println();
+        }
+
+    }*/
 }

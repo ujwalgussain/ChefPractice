@@ -7,7 +7,7 @@ public class StockBuySellAtmostKTimes {
     public int maxProfitIterativeDP(int[] prices, int K) {
         int n = prices.length;
         int profit[][] = new int[K+1][n];
-        for (int i = 0; i <= K; i++) {
+        for  (int i = 0; i <= K; i++) {
             for (int j = 0; j < n; j++) {
                 if (i == 0 || j == 0)
                     continue;
