@@ -3,6 +3,7 @@ package a_practiceproblems.TreeProblems;
 import a_practiceproblems.TreeProblems.tree.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class MorrisTraversal {
     /*
@@ -36,7 +37,7 @@ public class MorrisTraversal {
                 TreeNode pred = curr.left;
                 while (pred.right != null &&
                         pred.right != curr  //important
-                 ) {
+                ) {
                     pred = pred.right;
                 }
                 /*
@@ -83,51 +84,29 @@ public class MorrisTraversal {
         return preOrder;
     }
 
-    /*
-    static Vector<Integer> postorderTraversal(TreeNode root)
-{
-    Vector<Integer> res = new Vector<>();
-    TreeNode current = root;
 
-    while (current != null)
-    {
+    public ArrayList<Integer> postorderTraversal(TreeNode root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root, lastVisited = null;
 
-        // If right child is null,
-        // put the current node data
-        // in res. Move to left child.
-        if (current.right == null) {
-            res.add(current.key);
-            current = current.left;
-        }
-        else {
-            TreeNode predecessor = current.right;
-            while (predecessor.left != null
-                   && predecessor.left != current) {
-                predecessor = predecessor.left;
-            }
-
-            // If left child doesn't point
-            // to this node, then put in res
-            // this node and make left
-            // child point to this node
-            if (predecessor.left == null) {
-                res.add(current.key);
-                predecessor.left = current;
-                current = current.right;
-            }
-
-            // If the left child of inorder predecessor
-            // already points to this node
-            else {
-                predecessor.left = null;
+        while (current != null || !stack.isEmpty()) {
+            if (current != null) {
+                stack.push(current);
                 current = current.left;
+            } else {
+                TreeNode peek = stack.peek();
+                if (peek.right != null && lastVisited != peek.right) {
+                    current = peek.right;
+                } else {
+                    result.add(peek.val);
+                    lastVisited = stack.pop();
+                }
             }
         }
+
+        return result;
     }
 
-    // reverse the res
-    Collections.reverse(res);
-    return res;
-}
-     */
+
 }
