@@ -1,7 +1,5 @@
 package GraphAlgorithms.ShortestPathAlgorithms;
 
-import GraphAlgorithms.AdjacencyMatrix;
-
 import java.util.Arrays;
 
 /*Reference: https://www.youtube.com/watch?v=FtN3BYH2Zes
@@ -117,4 +115,43 @@ public class BellmanFordAlgorithmImpl {
                 };
         obj.applyBellmanFordAlgo(G);
     }
+
+    boolean hasNegWeightCycle(int[][] G) {
+        // A negative weight cycle will relax even after V - 1 iterations.
+        initialize(G);
+        for (int i = 0; i < V - 1; i++) {
+            boolean isRelaxed = false; // Improves the Time Complexity
+            for (int u = 0; u < V; u++) {
+                for (int v = 0; v < V; v++) {
+                    if (G[u][v] != INFINITY) //for each valid edge
+                    {
+                        //Relax
+                        if (d[u] + G[u][v] < d[v]) {
+                            d[v] = d[u] + G[u][v];
+                            parent[v] = u;
+                            isRelaxed = true;
+                        }
+                    }
+                }
+            }
+            if (!isRelaxed) {
+                //already relaxed, hence no negative weight cycle present.
+                return false;
+            }
+        }
+
+        for (int u = 0; u < V; u++) {
+            for (int v = 0; v < V; v++) {
+                if (G[u][v] != INFINITY) //for each valid edge
+                {
+                    if (d[u] + G[u][v] < d[v]) {
+                        //Relaxing even after V-1 attempts.
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }
