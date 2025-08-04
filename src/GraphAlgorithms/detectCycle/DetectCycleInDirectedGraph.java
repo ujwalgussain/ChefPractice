@@ -3,7 +3,10 @@ package GraphAlgorithms.detectCycle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class DetectCycleInDirectedGraph {
     int WHITE = -1; //unvisited
@@ -88,4 +91,38 @@ public class DetectCycleInDirectedGraph {
         color[node] = BLACK;
         return false;
     }
+
+
+    //----------------------- Solution 2 -----------------------
+    public boolean isCyclic(int V, int[][] edges) {
+        // code here
+        Map<Integer, List<Integer>> adjList = new HashMap<>();
+        for (int a[]:
+                edges) {
+            adjList.computeIfAbsent(a[0], k -> new ArrayList<>()).add(a[1]);
+            //adjList.computeIfAbsent(a[1], k -> new ArrayList<>()).add(a[0]);
+        }
+        Set<Integer> visited = new HashSet<>();
+        for(int i=0; i<V; i++) {
+            if(dfs(i, adjList, visited)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    boolean dfs(int curr, Map<Integer, List<Integer>> adjList,Set<Integer> visited) {
+        if(visited.contains(curr)) {
+            return true;
+        }
+        visited.add(curr);
+        for (int v:
+                adjList.getOrDefault(curr, new ArrayList<>())) {
+            if(dfs(v,adjList,visited)) {
+                return true;
+            }
+        }
+        visited.remove(curr);
+        return false;
+    }
+
 }
