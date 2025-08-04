@@ -70,7 +70,8 @@ public class BellmanFordAlgorithmImpl {
                     if (G[u][v] != INFINITY) //for each valid edge
                     {
                         //Relax
-                        if (d[u] + G[u][v] < d[v]) {
+                        if (d[u] !=INFINITY //Very Imp. in case of disconnected graph
+                                && d[u] + G[u][v] < d[v]) {
                             d[v] = d[u] + G[u][v];
                             parent[v] = u;
                             isRelaxed = true;
