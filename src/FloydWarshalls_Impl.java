@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class FloydWarshalls_Impl {
+    //https://www.youtube.com/watch?v=oNI0rf2P9gE
     public static void main(String args[])
     {
         Scanner sc = new Scanner(System.in);
@@ -30,11 +31,11 @@ public class FloydWarshalls_Impl {
         int[][] cost = new int[graph.length][];
         for(int i=0;i<N;i++)
             cost[i]= Arrays.copyOf(graph[i],graph.length);
-        for(int k=1;k<N;k++)
+        for(int k=1;k<=N;k++)
         {
-            for(int i=1;i<N;i++)
+            for(int i=1;i<=N;i++)
             {
-                for (int j=1;j<N;j++)
+                for (int j=1;j<=N;j++)
                 {
                     if(cost[i][k]+cost[k][j]<cost[i][j])
                     {
