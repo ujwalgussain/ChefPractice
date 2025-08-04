@@ -94,6 +94,7 @@ public class DetectCycleInDirectedGraph {
 
 
     //----------------------- Solution 2 -----------------------
+    //https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1
     public boolean isCyclic(int V, int[][] edges) {
         // code here
         Map<Integer, List<Integer>> adjList = new HashMap<>();
