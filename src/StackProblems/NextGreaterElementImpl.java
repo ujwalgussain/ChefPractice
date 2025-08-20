@@ -40,6 +40,8 @@ public class NextGreaterElementImpl {
     }
     static void processNGE(int i,long[] arr, int[] nge, Stack<Integer> stack)
     {
+        //Ex : [4, 5, 2, 3, 1] ---> NGE elems [5, -1, 3, -1, -1]
+        //for 4 its 4 but for 2 its 3. Hence we need stack.
         while(!stack.isEmpty() && arr[i]>arr[stack.peek()])
         {
             System.out.println("max i = "+i);

@@ -77,9 +77,9 @@ public class TopologicalSort {
         visited[current_vertex] = true;
         for (int i = 0; i < V; i++) {
             if (G[current_vertex][i] == 1) {
-                if (!visited[i]) {
-                    topologicalSort_Util(G, V, i, visited, stack);
-                }
+                    if (!visited[i]) {
+                        topologicalSort_Util(G, V, i, visited, stack);
+                    }
             }
         }
         stack.push(current_vertex);

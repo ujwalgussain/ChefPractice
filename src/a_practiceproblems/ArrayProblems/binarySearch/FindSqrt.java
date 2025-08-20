@@ -41,18 +41,20 @@ public class FindSqrt {
 
     static double findCeiling(int x) {
         int lo = 1, hi = x/2;
-        while (lo < hi) {
+        int ceil = -1;
+        while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
             if(mid*mid == x) {
                 return mid;
             }
             if (mid * mid > x) {
-                hi = mid;  // Found a candidate, look for smaller one
+                ceil =mid;
+                hi = mid-1;  // Found a candidate, look for smaller one
             } else {
                 lo = mid + 1;  // Need bigger value
             }
         }
-        return lo;
+        return ceil;
     }
 
     public static void main(String[] args) {
