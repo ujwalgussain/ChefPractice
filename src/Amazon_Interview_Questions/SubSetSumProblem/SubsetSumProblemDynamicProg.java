@@ -3,6 +3,20 @@ package Amazon_Interview_Questions.SubSetSumProblem;
 import java.util.Arrays;
 
 public class SubsetSumProblemDynamicProg {
+
+    //More Optimized approach
+    public boolean canPartition(int[] nums, int target) {
+        boolean[] dp = new boolean[target + 1];
+        dp[0] = true; // base case
+
+        for (int num : nums) {
+            for (int j = target; j >= num; j--) {
+                dp[j] = dp[j] || dp[j - num];
+            }
+        }
+
+        return dp[target];
+    }
     static boolean solveUsingDP(int a[], int sum)
     {
         int rows=(sum)+1,cols=a.length+1;
@@ -130,6 +144,4 @@ public class SubsetSumProblemDynamicProg {
             return dp[rows-1][cols-1]==K;
         }
     }
-
-
 }
