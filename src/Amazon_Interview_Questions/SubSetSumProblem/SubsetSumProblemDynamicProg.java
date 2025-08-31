@@ -3,11 +3,28 @@ package Amazon_Interview_Questions.SubSetSumProblem;
 import java.util.Arrays;
 
 public class SubsetSumProblemDynamicProg {
+    /*
+    Min Coin change [Infinite supply of coins]
+    public int minCoins(int coins[], int sum) {
+        // code here
+        int dp[] = new int[sum+1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;  ----> Base Case
+        for(int coin: coins) {
+            for(int i=coin; i<=sum;i++) {
+                if(dp[i-coin] != Integer.MAX_VALUE)
+                    dp[i] = Math.min(dp[i], dp[i-coin]+1);
+            }
+        }
+        return dp[sum]==Integer.MAX_VALUE ? -1: dp[sum];
+    }
 
+    */
+    //Find Subset Sum
     //More Optimized approach
-    public boolean canPartition(int[] nums, int target) {
+    public boolean hasSubsetWithSum(int[] nums, int target) {
         boolean[] dp = new boolean[target + 1];
-        dp[0] = true; // base case
+        dp[0] = true; // base case --->
 
         for (int num : nums) {
             for (int j = target; j >= num; j--) {
@@ -17,6 +34,15 @@ public class SubsetSumProblemDynamicProg {
 
         return dp[target];
     }
+    /*
+    In coin change we have infinite supply
+    in subset sum, we take only once.
+    Hence in coin change we have inner loop going from num to target
+    and in subset we go reverse, target to num
+         base case dp[0]=1
+     */
+
+
     static boolean solveUsingDP(int a[], int sum)
     {
         int rows=(sum)+1,cols=a.length+1;
