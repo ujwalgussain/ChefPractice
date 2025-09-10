@@ -14,9 +14,6 @@ public class MaxSubArraySumWithNonConsecutiveElements {
             }
             System.out.println(Math.max(incl,excl));
         }
-        {
-            System.out.println(bf(0,a));
-        }
 
 
     }
