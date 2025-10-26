@@ -76,7 +76,7 @@ class TestClass1 {
         TreeNode left;
         TreeNode right;
 
-        TreeNode(int x) {
+        public TreeNode(int x) {
             val = x;
             left = null;
             right = null;
