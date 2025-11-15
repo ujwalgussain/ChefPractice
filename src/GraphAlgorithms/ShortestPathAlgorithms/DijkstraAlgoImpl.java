@@ -1,7 +1,9 @@
 package GraphAlgorithms.ShortestPathAlgorithms;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 
 /*
  * S1: Create a mstSet{} and CostMtx initialized to Inf {INF,INF,....}
@@ -45,7 +47,7 @@ public class DijkstraAlgoImpl {
         //System.out.print(Arrays.toString(costmtx));
         //add mincostneighbour to
         int minCostNode = findMinCostNode(costmtx, mstSet);
-
+        //We can combine relax and findMinCostNode Check PQ soln
         System.out.println(" minCostNode ->" + minCostNode);
         mstSet.add(minCostNode);
         Dijsktra(g, costmtx, mstSet, minCostNode);
@@ -70,34 +72,48 @@ public class DijkstraAlgoImpl {
         costmtx[0] = 0;
 
         Dijsktra(g, costmtx, mstSet, 0);
-       /* {
-            int mincostneighbour=-1, mincost=Integer.MAX_VALUE;
-            while(mstSet.size()<g.length)
-            {
-                for(int i=0;i<costmtx.length;i++)
-                {
-                    if(!mstSet.contains(i) && mincost>costmtx[i])
-                    {
-                        mincostneighbour=i;
-                        mincost=costmtx[i];
+    }
+
+    public int[] dijkstra(int[][] adjMatrix, int src) {
+        class Node {
+            int vertex;
+            int dist;
+            Node(int vertex, int dist) {
+                this.vertex = vertex;
+                this.dist = dist;
+            }
+        }
+        int n = adjMatrix.length;
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[src] = 0;
+
+        boolean[] visited = new boolean[n];
+
+        // Min-heap based on distance
+        PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.dist));
+        pq.add(new Node(src, 0));
+
+        while (!pq.isEmpty()) {
+            Node curr = pq.poll();
+            int u = curr.vertex;
+
+            if (visited[u]) continue;
+            visited[u] = true;
+
+            // Check all neighbors
+            for (int v = 0; v < n; v++) {
+                if (adjMatrix[u][v] != -1 && !visited[v]) { // -1 means no edge
+                    int newDist = dist[u] + adjMatrix[u][v];
+                    if (newDist < dist[v]) {
+                        dist[v] = newDist;
+                        pq.add(new Node(v, newDist));
                     }
                 }
             }
-            System.out.println("neigh "+mincostneighbour);
-            mstSet.add(mincostneighbour);
-            //Relax all neighbours
-            int currNode=mincostneighbour;
-            for(int i=0;i<g.length;i++)
-            {
-                if(!mstSet.contains(i))
-                {
-                    int cost = costmtx[currNode]+g[currNode][i];
-                    if(cost<costmtx[i]) {
-                        costmtx[i] = cost;
-                    }
-                }
-            }
-        }*/
+        }
+
+        return dist;
     }
 
 }
